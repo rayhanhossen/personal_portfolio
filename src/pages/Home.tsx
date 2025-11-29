@@ -13,8 +13,7 @@ const Home = () => {
         textareaRef,
         handleRefine,
         handleCopy,
-        handleSend,
-        copyStatus
+        handleSend
     } = useContactForm();
 
     // Data Slicing for Previews
@@ -27,8 +26,8 @@ const Home = () => {
             {/* HERO SECTION */}
             <section id="home" className="grid grid-cols-1 md:grid-cols-2 gap-8 md:items-end mb-12 md:mb-20">
                 <div className="order-2 md:order-1 pb-2">
-                    <h3 className="font-mono text-1xl md:text-4xl font-bold text-white mb-6 leading-snug tracking-tight">
-                        Hi, I’m {personalInfo.name} — <br />
+                    <h3 className="font-mono text-1xl md:text-3xl font-bold text-white mb-6 leading-snug tracking-tight">
+                        Hi, I’m {personalInfo.name} Hossen — <br />
                         <span className="text-primary">{personalInfo.title}</span> focused on building <br />
                         <span className="whitespace-nowrap">
                             <span className="text-primary">AI-powered</span> applications<span className="animate-pulse text-primary">_</span>
@@ -389,30 +388,18 @@ const Home = () => {
                                 <div className="flex items-center gap-4">
                                     <button
                                         onClick={handleCopy}
-                                        // Conditional text color change for the entire button when copied
-                                        className={`group flex items-center gap-1.5 font-mono transition-colors ${copyStatus ? 'text-green-500 hover:text-green-500' : 'text-gray-500 hover:text-white'}`}
+                                        className="group flex items-center gap-1.5 font-mono text-gray-500 hover:text-white transition-colors"
                                         title="Copy to clipboard"
                                     >
-                                        {copyStatus ? (
-                                            /* STATE: COPIED (Mobile & Desktop Icon/Text) */
-                                            <>
-                                                {/* ICON: Always show checkmark when copied */}
-                                                <i className="fas fa-check-circle text-lg transition-colors"></i>
-                                            </>
-                                        ) : (
-                                            /* STATE: IDLE (Mobile Icon & Desktop Code Style) */
-                                            <>
-                                                {/* MOBILE ONLY: Icon */}
-                                                <i className="far fa-copy text-lg group-hover:text-green-400 transition-colors md:hidden"></i>
+                                        {/* MOBILE ONLY: Icon */}
+                                        <i className="far fa-copy text-lg group-hover:text-green-400 transition-colors md:hidden"></i>
 
-                                                {/* DESKTOP ONLY: Text code style */}
-                                                <span className="hidden md:inline text-sm">
-                                                    <span className="text-gray-600">.</span>
-                                                    <span className="text-green-400 opacity-70 group-hover:opacity-100 transition-opacity">copy</span>
-                                                    <span className="text-gray-600">()</span>
-                                                </span>
-                                            </>
-                                        )}
+                                        {/* DESKTOP ONLY: Text code style */}
+                                        <span className="hidden md:inline text-sm">
+                                            <span className="text-gray-600">.</span>
+                                            <span className="text-green-400 opacity-70 group-hover:opacity-100 transition-opacity">copy</span>
+                                            <span className="text-gray-600">()</span>
+                                        </span>
                                     </button>
 
                                     <button

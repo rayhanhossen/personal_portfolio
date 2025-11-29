@@ -15,7 +15,7 @@ const Navbar = () => {
     ];
 
     return (
-        <header className="flex justify-between items-center mb-10 md:mb-10 py-4 md:py-4">
+        <header className="flex justify-between items-center mb-10 md:mb-12 py-4 md:py-4">
             {/* Logo */}
             <Link
                 to="/"
