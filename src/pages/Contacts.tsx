@@ -76,6 +76,7 @@ const Contacts = () => {
                             </button>
 
                             <div className="flex items-center gap-4">
+                                {/* --- Copy Button (Unchanged) --- */}
                                 <button
                                     onClick={handleCopy}
                                     className="group flex items-center gap-1.5 font-mono text-gray-500 hover:text-white transition-colors"
@@ -99,22 +100,27 @@ const Contacts = () => {
                                     </span>
                                 </button>
 
+                                {/* --- Send Button (UPDATED to match Copy style) --- */}
                                 <button
                                     onClick={handleSend}
-                                    disabled={!message.trim()} // <-- Disabled check added for empty message
+                                    disabled={!message.trim()} // Disabled when no text exists
                                     className="font-mono text-sm md:text-base group flex items-center gap-1.5 transition-all disabled:cursor-not-allowed py-2"
                                 >
                                     {!message.trim() ? (
-                                        /* Disabled State: Looks like a code comment */
-                                        <span className="text-gray-600 italic font-mono select-none">//type_message</span>
+                                        /* 🚨 1. DISABLED State: Simple gray text 🚨 */
+                                        <span className="text-gray-500 font-mono select-none text-sm md:text-base">.send()</span>
                                     ) : (
-                                        /* Enabled State: Looks like an async function call */
+                                        /* 🚨 2. ENABLED State: Code style with Icon and Method call 🚨 */
                                         <>
-                                            <span className="text-primary font-bold">await</span>
-                                            <span className="text-yellow-400 group-hover:text-yellow-300 transition-colors">send</span>
-                                            <span className="text-gray-400">()</span>
-                                            {/* Semicolon appears on hover */}
-                                            <span className="text-gray-500 opacity-0 group-hover:opacity-100 transition-opacity">;</span>
+                                            {/* ICON (Mobile Only: Use a generic send/arrow icon) */}
+                                            <i className="fas fa-paper-plane text-lg text-primary group-hover:text-yellow-400 transition-colors md:hidden"></i>
+
+                                            {/* DESKTOP/CODE STYLE */}
+                                            <span className="hidden md:inline text-sm md:text-base">
+                                                <span className="text-gray-500">.</span>
+                                                <span className="text-primary group-hover:text-yellow-400 transition-colors">send</span>
+                                                <span className="text-gray-500">()</span>
+                                            </span>
                                         </>
                                     )}
                                 </button>
@@ -127,13 +133,13 @@ const Contacts = () => {
                     <div className="border border-gray-600 p-4 w-full md:w-auto">
                         <h4 className="text-white font-bold mb-4">Feel free to reach out</h4>
                         <div className="flex flex-col gap-2">
-                            <a href={`tel:${personalInfo.phone}`} className="flex items-center gap-2 text-gray-400 hover:text-white">
-                                <i className="fa fa-phone text-gray-500"></i>
-                                <span>{personalInfo.phone}</span>
-                            </a>
                             <a href={`mailto:${personalInfo.email}`} className="flex items-center gap-2 text-gray-400 hover:text-white">
                                 <i className="fas fa-envelope text-gray-500"></i>
                                 <span>{personalInfo.email}</span>
+                            </a>
+                            <a href={`tel:${personalInfo.phone}`} className="flex items-center gap-2 text-gray-400 hover:text-white">
+                                <i className="fa fa-phone text-gray-500"></i>
+                                <span>{personalInfo.phone}</span>
                             </a>
                         </div>
                     </div>

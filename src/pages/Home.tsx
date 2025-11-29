@@ -13,7 +13,8 @@ const Home = () => {
         textareaRef,
         handleRefine,
         handleCopy,
-        handleSend
+        handleSend,
+        copyStatus
     } = useContactForm();
 
     // Data Slicing for Previews
@@ -26,40 +27,88 @@ const Home = () => {
             {/* HERO SECTION */}
             <section id="home" className="grid grid-cols-1 md:grid-cols-2 gap-8 md:items-end mb-12 md:mb-20">
                 <div className="order-2 md:order-1 pb-2">
-                    <h3 className="font-mono text-1xl md:text-3xl font-bold text-white mb-6 leading-snug tracking-tight">
+                    <h3 className="font-mono text-1xl md:text-2xl font-bold text-white mb-6 leading-snug tracking-tighter">
+                        {/* 👆 Use tracking-tighter here */}
                         Hi, I’m {personalInfo.name} Hossen — <br />
-                        <span className="text-primary">{personalInfo.title}</span> focused on building <br />
-                        <span className="whitespace-nowrap">
-                            <span className="text-primary">AI-powered</span> applications<span className="animate-pulse text-primary">_</span>
-                        </span>
+                        <span className="text-primary">{personalInfo.title}</span> focused on building <span className="text-primary">AI-powered </span>
+                        applications<span className="animate-pulse text-primary">_</span>
                     </h3>
 
-                    <p className="font-mono text-gray-400 mb-8 max-w-lg text-sm md:text-base leading-relaxed">
+                    <p className="font-mono text-gray-400 mb-8 max-w-lg text-sm md:text-base leading-relaxed tracking-tighter">
                         // I love turning complex ideas into clear, intelligent digital experiences.
                     </p>
 
                     <div className="flex flex-row gap-3 mt-6 w-full md:w-auto">
-                        {/* Contact: JSON Object Style */}
                         <Link
                             to="/contacts"
-                            className="flex-1 md:flex-none group border border-primary/50 bg-[#282C33] px-4 py-3 flex items-center justify-center gap-2 hover:border-primary hover:shadow-[0_0_15px_rgba(199,120,221,0.3)] transition-all duration-300"
+                            className="flex-1 md:flex-none group border-2 relative
+                                px-3 py-3 flex items-center justify-center gap-2 
+                                transition-all duration-300 overflow-hidden rounded-md
+                                
+                                // 🚨 BASE STATE (Primary Purple Look) 🚨
+                                bg-transparent 
+                                border-[#C778DD]  /* Base Border: Primary Purple */
+                                
+                                
+                                // 🚨 HOVER STATE (Green Accent) 🚨
+                                hover:border-[#1bac81] /* Hover Border: Green */
+                                hover:shadow-[0_0_15px_rgba(27,172,129,0.8)] /* Hover Shadow: Green Glow (using #1bac81 converted to rgba) */
+                                "
                         >
-                            <span className="text-primary font-bold transition-transform duration-300 group-hover:-translate-x-1">{`>`}</span>
-                            <span className="font-mono font-medium text-white group-hover:text-primary transition-colors text-sm md:text-base">contact me</span>
-                            {/* <span className="text-primary font-bold transition-transform duration-300 group-hover:translate-x-1">{`}`}</span> */}
+                            {/* The > symbol color changes from Primary Purple to Green on hover */}
+                            <span
+                                className="font-bold transition-transform duration-300 
+                                    text-[#C778DD]                /* Base Text: Primary Purple */
+                                    group-hover:-translate-x-1 
+                                    group-hover:text-[#1bac81]"    /* Hover Text: Green */
+                            >
+                                {`>`}
+                            </span>
+
+                            {/* The main text stays white and only changes its accent color */}
+                            <span
+                                className="font-mono font-medium transition-colors text-sm md:text-base 
+                                    text-white /* Always White */
+                                    group-hover:text-white" /* Explicitly ensure it stays white on hover */
+                            >
+                                contact me
+                            </span>
                         </Link>
 
-                        {/* CV: Shell Command Style */}
+                        {/* CV:  Style */}
                         <a
                             href={personalInfo.cvLink}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="flex-1 md:flex-none group border border-gray-600 bg-[#282C33] px-4 py-3 flex items-center justify-center gap-2 hover:border-green-400 hover:shadow-[0_0_15px_rgba(74,222,128,0.2)] transition-all duration-300"
+
+                            // Base State: Primary Purple Border/Shadow
+                            className="flex-1 md:flex-none group border-2 relative
+                                px-3 py-3 flex items-center justify-center gap-2 
+                                transition-all duration-300 overflow-hidden rounded-md
+                                
+                                bg-transparent 
+                                border-[#1bac81]
+                                // Hover State: Green Accent
+                                hover:border-[#1bac81]                      /* Hover Border: Green */
+                                hover:shadow-[0_0_15px_rgba(27,172,129,0.8)] /* Hover Shadow: Green Glow */
+                                "
                         >
-                            <span className="text-gray-500 font-mono text-sm group-hover:text-green-400 transition-colors">$</span>
-                            <span className="font-mono font-medium text-gray-300 group-hover:text-white transition-colors text-sm md:text-base">cv.pdf</span>
-                            <i className="fas fa-download text-xs text-gray-500 group-hover:text-green-400 transition-colors ml-1"></i>
+
+                            {/* 1. DOWNLOAD ICON (Left, Initially Green, Hover Green) */}
+                            <i
+                                className="fas fa-download text-sm ml-0 mr-1 transition-colors 
+                                            text-[#1bac81]                          /* 🚨 Base Icon Color: Vibrant Green */
+                                            group-hover:text-[#1bac81]"             /* Hover Icon Color: Green (Stays Green) */
+                            ></i>
+
+                            {/* 2. TEXT (Always White) */}
+                            <span
+                                className="font-mono font-medium text-white transition-colors text-sm md:text-base"
+                            >
+                                resume.pdf
+                            </span>
                         </a>
+
                     </div>
 
                 </div>
@@ -91,7 +140,7 @@ const Home = () => {
                                 <span className="relative inline-flex rounded-full h-3 w-3 bg-green-500"></span>
                             </div>
 
-                            <span>Currently open to <span className="text-white font-bold">opportunities</span></span>
+                            <span className='tracking-normal'>Currently open to <span className="text-primary font-bold">opportunities</span></span>
                         </div>
                     </div>
                 </div>
@@ -386,38 +435,51 @@ const Home = () => {
                                 </button>
 
                                 <div className="flex items-center gap-4">
+                                    {/* --- Copy Button (Unchanged) --- */}
                                     <button
                                         onClick={handleCopy}
                                         className="group flex items-center gap-1.5 font-mono text-gray-500 hover:text-white transition-colors"
                                         title="Copy to clipboard"
                                     >
-                                        {/* MOBILE ONLY: Icon */}
-                                        <i className="far fa-copy text-lg group-hover:text-green-400 transition-colors md:hidden"></i>
+                                        {/* 3. Conditional rendering based on copyStatus */}
+                                        {copyStatus ? (
+                                            <i className="fas fa-check-circle text-lg text-green-500 transition-colors"></i>
+                                        ) : (
+                                            <>
+                                                {/* MOBILE ONLY: Icon */}
+                                                <i className="far fa-copy text-lg group-hover:text-green-400 transition-colors md:hidden"></i>
+                                            </>
+                                        )}
 
                                         {/* DESKTOP ONLY: Text code style */}
                                         <span className="hidden md:inline text-sm">
                                             <span className="text-gray-600">.</span>
-                                            <span className="text-green-400 opacity-70 group-hover:opacity-100 transition-opacity">copy</span>
+                                            <span className={`text-green-400 ${copyStatus ? 'opacity-100' : 'opacity-70 group-hover:opacity-100'} transition-opacity`}>copy</span>
                                             <span className="text-gray-600">()</span>
                                         </span>
                                     </button>
 
+                                    {/* --- Send Button (UPDATED to match Copy style) --- */}
                                     <button
                                         onClick={handleSend}
-                                        disabled={!message}
+                                        disabled={!message.trim()} // Disabled when no text exists
                                         className="font-mono text-sm md:text-base group flex items-center gap-1.5 transition-all disabled:cursor-not-allowed py-2"
                                     >
-                                        {!message ? (
-                                            /* Disabled State: Looks like a code comment */
-                                            <span className="text-gray-600 italic font-mono select-none">// type_message</span>
+                                        {!message.trim() ? (
+                                            /* 🚨 1. DISABLED State: Simple gray text 🚨 */
+                                            <span className="text-gray-500 font-mono select-none text-sm md:text-base">.send()</span>
                                         ) : (
-                                            /* Enabled State: Looks like an async function call */
+                                            /* 🚨 2. ENABLED State: Code style with Icon and Method call 🚨 */
                                             <>
-                                                <span className="text-primary font-bold">await</span>
-                                                <span className="text-yellow-400 group-hover:text-yellow-300 transition-colors">send</span>
-                                                <span className="text-gray-400">()</span>
-                                                {/* Semicolon appears on hover */}
-                                                <span className="text-gray-500 opacity-0 group-hover:opacity-100 transition-opacity">;</span>
+                                                {/* ICON (Mobile Only: Use a generic send/arrow icon) */}
+                                                <i className="fas fa-paper-plane text-sm text-primary group-hover:text-yellow-400 transition-colors md:hidden"></i>
+
+                                                {/* DESKTOP/CODE STYLE */}
+                                                <span className="hidden md:inline text-sm md:text-base">
+                                                    <span className="text-gray-500">.</span>
+                                                    <span className="text-primary group-hover:text-yellow-400 transition-colors">send</span>
+                                                    <span className="text-gray-500">()</span>
+                                                </span>
                                             </>
                                         )}
                                     </button>
@@ -430,14 +492,15 @@ const Home = () => {
                         <div className="border border-gray-600 p-4 w-full md:w-auto">
                             <h4 className="text-white font-bold mb-4">Feel free to reach out</h4>
                             <div className="flex flex-col gap-2">
-                                <a href={`tel:${personalInfo.phone}`} className="flex items-center gap-2 text-gray-400 hover:text-white">
-                                    <i className="fa fa-phone text-gray-500"></i>
-                                    <span>{personalInfo.phone}</span>
-                                </a>
                                 <a href={`mailto:${personalInfo.email}`} className="flex items-center gap-2 text-gray-400 hover:text-white">
                                     <i className="fas fa-envelope text-gray-500"></i>
                                     <span>{personalInfo.email}</span>
                                 </a>
+                                <a href={`tel:${personalInfo.phone}`} className="flex items-center gap-2 text-gray-400 hover:text-white">
+                                    <i className="fa fa-phone text-gray-500"></i>
+                                    <span>{personalInfo.phone}</span>
+                                </a>
+                                
                             </div>
                         </div>
                     </div>
