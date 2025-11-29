@@ -1,0 +1,53 @@
+@import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400;500;600;700&display=swap');
+@import '@fortawesome/fontawesome-free/css/all.min.css';
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  @apply bg-bg text-gray font-mono;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar { width: 8px; }
+::-webkit-scrollbar-track { background: #282C33; }
+::-webkit-scrollbar-thumb { background: #ABB2BF; border-radius: 4px; }
+
+/* Aesthetic scrollbar */
+.aesthetic-scrollbar::-webkit-scrollbar { width: 4px; }
+.aesthetic-scrollbar::-webkit-scrollbar-track { background: transparent; }
+.aesthetic-scrollbar::-webkit-scrollbar-thumb { background: #4B5263; border-radius: 2px; }
+.aesthetic-scrollbar:hover::-webkit-scrollbar-thumb { background: #C778DD; }
+
+/* Utilities */
+.dots-pattern {
+  background-image: radial-gradient(#ABB2BF 1px, transparent 1px);
+  background-size: 20px 20px;
+}
+
+.heading-line {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+.heading-line::after {
+  content: '';
+  display: block;
+  height: 1px;
+  background-color: #C778DD;
+  flex-grow: 1;
+  max-width: 500px;
+}
+
+/* Fade In Animation */
+.view-section {
+  animation: fadeIn 0.3s ease-in-out;
+}
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.terminal-blink { animation: blink 1s step-start infinite; }
+@keyframes blink { 50% { opacity: 0; } }

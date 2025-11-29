@@ -1,0 +1,132 @@
+import { personalInfo } from '../data/content';
+import { useContactForm } from '../hooks/useContactForm';
+
+
+
+const Contacts = () => {
+    const {
+        message,
+        setMessage,
+        loading,
+        textareaRef,
+        handleRefine,
+        handleCopy,
+        handleSend
+    } = useContactForm();
+
+
+    return (
+        <div>
+            <div className="mb-12">
+                <h2 className="text-3xl text-white font-medium mb-4"><span className="text-primary">/</span>contacts</h2>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
+                <div className="text-gray-400">
+                    <p className="mb-6">
+                        I'm interested in new opportunities. If you have a question, collaboration idea, or just want to connect, feel free to reach out.
+                    </p>
+
+                    <div className="border border-gray-600 p-4 mt-6 relative bg-[#282C33]/20">
+                        <label className="block text-1xl text-gray-500 mb-2 font-mono">Quick Message Draft:</label>
+
+                        <textarea
+                            ref={textareaRef}
+                            value={message}
+                            onChange={(e) => setMessage(e.target.value)}
+                            className="w-full bg-transparent text-white font-mono outline-none resize-none mb-4 text-sm focus:placeholder-gray-600 transition-colors"
+                            rows={4}
+                            placeholder="Type a message here..."
+                        />
+
+                        <div className="flex justify-between items-center border-t border-gray-600 pt-3">
+                            <button
+                                onClick={handleRefine}
+                                disabled={loading}
+                                className="group font-mono text-xs md:text-sm flex items-center gap-1.5 transition-all hover:bg-white/5 px-2 py-1 rounded-sm border border-transparent hover:border-gray-700"
+                            >
+                                {loading ? (
+                                    /* Loading State: Compiling style */
+                                    <>
+                                        <i className="fas fa-circle-notch fa-spin text-primary"></i>
+                                        <span className="text-gray-500 italic">processing...</span>
+                                    </>
+                                ) : (
+                                    /* Idle State: Method Call style */
+                                    <>
+                                        <i className="fas fa-magic text-purple-400 group-hover:text-yellow-400 transition-colors"></i>
+
+                                        <span className="flex items-center">
+                                            <span className="text-primary font-bold">AI</span>
+                                            <span className="text-gray-500">.</span>
+                                            <span className="text-yellow-400 group-hover:text-yellow-300 transition-colors">refine</span>
+                                            <span className="text-gray-500">(</span>
+                                            <span className="text-green-400 opacity-70 group-hover:opacity-100">msg</span>
+                                            <span className="text-gray-500">)</span>
+                                        </span>
+                                    </>
+                                )}
+                            </button>
+
+                            <div className="flex items-center gap-4">
+                                <button
+                                    onClick={handleCopy}
+                                    className="group flex items-center gap-1.5 font-mono text-gray-500 hover:text-white transition-colors"
+                                    title="Copy to clipboard"
+                                >
+                                    {/* MOBILE ONLY: Icon */}
+                                    <i className="far fa-copy text-lg group-hover:text-green-400 transition-colors md:hidden"></i>
+
+                                    {/* DESKTOP ONLY: Text code style */}
+                                    <span className="hidden md:inline text-sm">
+                                        <span className="text-gray-600">.</span>
+                                        <span className="text-green-400 opacity-70 group-hover:opacity-100 transition-opacity">copy</span>
+                                        <span className="text-gray-600">()</span>
+                                    </span>
+                                </button>
+
+                                <button
+                                    onClick={handleSend}
+                                    disabled={!message}
+                                    className="font-mono text-sm md:text-base group flex items-center gap-1.5 transition-all disabled:cursor-not-allowed py-2"
+                                >
+                                    {!message ? (
+                                        /* Disabled State: Looks like a code comment */
+                                        <span className="text-gray-600 italic font-mono select-none">//type_message</span>
+                                    ) : (
+                                        /* Enabled State: Looks like an async function call */
+                                        <>
+                                            <span className="text-primary font-bold">await</span>
+                                            <span className="text-yellow-400 group-hover:text-yellow-300 transition-colors">send</span>
+                                            <span className="text-gray-400">()</span>
+                                            {/* Semicolon appears on hover */}
+                                            <span className="text-gray-500 opacity-0 group-hover:opacity-100 transition-opacity">;</span>
+                                        </>
+                                    )}
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div className="flex justify-start md:justify-end">
+                    <div className="border border-gray-600 p-4 w-full md:w-auto">
+                        <h4 className="text-white font-bold mb-4">Feel free to reach out</h4>
+                        <div className="flex flex-col gap-2">
+                            <a href={`tel:${personalInfo.phone}`} className="flex items-center gap-2 text-gray-400 hover:text-white">
+                                <i className="fa fa-phone text-gray-500"></i>
+                                <span>{personalInfo.phone}</span>
+                            </a>
+                            <a href={`mailto:${personalInfo.email}`} className="flex items-center gap-2 text-gray-400 hover:text-white">
+                                <i className="fas fa-envelope text-gray-500"></i>
+                                <span>{personalInfo.email}</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    );
+};
+
+export default Contacts;
