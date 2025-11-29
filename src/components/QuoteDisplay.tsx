@@ -50,7 +50,7 @@ const QuoteDisplay = () => {
         }
     }, [displayedText, isTyping, index]);
 
-    
+
     const time = new Date().toLocaleTimeString('en-US', { hour12: false, hour: "2-digit", minute: "2-digit" });
 
     return (
@@ -67,7 +67,7 @@ const QuoteDisplay = () => {
                         <div className="w-3 h-3 rounded-full bg-green-500/80"></div>
                     </div>
                     <div className="text-gray-500 text-xs flex gap-2">
-                        <span>/bin/bash</span>
+                        <span className='text-primary'>/bin/bash</span>
                     </div>
                 </div>
 
@@ -86,16 +86,15 @@ const QuoteDisplay = () => {
                         </div>
 
                         {/* Quote Text: Responsive Text Size (text-base -> text-lg -> text-xl) */}
-                        <div className="text-base sm:text-lg md:text-xl text-gray-300 leading-relaxed pl-4 border-l-2 border-gray-700 font-medium break-words">
+                        <div className="text-sm sm:text-base md:text-lg text-gray-300 leading-relaxed pl-4 border-l-2 border-gray-700  break-words tracking-tighter">
                             {displayedText}
                             <span className="animate-pulse inline-block w-[3px] h-5 bg-yellow-400 ml-1 align-middle shadow-[0_0_8px_rgba(250,204,21,0.6)]"></span>
                         </div>
 
                         {/* Author: Rendered ALWAYS to reserve space, opacity toggled to prevent blinking */}
-                        <div 
-                            className={`mt-4 text-right text-primary italic transition-opacity duration-700 ease-in-out ${
-                                isTyping ? 'opacity-0' : 'opacity-100'
-                            }`}
+                        <div
+                            className={`mt-4 text-right text-green-400 italic transition-opacity duration-700 ease-in-out ${isTyping ? 'opacity-0' : 'opacity-100'
+                                }`}
                         >
                             - {quotes[index].author}
                         </div>
@@ -106,11 +105,16 @@ const QuoteDisplay = () => {
                             <span><span className="text-green-400">✓</span> Executed</span>
                             <span>{time}</span>
                         </div>
-                        <div className="w-24 md:w-32 h-1 bg-gray-700 rounded-full overflow-hidden">
-                            <div
-                                className="h-full bg-primary transition-all duration-100 ease-linear"
-                                style={{ width: `${progress}%` }}
-                            ></div>
+                        <div className="relative flex items-center justify-center w-8 h-8"> {/* Adjust w/h for size */}
+
+                            {/* 1. The Circular Progress Ring */}
+                            {/* This element will have the gradient and spin */}
+                            <div className="circular-loader-ring"></div>
+
+                            {/* 2. Inner Circle (to mask the center and show text) */}
+                            <div className="absolute flex items-center justify-center bg-[#282C33] rounded-full text-white font-mono text-xs z-10">
+                                {Math.round(progress)}% {/* 'progress' state will come from parent component */}
+                            </div>
                         </div>
                     </div>
                 </div>
