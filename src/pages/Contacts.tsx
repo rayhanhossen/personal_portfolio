@@ -1,18 +1,24 @@
 import { personalInfo } from '../data/content';
 import { useContactForm } from '../hooks/useContactForm';
-
-
+import React from 'react'; // Added explicit import for React functions/types
 
 const Contacts = () => {
     const {
         message,
         setMessage,
         loading,
+        copyStatus, // <-- 1. Get copyStatus from hook
         textareaRef,
         handleRefine,
         handleCopy,
         handleSend
     } = useContactForm();
+
+
+    // CSS Fix for iOS Auto-Zoom (Ensures font-size is >= 16px)
+    const textareaStyle: React.CSSProperties = {
+        fontSize: '16px'
+    };
 
 
     return (
@@ -37,13 +43,14 @@ const Contacts = () => {
                             className="w-full bg-transparent text-white font-mono outline-none resize-none mb-4 text-sm focus:placeholder-gray-600 transition-colors"
                             rows={4}
                             placeholder="Type a message here..."
+                            style={textareaStyle} // <-- 2. Apply iOS Zoom Fix
                         />
 
                         <div className="flex justify-between items-center border-t border-gray-600 pt-3">
                             <button
                                 onClick={handleRefine}
-                                disabled={loading}
-                                className="group font-mono text-xs md:text-sm flex items-center gap-1.5 transition-all hover:bg-white/5 px-2 py-1 rounded-sm border border-transparent hover:border-gray-700"
+                                disabled={loading || !message.trim()} // <-- Disabled check added for empty message
+                                className="group font-mono text-xs md:text-sm flex items-center gap-1.5 transition-all hover:bg-white/5 px-2 py-1 rounded-sm border border-transparent hover:border-gray-700 disabled:opacity-50"
                             >
                                 {loading ? (
                                     /* Loading State: Compiling style */
@@ -74,23 +81,30 @@ const Contacts = () => {
                                     className="group flex items-center gap-1.5 font-mono text-gray-500 hover:text-white transition-colors"
                                     title="Copy to clipboard"
                                 >
-                                    {/* MOBILE ONLY: Icon */}
-                                    <i className="far fa-copy text-lg group-hover:text-green-400 transition-colors md:hidden"></i>
+                                    {/* 3. Conditional rendering based on copyStatus */}
+                                    {copyStatus ? (
+                                        <i className="fas fa-check-circle text-lg text-green-500 transition-colors"></i>
+                                    ) : (
+                                        <>
+                                            {/* MOBILE ONLY: Icon */}
+                                            <i className="far fa-copy text-lg group-hover:text-green-400 transition-colors md:hidden"></i>
+                                        </>
+                                    )}
 
                                     {/* DESKTOP ONLY: Text code style */}
                                     <span className="hidden md:inline text-sm">
                                         <span className="text-gray-600">.</span>
-                                        <span className="text-green-400 opacity-70 group-hover:opacity-100 transition-opacity">copy</span>
+                                        <span className={`text-green-400 ${copyStatus ? 'opacity-100' : 'opacity-70 group-hover:opacity-100'} transition-opacity`}>copy</span>
                                         <span className="text-gray-600">()</span>
                                     </span>
                                 </button>
 
                                 <button
                                     onClick={handleSend}
-                                    disabled={!message}
+                                    disabled={!message.trim()} // <-- Disabled check added for empty message
                                     className="font-mono text-sm md:text-base group flex items-center gap-1.5 transition-all disabled:cursor-not-allowed py-2"
                                 >
-                                    {!message ? (
+                                    {!message.trim() ? (
                                         /* Disabled State: Looks like a code comment */
                                         <span className="text-gray-600 italic font-mono select-none">//type_message</span>
                                     ) : (

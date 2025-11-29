@@ -13,7 +13,8 @@ const Home = () => {
         textareaRef,
         handleRefine,
         handleCopy,
-        handleSend
+        handleSend,
+        copyStatus
     } = useContactForm();
 
     // Data Slicing for Previews
@@ -388,18 +389,30 @@ const Home = () => {
                                 <div className="flex items-center gap-4">
                                     <button
                                         onClick={handleCopy}
-                                        className="group flex items-center gap-1.5 font-mono text-gray-500 hover:text-white transition-colors"
+                                        // Conditional text color change for the entire button when copied
+                                        className={`group flex items-center gap-1.5 font-mono transition-colors ${copyStatus ? 'text-green-500 hover:text-green-500' : 'text-gray-500 hover:text-white'}`}
                                         title="Copy to clipboard"
                                     >
-                                        {/* MOBILE ONLY: Icon */}
-                                        <i className="far fa-copy text-lg group-hover:text-green-400 transition-colors md:hidden"></i>
+                                        {copyStatus ? (
+                                            /* STATE: COPIED (Mobile & Desktop Icon/Text) */
+                                            <>
+                                                {/* ICON: Always show checkmark when copied */}
+                                                <i className="fas fa-check-circle text-lg transition-colors"></i>
+                                            </>
+                                        ) : (
+                                            /* STATE: IDLE (Mobile Icon & Desktop Code Style) */
+                                            <>
+                                                {/* MOBILE ONLY: Icon */}
+                                                <i className="far fa-copy text-lg group-hover:text-green-400 transition-colors md:hidden"></i>
 
-                                        {/* DESKTOP ONLY: Text code style */}
-                                        <span className="hidden md:inline text-sm">
-                                            <span className="text-gray-600">.</span>
-                                            <span className="text-green-400 opacity-70 group-hover:opacity-100 transition-opacity">copy</span>
-                                            <span className="text-gray-600">()</span>
-                                        </span>
+                                                {/* DESKTOP ONLY: Text code style */}
+                                                <span className="hidden md:inline text-sm">
+                                                    <span className="text-gray-600">.</span>
+                                                    <span className="text-green-400 opacity-70 group-hover:opacity-100 transition-opacity">copy</span>
+                                                    <span className="text-gray-600">()</span>
+                                                </span>
+                                            </>
+                                        )}
                                     </button>
 
                                     <button
