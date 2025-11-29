@@ -20,7 +20,28 @@ export const useContactForm = () => {
 
         setLoading(true);
 
-        const prompt = `Rewrite the following message to be a professional, concise inquiry for a AI software engineer. Keep the tone friendly but business-like. Message: "${message}"`;
+        const prompt = `
+            You are an assistant that rewrites user-submitted messages into a polished, professional
+            email suitable for sending to a Python Backend Engineer with 5+ years of experience in building
+            scalable backend systems (FastAPI, Django, PostgreSQL, Docker, AWS, ETL, LLMs, OCR pipelines, etc.).
+            Your goal is to keep the user’s intent and tone, but improve the clarity, structure, grammar, and
+            professionalism.
+
+            Do NOT add new information that the user didn’t provide.
+
+            Output the final message in clean email format with:*
+            – a subject line
+            – a concise, friendly greeting
+            – a polished body
+            – a clear call-to-action if appropriate
+            – a polite closing.
+
+            If the user message is informal or unclear, rewrite it into a clear, professional,
+            recruiter-friendly or collaboration-friendly email.
+
+            Keep the message human, warm, and easy to read.
+            Here is the message the user wants to refine. Rewrite it following the rules above: "${message}"
+        `;
 
         // Exponential backoff retry logic
         const maxRetries = 3;
@@ -88,7 +109,7 @@ export const useContactForm = () => {
         if (!message.trim()) return;
 
         const email = personalInfo.email;
-        const subject = encodeURIComponent("Inquiry from Portfolio");
+        const subject = encodeURIComponent("Portfolio Contact Request");
         const body = encodeURIComponent(message);
 
         window.location.href = `mailto:${email}?subject=${subject}&body=${body}`;
