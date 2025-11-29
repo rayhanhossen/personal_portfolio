@@ -1,73 +1,67 @@
-# React + TypeScript + Vite
+# Developer Portfolio 👨‍💻
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A pixel-perfect, developer-centric portfolio website built with **React**, **TypeScript**, and **Tailwind CSS**.  
+Features a terminal-inspired aesthetic, dynamic content management, and fully responsive design.
 
-Currently, two official plugins are available:
+> **Note:** Replace this line with a real screenshot after deployment.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+---
 
-## React Compiler
+## 🚀 Tech Stack
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- **Framework:** React (v18+)
+- **Language:** TypeScript
+- **Styling:** Tailwind CSS
+- **Build Tool:** Vite
+- **Icons:** FontAwesome
+- **Routing:** React Router DOM
 
-## Expanding the ESLint configuration
+---
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## ✨ Features
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+- **Developer Aesthetic**  
+  Terminal-style UI, code-snippet components, IDE-inspired layout.
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+- **Dynamic Content Source**  
+  All personal data (projects, experience, skills, education) is controlled from  
+  `src/data/content.ts`.
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+- **Responsive Design**  
+  Fully optimized for mobile, tablet, and desktop.
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+- **Type Safety**  
+  Strong TypeScript interfaces for every structured data type.
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+- **Custom Hooks**  
+  Encapsulated logic for features such as the Contact Form.
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+- **Interactive UI Enhancements**
+  - Terminal-style typing effects  
+  - `wget`-inspired download animation  
+  - Code-syntax themed navbar  
+  - Vim-style shortcuts (`:gg` = scroll to top)
+
+---
+
+## 🛠️ Installation & Setup
+
+Clone the repository:
+
+```bash
+git clone https://github.com/rayhanhossen/portfolio.git
+cd portfolio
+
+---
+
+## Install dependencies:
+
+```bash
+npm install
+
+---
+
+## Start development server:
+```bash
+npm run dev
+
