@@ -72,7 +72,7 @@ const QuoteDisplay = () => {
                 </div>
 
                 {/* Body */}
-                <div className="bg-[#282C33] p-4 md:p-6 min-h-[240px] flex flex-col justify-between relative overflow-hidden hover:shadow-[0_0_15px_rgba(27,172,129,0.5)]">
+                <div className="bg-[#282C33] p-4 md:p-6 min-h-[240px] flex flex-col justify-between relative overflow-hidden">
                     {/* Background Grid Pattern */}
                     <div className="absolute inset-0 bg-[linear-gradient(rgba(18,18,18,0)_50%,rgba(0,0,0,0.25)_50%),linear-gradient(90deg,rgba(255,0,0,0.06),rgba(0,255,0,0.02),rgba(0,0,255,0.06))] z-0 pointer-events-none bg-[length:100%_4px,6px_100%] opacity-20"></div>
 

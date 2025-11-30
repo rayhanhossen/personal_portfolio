@@ -9,9 +9,6 @@ const Navbar = () => {
         { name: 'Home', path: '/' },
         { name: 'Projects', path: '/projects' },
         { name: 'About', path: '/about' },
-        // { name: 'experience', path: '/experience' },
-        // { name: 'education', path: '/education' },
-        // { name: 'contacts', path: '/contacts' },
     ];
 
     return (
@@ -45,22 +42,7 @@ const Navbar = () => {
 
                         {/* 2. The visible text content (must be relative and higher z-index) */}
                         <div className="relative z-10 flex items-center">
-
-                            <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                viewBox="0 0 24 24"
-                                className="h-5 w-5 mr-1 nav-code-icon-color" // Tailwind classes for size and margin
-                            >
-                                {/* The fill="currentColor" attribute is key: it makes the SVG inherit the text color from its parent. */}
-                                <path
-                                    fill="currentColor"
-                                    d="M24 12l-5.657 5.657-1.414-1.414L21.172 12l-4.243-4.243 1.414-1.414L24 12zM2.828 12l4.243 4.243-1.414 1.414L0 12l5.657-5.657L7.07 7.757 2.828 12zm6.96 9H7.66l6.552-18h2.128L9.788 21z"
-                                />
-                            </svg>
-
                             <code className="nav-link-text ">{link.name}</code>
-
-
                         </div>
 
                     </NavLink>
@@ -106,18 +88,6 @@ const Navbar = () => {
                             {/* 🚨 FIX IS HERE: ALL CONTENT IS MOVED INSIDE THE FUNCTION 🚨 */}
                             {({ isActive }) => (
                                 <>
-                                    {/* 1. SVG Icon - Now inside the function */}
-                                    <svg
-                                        xmlns="http://www.w3.org/2000/svg"
-                                        viewBox="0 0 24 24"
-                                        className="h-6 w-8 mr-4 nav-code-icon-color"
-                                    >
-                                        <path
-                                            fill="currentColor"
-                                            d="M24 12l-5.657 5.657-1.414-1.414L21.172 12l-4.243-4.243 1.414-1.414L24 12zM2.828 12l4.243 4.243-1.414 1.414L0 12l5.657-5.657L7.07 7.757 2.828 12zm6.96 9H7.66l6.552-18h2.128L9.788 21z"
-                                        />
-                                    </svg>
-
                                     {/* 2. Text Span - Conditional gradient remains */}
                                     <span
                                         className={isActive ? 'text-green-400' : 'text-white'}

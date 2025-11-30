@@ -1,5 +1,4 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState, useRef, useEffect } from 'react';
 
 // --- Type Definitions ---
 interface Experience {
@@ -17,48 +16,79 @@ interface ExperiencePreviewProps {
 
 
 const ExperiencePreview: React.FC<ExperiencePreviewProps> = ({ featuredExperience }) => {
+    const [expandedIds, setExpandedIds] = useState<Record<number, boolean>>({});
+    const [contentHeights, setContentHeights] = useState<Record<number, number>>({});
+    const contentRefs = useRef<Record<number, HTMLDivElement | null>>({});
 
-    // Helper component for the decorative cursor/pipe in the heading
-    const PipeCursor: React.FC = () => (
-        <span className="text-white flex items-center">
-            <svg width="10" height="20" viewBox="0 0 12 60" fill="none">
-                <path d="M10 2 Q2 30 10 58" stroke="currentColor" stroke-width="5" fill="none"
-                    className="h-3 md:h-3" />
-            </svg>
-            <svg width="10" height="20" viewBox="0 0 12 60" fill="none">
-                <path d="M2 2 Q10 30 2 58" stroke="currentColor" stroke-width="5" fill="none"
-                    className="h-3 md:h-3" />
-            </svg>
-            <span className="text-white-400 animate-pulse">:</span>
-        </span>
-    );
+    // Toggle function (unchanged)
+    const toggleExpansion = (id: number) => {
+        setExpandedIds(prev => ({
+            ...prev,
+            [id]: !prev[id]
+        }));
+    };
+
+    // EFFECT: Measure the full height of the description content once it renders (unchanged)
+    useEffect(() => {
+        const newHeights: Record<number, number> = {};
+
+        featuredExperience.forEach(exp => {
+            const ref = contentRefs.current[exp.id];
+
+            if (ref && !contentHeights[exp.id]) {
+                newHeights[exp.id] = ref.scrollHeight;
+            }
+        });
+
+        if (Object.keys(newHeights).length > 0) {
+            setContentHeights(prev => ({ ...prev, ...newHeights }));
+        }
+    }, [featuredExperience, contentHeights]);
 
     return (
-        <div id="experience-preview">
+        <div id="experience-preview" className="font-sans">
             <div className="flex justify-between items-end mb-12">
-                {/* Heading */}
-                <h2 className="text-xl md:text-2xl font-mono font-bold text-white flex items-center">
-                    <span className="text-green-400 mr-2 italic font-normal">def</span>
-                    <span className="text-primary font-semibold">experience</span>
-                    <PipeCursor />
+                <h2 className="text-xl md:text-2xl font-mono font-bold text-white flex items-baseline">
+                    <span className="flex items-center">
+                        <span className="text-green-200 mr-2 font-normal">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" className="size-6">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M3 8.25V18a2.25 2.25 0 0 0 2.25 2.25h13.5A2.25 2.25 0 0 0 21 18V8.25m-18 0V6a2.25 2.25 0 0 1 2.25-2.25h13.5A2.25 2.25 0 0 1 21 6v2.25m-18 0h18M5.25 6h.008v.008H5.25V6ZM7.5 6h.008v.008H7.5V6Zm2.25 0h.008v.008H9.75V6Z" />
+                            </svg>
+
+                        </span>
+                        <span className="text-primary mr-1 font-semibold italic tracking-tighter">Work Experience</span>
+                    </span>
                 </h2>
             </div>
 
             {/* Timeline Body */}
-            <div className="relative border-l border-gray-600 ml-3 md:ml-6 space-y-12 pb-2">
+            <div className="relative border-l border-gray-600 space-y-12 pb-2">
                 {featuredExperience.map((exp, index) => {
-                    // Determine styling based on the position in the timeline
                     const isFirst = index === 0;
-                    
-                    // Dot Styling Logic
+                    const isExpanded = !!expandedIds[exp.id];
+                    // Fallback to a large, safe max-height (like 1000px) if not measured yet
+                    const fullHeight = contentHeights[exp.id] || 1000;
+
+                    // 💥 NEW: Normalize description to an array
+                    const descriptionPoints = Array.isArray(exp.description) ? exp.description : [exp.description];
+
+                    // 💥 NEW: Determine if there is content that needs to be hidden
+                    const hasMoreContent = descriptionPoints.length > 2;
+
+                    // 💥 NEW: The content that is *always* visible (first 2 items)
+                    const initialContent = hasMoreContent ? descriptionPoints.slice(0, 2) : descriptionPoints;
+
+                    // 💥 NEW: The content that is *hidden* initially (rest of the items)
+                    const restOfContent = hasMoreContent ? descriptionPoints.slice(2) : [];
+
+                    // ... Dot and Card Styling Logic remain the same ...
                     let dotClasses = 'absolute -left-[9px] top-1/2 -translate-y-1/2 w-4 h-4 rounded-full transition-all duration-300 z-10';
                     if (isFirst) {
-                        dotClasses += ' bg-green-400 border-white terminal-blink'; // Currently active
+                        dotClasses += ' bg-green-400 border-white terminal-blink';
                     } else {
                         dotClasses += ' bg-[#282C33] border border-white group-hover:bg-primary';
                     }
 
-                    // Card Styling Logic
                     let cardClasses = 'p-4 transition-colors bg-[#282C33] rounded-md';
                     if (isFirst) {
                         cardClasses += ' border border-green-400 shadow-[0_0_15px_rgba(27,172,129,0.5)]';
@@ -67,13 +97,8 @@ const ExperiencePreview: React.FC<ExperiencePreviewProps> = ({ featuredExperienc
                     }
 
                     return (
-                        // Timeline Item Container
                         <div key={exp.id} className="timeline-item pl-8 relative group">
-
-                            {/* Dot */}
                             <div className={dotClasses}></div>
-
-                            {/* Card */}
                             <div className={cardClasses}>
                                 <div className="flex flex-col md:flex-row justify-between mb-2">
                                     <h3 className="text-white font-medium text-xl">{exp.role}</h3>
@@ -87,47 +112,115 @@ const ExperiencePreview: React.FC<ExperiencePreviewProps> = ({ featuredExperienc
                                 </p>
 
                                 <div className="text-gray-400 text-sm">
+                                    {/* --- 1. ALWAYS VISIBLE CONTENT (First 2 points) --- */}
+                                    {/* We use a separate list/paragraph for initial content to ensure it's always rendered */}
                                     {Array.isArray(exp.description) ? (
-                                        <>
-                                            {/* Display UL for list items */}
-                                            <ul className="list-disc list-inside text-gray-400 space-y-2 leading-relaxed mb-1">
-                                                {/* Show ONLY the first item in the preview */}
-                                                {exp.description.slice(0, 2).map((point, idx) => (
-                                                    <li key={idx}>{point}</li>
-                                                ))}
-                                            </ul>
+                                        <ul className="list-disc list-inside text-gray-400 space-y-2 leading-relaxed mb-1">
+                                            {initialContent.map((point, idx) => (
+                                                <li key={idx}>{point}</li>
+                                            ))}
+                                        </ul>
+                                    ) : (
+                                        // This handles the case where description is just a string (no points to hide)
+                                        <p className="text-gray-400 leading-relaxed">{exp.description}</p>
+                                    )}
 
-                                            {/* Show the "Show More" button if there's more than 1 item */}
-                                            {exp.description.length > 2 && (
-                                                <div className="flex justify-end pt-1">
-                                                    {/* NOTE: Actual state management for showing more is omitted for brevity but goes here */}
-                                                    <button className="text-xs text-primary hover:text-white transition-colors">
-                                                        Show More ({exp.description.length - 2})
+                                    {/* --- 2. HIDING/MEASURING WRAPPER --- */}
+                                    {/* This wrapper holds the 'rest of the content' and is used for measuring/transitioning */}
+                                    {hasMoreContent && (
+                                        <>
+                                            {/* Measurement Wrapper: Always render full content for accurate height */}
+                                            <div
+                                                ref={el => { contentRefs.current[exp.id] = el }}
+                                                className="content-inner-wrapper pt-2"
+                                                // Style visibility to measure, but hide it visually if not expanded
+                                                style={{
+                                                    // Ensure content is measured at its full height
+                                                    maxHeight: isExpanded ? `${fullHeight}px` : '0px',
+                                                    // Add the smooth transition
+                                                    transition: `max-height 500ms ease-in-out, opacity 500ms ease-in-out`,
+                                                    // Control visual state
+                                                    overflow: 'hidden',
+                                                    opacity: isExpanded ? 1 : 0.01,
+                                                }}
+                                            >
+                                                <ul className="list-disc list-inside text-gray-400 space-y-2 leading-relaxed mb-1">
+                                                    {restOfContent.map((point, idx) => (
+                                                        <li key={idx}>{point}</li>
+                                                    ))}
+                                                </ul>
+                                            </div>
+
+                                            {/* Show/Hide Button */}
+                                            {/* <div className="flex justify-end pt-2">
+                                                <button
+                                                    onClick={() => toggleExpansion(exp.id)}
+                                                    className="text-xs text-primary hover:text-white transition-colors font-mono tracking-widest uppercase"
+                                                >
+                                                    {isExpanded ? 
+                                                        `Hide` : 
+                                                        `Show More` // Accurate count of remaining items
+                                                    }
+                                                </button>
+                                            </div> */}
+                                            <div className="flex justify-end pt-4">
+                                                <div className="flex items-baseline gap-2 font-mono text-base">
+                                                    {/* 1. The stylized 'return' text */}
+                                                    <span className="text-primary opacity-70 transition-opacity italic">
+                                                        {isExpanded ? 'show' : 'show'}
+                                                    </span>
+
+                                                    {/* The main container for the stylized button */}
+                                                    <button
+                                                        onClick={() => toggleExpansion(exp.id)}
+                                                        className="group" // Useful for hover effects on child elements
+                                                    >
+
+                                                        {/* 2. The main button text, with hover effect */}
+                                                        <div className="flex items-center gap-2 text-white hover:text-green-400 transition-colors">
+                                                            <span>
+                                                                {isExpanded ?
+                                                                    `less` :
+                                                                    `more`
+                                                                }
+                                                            </span>
+                                                            {/* --- ICON IMPLEMENTATION --- */}
+                                                            {isExpanded ? (
+                                                                // Up Arrow Icon (Visible when expanded = 'less')
+                                                                <svg
+                                                                    xmlns="http://www.w3.org/2000/svg"
+                                                                    fill="none"
+                                                                    viewBox="0 0 24 24"
+                                                                    strokeWidth={2.5}
+                                                                    stroke="currentColor"
+                                                                    className="w-4 h-4"
+                                                                >
+                                                                    <path strokeLinecap="round" strokeLinejoin="round" d="m4.5 15.75 7.5-7.5 7.5 7.5" />
+                                                                </svg>
+                                                            ) : (
+                                                                // Down Arrow Icon (Visible when not expanded = 'more')
+                                                                <svg
+                                                                    xmlns="http://www.w3.org/2000/svg"
+                                                                    fill="none"
+                                                                    viewBox="0 0 24 24"
+                                                                    strokeWidth={2.5}
+                                                                    stroke="currentColor"
+                                                                    className="w-4 h-4"
+                                                                >
+                                                                    <path strokeLinecap="round" strokeLinejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
+                                                                </svg>
+                                                            )}
+                                                        </div>
                                                     </button>
                                                 </div>
-                                            )}
+                                            </div>
                                         </>
-                                    ) : (
-                                        // Display P tag for single string description
-                                        <p className="text-gray-400 leading-relaxed">{exp.description}</p>
                                     )}
                                 </div>
                             </div>
                         </div>
                     );
                 })}
-            </div>
-
-            {/* Mobile View All Link */}
-            <div className="flex justify-start mt-8 md:hidden">
-                <Link to="/experience" className="group">
-                    <div className="flex items-baseline gap-2 font-mono text-base">
-                        <span className="text-primary opacity-70 transition-opacity italic">return</span>
-                        <div className="flex items-center gap-2 text-white hover:text-green-400 transition-colors">
-                            <span>view_all</span>
-                        </div>
-                    </div>
-                </Link>
             </div>
         </div>
     );

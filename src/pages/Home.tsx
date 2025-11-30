@@ -1,9 +1,10 @@
 import { Link } from 'react-router-dom';
-import { personalInfo, projects, experiences } from '../data/content';
+import { personalInfo, experiences } from '../data/content';
 import profileImg from '../assets/profile-avatar.png';
 import { useContactForm } from '../hooks/useContactForm';
 import QuoteDisplay from '../components/QuoteDisplay';
 import ExperiencePreview from '../components/Experience';
+
 
 
 const Home = () => {
@@ -18,8 +19,6 @@ const Home = () => {
         copyStatus
     } = useContactForm();
 
-    // Data Slicing for Previews
-    const featuredProjects = projects.slice(0, 3);
 
     return (
         <div id="home-view" className="view-section">
@@ -47,33 +46,30 @@ const Home = () => {
                                 px-3 py-3 flex items-center justify-center gap-2 
                                 transition-all duration-300 overflow-hidden rounded-md
                                 
-                                // BASE STATE (Primary Purple Look)
-                                bg-transparent 
-                                border-[#C778DD]  /* Base Border: Primary Purple */
-                                
-                                
-                                // HOVER STATE (Green Accent) 🚨
-                                hover:border-[#1bac81] /* Hover Border: Green */
-                                hover:shadow-[0_0_15px_rgba(27,172,129,0.8)] /* Hover Shadow: Green Glow (using #1bac81 converted to rgba) */
+                                // BASE STATE
+                                bg-transparent
+                                border-[#c778DD] 
+                                shadow-[0_0_15px_rgba(199,120,221,1)]
                                 "
                         >
+                            
+
+                            {/* The main text stays white and only changes its accent color */}
+                            <span
+                                className="font-mono font-medium transition-colors text-sm md:text-base 
+                                    text-[#C778DD]
+                                    group-hover:text-white" /* Explicitly ensure it stays white on hover */
+                            >
+                                Get in touch
+                            </span>
                             {/* The > symbol color changes from Primary Purple to Green on hover */}
                             <span
                                 className="font-bold transition-transform duration-300 
                                     text-[#C778DD]                /* Base Text: Primary Purple */
                                     group-hover:-translate-x-1 
-                                    group-hover:text-[#1bac81]"    /* Hover Text: Green */
+                                    group-hover:text-white"    /* Hover Text: Green */
                             >
-                                {`>`}
-                            </span>
-
-                            {/* The main text stays white and only changes its accent color */}
-                            <span
-                                className="font-mono font-medium transition-colors text-sm md:text-base 
-                                    text-white /* Always White */
-                                    group-hover:text-white" /* Explicitly ensure it stays white on hover */
-                            >
-                                contact me
+                                {`>>`}
                             </span>
                         </Link>
 
@@ -97,17 +93,19 @@ const Home = () => {
                                 "
                         >
 
-                            {/* 1. DOWNLOAD ICON (Left, Initially Green, Hover Green) */}
-                            <i
-                                className="fas fa-download text-sm ml-0 mr-1 transition-colors 
-                                            text-[#1bac81]                          /* 🚨 Base Icon Color: Vibrant Green */
-                                            group-hover:text-[#1bac81]"             /* Hover Icon Color: Green (Stays Green) */
-                            ></i>
+                            
 
                             {/* 2. TEXT (Always White) */}
                             <span className="font-mono font-medium text-white transition-colors text-sm md:text-base">
-                                resume.pdf
+                                Resume
                             </span>
+
+                            {/* 1. DOWNLOAD ICON (Left, Initially Green, Hover Green) */}
+                            <i
+                                className="fas fa-download text-sm ml-0 transition-colors  
+                                            text-white                          /* 🚨 Base Icon Color: Vibrant Green */
+                                            group-hover:text-[#1bac81] "             /* Hover Icon Color: Green (Stays Green) */
+                            ></i>
                         </a>
 
                     </div>
@@ -147,125 +145,26 @@ const Home = () => {
 
 
             {/* EXPERIENCE PREVIEW */}
-            <section id="experience-preview" className="mb-24">
-                <ExperiencePreview featuredExperience={experiences}/>
+            <section id="experience-preview" className="mb-12 md:mb-20">
+                <ExperiencePreview featuredExperience={experiences} />
             </section>
 
-            {/* PROJECTS SECTION */}
-            <section id="works" className="mb-24">
-                <div className="flex justify-between items-end mb-12">
-                    {/* Heading */}
-                    <h2 className="text-2xl md:text-3xl font-mono font-bold text-white flex items-center">
-                        <span className="text-primary mr-2">def</span>
-                        <span className="text-yellow-400">projects</span>
-                        <span className="text-gray-400">()</span>
-                        <span className="text-gray-400 animate-pulse">:</span>
-                    </h2>
-
-                    <Link to="/projects" className="group mb-1">
-                        {/* MOBILE VIEW: Clean Arrow Only */}
-                        <i className="fas fa-arrow-right text-xl text-gray-400 group-hover:text-primary transition-colors transform group-hover:translate-x-1 duration-300 md:hidden"></i>
-
-                        {/* DESKTOP VIEW: Python Return Style */}
-                        <div className="hidden md:flex items-baseline gap-2 font-mono text-base">
-                            <span className="text-primary opacity-70 group-hover:opacity-100 transition-opacity italic">return</span>
-                            <div className="flex items-center gap-2 text-green-400 hover:text-green-300 transition-colors">
-                                <span>"view_all"</span>
-                            </div>
-                        </div>
-                    </Link>
-                </div>
-
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                    {featuredProjects.map((p) => (
-                        <div key={p.id} className="border border-gray-600 hover:border-white transition-colors group">
-
-                            {/* Image Area Logic */}
-                            <div className={`h-48 border-b border-gray-600 overflow-hidden relative ${p.title.includes('Kahoot') ? 'bg-[#46178F] flex items-center justify-center' : 'bg-[#333]'}`}>
-                                {p.image && !p.title.includes('Kahoot') && !p.title.includes('ProtectX') ? (
-                                    <img src={p.image} alt={p.title} className="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity" />
-                                ) : p.title.includes('Kahoot') ? (
-                                    <h1 className="text-white font-bold text-3xl italic">Kahoot!</h1>
-                                ) : p.title.includes('ProtectX') ? (
-                                    <div className="flex items-center justify-center h-full relative">
-                                        <i className="fas fa-shield-alt text-6xl text-green-500"></i>
-                                        <div className="absolute inset-0 bg-black/20"></div>
-                                    </div>
-                                ) : null}
-                            </div>
-
-                            <div className="border-b border-gray-600 p-2 text-gray-400 text-sm">
-                                {p.tech.join(" ")}
-                            </div>
-
-                            <div className="p-4">
-                                <h3 className="text-2xl text-white font-medium mb-4">{p.title}</h3>
-                                <p className="text-gray-400 text-sm mb-4">{p.description}</p>
-
-                                {/* CONDITIONAL LINK RENDERING */}
-                                {p.liveLink && p.liveLink !== "#" && (
-                                    <div className="flex gap-4">
-                                        <a
-                                            href={p.liveLink}
-                                            target="_blank"
-                                            rel="noopener noreferrer"
-                                            className="text-primary text-sm hover:underline"
-                                        >
-                                            Link {'->'}
-                                        </a>
-                                    </div>
-                                )}
-                            </div>
-                        </div>
-                    ))}
-                </div>
-            </section>
-
-            {/* ABOUT ME SECTION */}
-            <section id="about-me" className="mb-24">
-                <div className="mb-12">
-                    <h2 className="text-3xl font-mono font-bold text-white mb-12 flex items-center">
-                        <span className="text-primary mr-2">def</span>
-                        <span className="text-yellow-400">about_me</span>
-                        <span className="text-gray-400">()</span>
-                        <span className="text-gray-400 animate-pulse">:</span>
-                    </h2>
-                    <p className="text-gray-400">Who am i?</p>
-                </div>
-
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
-                    <div className="text-gray-400 leading-relaxed order-2 md:order-1">
-                        {personalInfo.about.map((line, idx) => (
-                            <p key={idx} className="mb-6">{line}</p>
-                        ))}
-
-                        <Link to="/about" className="group inline-block mt-4">
-                            {/* Shows "return read_more" on Mobile AND Desktop */}
-                            <div className="flex items-baseline gap-2 font-mono text-base">
-                                <span className="text-primary opacity-70 group-hover:opacity-100 transition-opacity italic">return</span>
-                                <span className="text-green-400 hover:text-green-300 transition-colors">"read_more"</span>
-                            </div>
-                        </Link>
-                    </div>
-
-                    <div className="relative flex justify-center md:justify-end order-1 md:order-2">
-                        <div className="relative">
-                            <div className="absolute top-[4.75rem] left-[0.5rem] w-16 h-16 dots-pattern z-0"></div>
-                            <img src={profileImg} alt="Rayhan Profile" className="w-72 md:w-80 relative z-10 -scale-x-100 -ml-[10px] top-[10px]" />
-                            <div className="absolute bottom-[11rem] -right-4 w-16 h-16 dots-pattern z-20"></div>
-                        </div>
-                    </div>
-                </div>
-            </section>
 
             {/* CONTACTS SECTION */}
-            <section id="contacts" className="mb-32">
-                <h2 className="text-3xl font-mono font-bold text-white mb-12 flex items-center">
-                    <span className="text-primary mr-2">def</span>
-                    <span className="text-yellow-400">contacts</span>
-                    <span className="text-gray-400">()</span>
-                    <span className="text-gray-400 animate-pulse">:</span>
-                </h2>
+            <section id="contacts" className="mb-12 md:mb-20">
+                <div className="flex justify-between items-end mb-12">
+                    <h2 className="text-xl md:text-2xl font-mono font-bold text-white flex items-baseline">
+                        <span className="flex items-center">
+                            <span className="text-white mr-2 font-normal">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" className="size-6">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M3 8.25V18a2.25 2.25 0 0 0 2.25 2.25h13.5A2.25 2.25 0 0 0 21 18V8.25m-18 0V6a2.25 2.25 0 0 1 2.25-2.25h13.5A2.25 2.25 0 0 1 21 6v2.25m-18 0h18M5.25 6h.008v.008H5.25V6ZM7.5 6h.008v.008H7.5V6Zm2.25 0h.008v.008H9.75V6Z" />
+                                </svg>
+
+                            </span>
+                            <span className="text-primary mr-1 font-semibold italic tracking-tighter">Contact Me</span>
+                        </span>
+                    </h2>
+                </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
                     <div className="text-gray-400">

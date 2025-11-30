@@ -41,8 +41,9 @@ export const experiences: Experience[] = [
         period: "2023 - Present",
         description: [
             "Leading a team of 5 developers in migrating legacy monolith to micro-frontend architecture.",
-            "Implemented CI/CD pipelines reducing deployment time by 60%.",
-            "Mentoring junior developers and conducting code reviews."
+            "Implemented CI/CD pipelines reducing deployment time by 60%. Leading a team of 5 developers in migrating legacy monolith to micro-frontend architecture.Leading a team of 5 developers in migrating legacy monolith to micro-frontend architecture.",
+            "Mentoring junior developers and conducting code reviews.",
+            "Leading a team of 5 developers in migrating legacy monolith to micro-frontend architecture."
         ]
     },
     {
