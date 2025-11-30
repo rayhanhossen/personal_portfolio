@@ -1,10 +1,11 @@
 import { Link } from 'react-router-dom';
 import { personalInfo, experiences } from '../data/content';
-import profileImg from '../assets/profile-avatar.png';
+// NOTE: Assuming profileImg is a PNG with a transparent/clean background, 
+// if it's currently optimized for dark mode, it may need adjusting.
+import profileImg from '../assets/profile-avatar.png'; 
 import { useContactForm } from '../hooks/useContactForm';
 import QuoteDisplay from '../components/QuoteDisplay';
 import ExperiencePreview from '../components/Experience';
-
 
 
 const Home = () => {
@@ -21,130 +22,108 @@ const Home = () => {
 
 
     return (
-        <div id="home-view" className="view-section">
+        // 🚨 UPDATED: Removed dark theme classes, relying on Layout.tsx for bg/font
+        <div id="home-view" className="view-section pt-12"> 
 
             {/* HERO SECTION */}
-            <section id="home" className="grid grid-cols-1 md:grid-cols-2 gap-8 md:items-end mb-12 md:mb-20">
-                <div className="order-2 md:order-1 pb-2">
-                    {/* intial text  */}
-                    <h3 className="font-mono text-1xl md:text-2xl font-bold text-white mb-6 leading-snug tracking-tighter">
-                        Hi, I’m {personalInfo.name} Hossen — <br />
-                        <span className="text-primary">{personalInfo.title}</span> focused on building <span className="text-primary">AI-powered </span>
-                        applications<span className="animate-pulse text-primary">_</span>
+            <section id="home" className="grid grid-cols-1 md:grid-cols-2 gap-12 md:items-start mb-20 md:mb-28">
+                
+                {/* 1. TEXT CONTENT */}
+                <div className="order-2 md:order-1 pt-4">
+                    
+                    {/* 🚨 UPDATED: Clean, Sans-Serif Typography and Light Text Colors */}
+                    <h3 className="font-sans text-2xl md:text-4xl font-light text-gray-800 mb-6 leading-tight">
+                        Hi, I’m <span className="font-semibold text-gray-900">{personalInfo.name}</span> Hossen. <br />
+                        I’m a <span className="text-accent font-medium">{personalInfo.title}</span> focused on building <span className="text-accent font-medium">AI-powered</span>
+                        applications<span className="animate-pulse text-accent">.</span>
                     </h3>
 
-                    {/* sub header  */}
-                    <p className="font-mono text-gray-400 mb-8 max-w-lg text-sm md:text-base leading-relaxed tracking-tighter">
-                        // I love turning complex ideas into clear, intelligent digital experiences.
+                    {/* 🚨 UPDATED: Subtle descriptive text */}
+                    <p className="font-sans text-gray-600 mb-8 max-w-lg text-base leading-relaxed">
+                        I love turning complex ideas into clear, intelligent digital experiences.
                     </p>
 
-                    <div className="flex flex-row gap-3 mt-6 w-full md:w-auto">
-                        {/* contact me button  */}
+                    <div className="flex flex-col sm:flex-row gap-4 mt-8 w-full md:w-auto">
+                        
+                        {/* 📞 Contact Me Button (Clean, Solid Fill, Accent Color) */}
                         <Link
                             to="/contacts"
-                            className="flex-1 md:flex-none group border-2 relative
-                                px-3 py-3 flex items-center justify-center gap-2 
-                                transition-all duration-300 overflow-hidden rounded-md
+                            className="flex-1 sm:flex-none group relative
+                                px-6 py-3 flex items-center justify-center gap-2 
+                                transition-all duration-300 rounded-xl font-medium text-sm md:text-base
                                 
-                                // BASE STATE
-                                bg-transparent
-                                border-[#c778DD] 
-                                shadow-[0_0_15px_rgba(199,120,221,1)]
-                                "
+                                // BASE STATE: Accent background, white text
+                                bg-accent text-white shadow-lg shadow-accent/40
+                                
+                                // HOVER STATE: Subtle darkening/lift
+                                hover:bg-accent/90 hover:-translate-y-0.5 hover:shadow-xl hover:shadow-accent/60"
                         >
-                            
-
-                            {/* The main text stays white and only changes its accent color */}
-                            <span
-                                className="font-mono font-medium transition-colors text-sm md:text-base 
-                                    text-[#C778DD]
-                                    group-hover:text-white" /* Explicitly ensure it stays white on hover */
-                            >
-                                Get in touch
-                            </span>
-                            {/* The > symbol color changes from Primary Purple to Green on hover */}
-                            <span
-                                className="font-bold transition-transform duration-300 
-                                    text-[#C778DD]                /* Base Text: Primary Purple */
-                                    group-hover:-translate-x-1 
-                                    group-hover:text-white"    /* Hover Text: Green */
-                            >
-                                {`>>`}
+                            <span>Get in touch</span>
+                            <span className="font-bold transition-transform duration-300 group-hover:translate-x-1">
+                                {`>`}
                             </span>
                         </Link>
 
-                        {/* resume download button */}
+                        {/* 📄 Resume Download Button (Minimalist, Outline) */}
                         <a
                             href={personalInfo.cvLink}
                             target="_blank"
                             rel="noopener noreferrer"
-
-                            // Base State: Primary Purple Border/Shadow
-                            className="flex-1 md:flex-none group border-2 relative
-                                px-3 py-3 flex items-center justify-center gap-2 
-                                transition-all duration-300 overflow-hidden rounded-md
+                            className="flex-1 sm:flex-none group relative
+                                px-6 py-3 flex items-center justify-center gap-2 
+                                transition-all duration-300 rounded-xl font-medium text-sm md:text-base
                                 
-                                bg-transparent 
-                                border-[#1bac81]
-
-                                // Hover State: Green Accent
-                                hover:border-[#1bac81]                      /* Hover Border: Green */
-                                hover:shadow-[0_0_15px_rgba(27,172,129,0.8)] /* Hover Shadow: Green Glow */
-                                "
+                                // BASE STATE: Outline style
+                                border border-gray-400 text-gray-700 hover:border-accent hover:text-accent 
+                                hover:bg-accent/5 hover:shadow-md hover:shadow-accent/20"
                         >
-
-                            
-
-                            {/* 2. TEXT (Always White) */}
-                            <span className="font-mono font-medium text-white transition-colors text-sm md:text-base">
-                                Resume
-                            </span>
-
-                            {/* 1. DOWNLOAD ICON (Left, Initially Green, Hover Green) */}
-                            <i
-                                className="fas fa-download text-sm ml-0 transition-colors  
-                                            text-white                          /* 🚨 Base Icon Color: Vibrant Green */
-                                            group-hover:text-[#1bac81] "             /* Hover Icon Color: Green (Stays Green) */
-                            ></i>
+                            <span>Resume</span>
+                            <i className="fas fa-download text-sm ml-1 transition-colors"></i>
                         </a>
 
                     </div>
-
                 </div>
 
-                <div className="order-1 md:order-2 relative flex justify-center md:justify-end md:-translate-y-[18px]">
-                    {/* <div className="absolute md:top-10 left-[-54px] top-[-24px] md:left-[2.3rem] w-20 h-20 border-2 border-gray-600 opacity-50 z-0"></div> */}
-                    {/* <div className="absolute bottom-[13rem] right-[21rem] w-16 h-16 dots-pattern opacity-60 z-20"></div> */}
-
+                {/* 2. PROFILE IMAGE (Cleaned up, light shadow, status bubble redesigned) */}
+                <div className="order-1 md:order-2 relative flex justify-center md:justify-end">
+                    
                     <div className="relative z-10 w-64 md:w-80 group">
-                        <img src={profileImg} alt="profile" className="w-full object-contain drop-shadow-[0_10px_20px_rgba(199,120,221,0.2)] transition-transform duration-300 group-hover:-translate-y-1 -scale-x-100 -ml-[25px]" />
+                        {/* Image: Removed glowing shadow, added standard soft shadow, fixed scaleX */}
+                        <img 
+                            src={profileImg} 
+                            alt="profile" 
+                            className="w-full object-contain rounded-xl shadow-2xl transition-transform duration-300 group-hover:-translate-y-1" 
+                        />
 
-
-                        <div className="rounded-md absolute -bottom-2 left-1/2 -translate-x-1/2 border border-[#1bac81] shadow-[0_0_15px_rgba(27,172,129,0.5)] bg-[#282C33] p-3 md:p-[12px] flex items-center gap-2 text-gray-400 text-sm w-max z-20">
+                        {/* Status Bubble (Redesigned for light glass effect) */}
+                        <div className="glass-card absolute -bottom-4 left-1/2 -translate-x-1/2 
+                                p-3 md:p-3 flex items-center gap-2 text-gray-700 text-sm w-max z-20">
 
                             <div className="relative flex h-3 w-3">
-                                {/* Added style={{ animationDuration: '3s' }} to slow it down */}
+                                {/* Ping/Dot: Use standard green, consistent with professional status */}
                                 <span
                                     className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"
                                     style={{ animationDuration: '2s' }}
                                 ></span>
-
                                 <span className="relative inline-flex rounded-full h-3 w-3 bg-green-500"></span>
                             </div>
 
-                            <span className='tracking-normal'>Currently open to <span className="text-primary font-bold">opportunities</span></span>
+                            <span className='tracking-normal font-medium'>
+                                Open to <span className="text-accent font-bold">opportunities</span>
+                            </span>
                         </div>
                     </div>
                 </div>
             </section>
 
-            {/* QUOTE SECTION */}
+            {/* QUOTE SECTION (Assuming QuoteDisplay works well with light background) */}
             <section className="mb-12 md:mb-20 w-full">
                 <QuoteDisplay />
             </section>
 
 
             {/* EXPERIENCE PREVIEW */}
+            {/* NOTE: If ExperiencePreview uses dark cards, it will need a redesign too */}
             <section id="experience-preview" className="mb-12 md:mb-20">
                 <ExperiencePreview featuredExperience={experiences} />
             </section>
@@ -153,131 +132,110 @@ const Home = () => {
             {/* CONTACTS SECTION */}
             <section id="contacts" className="mb-12 md:mb-20">
                 <div className="flex justify-between items-end mb-12">
-                    <h2 className="text-xl md:text-2xl font-mono font-bold text-white flex items-baseline">
-                        <span className="flex items-center">
-                            <span className="text-white mr-2 font-normal">
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" className="size-6">
-                                    <path stroke-linecap="round" stroke-linejoin="round" d="M3 8.25V18a2.25 2.25 0 0 0 2.25 2.25h13.5A2.25 2.25 0 0 0 21 18V8.25m-18 0V6a2.25 2.25 0 0 1 2.25-2.25h13.5A2.25 2.25 0 0 1 21 6v2.25m-18 0h18M5.25 6h.008v.008H5.25V6ZM7.5 6h.008v.008H7.5V6Zm2.25 0h.008v.008H9.75V6Z" />
-                                </svg>
-
-                            </span>
-                            <span className="text-primary mr-1 font-semibold italic tracking-tighter">Contact Me</span>
+                    {/* 🚨 UPDATED: Clean text heading */}
+                    <h2 className="text-xl md:text-2xl font-semibold text-gray-800 flex items-baseline">
+                        <span className="text-accent mr-2">
+                            <i className="fas fa-envelope-open-text"></i>
                         </span>
+                        <span className="tracking-tight">Contact Me</span>
                     </h2>
                 </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
-                    <div className="text-gray-400">
-                        <p className="mb-6">
+                    
+                    {/* Left Column: Description & Glass Contact Form */}
+                    <div>
+                        <p className="mb-8 text-gray-600">
                             I'm interested in new opportunities. If you have a question, collaboration idea, or just want to connect, feel free to reach out.
                         </p>
 
-                        <div className="border border-gray-600 p-4 mt-6 relative bg-[#282C33]/20">
-                            <label className="block text-1xl text-gray-500 mb-2 font-mono">Quick Message Draft:</label>
+                        {/* 🫧 GLASS CONTACT FORM BOX */}
+                        <div className="glass-card p-6 w-full shadow-lg"> 
+                            <label className="block text-sm text-gray-500 mb-2 font-medium">Quick Message Draft:</label>
 
                             <textarea
                                 ref={textareaRef}
                                 value={message}
                                 onChange={(e) => setMessage(e.target.value)}
-                                className="w-full bg-transparent text-white font-mono outline-none resize-none mb-4 text-sm focus:placeholder-gray-600 transition-colors"
+                                // 🚨 UPDATED: Light background, dark text
+                                className="w-full bg-gray-50/50 text-gray-800 border border-gray-200 focus:border-accent rounded-lg p-3 outline-none resize-none mb-4 text-sm transition-colors"
                                 rows={4}
                                 placeholder="Type a message here..."
                             />
 
-                            <div className="flex justify-between items-center border-t border-gray-600 pt-3">
+                            <div className="flex justify-between items-center border-t border-gray-200 pt-3">
+                                
+                                {/* 🤖 Refine Button (Clean, Non-Code Style) */}
                                 <button
                                     onClick={handleRefine}
                                     disabled={loading}
-                                    className="group font-mono text-xs md:text-sm flex items-center gap-1.5 transition-all hover:bg-white/5 px-2 py-1 rounded-sm border border-transparent hover:border-gray-700"
+                                    className="group font-medium text-xs md:text-sm flex items-center gap-2 transition-all 
+                                               px-3 py-1.5 rounded-full border border-transparent 
+                                               text-gray-600 hover:text-accent hover:border-accent/50 disabled:opacity-50"
                                 >
                                     {loading ? (
-                                        /* Loading State: Compiling style */
                                         <>
-                                            <i className="fas fa-circle-notch fa-spin text-primary"></i>
-                                            <span className="text-gray-500 italic">processing...</span>
+                                            <i className="fas fa-circle-notch fa-spin text-accent"></i>
+                                            <span className="text-gray-500 italic">Processing...</span>
                                         </>
                                     ) : (
-                                        /* Idle State: Method Call style */
                                         <>
-                                            <i className="fas fa-magic text-purple-400 group-hover:text-yellow-400 transition-colors"></i>
-
-                                            <span className="flex items-center">
-                                                <span className="text-primary font-bold">AI</span>
-                                                <span className="text-gray-500">.</span>
-                                                <span className="text-yellow-400 group-hover:text-yellow-300 transition-colors">refine</span>
-                                                <span className="text-gray-500">(</span>
-                                                <span className="text-green-400 opacity-70 group-hover:opacity-100">msg</span>
-                                                <span className="text-gray-500">)</span>
-                                            </span>
+                                            <i className="fas fa-magic text-accent group-hover:text-accent/80 transition-colors"></i>
+                                            <span className="font-semibold">AI Refine</span>
                                         </>
                                     )}
                                 </button>
 
                                 <div className="flex items-center gap-4">
-                                    {/* --- Copy Button (Unchanged) --- */}
+                                    {/* 📋 Copy Button (Minimalist) */}
                                     <button
                                         onClick={handleCopy}
-                                        className="group flex items-center gap-1.5 font-mono text-gray-500 hover:text-white transition-colors"
+                                        className="group flex items-center gap-1.5 text-gray-500 hover:text-green-600 transition-colors"
                                         title="Copy to clipboard"
                                     >
-                                        {/* 3. Conditional rendering based on copyStatus */}
                                         {copyStatus ? (
                                             <i className="fas fa-check-circle text-lg text-green-500 transition-colors"></i>
                                         ) : (
-                                            <>
-                                                {/* MOBILE ONLY: Icon */}
-                                                <i className="far fa-copy text-lg group-hover:text-green-400 transition-colors md:hidden"></i>
-                                            </>
+                                            <i className="far fa-copy text-lg transition-colors"></i>
                                         )}
-
-                                        {/* DESKTOP ONLY: Text code style */}
-                                        <span className="hidden md:inline text-sm">
-                                            <span className="text-gray-600">.</span>
-                                            <span className={`text-green-400 ${copyStatus ? 'opacity-100' : 'opacity-70 group-hover:opacity-100'} transition-opacity`}>copy</span>
-                                            <span className="text-gray-600">()</span>
-                                        </span>
+                                        <span className="hidden md:inline text-sm font-medium">Copy</span>
                                     </button>
 
-                                    {/* --- Send Button (UPDATED to match Copy style) --- */}
+                                    {/* 🚀 Send Button (Clean, Accent Color) */}
                                     <button
                                         onClick={handleSend}
-                                        disabled={!message.trim()} // Disabled when no text exists
-                                        className="font-mono text-sm md:text-base group flex items-center gap-1.5 transition-all disabled:cursor-not-allowed py-2"
+                                        disabled={!message.trim()}
+                                        className="font-medium text-sm md:text-base group flex items-center gap-1.5 transition-all py-1.5 px-3 rounded-full
+                                                   bg-accent text-white shadow-md shadow-accent/30 
+                                                   disabled:bg-gray-300 disabled:shadow-none disabled:text-gray-500 disabled:cursor-not-allowed"
                                     >
-                                        {!message.trim() ? (
-                                            /* 🚨 1. DISABLED State: Simple gray text 🚨 */
-                                            <span className="text-gray-500 font-mono select-none text-sm md:text-base">.send()</span>
-                                        ) : (
-                                            /* 🚨 2. ENABLED State: Code style with Icon and Method call 🚨 */
-                                            <>
-                                                {/* ICON (Mobile Only: Use a generic send/arrow icon) */}
-                                                <i className="fas fa-paper-plane text-sm text-primary group-hover:text-yellow-400 transition-colors md:hidden"></i>
-
-                                                {/* DESKTOP/CODE STYLE */}
-                                                <span className="hidden md:inline text-sm md:text-base">
-                                                    <span className="text-gray-500">.</span>
-                                                    <span className="text-primary group-hover:text-yellow-400 transition-colors">send</span>
-                                                    <span className="text-gray-500">()</span>
-                                                </span>
-                                            </>
-                                        )}
+                                        Send
+                                        <i className="fas fa-paper-plane text-xs ml-1"></i>
                                     </button>
                                 </div>
                             </div>
                         </div>
                     </div>
 
+                    {/* Right Column: Contact Info Card */}
                     <div className="flex justify-start md:justify-end">
-                        <div className="border border-gray-600 p-4 w-full md:w-auto">
-                            <h4 className="text-white font-bold mb-4">Feel free to reach out</h4>
-                            <div className="flex flex-col gap-2">
-                                <a href={`mailto:${personalInfo.email}`} className="flex items-center gap-2 text-gray-400 hover:text-white">
-                                    <i className="fas fa-envelope text-gray-500"></i>
-                                    <span>{personalInfo.email}</span>
+                        <div className="glass-card p-6 w-full md:w-96"> {/* 🚨 APPLIED GLASS CARD */}
+                            <h4 className="text-gray-800 font-bold mb-4">Feel free to reach out</h4>
+                            <div className="flex flex-col gap-3">
+                                {/* Email */}
+                                <a href={`mailto:${personalInfo.email}`} className="flex items-center gap-3 text-gray-600 hover:text-accent transition-colors">
+                                    <i className="fas fa-envelope text-gray-400 w-4 text-center"></i>
+                                    <span className='font-medium'>{personalInfo.email}</span>
                                 </a>
-                                <a href={`tel:${personalInfo.phone}`} className="flex items-center gap-2 text-gray-400 hover:text-white">
-                                    <i className="fa fa-phone text-gray-500"></i>
-                                    <span>{personalInfo.phone}</span>
+                                {/* Phone */}
+                                <a href={`tel:${personalInfo.phone}`} className="flex items-center gap-3 text-gray-600 hover:text-accent transition-colors">
+                                    <i className="fa fa-phone text-gray-400 w-4 text-center"></i>
+                                    <span className='font-medium'>{personalInfo.phone}</span>
+                                </a>
+                                {/* LinkedIn - Good to repeat a social link here */}
+                                <a href={personalInfo.linkedin} target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 text-gray-600 hover:text-accent transition-colors">
+                                    <i className="fab fa-linkedin text-gray-400 w-4 text-center"></i>
+                                    <span className='font-medium'>LinkedIn Profile</span>
                                 </a>
 
                             </div>

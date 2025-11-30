@@ -1,98 +1,89 @@
 import { personalInfo, skills, funFacts } from '../data/content';
-import profileImg from '../assets/profile-avatar.png'; // Ensure this image exists
+import profileImg from '../assets/profile-avatar.png';
 
 const About = () => {
     return (
-        <div>
+        <div className="font-sans">
             {/* Header */}
-            <div className="mb-12">
-                <h2 className="text-3xl text-white font-semibold mb-4">
-                    <span className="text-primary">/</span>about-me
+            <div className="mb-12 pt-8">
+                <h2 className="text-3xl text-gray-800 font-semibold mb-2">
+                    <span className="text-accent">/</span>about-me
                 </h2>
-                <p className="text-gray">Who am i?</p>
+                <p className="text-gray-600 text-lg">Who am I?</p>
             </div>
 
             {/* Main Bio & Image */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-12 mb-24 items-center">
-                <div className="text-gray leading-relaxed order-2 md:order-1">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-12 mb-24 items-start">
+                
+                {/* 1. Bio Text & Button */}
+                <div className="text-gray-700 leading-relaxed order-2 md:order-1 pt-4">
                     {personalInfo.about.map((paragraph, index) => (
-                        <p key={index} className="mb-6">
+                        <p key={index} className="mb-6 text-base">
                             {paragraph}
                         </p>
                     ))}
 
-                    {/* Developer Aesthetic Download Button (wget Style) */}
+                    {/* 📄 CV Download Button (Clean, Outlined Style) */}
                     <a
                         href={personalInfo.cvLink}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="group flex items-center gap-3 border border-gray-600 bg-[#282C33] px-5 py-3 hover:border-green-400 w-max mt-6 transition-all duration-300 hover:shadow-[0_0_15px_rgba(74,222,128,0.1)]"
+                        className="group flex items-center gap-3 border border-gray-400 text-gray-700 font-medium 
+                            px-6 py-3 hover:border-accent hover:text-accent hover:bg-accent/5 
+                            w-max mt-8 transition-all duration-300 rounded-xl"
+                        aria-label="Download Resume"
                     >
-                        {/* Terminal Prompt */}
-                        <span className="text-gray-500 font-mono text-sm group-hover:text-green-400 transition-colors font-bold">$</span>
-
-                        {/* Command Text */}
-                        <span className="font-mono text-sm">
-                            <span className="text-gray-300 group-hover:text-white transition-colors">wget</span>
-                            <span className="text-green-400 ml-2">cv.pdf</span>
-                        </span>
-
-                        {/* Download Icon (Animated) */}
-                        <i className="fas fa-arrow-down text-gray-500 group-hover:text-green-400 transform group-hover:translate-y-1 transition-all duration-300 text-xs ml-2"></i>
+                        <span>Download CV</span>
+                        <i className="fas fa-arrow-down text-sm transform group-hover:translate-y-0.5 transition-all duration-300 ml-1"></i>
                     </a>
                 </div>
 
-                {/* Image Decoration */}
+                {/* 2. Image Decoration (Minimalist) */}
                 <div className="relative flex justify-center md:justify-end order-1 md:order-2">
-                    <div className="relative">
-                        {/* Dots top left */}
-                        <div className="absolute top-[4.75rem] left-[0.5rem] w-16 h-16 dots-pattern z-0"></div>
-
-                        {/* Profile Image (Flipped) */}
+                    <div className="relative w-72 md:w-80 p-4 rounded-xl shadow-2xl bg-white/70 backdrop-blur-sm">
+                        
+                        {/* Profile Image (No flip, centered) */}
                         <img
                             src={profileImg}
                             alt={personalInfo.name}
-                            className="w-72 md:w-80 relative z-10 -scale-x-100 -ml-[10px] top-[10px]"
+                            // Removed negative margin/flip for clean presentation
+                            className="w-full relative z-10 rounded-lg shadow-md"
                         />
-
-                        {/* Dots bottom right */}
-                        <div className="absolute bottom-20 -right-4 w-16 h-16 dots-pattern z-20"></div>
+                        
+                        {/* Subtle background shape (Optional: replace dots) */}
+                        <div className="absolute top-0 left-0 w-1/3 h-1/3 rounded-full bg-accent/10 -translate-x-1/2 -translate-y-1/2 z-0"></div>
+                        <div className="absolute bottom-0 right-0 w-2/5 h-2/5 rounded-full bg-gray-200 translate-x-1/3 translate-y-1/3 z-0"></div>
                     </div>
                 </div>
             </div>
 
             {/* Skills Section */}
             <section className="mb-24 relative">
-                <h3 className="text-2xl md:text-3xl font-mono font-bold text-white mb-8 flex items-center">
-                    <span className="text-primary mr-2">def</span>
-                    <span className="text-yellow-400">skills</span>
-                    <span className="text-gray-400">()</span>
-                    <span className="text-gray-400 animate-pulse">:</span>
+                {/* 🚨 UPDATED HEADING: Clean, professional sans-serif title */}
+                <h3 className="text-2xl md:text-3xl font-bold text-gray-800 mb-10 flex items-center tracking-tight">
+                    <i className="fas fa-cogs text-accent mr-3"></i>
+                    Technical Skills
                 </h3>
-                {/* Decorative dots top right */}
-                <div className="absolute -top-10 -right-4 w-20 h-20 dots-pattern opacity-50 z-0"></div>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6">
+                <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-6">
                     {skills.map((grp) => (
+                        // 🚨 APPLIED GLASS CARD: Transforms skills group into a floating glass panel
                         <div
                             key={grp.category}
-                            className="h-52 flex flex-col border border-gray-600 bg-card group hover:border-white transition-all duration-300 hover:-translate-y-1"
+                            className="h-56 flex flex-col glass-card group hover:-translate-y-1 transition-all duration-300"
                         >
-                            <div className="border-b border-gray-600 p-2 flex justify-between items-center bg-[#21252B]">
-                                <span className="font-bold text-white text-sm">
-                                    <span className="text-primary">#</span>{grp.category.toLowerCase()}
+                            {/* Header (Cleaned up: no traffic lights, just bold text) */}
+                            <div className="border-b border-gray-200 p-3 flex justify-between items-center bg-gray-50/50">
+                                <span className="font-bold text-gray-800 text-sm">
+                                    {grp.category}
                                 </span>
-                                {/* Traffic Lights decoration */}
-                                <div className="flex gap-1.5">
-                                    <div className="w-2.5 h-2.5 rounded-full bg-red-500/80"></div>
-                                    <div className="w-2.5 h-2.5 rounded-full bg-yellow-500/80"></div>
-                                    <div className="w-2.5 h-2.5 rounded-full bg-green-500/80"></div>
-                                </div>
                             </div>
-                            <div className="p-3 text-gray text-sm flex flex-col gap-y-2 overflow-y-auto aesthetic-scrollbar">
+                            
+                            {/* Skill List (Cleaned up: dark text, simple bullet/list style) */}
+                            <div className="p-4 text-gray-700 text-sm flex flex-col gap-y-1 overflow-y-auto aesthetic-scrollbar">
                                 {grp.items.map((skill) => (
-                                    <span key={skill} className="hover:text-white transition-colors cursor-default">
-                                        <span className="text-primary font-bold">&gt;</span> {skill}
+                                    <span key={skill} className="hover:text-accent transition-colors cursor-default">
+                                        &bull; {skill}
                                     </span>
                                 ))}
                             </div>
@@ -103,30 +94,31 @@ const About = () => {
 
             {/* Fun Facts Section */}
             <section className="mb-24 relative">
-                <h3 className="text-2xl md:text-3xl font-mono font-bold text-white mb-8 flex items-center">
-                    <span className="text-primary mr-2">def</span>
-                    <span className="text-yellow-400">my_fun_facts</span>
-                    <span className="text-gray-400">()</span>
-                    <span className="text-gray-400 animate-pulse">:</span>
+                {/* 🚨 UPDATED HEADING: Clean, professional sans-serif title */}
+                <h3 className="text-2xl md:text-3xl font-bold text-gray-800 mb-10 flex items-center tracking-tight">
+                    <i className="fas fa-lightbulb text-accent mr-3"></i>
+                    Fun Facts
                 </h3>
 
-                <div className="flex gap-4 flex-wrap max-w-2xl">
+                <div className="flex gap-3 flex-wrap max-w-2xl">
                     {funFacts.map((fact) => (
-                        <div key={fact.id} className="border border-gray-600 p-2 text-gray hover:text-white hover:border-white transition-colors cursor-default">
+                        // 🚨 Applied Glass Card (as a small badge)
+                        <div 
+                            key={fact.id} 
+                            className="glass-card p-3 text-gray-700 text-sm hover:text-gray-900 transition-colors cursor-default shadow-sm"
+                        >
                             {fact.text}
                         </div>
                     ))}
                 </div>
 
-                {/* Decorative Elements */}
-                <div className="hidden md:block absolute right-0 top-20">
-                    <div className="absolute -top-16 -right-10 w-16 h-16 dots-pattern"></div>
-                    {/* Interlocking squares */}
+                {/* Decorative Elements (Removed complex dark-theme geometry) */}
+                <div className="hidden md:block absolute right-0 top-0">
                     <div className="relative w-32 h-32">
-                        <div className="absolute top-0 right-8 w-16 h-16 border border-gray-600"></div>
-                        <div className="absolute bottom-8 right-0 w-16 h-16 border border-primary"></div>
+                        {/* Simple, light decorative elements */}
+                        <div className="absolute top-0 right-0 w-16 h-16 rounded-lg border border-gray-300"></div>
+                        <div className="absolute bottom-0 left-0 w-16 h-16 rounded-full bg-accent/20"></div>
                     </div>
-                    <div className="absolute top-40 -right-8 w-16 h-16 dots-pattern"></div>
                 </div>
             </section>
         </div>

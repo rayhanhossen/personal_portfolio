@@ -9,95 +9,96 @@ const Navbar = () => {
         { name: 'Home', path: '/' },
         { name: 'Projects', path: '/projects' },
         { name: 'About', path: '/about' },
+        // Consider adding a 'Contact' link here if applicable
     ];
 
     return (
-        <header className="flex justify-between items-center mb-10 md:mb-12 py-4 md:py-4">
-            {/* Logo */}
-            <Link
-                to="/"
-                className="flex items-center gap-2 font-bold text-white text-3xl select-none cursor-pointer hover:opacity-80 transition-opacity"
-            >
-                <i className="fas fa-terminal text-primary terminal-blink"></i>
-                <span className='gradient-text'>{personalInfo.name}</span>
-            </Link>
+        <header className="py-4 md:py-4">
+            <div className="flex justify-between items-center px-4 md:px-6 py-3 md:py-3 glass-card mx-auto">
+                
+                {/* 🍏 Logo/Name (Cleaned up: No terminal, no gradient) */}
+                <Link
+                    to="/"
+                    className="flex items-center gap-2 font-bold text-gray-800 text-xl md:text-2xl select-none cursor-pointer hover:text-accent transition-colors"
+                    onClick={() => setIsOpen(false)} // Close mobile menu if open
+                >
+                    {/* Simplified, modern logo text, can add a minimal icon if desired */}
+                    <span className='text-accent'>{personalInfo.name.toUpperCase()}</span> 
+                    <span className="font-light text-gray-500 hidden sm:inline">Portfolio</span>
+                </Link>
 
-            {/* Desktop Nav */}
-            <nav className="hidden md:flex gap-4 text-gray font-medium">
-                {navLinks.map((link) => (
-                    <NavLink
-                        key={link.name}
-                        to={link.path}
-                        // Use 'relative' on the NavLink to contain the absolute sweep span
-                        className={({ isActive }) =>
-                            `transition-colors relative overflow-hidden group py-2 px-3 rounded-md 
-                            ${isActive
-                                ? 'text-white font-bold nav-active-style' // Apply the active styles and custom class
-                                : 'hover:text-primary-light text-gray-400' // Default/Hover style for inactive links
-                            }`
-                        }
-                    >
-                        {/* 1. The sweeping effect element (must be the first child for correct z-indexing) */}
-                        <span className="nav-sweep-bg"></span>
-
-                        {/* 2. The visible text content (must be relative and higher z-index) */}
-                        <div className="relative z-10 flex items-center">
-                            <code className="nav-link-text ">{link.name}</code>
-                        </div>
-
-                    </NavLink>
-                ))}
-            </nav>
-
-            {/* Mobile Toggle */}
-            <button className="md:hidden text-2xl text-white" onClick={() => setIsOpen(!isOpen)}>
-                <i className={`fas ${isOpen ? 'fa-times' : 'fa-bars'}`}></i>
-            </button>
-
-            {/* Mobile Menu */}
-            {isOpen && (
-                <div className="fixed inset-0 bg-bg z-50 p-8 flex flex-col gap-8 md:hidden">
-                    <div className='flex justify-between items-center'>
-                        {/* Logo */}
-                        <Link
-                            to="/"
-                            className="flex items-center gap-2 font-bold text-white text-3xl select-none cursor-pointer hover:opacity-80 transition-opacity"
-                        >
-                            <i className="fas fa-terminal text-primary terminal-blink"></i>
-                            <span className='gradient-text'>{personalInfo.name}</span>
-                        </Link>
-                        <button className="text-2xl text-white hover:text-red-400" onClick={() => setIsOpen(false)}>
-                            <i className="fas fa-times"></i>
-                        </button>
-                    </div>
-                    <hr className='text-white'/>
+                {/* 💻 Desktop Nav (Cleaned up, using accent color and underline effect) */}
+                <nav className="hidden md:flex gap-6 font-medium text-gray-600">
                     {navLinks.map((link) => (
                         <NavLink
                             key={link.name}
                             to={link.path}
-                            onClick={() => setIsOpen(false)}
                             className={({ isActive }) =>
-                                // Outer className sets link container styles and general color
-                                `text-2xl font-medium flex items-center transition-colors 
-                                ${isActive
-                                    ? 'text-white'
-                                    : 'text-gray hover:text-white'
-                                }`
+                                `relative transition-colors py-1 hover:text-gray-900 
+                                ${isActive ? 'text-gray-900 font-semibold' : ''}`
                             }
                         >
-                            {/* 🚨 FIX IS HERE: ALL CONTENT IS MOVED INSIDE THE FUNCTION 🚨 */}
+                            {/* 1. NavLink Text */}
+                            <span>{link.name}</span>
+
+                            {/* 2. Custom Underline for Active State (Clean Look) */}
                             {({ isActive }) => (
-                                <>
-                                    {/* 2. Text Span - Conditional gradient remains */}
-                                    <span
-                                        className={isActive ? 'text-green-400' : 'text-white'}
-                                    >
-                                        {link.name}
-                                    </span>
-                                </>
+                                isActive && (
+                                    <span className="absolute bottom-0 left-0 w-full h-[2px] bg-accent transform transition-transform duration-300 scale-x-100"></span>
+                                )
                             )}
                         </NavLink>
                     ))}
+                </nav>
+
+                {/* Mobile Toggle (Cleaned up, using dark colors) */}
+                <button className="md:hidden text-2xl text-gray-700 hover:text-accent transition-colors" onClick={() => setIsOpen(!isOpen)}>
+                    <i className={`fas ${isOpen ? 'fa-times' : 'fa-bars'}`}></i>
+                </button>
+            </div>
+
+
+            {/* 📱 Mobile Menu (Fixed Glass Panel) */}
+            {isOpen && (
+                <div 
+                    // 🚨 UPDATED: Mobile Menu is now a fixed, full-screen glass panel
+                    className="fixed inset-0 z-[60] p-6 flex flex-col gap-6 md:hidden glass-card"
+                    style={{ backdropFilter: 'blur(30px)' }} // Ensure strong blur on mobile overlay
+                >
+                    <div className='flex justify-between items-center'>
+                        {/* Mobile Logo */}
+                        <Link
+                            to="/"
+                            className="flex items-center gap-2 font-bold text-gray-800 text-2xl"
+                        >
+                            <span className='text-accent'>{personalInfo.name.toUpperCase()}</span> 
+                        </Link>
+                        
+                        {/* Close Button */}
+                        <button className="text-3xl text-gray-700 hover:text-red-500 transition-colors" onClick={() => setIsOpen(false)}>
+                            <i className="fas fa-times"></i>
+                        </button>
+                    </div>
+                    
+                    {/* Navigation Links */}
+                    <div className="flex flex-col gap-4">
+                        {navLinks.map((link) => (
+                            <NavLink
+                                key={link.name}
+                                to={link.path}
+                                onClick={() => setIsOpen(false)}
+                                className={({ isActive }) =>
+                                    `text-xl font-medium p-2 rounded-lg transition-all 
+                                    ${isActive
+                                        ? 'bg-accent/10 text-accent font-semibold' // Active link style
+                                        : 'text-gray-700 hover:bg-gray-100' // Inactive link style
+                                    }`
+                                }
+                            >
+                                {link.name}
+                            </NavLink>
+                        ))}
+                    </div>
                 </div>
             )}
         </header>

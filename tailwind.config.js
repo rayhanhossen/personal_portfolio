@@ -1,34 +1,25 @@
 /** @type {import('tailwindcss').Config} */
-export default {
-    content: [
-        "./index.html",
-        "./src/**/*.{js,ts,jsx,tsx}",
-    ],
-    theme: {
-        extend: {
-            colors: {
-                bg: '#282C33',
-                primary: '#C778DD',
-                text: '#E0E6ED',
-                gray: '#ABB2BF',
-                card: '#282C33',
-            },
-            fontFamily: {
-                mono: ['"Fira Code"', 'monospace'],
-            },
-            spacing: {
-                'container': '1024px',
-            },
-            keyframes: {
-                'dot-pulse': {
-                    '0%, 100%': { transform: 'scale(1)', opacity: '1' },
-                    '50%': { transform: 'scale(1.4)', opacity: '0.5' },
-                }
-            },
-            animation: {
-                'dot-blink': 'dot-pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite',
-            }
-        },
+module.exports = {
+  content: [
+    "./src/**/*.{js,jsx,ts,tsx}",
+  ],
+  theme: {
+    extend: {
+      colors: {
+        // Define the new, clean color palette
+        'bg': '#E8F7FA', // The light, airy background
+        'glass-overlay': '#FFFFFF', // The base color for the translucent panels
+        'accent': '#3CB4C4', // The new, calm accent color
+        
+        // Use standard Tailwind grays for text to maintain contrast
+      },
+      fontFamily: {
+        // Implement the modern sans-serif font stack
+        sans: ["Inter", "ui-sans-serif", "system-ui", "-apple-system", "Segoe UI", "Roboto", "Helvetica Neue", "Arial"],
+      },
+      // You can add a custom 'glass' utility if you like, 
+      // but applying backdrop-blur directly is often simpler.
     },
-    plugins: [],
+  },
+  plugins: [],
 }
