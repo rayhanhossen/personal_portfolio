@@ -1,8 +1,9 @@
 import { Link } from 'react-router-dom';
-import { personalInfo, projects, skills, experiences } from '../data/content';
+import { personalInfo, projects, experiences } from '../data/content';
 import profileImg from '../assets/profile-avatar.png';
 import { useContactForm } from '../hooks/useContactForm';
 import QuoteDisplay from '../components/QuoteDisplay';
+import ExperiencePreview from '../components/Experience';
 
 
 const Home = () => {
@@ -19,7 +20,6 @@ const Home = () => {
 
     // Data Slicing for Previews
     const featuredProjects = projects.slice(0, 3);
-    const featuredExperience = experiences.slice(0, 2);
 
     return (
         <div id="home-view" className="view-section">
@@ -27,30 +27,32 @@ const Home = () => {
             {/* HERO SECTION */}
             <section id="home" className="grid grid-cols-1 md:grid-cols-2 gap-8 md:items-end mb-12 md:mb-20">
                 <div className="order-2 md:order-1 pb-2">
+                    {/* intial text  */}
                     <h3 className="font-mono text-1xl md:text-2xl font-bold text-white mb-6 leading-snug tracking-tighter">
-                        {/* 👆 Use tracking-tighter here */}
                         Hi, I’m {personalInfo.name} Hossen — <br />
                         <span className="text-primary">{personalInfo.title}</span> focused on building <span className="text-primary">AI-powered </span>
                         applications<span className="animate-pulse text-primary">_</span>
                     </h3>
 
+                    {/* sub header  */}
                     <p className="font-mono text-gray-400 mb-8 max-w-lg text-sm md:text-base leading-relaxed tracking-tighter">
                         // I love turning complex ideas into clear, intelligent digital experiences.
                     </p>
 
                     <div className="flex flex-row gap-3 mt-6 w-full md:w-auto">
+                        {/* contact me button  */}
                         <Link
                             to="/contacts"
                             className="flex-1 md:flex-none group border-2 relative
                                 px-3 py-3 flex items-center justify-center gap-2 
                                 transition-all duration-300 overflow-hidden rounded-md
                                 
-                                // 🚨 BASE STATE (Primary Purple Look) 🚨
+                                // BASE STATE (Primary Purple Look)
                                 bg-transparent 
                                 border-[#C778DD]  /* Base Border: Primary Purple */
                                 
                                 
-                                // 🚨 HOVER STATE (Green Accent) 🚨
+                                // HOVER STATE (Green Accent) 🚨
                                 hover:border-[#1bac81] /* Hover Border: Green */
                                 hover:shadow-[0_0_15px_rgba(27,172,129,0.8)] /* Hover Shadow: Green Glow (using #1bac81 converted to rgba) */
                                 "
@@ -75,7 +77,7 @@ const Home = () => {
                             </span>
                         </Link>
 
-                        {/* CV:  Style */}
+                        {/* resume download button */}
                         <a
                             href={personalInfo.cvLink}
                             target="_blank"
@@ -88,6 +90,7 @@ const Home = () => {
                                 
                                 bg-transparent 
                                 border-[#1bac81]
+
                                 // Hover State: Green Accent
                                 hover:border-[#1bac81]                      /* Hover Border: Green */
                                 hover:shadow-[0_0_15px_rgba(27,172,129,0.8)] /* Hover Shadow: Green Glow */
@@ -102,9 +105,7 @@ const Home = () => {
                             ></i>
 
                             {/* 2. TEXT (Always White) */}
-                            <span
-                                className="font-mono font-medium text-white transition-colors text-sm md:text-base"
-                            >
+                            <span className="font-mono font-medium text-white transition-colors text-sm md:text-base">
                                 resume.pdf
                             </span>
                         </a>
@@ -114,21 +115,14 @@ const Home = () => {
                 </div>
 
                 <div className="order-1 md:order-2 relative flex justify-center md:justify-end md:-translate-y-[18px]">
-                    <div className="absolute top-10 left-10 w-20 h-20 border-2 border-gray-600 opacity-50 z-0"></div>
-                    <div className="absolute bottom-[13.3rem] right-[21rem] w-16 h-16 dots-pattern opacity-60 z-20"></div>
+                    {/* <div className="absolute md:top-10 left-[-54px] top-[-24px] md:left-[2.3rem] w-20 h-20 border-2 border-gray-600 opacity-50 z-0"></div> */}
+                    {/* <div className="absolute bottom-[13rem] right-[21rem] w-16 h-16 dots-pattern opacity-60 z-20"></div> */}
 
                     <div className="relative z-10 w-64 md:w-80 group">
                         <img src={profileImg} alt="profile" className="w-full object-contain drop-shadow-[0_10px_20px_rgba(199,120,221,0.2)] transition-transform duration-300 group-hover:-translate-y-1 -scale-x-100 -ml-[25px]" />
 
-                        <div className="absolute top-0 -left-6 w-12 h-12 opacity-50 animate-bounce delay-700">
-                            <svg viewBox="0 0 100 100" fill="none" stroke="#C778DD" strokeWidth="2">
-                                <rect x="10" y="10" width="80" height="80" />
-                                <path d="M10 50 L90 50" />
-                                <path d="M50 10 L50 90" />
-                            </svg>
-                        </div>
 
-                        <div className="absolute -bottom-2 left-1/2 -translate-x-1/2 border border-gray-600 bg-[#282C33] p-2 flex items-center gap-2 text-gray-400 text-sm w-max z-20 shadow-xl">
+                        <div className="rounded-md absolute -bottom-2 left-1/2 -translate-x-1/2 border border-[#1bac81] shadow-[0_0_15px_rgba(27,172,129,0.5)] bg-[#282C33] p-3 md:p-[12px] flex items-center gap-2 text-gray-400 text-sm w-max z-20">
 
                             <div className="relative flex h-3 w-3">
                                 {/* Added style={{ animationDuration: '3s' }} to slow it down */}
@@ -147,128 +141,14 @@ const Home = () => {
             </section>
 
             {/* QUOTE SECTION */}
-            <section className="mb-24 w-full">
+            <section className="mb-12 md:mb-20 w-full">
                 <QuoteDisplay />
             </section>
 
-            {/* SKILLS SECTION */}
-            <section id="skills" className="mb-24">
-                <div className="flex justify-between items-end mb-12">
-                    {/* Heading */}
-                    <h2 className="text-2xl md:text-3xl font-mono font-bold text-white flex items-center">
-                        <span className="text-primary mr-2">def</span>
-                        <span className="text-yellow-400">skills</span>
-                        <span className="text-gray-400">()</span>
-                        <span className="text-gray-400 animate-pulse">:</span>
-                    </h2>
-
-                    <Link to="/about" className="group mb-1">
-                        {/* MOBILE VIEW: Clean Arrow Only */}
-                        <i className="fas fa-arrow-right text-xl text-gray-400 group-hover:text-primary transition-colors transform group-hover:translate-x-1 duration-300 md:hidden"></i>
-
-                        {/* DESKTOP VIEW: Python Return Style */}
-                        <div className="hidden md:flex items-baseline gap-2 font-mono text-base">
-                            <span className="text-primary opacity-70 group-hover:opacity-100 transition-opacity italic">return</span>
-
-                            <div className="flex items-center gap-2 text-green-400 hover:text-green-300 transition-colors">
-                                <span>"view_all"</span>
-                            </div>
-                        </div>
-                    </Link>
-                </div>
-
-                <div className="grid grid-cols-1 lg:grid-cols-5 gap-12">
-                    {/* Left Decorative Area (Hardcoded Visual) */}
-                    <div className="hidden lg:flex lg:col-span-2 relative min-h-[300px] items-center justify-center">
-                        <div className="absolute top-4 left-4 w-24 h-24 dots-pattern opacity-40"></div>
-                        <div className="absolute top-10 right-10 w-20 h-20 border border-gray-600 opacity-30"></div>
-                        <div className="absolute top-1/2 right-0 w-3 h-3 bg-primary transform translate-x-1/2"></div>
-                        <div className="absolute bottom-10 left-10 w-24 h-24 border border-primary opacity-20 -z-10"></div>
-
-                        <div className="relative bg-[#21252B] border border-gray-600 rounded-lg w-full max-w-[300px] shadow-2xl transform transition-transform hover:-translate-y-1">
-                            <div className="border-b border-gray-700 p-3 flex gap-2 bg-[#282C33] rounded-t-lg">
-                                <div className="w-3 h-3 rounded-full bg-red-500"></div>
-                                <div className="w-3 h-3 rounded-full bg-yellow-500"></div>
-                                <div className="w-3 h-3 rounded-full bg-green-500"></div>
-                            </div>
-                            <div className="p-5 font-mono text-sm leading-relaxed">
-                                <div><span className="text-white">skills</span> <span className="text-primary">=</span> <span className="text-yellow-500">{'{'}</span></div>
-                                <div className="pl-4"><span className="text-green-400">"passion"</span>: <span className="text-yellow-600">True</span>,</div>
-                                <div className="pl-4"><span className="text-green-400">"learning"</span>: <span className="text-green-400">"always"</span>,</div>
-                                <div className="pl-4"><span className="text-green-400">"code"</span>: <span className="text-primary">lambda</span>: <span className="text-green-400">"awesome"</span></div>
-                                <div><span className="text-yellow-500">{'}'}</span></div>
-                            </div>
-                        </div>
-                    </div>
-
-                    {/* Right Skills Grid */}
-                    <div className="lg:col-span-3 grid grid-cols-2 md:grid-cols-3 gap-6">
-                        {skills.map((grp) => (
-                            <div key={grp.category} className="border border-gray-600 bg-[#282C33] group hover:border-white transition-all duration-300">
-                                <div className="border-b border-gray-600 p-2 pl-3 flex justify-between items-center bg-[#21252B]">
-                                    <span className="font-bold text-white text-sm"><span className="text-primary">#</span>{grp.category.toLowerCase()}</span>
-                                </div>
-                                <div className="h-32 overflow-y-auto aesthetic-scrollbar p-3 text-gray-400 text-sm flex flex-col gap-2">
-                                    {grp.items.map((item) => (
-                                        <span key={item} className="hover:text-white transition-colors cursor-default">
-                                            <span className="text-primary font-bold">&gt;</span> {item}
-                                        </span>
-                                    ))}
-                                </div>
-                            </div>
-                        ))}
-                    </div>
-                </div>
-            </section>
 
             {/* EXPERIENCE PREVIEW */}
             <section id="experience-preview" className="mb-24">
-                <div className="flex justify-between items-end mb-12">
-                    {/* Heading */}
-                    <h2 className="text-2xl md:text-3xl font-mono font-bold text-white flex items-center">
-                        <span className="text-primary mr-2">def</span>
-                        <span className="text-yellow-400">experience</span>
-                        <span className="text-gray-400">()</span>
-                        <span className="text-gray-400 animate-pulse">:</span>
-                    </h2>
-
-                    <Link to="/experience" className="group mb-1">
-                        {/* MOBILE VIEW: Clean Arrow Only */}
-                        <i className="fas fa-arrow-right text-xl text-gray-400 group-hover:text-primary transition-colors transform group-hover:translate-x-1 duration-300 md:hidden"></i>
-
-                        {/* DESKTOP VIEW: Python Return Style */}
-                        <div className="hidden md:flex items-baseline gap-2 font-mono text-base">
-                            <span className="text-primary opacity-70 group-hover:opacity-100 transition-opacity italic">return</span>
-
-                            <div className="flex items-center gap-2 text-green-400 hover:text-green-300 transition-colors">
-                                <span>"view_all"</span>
-                            </div>
-                        </div>
-                    </Link>
-                </div>
-
-                <div className="relative border-l border-gray-600 ml-3 md:ml-6 space-y-12 pb-2">
-                    {featuredExperience.map(exp => (
-                        // 1. Added 'group' here so children react to parent hover
-                        <div key={exp.id} className="timeline-item pl-8 relative group">
-
-                            {/* Dot: adjusted alignment to -left-[9px] and used group-hover */}
-                            <div className="absolute -left-[9px] top-[24px] w-4 h-4 bg-[#282C33] border border-gray-600 rounded-full group-hover:bg-primary group-hover:border-primary transition-all duration-300"></div>
-
-                            {/* Card: Changed hover:border-white to group-hover:border-white */}
-                            <div className="border border-gray-600 p-4 group-hover:border-white transition-colors bg-[#282C33]">
-                                <div className="flex flex-col md:flex-row justify-between mb-2">
-                                    <h3 className="text-white font-medium text-lg">{exp.role}</h3>
-                                    <span className="text-gray-500 text-sm">{exp.period}</span>
-                                </div>
-                                <p className="text-primary text-sm mb-4">{exp.company} <span className="text-gray-500 ml-2 text-xs"><i className="fas fa-map-marker-alt"></i> {exp.location}</span></p>
-                                <p className="text-gray-400 text-sm">
-                                    {Array.isArray(exp.description) ? exp.description[0] : exp.description}
-                                </p>
-                            </div>
-                        </div>
-                    ))}
-                </div>
+                <ExperiencePreview featuredExperience={experiences}/>
             </section>
 
             {/* PROJECTS SECTION */}
@@ -500,7 +380,7 @@ const Home = () => {
                                     <i className="fa fa-phone text-gray-500"></i>
                                     <span>{personalInfo.phone}</span>
                                 </a>
-                                
+
                             </div>
                         </div>
                     </div>

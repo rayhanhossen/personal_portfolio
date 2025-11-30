@@ -75,12 +75,20 @@ const Navbar = () => {
             {/* Mobile Menu */}
             {isOpen && (
                 <div className="fixed inset-0 bg-bg z-50 p-8 flex flex-col gap-8 md:hidden">
-                    <div className='flex justify-end'>
-                        <button className="text-2xl text-white" onClick={() => setIsOpen(false)}>
+                    <div className='flex justify-between items-center'>
+                        {/* Logo */}
+                        <Link
+                            to="/"
+                            className="flex items-center gap-2 font-bold text-white text-3xl select-none cursor-pointer hover:opacity-80 transition-opacity"
+                        >
+                            <i className="fas fa-terminal text-primary terminal-blink"></i>
+                            <span className='gradient-text'>{personalInfo.name}</span>
+                        </Link>
+                        <button className="text-2xl text-white hover:text-red-400" onClick={() => setIsOpen(false)}>
                             <i className="fas fa-times"></i>
                         </button>
                     </div>
-
+                    <hr className='text-white'/>
                     {navLinks.map((link) => (
                         <NavLink
                             key={link.name}
@@ -88,7 +96,7 @@ const Navbar = () => {
                             onClick={() => setIsOpen(false)}
                             className={({ isActive }) =>
                                 // Outer className sets link container styles and general color
-                                `text-3xl font-medium flex items-center transition-colors 
+                                `text-2xl font-medium flex items-center transition-colors 
                                 ${isActive
                                     ? 'text-white'
                                     : 'text-gray hover:text-white'
@@ -102,7 +110,7 @@ const Navbar = () => {
                                     <svg
                                         xmlns="http://www.w3.org/2000/svg"
                                         viewBox="0 0 24 24"
-                                        className="h-8 w-8 mr-4 nav-code-icon-color"
+                                        className="h-6 w-8 mr-4 nav-code-icon-color"
                                     >
                                         <path
                                             fill="currentColor"
@@ -112,7 +120,7 @@ const Navbar = () => {
 
                                     {/* 2. Text Span - Conditional gradient remains */}
                                     <span
-                                        className={isActive ? 'gradient-text' : ''}
+                                        className={isActive ? 'text-green-400' : 'text-white'}
                                     >
                                         {link.name}
                                     </span>

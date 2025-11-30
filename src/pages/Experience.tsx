@@ -19,9 +19,8 @@ const ExperiencePage = () => {
             /* 1. Add 'group' here so children can react to hovering this container */
             <div key={job.id} className="relative pl-8 group">
               
-              {/* 2. Timeline Dot: Changed 'hover:' to 'group-hover:' 
-                   Now it lights up when you hover ANYWHERE on the job item */}
-              <div className="absolute -left-[9px] top-[24px] w-4 h-4 bg-bg border border-gray-600 rounded-full group-hover:bg-primary group-hover:border-primary transition-all duration-300"></div>
+              {/* 2. Timeline Dot: Changed 'hover:' to 'group-hover:' Now it lights up when you hover ANYWHERE on the job item */}
+              <div className="absolute -left-[9px] top-1/2 -translate-y-1/2 w-4 h-4 bg-[#282C33] border border-gray-600 rounded-full group-hover:bg-primary group-hover:border-primary transition-all duration-300"></div>
 
               {/* 3. Card: Changed 'hover:' to 'group-hover:' so the border glows together with the dot */}
               <div className="border border-gray-600 p-6 group-hover:border-white transition-colors bg-card">

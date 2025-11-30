@@ -69,12 +69,12 @@ const Layout = () => {
                     }`}
             >
                 {/* 🚨 UPDATED CLASSES ON THE INNER DIV 🚨 */}
-                <div className="group flex items-center justify-center border-2 border-[#C778DD] bg-transparent p-3 rounded-full 
+                <div className="group flex items-center justify-center border-2 border-[#1bac81] bg-transparent p-3 rounded-full 
                     hover:border-[#1bac81] hover:-translate-y-1 hover:shadow-[0_0_15px_rgba(27,172,129,0.8)] 
                     transition-all duration-300">
 
                     {/* Arrow (Always Visible) - Now starts Primary Purple, turns Green on hover */}
-                    <i className="fas fa-arrow-up text-[#C778DD] group-hover:text-[#1bac81] transition-colors text-sm"></i>
+                    <i className="fas fa-arrow-up text-[#1bac81] group-hover:text-[#1bac81] transition-colors text-sm"></i>
                 </div>
             </button>
         </div>

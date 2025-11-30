@@ -1,25 +1,34 @@
 /** @type {import('tailwindcss').Config} */
 export default {
-  content: [
-    "./index.html",
-    "./src/**/*.{js,ts,jsx,tsx}",
-  ],
-  theme: {
-    extend: {
-      colors: {
-        bg: '#282C33',
-        primary: '#C778DD',
-        text: '#E0E6ED',
-        gray: '#ABB2BF',
-        card: '#282C33',
-      },
-      fontFamily: {
-        mono: ['"Fira Code"', 'monospace'],
-      },
-      spacing: {
-        'container': '1024px',
-      }
+    content: [
+        "./index.html",
+        "./src/**/*.{js,ts,jsx,tsx}",
+    ],
+    theme: {
+        extend: {
+            colors: {
+                bg: '#282C33',
+                primary: '#C778DD',
+                text: '#E0E6ED',
+                gray: '#ABB2BF',
+                card: '#282C33',
+            },
+            fontFamily: {
+                mono: ['"Fira Code"', 'monospace'],
+            },
+            spacing: {
+                'container': '1024px',
+            },
+            keyframes: {
+                'dot-pulse': {
+                    '0%, 100%': { transform: 'scale(1)', opacity: '1' },
+                    '50%': { transform: 'scale(1.4)', opacity: '0.5' },
+                }
+            },
+            animation: {
+                'dot-blink': 'dot-pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+            }
+        },
     },
-  },
-  plugins: [],
+    plugins: [],
 }
