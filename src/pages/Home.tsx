@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 import { personalInfo, experiences } from '../data/content';
 // NOTE: Assuming profileImg is a PNG with a transparent/clean background, 
 // if it's currently optimized for dark mode, it may need adjusting.
-import profileImg from '../assets/profile-avatar.png'; 
+import profileImg from '../assets/profile-avatar.png';
 import { useContactForm } from '../hooks/useContactForm';
 import QuoteDisplay from '../components/QuoteDisplay';
 import ExperiencePreview from '../components/Experience';
@@ -23,18 +23,18 @@ const Home = () => {
 
     return (
         // 🚨 UPDATED: Removed dark theme classes, relying on Layout.tsx for bg/font
-        <div id="home-view" className="view-section pt-12"> 
+        <div id="home-view" className="view-section pt-[16px] md:pt-[25px]">
 
             {/* HERO SECTION */}
-            <section id="home" className="grid grid-cols-1 md:grid-cols-2 gap-12 md:items-start mb-20 md:mb-28">
-                
+            <section id="home" className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-12 md:items-start mb-20 md:mb-28">
+
                 {/* 1. TEXT CONTENT */}
                 <div className="order-2 md:order-1 pt-4">
-                    
+
                     {/* 🚨 UPDATED: Clean, Sans-Serif Typography and Light Text Colors */}
                     <h3 className="font-sans text-2xl md:text-4xl font-light text-gray-800 mb-6 leading-tight">
-                        Hi, I’m <span className="font-semibold text-gray-900">{personalInfo.name}</span> Hossen. <br />
-                        I’m a <span className="text-accent font-medium">{personalInfo.title}</span> focused on building <span className="text-accent font-medium">AI-powered</span>
+                        Hi, I’m {personalInfo.name} Hossen. <br />
+                        <span className="text-accent font-medium">{personalInfo.title}</span> focused on building <span className="text-accent font-medium">AI-powered </span>
                         applications<span className="animate-pulse text-accent">.</span>
                     </h3>
 
@@ -44,7 +44,7 @@ const Home = () => {
                     </p>
 
                     <div className="flex flex-col sm:flex-row gap-4 mt-8 w-full md:w-auto">
-                        
+
                         {/* 📞 Contact Me Button (Clean, Solid Fill, Accent Color) */}
                         <Link
                             to="/contacts"
@@ -86,30 +86,33 @@ const Home = () => {
 
                 {/* 2. PROFILE IMAGE (Cleaned up, light shadow, status bubble redesigned) */}
                 <div className="order-1 md:order-2 relative flex justify-center md:justify-end">
-                    
-                    <div className="relative z-10 w-64 md:w-80 group">
+
+                    <div className="relative z-10 w-70 md:w-[313px] group">
                         {/* Image: Removed glowing shadow, added standard soft shadow, fixed scaleX */}
-                        <img 
-                            src={profileImg} 
-                            alt="profile" 
-                            className="w-full object-contain rounded-xl shadow-2xl transition-transform duration-300 group-hover:-translate-y-1" 
+                        <img
+                            src={profileImg}
+                            alt="profile"
+                            className="w-full object-contain rounded-xl shadow-2xl transition-transform duration-300 group-hover:-translate-y-1"
+                            style={{ transform: 'scaleX(-1)' }}
                         />
 
-                        {/* Status Bubble (Redesigned for light glass effect) */}
-                        <div className="glass-card absolute -bottom-4 left-1/2 -translate-x-1/2 
-                                p-3 md:p-3 flex items-center gap-2 text-gray-700 text-sm w-max z-20">
+                        {/* Status Bubble: No background/padding/glass-card. Just dot and text floating over the image. */}
+                        <div className="absolute bottom-[0.4rem] left-1/2 -translate-x-1/2 
+                        flex items-center gap-2 text-white text-sm w-max z-20">
 
-                            <div className="relative flex h-3 w-3">
-                                {/* Ping/Dot: Use standard green, consistent with professional status */}
+                            {/* Combined Dot and Animation */}
+                            <span className="relative flex h-3 w-3">
+                                {/* Ping/Dot */}
                                 <span
                                     className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"
                                     style={{ animationDuration: '2s' }}
                                 ></span>
                                 <span className="relative inline-flex rounded-full h-3 w-3 bg-green-500"></span>
-                            </div>
+                            </span>
 
+                            {/* Status Text */}
                             <span className='tracking-normal font-medium'>
-                                Open to <span className="text-accent font-bold">opportunities</span>
+                                Open to opportunities
                             </span>
                         </div>
                     </div>
@@ -142,7 +145,7 @@ const Home = () => {
                 </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
-                    
+
                     {/* Left Column: Description & Glass Contact Form */}
                     <div>
                         <p className="mb-8 text-gray-600">
@@ -150,7 +153,7 @@ const Home = () => {
                         </p>
 
                         {/* 🫧 GLASS CONTACT FORM BOX */}
-                        <div className="glass-card p-6 w-full shadow-lg"> 
+                        <div className="glass-card p-6 w-full shadow-lg">
                             <label className="block text-sm text-gray-500 mb-2 font-medium">Quick Message Draft:</label>
 
                             <textarea
@@ -164,7 +167,7 @@ const Home = () => {
                             />
 
                             <div className="flex justify-between items-center border-t border-gray-200 pt-3">
-                                
+
                                 {/* 🤖 Refine Button (Clean, Non-Code Style) */}
                                 <button
                                     onClick={handleRefine}

@@ -9,14 +9,12 @@ const Navbar = () => {
         { name: 'Home', path: '/' },
         { name: 'Projects', path: '/projects' },
         { name: 'About', path: '/about' },
-        // Consider adding a 'Contact' link here if applicable
     ];
 
     return (
         <header className="py-4 md:py-4">
             <div className="flex justify-between items-center px-4 md:px-6 py-3 md:py-3 glass-card mx-auto">
                 
-                {/* 🍏 Logo/Name (Cleaned up: No terminal, no gradient) */}
                 <Link
                     to="/"
                     className="flex items-center gap-2 font-bold text-gray-800 text-xl md:text-2xl select-none cursor-pointer hover:text-accent transition-colors"

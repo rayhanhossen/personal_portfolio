@@ -1,38 +1,13 @@
-import { useEffect, useState, useCallback } from 'react';
+import { useEffect, useState } from 'react';
 import { Outlet, useLocation } from 'react-router-dom';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import { personalInfo } from '../data/content';
 
-// Define the type for mouse coordinates
-interface MousePosition {
-    x: number;
-    y: number;
-}
-
 
 const Layout = () => {
     const [showScroll, setShowScroll] = useState(false);
-    const [mousePosition, setMousePosition] = useState<MousePosition>({ x: 0, y: 0 });
-    const [isHovering, setIsHovering] = useState(false);
     const location = useLocation();
-
-    // Custom Cursor Logic
-    const handleMouseMove = useCallback((event: MouseEvent) => {
-        setMousePosition({ x: event.clientX, y: event.clientY });
-
-        // Check if the mouse is hovering over an interactive element (links, buttons)
-        const target = event.target as HTMLElement;
-        const isInteractive = target.closest('a, button, [role="button"], [role="link"]') !== null;
-        setIsHovering(isInteractive);
-    }, []);
-
-    useEffect(() => {
-        window.addEventListener('mousemove', handleMouseMove);
-        return () => {
-            window.removeEventListener('mousemove', handleMouseMove);
-        };
-    }, [handleMouseMove]);
 
 
     // Scroll to top on route change
@@ -61,23 +36,22 @@ const Layout = () => {
         // but 'body' handles cursor visibility via CSS.
         <div className="bg-bg min-h-screen relative text-gray-800 font-sans">
 
-            {/* 🖱️ CUSTOM CURSOR ELEMENT */}
-            <div
-                className={`custom-cursor ${isHovering ? 'active' : ''}`}
-                style={{ left: mousePosition.x, top: mousePosition.y }}
-            ></div>
-
             {/* Fixed Left Sidebar */}
-            <div className="fixed left-4 top-0 h-full hidden md:flex flex-col items-center justify-start pt-0 gap-2 w-8 z-50">
-                <div className="h-56 w-[1px] bg-gray-400"></div>
+            <div className="fixed left-4 top-0 h-full hidden md:flex flex-col items-center justify-start pt-0 gap-1 w-8 z-50">
+                <div className="h-48 w-[1px] bg-gray-400"></div>
 
                 <div className="flex flex-col items-center">
-                    <a href={`mailto:${personalInfo.email}`} target="_blank" className="text-gray-500 hover:text-accent text-xl transition-colors" aria-label="Email">
-                        <i className="fa-regular fa-envelope"></i></a>
-                    <a href={personalInfo.whatsapp} target="_blank" className="text-gray-500 hover:text-accent text-xl transition-colors" aria-label="Whatsapp">
-                        <i className="fa-brands fa-whatsapp"></i></a>
-                    <a href={personalInfo.linkedin} target="_blank" className="text-gray-500 hover:text-accent text-xl transition-colors" aria-label="LinkedIn">
+                    <a href={`mailto:${personalInfo.email}`} target="_blank" className="relative group text-gray-500 hover:text-accent text-xl my-2 transition-colors duration-200">
+                        <i className="fa-regular fa-envelope"></i>
+                        <span className="social-label">{personalInfo.email}</span>
+                    </a>
+                    <a href={personalInfo.whatsapp} target="_blank" className="relative group text-gray-500 hover:text-accent text-xl my-2 transition-colors duration-200">
+                        <i className="fa-brands fa-whatsapp"></i>
+                        <span className="social-label">+{personalInfo.whatsapp.substring(personalInfo.whatsapp.indexOf('8'))}</span>
+                    </a>
+                    <a href={personalInfo.linkedin} target="_blank" className="relative group text-gray-500 hover:text-accent text-xl my-2 transition-colors duration-200">
                         <i className="fab fa-linkedin"></i>
+                        <span className="social-label">LinkedIn</span>
                     </a>
                 </div>
             </div>

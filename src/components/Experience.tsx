@@ -68,10 +68,10 @@ const ExperiencePreview: React.FC<ExperiencePreviewProps> = ({ featuredExperienc
                     const restOfContent = hasMoreContent ? descriptionPoints.slice(2) : [];
 
                     // 🚨 UPDATED: Dot Styling (Clean, Accent-focused)
-                    let dotClasses = 'absolute -left-[9px] top-4 w-4 h-4 rounded-full transition-all duration-300 z-10 shadow-md';
+                    let dotClasses = 'absolute -left-[9px] top-1/2 -translate-y-1/2 w-4 h-4 rounded-full transition-all duration-300 z-10 shadow-md';
                     if (isFirst) {
                         // Highlight the latest experience with the accent color
-                        dotClasses += ' bg-accent border-2 border-white';
+                        dotClasses += ' bg-accent border-2 border-white dot-blink-animation';
                     } else {
                         // Subtle gray dot for past experiences
                         dotClasses += ' bg-gray-400 border border-white group-hover:bg-accent/80';
@@ -137,7 +137,7 @@ const ExperiencePreview: React.FC<ExperiencePreviewProps> = ({ featuredExperienc
                                                     onClick={() => toggleExpansion(exp.id)}
                                                     className="flex items-center gap-1 font-medium text-sm text-accent hover:underline transition-colors"
                                                 >
-                                                    <span>{isExpanded ? `Show Less` : `Show More (${restOfContent.length})`}</span>
+                                                    <span>{isExpanded ? `Show Less` : `Show More`}</span>
                                                     {isExpanded ? (
                                                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-4 h-4">
                                                             <path strokeLinecap="round" strokeLinejoin="round" d="m4.5 15.75 7.5-7.5 7.5 7.5" />
