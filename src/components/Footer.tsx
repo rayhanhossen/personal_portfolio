@@ -3,7 +3,7 @@ import { personalInfo } from '../data/content';
 const Footer = () => {
   return (
     // 🚨 UPDATED: Light border, increased top margin
-    <footer className="border-t border-gray-300 pt-10 pb-10 mt-28">
+    <footer className="border-t border-gray-300 pt-10 pb-10 mt-12 md:mt-20">
       <div className="flex flex-col md:flex-row justify-between items-start gap-8 mb-10">
         <div>
           {/* 🚨 UPDATED: Logo/Name (Clean, Sans-serif) */}
@@ -12,7 +12,7 @@ const Footer = () => {
             <span>{personalInfo.name}</span>
             {/* 🚨 UPDATED: Email (Subtle, dark text) */}
             <span 
-                className="text-gray-500 text-sm font-normal ml-2 hidden sm:inline"
+                className="text-gray-500 text-sm font-normal ml-2 sm:inline"
                 data-detectors="false"
                 data-item-type="false"
                 x-apple-data-detectors="false"

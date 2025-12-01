@@ -21,7 +21,7 @@ body {
 
 /* Optional Hover Effect */
 .glass-card:hover {
-    @apply shadow-xl shadow-accent/20;
+    @apply shadow-xl shadow-accent/30;
 }
 
 /* Accent for buttons and headings */
@@ -102,7 +102,7 @@ body {
 }
 
 .dot-blink-animation {
-    animation: simpleBlink 1.5s infinite alternate; /* 1.5s duration, fade out then back in */
+    animation: simpleBlink 2s infinite alternate; /* 1.5s duration, fade out then back in */
 }
 
 @keyframes simpleBlink {

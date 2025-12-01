@@ -12,7 +12,7 @@ const Navbar = () => {
     ];
 
     return (
-        <header className="py-4 md:py-4">
+        <header className="py-4 md:py-5">
             <div className="flex justify-between items-center px-4 md:px-6 py-3 md:py-3 glass-card mx-auto">
                 
                 <Link
