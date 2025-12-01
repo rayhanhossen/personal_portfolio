@@ -22,85 +22,17 @@ const Home = () => {
 
 
     return (
-        // 🚨 UPDATED: Removed dark theme classes, relying on Layout.tsx for bg/font
-        <div id="home-view" className="view-section pt-[16px] md:pt-[25px]">
+        <div id="home-view" className="view-section">
 
             {/* HERO SECTION */}
-            <section id="home" className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-12 md:items-start mb-20 md:mb-28">
+            <section id="home" className="grid grid-cols-1 md:grid-cols-12 gap-y-4 md:gap-y-12 md:gap-x-0 md:items-stretch mb-20 md:mb-28">
+                {/* 1. TEXT AND BUTTONS CARD (8 Columns) */}
+                <div className="order-2 md:order-1 p-5 md:col-span-8 glass-card shadow-xl md:mr-[10px]">
+                    {/* 1. STATUS BUBBLE - NOW POSITIONED AT THE TOP WITH MINI GLASS CARD STYLE */}
+                    <div className="glass-card mb-4 inline-flex items-center p-2 rounded-lg shadow-md text-sm w-max">
+                        {/* NOTE: I used inline-flex and mb-4 to separate it from the H3 */}
 
-                {/* 1. TEXT CONTENT */}
-                <div className="order-2 md:order-1 pt-4">
-
-                    {/* 🚨 UPDATED: Clean, Sans-Serif Typography and Light Text Colors */}
-                    <h3 className="font-sans text-2xl md:text-4xl font-light text-gray-800 mb-6 leading-tight">
-                        Hi, I’m {personalInfo.name} Hossen. <br />
-                        <span className="text-accent font-medium">{personalInfo.title}</span> focused on building <span className="text-accent font-medium">AI-powered </span>
-                        applications<span className="animate-pulse text-accent">.</span>
-                    </h3>
-
-                    {/* 🚨 UPDATED: Subtle descriptive text */}
-                    <p className="font-sans text-gray-600 mb-8 max-w-lg text-base leading-relaxed">
-                        I love turning complex ideas into clear, intelligent digital experiences.
-                    </p>
-
-                    <div className="flex flex-col sm:flex-row gap-4 mt-8 w-full md:w-auto">
-
-                        {/* 📞 Contact Me Button (Clean, Solid Fill, Accent Color) */}
-                        <Link
-                            to="/contacts"
-                            className="flex-1 sm:flex-none group relative
-                                px-6 py-3 flex items-center justify-center gap-2 
-                                transition-all duration-300 rounded-xl font-medium text-sm md:text-base
-                                
-                                // BASE STATE: Accent background, white text
-                                bg-accent text-white shadow-lg shadow-accent/40
-                                
-                                // HOVER STATE: Subtle darkening/lift
-                                hover:bg-accent/90 hover:-translate-y-0.5 hover:shadow-xl hover:shadow-accent/60"
-                        >
-                            <span>Get in touch</span>
-                            <span className="font-bold transition-transform duration-300 group-hover:translate-x-1">
-                                {`>`}
-                            </span>
-                        </Link>
-
-                        {/* 📄 Resume Download Button (Minimalist, Outline) */}
-                        <a
-                            href={personalInfo.cvLink}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="flex-1 sm:flex-none group relative
-                                px-6 py-3 flex items-center justify-center gap-2 
-                                transition-all duration-300 rounded-xl font-medium text-sm md:text-base
-                                
-                                // BASE STATE: Outline style
-                                border border-gray-400 text-gray-700 hover:border-accent hover:text-accent 
-                                hover:bg-accent/5 hover:shadow-md hover:shadow-accent/20"
-                        >
-                            <span>Resume</span>
-                            <i className="fas fa-download text-sm ml-1 transition-colors"></i>
-                        </a>
-
-                    </div>
-                </div>
-
-                {/* 2. PROFILE IMAGE (Cleaned up, light shadow, status bubble redesigned) */}
-                <div className="order-1 md:order-2 relative flex justify-center md:justify-end">
-
-                    <div className="relative z-10 w-70 md:w-[313px] group">
-                        {/* Image: Removed glowing shadow, added standard soft shadow, fixed scaleX */}
-                        <img
-                            src={profileImg}
-                            alt="profile"
-                            className="w-full object-contain rounded-xl shadow-2xl transition-transform duration-300 group-hover:-translate-y-1"
-                            style={{ transform: 'scaleX(-1)' }}
-                        />
-
-                        {/* Status Bubble: No background/padding/glass-card. Just dot and text floating over the image. */}
-                        <div className="absolute bottom-[0.4rem] left-1/2 -translate-x-1/2 
-                        flex items-center gap-2 text-white text-sm w-max z-20">
-
-                            {/* Combined Dot and Animation */}
+                        <div className="flex items-center gap-2 text-gray-700">
                             <span className="relative flex h-3 w-3">
                                 {/* Ping/Dot */}
                                 <span
@@ -110,11 +42,79 @@ const Home = () => {
                                 <span className="relative inline-flex rounded-full h-3 w-3 bg-green-500"></span>
                             </span>
 
-                            {/* Status Text */}
+                            {/* Status Text (Changed color back to gray/dark for visibility on light card background) */}
                             <span className='tracking-normal font-medium'>
-                                Open to opportunities
+                                Open to <span className="text-accent font-bold">work</span>
                             </span>
                         </div>
+                    </div>
+
+                    {/* 2. HEADER */}
+                    <h3 className="font-sans text-2xl md:text-5xl font-light text-gray-800 mb-6 leading-tight">
+                        Engineering AI-driven products that solve real problems — beautifully and efficiently
+                        <span className="animate-pulse text-accent">.</span>
+                    </h3>
+
+                    {/* ... Rest of your content remains the same ... */}
+                    <p className="font-sans text-gray-600 mb-8 max-w-lg text-base leading-relaxed">
+                        I love turning complex ideas into clear, intelligent digital experiences.
+                    </p>
+
+                    <div className="flex flex-col sm:flex-row gap-4 mt-8 w-full md:w-auto">
+
+                        {/* Contact Me Button */}
+                        <Link
+                            to="/contacts"
+                            className="flex-1 sm:flex-none group relative
+                        px-6 py-3 flex items-center justify-center gap-2 
+                        transition-all duration-300 rounded-xl font-medium text-sm md:text-base
+                        
+                        // BASE STATE: Accent background, white text
+                        bg-accent text-white shadow-lg shadow-accent/40
+                        
+                        // HOVER STATE: Subtle darkening/lift
+                        hover:bg-accent/90 hover:-translate-y-0.5 hover:shadow-xl hover:shadow-accent/60"
+                        >
+                            <span>Get in touch</span>
+                            <span className="font-bold transition-transform duration-300 group-hover:translate-x-1">
+                                {`>`}
+                            </span>
+                        </Link>
+
+                        {/* 📄 Resume Download Button */}
+                        <a
+                            href={personalInfo.cvLink}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="flex-1 sm:flex-none group relative
+                        px-6 py-3 flex items-center justify-center gap-2 
+                        transition-all duration-300 rounded-xl font-medium text-sm md:text-base
+                        
+                        // BASE STATE: Outline style
+                        border border-gray-400 text-gray-700 hover:border-accent hover:text-accent 
+                        hover:bg-accent/5 hover:shadow-md hover:shadow-accent/20"
+                        >
+                            <span>Resume</span>
+                            <i className="fas fa-download text-sm ml-1 transition-colors"></i>
+                        </a>
+                    </div>
+                </div>
+
+                {/* 2. PROFILE IMAGE CARD (4 Columns) - ADDED h-full */}
+                <div className="order-1 md:order-2 md:col-span-4 glass-card shadow-xl h-full relative flex flex-col justify-center items-center">
+
+                    {/* Inner container: Now has bg-black and rounded corners */}
+                    <div className="relative z-10 w-70 md:w-[310px] group h-full flex items-center md:mb-3 rounded-xl">
+
+                        {/* Image: Removed rounded-xl to allow the image's content to blend into the new black background */}
+                        <img
+                            src={profileImg}
+                            alt="profile"
+                            // Removed rounded-xl class from here
+                            className="w-full h-full object-cover shadow-xl transition-transform duration-300 group-hover:-translate-y-1"
+                            style={{ transform: 'scaleX(-1)' }}
+                        />
+                        <div className="absolute bottom-[-12px] left-0 right-0 h-5 bg-black rounded-b-xl z-1"></div>
                     </div>
                 </div>
             </section>

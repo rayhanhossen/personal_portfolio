@@ -56,7 +56,7 @@ const Layout = () => {
                 </div>
             </div>
 
-            <div className="max-w-5xl mx-auto px-6 md:px-12 pt-8 pb-12">
+            <div className="max-w-5xl mx-auto px-6 md:px-12 pt-[1rem] pb-[1rem]">
                 <Navbar />
                 <main className="view-section">
                     <Outlet />
