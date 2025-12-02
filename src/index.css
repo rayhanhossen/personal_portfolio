@@ -1,52 +1,62 @@
-@import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
 @import '@fortawesome/fontawesome-free/css/all.min.css';
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
+/* --- GLOBAL STYLES --- */
+
 body {
-    @apply bg-bg text-gray font-mono;
+    /* Apply the light background and the new sans-serif font */
+    @apply bg-bg font-sans text-gray-800;
+    min-height: 100vh;
 }
 
-/* Custom Scrollbar */
+/* --- CUSTOM UTILITIES & COMPONENTS --- */
+.glass-card {
+    @apply bg-glass-overlay/80 backdrop-blur-xl rounded-2xl shadow-lg transition-all duration-300;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+/* Optional Hover Effect */
+/* .glass-card:hover {
+    @apply shadow-xl shadow-accent/30;
+} */
+
+/* Accent for buttons and headings */
+.accent-text {
+    @apply text-accent;
+}
+
+/* --- Light Dots Pattern Utility --- */
+.light-dots-pattern {
+    /* Subtle blue-gray color blending with the background */
+    background-image: radial-gradient(rgba(195, 220, 229, 0.6) 1px, transparent 1px);
+    background-size: 24px 24px;
+}
+
+/* --- SCROLLBAR REDESIGN (Light Mode) --- */
 ::-webkit-scrollbar {
-    width: 8px;
+    width: 6px;
 }
 
 ::-webkit-scrollbar-track {
-    background: #282C33;
-}
-
-::-webkit-scrollbar-thumb {
-    background: #ABB2BF;
-    border-radius: 4px;
-}
-
-/* Aesthetic scrollbar */
-.aesthetic-scrollbar::-webkit-scrollbar {
-    width: 4px;
-}
-
-.aesthetic-scrollbar::-webkit-scrollbar-track {
     background: transparent;
 }
 
-.aesthetic-scrollbar::-webkit-scrollbar-thumb {
-    background: #4B5263;
-    border-radius: 2px;
+::-webkit-scrollbar-thumb {
+    background: #C3DCE5;
+    /* Lighter color */
+    border-radius: 3px;
 }
 
-.aesthetic-scrollbar:hover::-webkit-scrollbar-thumb {
-    background: #C778DD;
+::-webkit-scrollbar-thumb:hover {
+    background: #A3C3CD;
 }
 
-/* Utilities */
-.dots-pattern {
-    background-image: radial-gradient(#ABB2BF 1px, transparent 1px);
-    background-size: 20px 20px;
-}
 
+/* --- HEADING LINE (Simplified) --- */
 .heading-line {
     display: flex;
     align-items: center;
@@ -57,12 +67,57 @@ body {
     content: '';
     display: block;
     height: 1px;
-    background-color: #C778DD;
+    background-color: #3CB4C4;
+    /* Using the new accent color */
     flex-grow: 1;
     max-width: 500px;
 }
 
-/* Fade In Animation */
+.social-label {
+    position: absolute;
+    top: 50%;
+    left: 100%;
+    transform: translateY(-50%); /* Initial state: hidden */
+
+    background: #3CB4C4; /* Using the new accent color */
+    color: white;
+    padding: 0.25rem 0.5rem;
+    border-radius: 0.25rem;
+    font-size: 0.8rem;
+    white-space: nowrap;
+    margin-left: 0.5rem;
+
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s, visibility 0.3s, transform 0.3s;
+    z-index: 60;
+}
+
+/* Reveal the label when the parent <a> tag is hovered (using the 'group-hover' effect) */
+.group:hover .social-label {
+    opacity: 1;
+    visibility: visible;
+    /* Optional: Slide right on hover */
+    transform: translateY(-50%) translateX(5px);
+}
+
+.dot-blink-animation {
+    animation: simpleBlink 2s infinite alternate; /* 1.5s duration, fade out then back in */
+}
+
+@keyframes simpleBlink {
+    0% {
+        opacity: 1;
+        transform: scale(1);
+    }
+    100% {
+        opacity: 0.7; /* Fade slightly */
+        transform: scale(1.05); /* Gentle pulse */
+    }
+}
+
+
+/* --- FADE IN ANIMATION (Kept) --- */
 .view-section {
     animation: fadeIn 0.3s ease-in-out;
 }
@@ -76,173 +131,5 @@ body {
     to {
         opacity: 1;
         transform: translateY(0);
-    }
-}
-
-.terminal-blink {
-    animation: blink 1s step-start infinite;
-}
-
-@keyframes blink {
-    50% {
-        opacity: 0;
-    }
-}
-
-
-/* --- Sweep Background Definition --- */
-.nav-sweep-bg {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: 0;
-
-    /* Apply your primary gradient color */
-    background: linear-gradient(to right, #1bac81, #C778DD);
-
-    width: 120%;
-    left: -10%;
-    transform: skew(30deg) translate3d(-100%, 0, 0);
-    transition: transform 0.4s cubic-bezier(0.3, 1, 0.8, 1);
-}
-
-/* --- Active State (Sweep ON) --- */
-.nav-active-style .nav-sweep-bg {
-    /* Final state: skewed but translated 0% (fully visible) */
-    transform: skew(30deg) translate3d(0, 0, 0);
-}
-
-/* --- Styling for the SVG Icon --- */
-
-/* Inactive State: Sets the default color for the SVG to your Primary Color */
-.nav-code-icon-color {
-    color: #C778DD;
-    /* Example Primary Purple */
-    transition: color 0.4s;
-}
-
-/* Active State: When the link is active, the icon color switches to white */
-.nav-active-style .nav-code-icon-color {
-    color: white;
-}
-
-.gradient-text {
-    /* 1. Apply the gradient as a background image */
-    background-image: linear-gradient(to right, #1bac81, #C778DD);
-
-    /* 2. Clip the background only to the shape of the text */
-    -webkit-background-clip: text;
-    background-clip: none;
-
-    /* 3. Make the text transparent so the background shows through */
-    -webkit-text-fill-color: transparent;
-
-    /* Fallback for browsers that don't support the above properties */
-    color: #C778DD;
-}
-
-.gradient-line {
-    /* Set the gradient as the background image */
-    background-image: linear-gradient(to bottom, #1bac81, #C778DD);
-
-    /* Ensure the gradient covers the entire height */
-    background-size: 100% 100%;
-
-    /* IMPORTANT: Remove the Tailwind bg-green-500 class */
-    background-color: transparent;
-}
-
-
-
-/* --- Styling for the Social Media Hover Labels --- */
-.social-label {
-    /* Positioning relative to the <a> tag (which has 'relative' class) */
-    position: absolute;
-    top: 50%;
-    /* Start the label slightly off the screen, to the right of the icon column */
-    left: 100%;
-    transform: translateY(-50%);
-
-    /* Look and Feel */
-    background: #282C33;
-    /* Dark background to match your theme */
-    color: white;
-    /* White text for contrast */
-    padding: 0.25rem 0.5rem;
-    border-radius: 0.25rem;
-    font-size: 0.8rem;
-    white-space: nowrap;
-    /* Prevents long text from wrapping */
-    margin-left: 0.5rem;
-    /* Space between icon and label */
-
-    /* Hide by default and animate visibility and position */
-    opacity: 0;
-    visibility: hidden;
-    transition: opacity 0.3s, visibility 0.3s, transform 0.3s;
-    z-index: 60;
-    /* Ensure it stays on top of other content */
-}
-
-/* Reveal the label when the parent <a> tag is hovered */
-/* Tailwind 'group-hover' is used here, but for absolute elements sometimes
-   it's easier to use a direct CSS rule */
-a:hover .social-label {
-    opacity: 1;
-    visibility: visible;
-    /* Optional: Slight movement effect on hover */
-    transform: translateY(-50%) translateX(5px);
-}
-
-
-
-/* --- CSS for Circular Loader --- */
-
-.circular-loader-ring {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    border-radius: 50%;
-
-    /* Default background for the full circle track if needed, or transparent */
-    background: transparent;
-
-    /* The key gradient property - this creates the partial fill and color */
-    /* Using a conic gradient to define the progress color and the transparent "gap" */
-    background-image: conic-gradient(#1bac81 0deg,
-            /* Start color of your gradient (Primary Purple) */
-            #C778DD 90deg,
-            /* End color of your gradient (Darker Purple) */
-            transparent 90deg
-            /* Transparent from 90deg onwards for a partial fill effect */
-        );
-
-    /* Animation for spinning */
-    animation: spin 1.5s linear infinite;
-}
-
-/* Optional: To make it look like a thin ring, use a mask or inner shadow */
-.circular-loader-ring::before {
-    content: '';
-    position: absolute;
-    inset: 2px;
-    /* Adjust this value for ring thickness */
-    background: #282C33;
-    /* Background of the inner circle to mask the center */
-    border-radius: 50%;
-}
-
-
-/* Keyframe animation for spinning */
-@keyframes spin {
-    0% {
-        transform: rotate(0deg);
-    }
-
-    100% {
-        transform: rotate(360deg);
     }
 }

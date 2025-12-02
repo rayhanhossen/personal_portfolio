@@ -41,8 +41,9 @@ export const experiences: Experience[] = [
         period: "2023 - Present",
         description: [
             "Leading a team of 5 developers in migrating legacy monolith to micro-frontend architecture.",
-            "Implemented CI/CD pipelines reducing deployment time by 60%.",
-            "Mentoring junior developers and conducting code reviews."
+            "Implemented CI/CD pipelines reducing deployment time by 60%. Leading a team of 5 developers in migrating legacy monolith to micro-frontend architecture.Leading a team of 5 developers in migrating legacy monolith to micro-frontend architecture.",
+            "Mentoring junior developers and conducting code reviews.",
+            "Leading a team of 5 developers in migrating legacy monolith to micro-frontend architecture."
         ]
     },
     {
@@ -65,8 +66,7 @@ export const experiences: Experience[] = [
         period: "2020 - 2021",
         description: [
             "Assisted in building the MVP of a fintech application using React.",
-            "Fixed bugs and implemented new features based on user feedback.",
-            "Participated in daily stand-ups and agile sprints."
+            "Fixed bugs and implemented new features based on user feedback."
         ]
     }
 ];
@@ -135,13 +135,12 @@ export const certificates: Certificate[] = [
 export const funFacts: FunFact[] = [
     { id: 1, text: "I like winter more than summer" },
     { id: 2, text: "I often bike with my friends" },
-    { id: 3, text: "I like pizza and pasta" },
+    { id: 3, text: "I love to explore the nature" },
 ];
 
 
 // quotes
 export const quotes = [
-    { text: "With great power comes great electricity bill.", author: "Dr. Who" },
     { text: "First, solve the problem. Then, write the code.", author: "John Johnson" },
     { text: "Simplicity is the ultimate sophistication.", author: "Leonardo da Vinci" },
     { text: "Code is like humor. When you have to explain it, it’s bad.", author: "Cory House" },

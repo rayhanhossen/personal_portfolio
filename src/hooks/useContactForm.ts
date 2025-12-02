@@ -9,7 +9,8 @@ export const useContactForm = () => {
     const [message, setMessage] = useState('');
     const [loading, setLoading] = useState(false);
     // Added state to manage copy button visual feedback
-    const [copyStatus, setCopyStatus] = useState(false);
+    const [emailCopyStatus, setEmailCopyStatus] = useState(false);
+    const [phoneCopyStatus, setPhoneCopyStatus] = useState(false);
 
     // 1. Create the Ref (Fixed TS error: use generics for explicit typing)
     const textareaRef = useRef<HTMLTextAreaElement>(null);
@@ -88,21 +89,59 @@ export const useContactForm = () => {
         setLoading(false);
     }, [message]);
 
-    // Clipboard Copy Logic 
-    const handleCopy = useCallback(() => {
-        // TypeScript now confirms textareaRef.current has these properties
-        if (textareaRef.current) {
-            textareaRef.current.select();
-            textareaRef.current.setSelectionRange(0, 99999); // Mobile support
 
-            // Use document.execCommand('copy') for better compatibility 
-            document.execCommand('copy');
+    const handleCopy = async (type: any, textToCopy: any) => {
+        // 1. Check for browser support
+        if (!navigator.clipboard || !navigator.clipboard.writeText) {
+            // Fallback for older browsers (where the keyboard issue will persist)
+            console.warn("Clipboard API not available. Using fallback method.");
+            if (!textToCopy) return false;
+            // TypeScript now confirms textareaRef.current has these properties
+            if (textToCopy && type) {
+                // 1. Create a temporary, invisible textarea element
+                const tempInput = document.createElement('textarea');
+                tempInput.value = textToCopy;
+                // Set position to hide it visually but keep it functional
+                tempInput.style.position = 'absolute';
+                tempInput.style.left = '-9999px';
+                document.body.appendChild(tempInput);
 
-            // Trigger visual feedback (Green Checkmark on the button)
-            setCopyStatus(true);
-            setTimeout(() => setCopyStatus(false), 2000);
+                // 2. Select the text and execute the copy command
+                tempInput.select();
+                tempInput.setSelectionRange(0, 99999);
+
+                // Use document.execCommand('copy') for better compatibility 
+                document.execCommand('copy');
+
+                // Trigger visual feedback (Green Checkmark on the button)
+                if (type === "email") {
+                    setEmailCopyStatus(true);
+                    setTimeout(() => setEmailCopyStatus(false), 2000);
+                } else {
+                    setPhoneCopyStatus(true);
+                    setTimeout(() => setPhoneCopyStatus(false), 2000);
+                }
+            }
         }
-    }, []);
+
+        try {
+            // 2. Use the modern, non-visual Clipboard API
+            await navigator.clipboard.writeText(textToCopy);
+
+            // 3. Update the state to show the success icon
+            if (type === "phone") {
+                setPhoneCopyStatus(true);
+                setTimeout(() => setPhoneCopyStatus(false), 2000); // Reset after 2 seconds
+            }
+            else if (type === "email") {
+                setEmailCopyStatus(true);
+                setTimeout(() => setEmailCopyStatus(false), 2000); // Reset after 2 seconds
+            }
+
+        } catch (err) {
+            console.error('Failed to copy text: ', err);
+        }
+    };
 
     // Send Email Logic 
     const handleSend = useCallback(() => {
@@ -120,7 +159,8 @@ export const useContactForm = () => {
         message,
         setMessage,
         loading,
-        copyStatus, // Exposed for UI feedback
+        emailCopyStatus,
+        phoneCopyStatus,
         textareaRef,
         handleRefine,
         handleCopy,

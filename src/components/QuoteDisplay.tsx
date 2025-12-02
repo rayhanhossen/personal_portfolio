@@ -35,7 +35,7 @@ const QuoteDisplay = () => {
         return () => clearInterval(quoteInterval);
     }, []);
 
-    // 3. Typing Effect
+    // 3. Typing Effect (Retained logic, updated cursor)
     useEffect(() => {
         const fullText = `"${quotes[index].text}"`;
         if (isTyping) {
@@ -48,78 +48,67 @@ const QuoteDisplay = () => {
                 setIsTyping(false);
             }
         }
-    }, [displayedText, isTyping, index]);
+    }, [displayedText, isTyping, index, quotes]);
 
-
-    const time = new Date().toLocaleTimeString('en-US', { hour12: false, hour: "2-digit", minute: "2-digit" });
+    const time = new Date().toLocaleTimeString('en-US', { hour12: true, hour: "2-digit", minute: "2-digit" });
 
     return (
-        <div className="w-full font-mono text-sm relative group cursor-default my-8">
+        <div className="w-full font-sans text-base relative group cursor-default my-8">
 
-            {/* TERMINAL CONTAINER */}
-            <div className="relative border border-gray-600 shadow-2xl rounded-sm">
-
-                {/* Header */}
-                <div className="flex items-center justify-between bg-[#1e222a] border-b border-gray-700 p-2">
+            {/* 🫧 GLASS CARD CONTAINER */}
+            <div className="glass-card shadow-xl overflow-hidden"> 
+                
+                {/* Header (Minimalist) */}
+                <div className="flex items-center justify-between bg-gray-50/70 border-b border-gray-200 p-3">
                     <div className="flex gap-2">
-                        <div className="w-3 h-3 rounded-full bg-red-500/80"></div>
-                        <div className="w-3 h-3 rounded-full bg-yellow-500/80"></div>
-                        <div className="w-3 h-3 rounded-full bg-green-500/80"></div>
+                        {/* Simple, neutral indicator lights */}
+                        <div className="w-3 h-3 rounded-full bg-red-400"></div>
+                        <div className="w-3 h-3 rounded-full bg-yellow-400"></div>
+                        <div className="w-3 h-3 rounded-full bg-green-400"></div>
                     </div>
-                    <div className="text-gray-500 text-xs flex gap-2">
-                        <span className='text-primary'>/bin/bash</span>
+                    {/* Clean Title */}
+                    <div className="text-gray-500 text-xs font-medium">
+                        Insight Generator
                     </div>
                 </div>
 
                 {/* Body */}
-                <div className="bg-[#282C33] p-4 md:p-6 min-h-[160px] flex flex-col justify-between relative overflow-hidden">
-                    {/* Background Grid Pattern */}
-                    <div className="absolute inset-0 bg-[linear-gradient(rgba(18,18,18,0)_50%,rgba(0,0,0,0.25)_50%),linear-gradient(90deg,rgba(255,0,0,0.06),rgba(0,255,0,0.02),rgba(0,0,255,0.06))] z-0 pointer-events-none bg-[length:100%_4px,6px_100%] opacity-20"></div>
-
+                <div className="p-6 md:p-8 min-h-[220px] flex flex-col justify-between relative">
+                    
                     <div className="relative z-10">
-                        <div className="flex items-center gap-2 mb-4 text-gray-400 text-xs md:text-sm">
-                            <span className="text-green-400">root@rayhan</span>
-                            <span className="text-gray-500">:</span>
-                            <span className="text-blue-400">~/wisdom</span>
-                            <span className="text-gray-500">$</span>
-                            <span className="text-white">echo $QUOTE</span>
-                        </div>
-
-                        {/* Quote Text: Responsive Text Size (text-base -> text-lg -> text-xl) */}
-                        <div className="text-sm sm:text-base md:text-lg text-gray-300 leading-relaxed pl-4 border-l-2 border-gray-700  break-words tracking-tighter">
+                        {/* Quote Text: Clean, readable dark text */}
+                        <div className="text-xl sm:text-2xl md:text-3xl text-gray-800 leading-snug break-words font-light italic">
                             {displayedText}
-                            <span className="animate-pulse inline-block w-[3px] h-5 bg-yellow-400 ml-1 align-middle shadow-[0_0_8px_rgba(250,204,21,0.6)]"></span>
+                            {/* 🚨 UPDATED CURSOR: Subtle underscore with accent color */}
+                            {/* <span className={`animate-pulse inline-block w-2 h-0.5 bg-accent ml-1 align-middle ${isTyping ? 'opacity-100' : 'opacity-0'}`}></span> */}
                         </div>
 
-                        {/* Author: Rendered ALWAYS to reserve space, opacity toggled to prevent blinking */}
+                        {/* Author: Transitioned to clean sans-serif text */}
                         <div
-                            className={`mt-4 text-right text-green-400 italic transition-opacity duration-700 ease-in-out ${isTyping ? 'opacity-0' : 'opacity-100'
+                            className={`mt-6 text-left text-accent font-medium italic transition-opacity duration-700 ease-in-out ${isTyping ? 'opacity-0' : 'opacity-100'
                                 }`}
                         >
                             - {quotes[index].author}
                         </div>
                     </div>
 
-                    <div className="mt-6 pt-4 border-t border-gray-700/50 flex justify-between items-center text-xs text-gray-500 font-mono">
+                    {/* Footer with Horizontal Progress Bar (Clean Look) */}
+                    <div className="mt-8 pt-4 border-t border-gray-200 flex justify-between items-center text-xs text-gray-500 font-sans">
                         <div className="flex gap-4">
-                            <span><span className="text-green-400">✓</span> Executed</span>
-                            <span>{time}</span>
+                            <span>Quote refreshed: <span className="font-semibold text-gray-700">{time}</span></span>
                         </div>
-                        <div className="relative flex items-center justify-center w-8 h-8"> {/* Adjust w/h for size */}
-
-                            {/* 1. The Circular Progress Ring */}
-                            {/* This element will have the gradient and spin */}
-                            <div className="circular-loader-ring"></div>
-
-                            {/* 2. Inner Circle (to mask the center and show text) */}
-                            <div className="absolute flex items-center justify-center bg-[#282C33] rounded-full text-white font-mono text-xs z-10">
-                                {Math.round(progress)}% {/* 'progress' state will come from parent component */}
-                            </div>
+                        
+                        {/* 📊 Progress Bar Container */}
+                        <div className="w-32 h-2 bg-gray-200 rounded-full overflow-hidden relative">
+                            <div 
+                                className="h-full bg-accent transition-all duration-100 ease-linear rounded-full"
+                                style={{ width: `${progress}%` }}
+                                title={`${Math.round(progress)}% progress`}
+                            ></div>
                         </div>
                     </div>
                 </div>
             </div>
-
         </div>
     );
 };

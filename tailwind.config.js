@@ -1,24 +1,23 @@
 /** @type {import('tailwindcss').Config} */
-export default {
+module.exports = {
   content: [
-    "./index.html",
-    "./src/**/*.{js,ts,jsx,tsx}",
+    "./src/**/*.{js,jsx,ts,tsx}",
   ],
   theme: {
     extend: {
       colors: {
-        bg: '#282C33',
-        primary: '#C778DD',
-        text: '#E0E6ED',
-        gray: '#ABB2BF',
-        card: '#282C33',
+        // Define the new, clean color palette
+        'bg': '#E8F7FA', // The light, airy background
+        'glass-overlay': '#FFFFFF', // The base color for the translucent panels
+        'accent': '#3CB4C4', // The new, calm accent color
       },
       fontFamily: {
-        mono: ['"Fira Code"', 'monospace'],
+        // Implement the modern sans-serif font stack
+        sans: ["Inter", "ui-sans-serif", "system-ui", "-apple-system", "Segoe UI", "Roboto", "Helvetica Neue", "Arial"],
       },
-      spacing: {
-        'container': '1024px',
-      }
+      lineHeight: {
+        '12': '1.2'
+      },
     },
   },
   plugins: [],
