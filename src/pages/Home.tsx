@@ -15,7 +15,8 @@ const Home = () => {
         handleRefine,
         handleCopy,
         handleSend,
-        copyStatus
+        emailCopyStatus,
+        phoneCopyStatus
     } = useContactForm();
 
 
@@ -23,11 +24,11 @@ const Home = () => {
         <div id="home-view" className="view-section">
 
             {/* HERO SECTION */}
-            <section id="home" className="grid grid-cols-1 md:grid-cols-12 gap-y-4 md:gap-y-12 md:gap-x-0 md:items-stretch mb-12 md:mb-20">
+            <section id="home" className="grid grid-cols-1 md:grid-cols-12 gap-y-4 md:gap-y-12 md:gap-x-0 md:items-stretch mb-[30px] md:mb-[32px]">
                 {/* 1. TEXT AND BUTTONS CARD (8 Columns) */}
-                <div className="order-2 md:order-1 p-5 md:col-span-8 glass-card shadow-xl md:mr-[10px]">
+                <div className="order-2 md:order-1 p-5 pb-[24px] md:col-span-8 glass-card shadow-xl md:mr-[16px]">
                     {/* 1. STATUS BUBBLE - NOW POSITIONED AT THE TOP WITH MINI GLASS CARD STYLE */}
-                    <div className="glass-card mb-4 inline-flex items-center p-2 rounded-lg shadow-md text-sm w-max">
+                    <div className="mb-4 inline-flex items-center p-2 rounded-lg  border border-accent/20 text-sm w-max">
                         {/* NOTE: I used inline-flex and mb-4 to separate it from the H3 */}
 
                         <div className="flex items-center gap-2 text-gray-700">
@@ -49,9 +50,9 @@ const Home = () => {
                     </div>
 
                     {/* 2. HEADER */}
-                    <h3 className="font-sans text-2xl md:text-5xl font-light text-gray-800 mb-6 leading-tight">
+                    <h3 className="font-sans text-2xl md:text-5xl font-medium text-gray-800 mb-6 tracking-tight md:leading-tight">
                         Engineering AI-driven products that solve real problems — beautifully and efficiently
-                        <span className="animate-pulse text-accent">.</span>
+                        <span className="animate-pulse text-black">.</span>
                     </h3>
 
                     {/* ... Rest of your content remains the same ... */}
@@ -67,13 +68,13 @@ const Home = () => {
                             smooth
                             className="flex-1 sm:flex-none group relative
                         px-6 py-3 flex items-center justify-center gap-2 
-                        transition-all duration-300 rounded-xl font-medium text-sm md:text-base
+                        transition-all duration-300 rounded-full font-medium text-sm md:text-base
                         
                         // BASE STATE: Accent background, white text
                         bg-accent text-white shadow-lg shadow-accent/40
                         
                         // HOVER STATE: Subtle darkening/lift
-                        hover:bg-accent/90 hover:-translate-y-0.5 hover:shadow-xl hover:shadow-accent/60"
+                        hover:bg-accent/90 hover:-translate-y-0.5 hover:shadow-xl"
                         >
                             <span>Get in touch</span>
                             <span className="font-bold transition-transform duration-300 group-hover:translate-x-1">
@@ -88,7 +89,7 @@ const Home = () => {
                             rel="noopener noreferrer"
                             className="flex-1 sm:flex-none group relative
                         px-6 py-3 flex items-center justify-center gap-2 
-                        transition-all duration-300 rounded-xl font-medium text-sm md:text-base
+                        transition-all duration-300 rounded-full font-medium text-sm md:text-base
                         
                         // BASE STATE: Outline style
                         border border-gray-400 text-gray-700 hover:border-accent hover:text-accent 
@@ -120,21 +121,20 @@ const Home = () => {
             </section>
 
             {/* QUOTE SECTION (Assuming QuoteDisplay works well with light background) */}
-            <section className="mb-12 md:mb-20 w-full">
+            <section className="mb-[30px] md:mb-[32px] w-full">
                 <QuoteDisplay />
             </section>
 
 
             {/* EXPERIENCE PREVIEW */}
-            {/* NOTE: If ExperiencePreview uses dark cards, it will need a redesign too */}
-            <section id="experience-preview" className="mb-12 md:mb-20">
+            <section id="experience-preview" className="mb-[30px] md:mb-[32px]">
                 <ExperiencePreview featuredExperience={experiences} />
             </section>
 
 
             {/* CONTACTS SECTION */}
-            <section id="contacts" className="mb-12 md:mb-20">
-                <div className="flex justify-between items-end mb-12">
+            <section id="contacts" className="mb-[30px] md:mb-[32px]">
+                <div className="flex justify-between items-end mb-[18px]">
                     <h2 className="text-xl md:text-2xl font-semibold text-gray-800 flex items-baseline">
                         <span className="text-accent mr-2">
                             <i className="fas fa-envelope-open-text"></i>
@@ -143,7 +143,7 @@ const Home = () => {
                     </h2>
                 </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-[16px]">
 
                     {/* ⬅️ LEFT COLUMN: Contact Info Card and Description Text (NO CHANGE) */}
                     <div className="flex flex-col gap-8">
@@ -152,18 +152,62 @@ const Home = () => {
                             <p className="mb-8 text-gray-600">
                                 I'm interested in new opportunities. If you have a question, collaboration idea, or just want to connect, feel free to reach out.
                             </p>
-                            <h4 className="text-gray-800 text-1xl font-bold mb-4">Get in touch</h4>
+                            <h4 className="text-gray-800 text-xl font-bold mb-4">Get in touch</h4>
                             <div className="flex flex-col gap-3">
-                                {/* Email */}
-                                <a href={`mailto:${personalInfo.email}`} className="flex items-center gap-3 text-gray-600 hover:text-accent transition-colors">
-                                    <i className="fas fa-envelope text-gray-400 w-4 text-center"></i>
-                                    <span className='font-medium'>{personalInfo.email}</span>
-                                </a>
-                                {/* Phone */}
-                                <a href={`tel:${personalInfo.phone}`} className="flex items-center gap-3 text-gray-600 hover:text-accent transition-colors">
-                                    <i className="fa fa-phone text-gray-400 w-4 text-center"></i>
-                                    <span className='font-medium'>{personalInfo.phone}</span>
-                                </a>
+
+                                {/* Email Row */}
+                                <div className="flex items-center text-gray-600">
+
+                                    {/* LEFT CELL: Clickable Email Link (a) */}
+                                    <a
+                                        href={`mailto:${personalInfo.email}`}
+                                        className="flex items-center gap-3 hover:text-accent transition-colors">
+
+                                        <i className="fas fa-envelope text-gray-400 w-4 text-center"></i>
+                                        <span className='font-medium'>{personalInfo.email}</span>
+                                    </a>
+
+                                    {/* RIGHT CELL: Non-Clickable Copy Button (button) */}
+                                    <button
+                                        onClick={() => handleCopy("email", personalInfo.email)}
+                                        className="group flex items-center gap-1.5 text-gray-500 hover:text-accent transition-colors p-1" // Added padding for easy clicking
+                                        title="Copy to clipboard"
+                                    >
+                                        {/* The icon logic should be updated to copy the email address */}
+                                        {emailCopyStatus ? (
+                                            <i className="fas fa-check-circle text-lg text-green-500 transition-colors"></i>
+                                        ) : (
+                                            <i className="far fa-copy text-lg transition-colors"></i>
+                                        )}
+                                    </button>
+                                </div>
+
+                                {/* Phone Row */}
+                                <div className="flex items-center text-gray-600">
+
+                                    {/* LEFT CELL: Clickable Phone Link (a) */}
+                                    <a
+                                        href={`tel:${personalInfo.phone}`}
+                                        className="flex items-center gap-3 hover:text-accent transition-colors">
+
+                                        <i className="fa fa-phone text-gray-400 w-4 text-center"></i>
+                                        <span className='font-medium'>{personalInfo.phone}</span>
+                                    </a>
+
+                                    {/* RIGHT CELL: Non-Clickable Copy Button (button) */}
+                                    <button
+                                        onClick={() => handleCopy("phone", personalInfo.phone)}
+                                        className="group flex items-center gap-1.5 text-gray-500 hover:text-accent transition-colors p-1" // Added padding for easy clicking
+                                        title="Copy to clipboard"
+                                    >
+                                        {/* The icon logic should be updated to copy the phone number */}
+                                        {phoneCopyStatus ? (
+                                            <i className="fas fa-check-circle text-lg text-green-500 transition-colors"></i>
+                                        ) : (
+                                            <i className="far fa-copy text-lg transition-colors"></i>
+                                        )}
+                                    </button>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -233,20 +277,6 @@ const Home = () => {
                                 </button>
 
                                 <div className="flex items-center gap-4">
-                                    {/* 📋 Copy Button */}
-                                    <button
-                                        onClick={handleCopy}
-                                        className="group flex items-center gap-1.5 text-gray-500 hover:text-green-600 transition-colors"
-                                        title="Copy to clipboard"
-                                    >
-                                        {copyStatus ? (
-                                            <i className="fas fa-check-circle text-lg text-green-500 transition-colors"></i>
-                                        ) : (
-                                            <i className="far fa-copy text-lg transition-colors"></i>
-                                        )}
-                                        <span className="hidden md:inline text-sm font-medium">Copy</span>
-                                    </button>
-
                                     {/* 🚀 Send Button */}
                                     <button
                                         onClick={handleSend}

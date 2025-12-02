@@ -77,15 +77,15 @@ const QuoteDisplay = () => {
                     
                     <div className="relative z-10">
                         {/* Quote Text: Clean, readable dark text */}
-                        <div className="text-xl sm:text-2xl md:text-3xl text-gray-800 leading-snug break-words font-light">
+                        <div className="text-xl sm:text-2xl md:text-3xl text-gray-800 leading-snug break-words font-light italic">
                             {displayedText}
                             {/* 🚨 UPDATED CURSOR: Subtle underscore with accent color */}
-                            <span className={`animate-pulse inline-block w-2 h-0.5 bg-accent ml-1 align-middle ${isTyping ? 'opacity-100' : 'opacity-0'}`}></span>
+                            {/* <span className={`animate-pulse inline-block w-2 h-0.5 bg-accent ml-1 align-middle ${isTyping ? 'opacity-100' : 'opacity-0'}`}></span> */}
                         </div>
 
                         {/* Author: Transitioned to clean sans-serif text */}
                         <div
-                            className={`mt-6 text-right text-accent font-medium italic transition-opacity duration-700 ease-in-out ${isTyping ? 'opacity-0' : 'opacity-100'
+                            className={`mt-6 text-left text-accent font-medium italic transition-opacity duration-700 ease-in-out ${isTyping ? 'opacity-0' : 'opacity-100'
                                 }`}
                         >
                             - {quotes[index].author}

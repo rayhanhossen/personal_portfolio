@@ -45,7 +45,7 @@ const ExperiencePreview: React.FC<ExperiencePreviewProps> = ({ featuredExperienc
     return (
         <div id="experience-preview" className="font-sans">
             {/* 🚨 UPDATED: Clean Heading */}
-            <div className="flex justify-between items-end mb-12">
+            <div className="flex justify-between items-end mb-[18px]">
                 <h2 className="text-xl md:text-2xl font-semibold text-gray-800 flex items-baseline">
                     <span className="text-accent mr-2">
                         <i className="fas fa-briefcase"></i>
@@ -55,7 +55,7 @@ const ExperiencePreview: React.FC<ExperiencePreviewProps> = ({ featuredExperienc
             </div>
 
             {/* 🌬️ Timeline Body (Light Gray Line) */}
-            <div className="relative border-l border-gray-300 space-y-10 pb-2">
+            <div className="relative border-l border-gray-300 space-y-4 pb-2">
                 {featuredExperience.map((exp, index) => {
                     const isFirst = index === 0;
                     const isExpanded = !!expandedIds[exp.id];

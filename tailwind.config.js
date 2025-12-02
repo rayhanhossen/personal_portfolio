@@ -15,6 +15,9 @@ module.exports = {
         // Implement the modern sans-serif font stack
         sans: ["Inter", "ui-sans-serif", "system-ui", "-apple-system", "Segoe UI", "Roboto", "Helvetica Neue", "Arial"],
       },
+      lineHeight: {
+        '12': '1.2'
+      },
     },
   },
   plugins: [],

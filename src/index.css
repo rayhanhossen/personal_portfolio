@@ -20,9 +20,9 @@ body {
 }
 
 /* Optional Hover Effect */
-.glass-card:hover {
+/* .glass-card:hover {
     @apply shadow-xl shadow-accent/30;
-}
+} */
 
 /* Accent for buttons and headings */
 .accent-text {

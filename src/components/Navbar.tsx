@@ -12,17 +12,17 @@ const Navbar = () => {
     ];
 
     return (
-        <header className="py-4 md:py-5">
+        <header className="py-4 md:py-[16px]">
             <div className="flex justify-between items-center px-4 md:px-6 py-3 md:py-3 glass-card mx-auto">
-                
+
                 <Link
                     to="/"
                     className="flex items-center gap-2 font-bold text-gray-800 text-xl md:text-2xl select-none cursor-pointer hover:text-accent transition-colors"
                     onClick={() => setIsOpen(false)} // Close mobile menu if open
                 >
                     {/* Simplified, modern logo text, can add a minimal icon if desired */}
-                    <span className='text-accent'>{personalInfo.name.toUpperCase()}</span> 
-                    <span className="font-light text-gray-500 hidden sm:inline">Portfolio</span>
+                    <span className='text-accent'>{personalInfo.name.toUpperCase()}</span>
+                    {/* <span className="font-light text-gray-500 hidden sm:inline">Portfolio</span> */}
                 </Link>
 
                 {/* 💻 Desktop Nav (Cleaned up, using accent color and underline effect) */}
@@ -36,14 +36,18 @@ const Navbar = () => {
                                 ${isActive ? 'text-gray-900 font-semibold' : ''}`
                             }
                         >
-                            {/* 1. NavLink Text */}
-                            <span>{link.name}</span>
-
-                            {/* 2. Custom Underline for Active State (Clean Look) */}
                             {({ isActive }) => (
-                                isActive && (
-                                    <span className="absolute bottom-0 left-0 w-full h-[2px] bg-accent transform transition-transform duration-300 scale-x-100"></span>
-                                )
+                                <>
+                                    {/* 1. NavLink Text */}
+                                    <span>{link.name}</span>
+
+                                    {/* 2. Custom Underline for Active State (Clean Look) */}
+                                    {isActive && (
+                                        <span
+                                            className="absolute bottom-0 left-0 w-full h-[2px] bg-accent transform transition-transform duration-300 scale-x-100"
+                                        ></span>
+                                    )}
+                                </>
                             )}
                         </NavLink>
                     ))}
@@ -58,7 +62,7 @@ const Navbar = () => {
 
             {/* 📱 Mobile Menu (Fixed Glass Panel) */}
             {isOpen && (
-                <div 
+                <div
                     // 🚨 UPDATED: Mobile Menu is now a fixed, full-screen glass panel
                     className="fixed inset-0 z-[60] p-6 flex flex-col gap-6 md:hidden glass-card"
                     style={{ backdropFilter: 'blur(30px)' }} // Ensure strong blur on mobile overlay
@@ -69,15 +73,15 @@ const Navbar = () => {
                             to="/"
                             className="flex items-center gap-2 font-bold text-gray-800 text-2xl"
                         >
-                            <span className='text-accent'>{personalInfo.name.toUpperCase()}</span> 
+                            <span className='text-accent'>{personalInfo.name.toUpperCase()}</span>
                         </Link>
-                        
+
                         {/* Close Button */}
                         <button className="text-3xl text-gray-700 hover:text-red-500 transition-colors" onClick={() => setIsOpen(false)}>
                             <i className="fas fa-times"></i>
                         </button>
                     </div>
-                    
+
                     {/* Navigation Links */}
                     <div className="flex flex-col gap-4">
                         {navLinks.map((link) => (

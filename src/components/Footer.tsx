@@ -3,8 +3,8 @@ import { personalInfo } from '../data/content';
 const Footer = () => {
   return (
     // 🚨 UPDATED: Light border, increased top margin
-    <footer className="border-t border-gray-300 pt-10 pb-10 mt-12 md:mt-20">
-      <div className="flex flex-col md:flex-row justify-between items-start gap-8 mb-10">
+    <footer className="border-t border-gray-300 pt-10 pb-10">
+      <div className="flex flex-col md:flex-row justify-between items-start gap-8 mb-[30px] md:mb-[32px]">
         <div>
           {/* 🚨 UPDATED: Logo/Name (Clean, Sans-serif) */}
           <div className="flex items-center gap-2 font-bold text-gray-800 text-xl mb-2">
@@ -39,7 +39,7 @@ const Footer = () => {
       </div>
       
       {/* 🚨 UPDATED: Clean Copyright Notice */}
-      <div className="text-center text-gray-500 text-sm pt-4">
+      <div className="md:text-center text-gray-500 text-sm pt-3">
         &copy; {new Date().getFullYear()}. Designed & Built by <span className='font-semibold text-gray-700'>{personalInfo.name}</span>.
       </div>
     </footer>
