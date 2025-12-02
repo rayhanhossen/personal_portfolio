@@ -134,17 +134,18 @@ const CustomCursor: React.FC = () => {
                     ${cursorState === 'pointer' ? 'w-12 h-12' : 'w-6 h-6'}
                 `}
             >
-                {/* State: Default (Small diamond)
-                */}
+                {/* State: Default (Small diamond) */}
                 <div className={`absolute inset-0 border border-slate-500/50 rotate-45 transition-all duration-300
                     ${cursorState === 'default' ? 'opacity-100 scale-100' : 'opacity-0 scale-50'}
                 `}/>
 
-                {/* State: Hover (Spinning Code/Loader Ring) 
-                    This creates the "Loading" / "System Processing" look
-                */}
+                {/* State: Hover (Spinning Code/Loader Ring) */}
+                {/* 🚨 UPDATED: Changed animation class */}
                 <div className={`absolute inset-0 rounded-full border-2 border-dashed border-cyan-400/80 transition-all duration-300
-                    ${cursorState === 'pointer' ? 'opacity-100 scale-100 animate-[spin_3s_linear_infinite]' : 'opacity-0 scale-50'}
+                    ${cursorState === 'pointer' 
+                        ? 'opacity-100 scale-100 animate-spin [animation-duration:4s]' 
+                        : 'opacity-0 scale-50'
+                    }
                 `}/>
                 
                 {/* Optional: Inner static ring for Hover */}
@@ -152,8 +153,7 @@ const CustomCursor: React.FC = () => {
                      ${cursorState === 'pointer' ? 'opacity-100' : 'opacity-0'}
                 `}/>
 
-                {/* State: Disabled (Solid Red Block)
-                */}
+                {/* State: Disabled (Solid Red Block) */}
                  <div className={`absolute inset-0 rounded-full bg-red-500/20 border border-red-500/50 transition-all duration-300
                     ${cursorState === 'disabled' ? 'opacity-100 scale-100' : 'opacity-0 scale-50'}
                 `}/>

@@ -32,16 +32,25 @@ const Layout: React.FC = () => {
     }, [location]);
 
     return (
-        // 1. REMOVED 'bg-bg' from here. It is now handled inside RippleBackground.tsx
-        // If we keep it here, it covers the fixed background component because of stacking contexts.
         <div className="min-h-screen relative text-text-main font-sans cursor-none overflow-x-hidden selection:bg-accent selection:text-bg">
 
-            {/* Background & Cursor */}
+            {/* Background */}
             <RippleBackground />
-            <CustomCursor />
+            
+            {/* 🚨 FIX 2: Custom Cursor Z-Index
+               - Wrapped in a high z-index div so it sits above Navbar/Sidebar/Buttons.
+               - 'pointer-events-none' ensures the wrapper doesn't block clicks. 
+            */}
+            <div className="fixed inset-0 z-[9999] pointer-events-none overflow-hidden">
+                <CustomCursor />
+            </div>
 
-            {/* Sidebar (Left) */}
-            <div className="fixed left-4 top-0 h-full hidden md:flex flex-col items-center justify-start pt-0 gap-1 w-8 z-50">
+            {/* 🚨 FIX 1: Sidebar (Left) 
+               - Changed 'md:flex' to 'xl:flex'.
+               - md (768px) includes tablets.
+               - xl (1280px) is strictly desktop/laptop.
+            */}
+            <div className="fixed left-4 top-0 h-full hidden xl:flex flex-col items-center justify-start pt-0 gap-1 w-8 z-50">
                 <div className="h-48 w-[1px] bg-slate-700"></div>
 
                 <div className="flex flex-col items-center">
@@ -51,7 +60,7 @@ const Layout: React.FC = () => {
                     </a>
                     <a href={personalInfo.whatsapp} target="_blank" rel="noreferrer" className="relative group text-text-muted hover:text-accent text-xl my-2 transition-all duration-300 hover:-translate-y-1">
                         <i className="fa-brands fa-whatsapp"></i>
-                        <span className="social-label bg-accent text-bg font-bold">WhatsApp</span>
+                        <span className="social-label bg-accent text-bg font-bold">+{personalInfo.whatsapp.substring(personalInfo.whatsapp.indexOf('8'))}</span>
                     </a>
                     <a href={personalInfo.linkedin} target="_blank" rel="noreferrer" className="relative group text-text-muted hover:text-accent text-xl my-2 transition-all duration-300 hover:-translate-y-1">
                         <i className="fab fa-linkedin"></i>
