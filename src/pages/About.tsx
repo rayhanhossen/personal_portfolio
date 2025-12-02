@@ -48,6 +48,7 @@ const About = () => {
                             alt={personalInfo.name}
                             // Removed negative margin/flip for clean presentation
                             className="w-full relative z-10 rounded-lg shadow-md"
+                            style={{ transform: 'scaleX(-1)' }}
                         />
                         
                         {/* Subtle background shape (Optional: replace dots) */}
