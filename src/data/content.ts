@@ -81,7 +81,7 @@ export const projects: Project[] = [
         image: "https://placehold.co/400x300/222/FFF?text=ChertNodes",
         tech: ["HTML", "SCSS", "Python", "Flask"],
         category: "professional",
-        liveLink: "#"
+        liveLink: "www.google.com"
     },
     {
         id: 2,
@@ -96,7 +96,7 @@ export const projects: Project[] = [
         id: 3,
         title: "Bot boilerplate",
         description: "Start creating scalable discord.js bot with typescript in seconds",
-        image: "", // Empty for small project
+        image: "https://placehold.co/400x300/333/FFF?text=Bot", // Empty for small project
         tech: ["Discord.js", "TS", "JS"],
         category: "small",
         liveLink: "#"

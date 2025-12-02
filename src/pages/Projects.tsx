@@ -87,10 +87,10 @@ const Projects = () => {
     );
 
     return (
-        <div id="projects-view" className="view-section pt-8">
+        <div id="projects-view" className="view-section pt-4">
 
             {/* Header */}
-            <div className="mb-16">
+            <div className="mb-[32px]">
                 <h2 className="text-3xl text-gray-800 font-semibold mb-2">
                     <span className="text-accent">/</span>projects
                 </h2>
@@ -98,9 +98,9 @@ const Projects = () => {
             </div>
 
             {/* Complete Apps Section */}
-            <section className="mb-20 relative">
+            <section className="mb-[32px] relative">
                 {/* 🚨 UPDATED HEADING: Clean, professional sans-serif title */}
-                <h3 className="text-2xl md:text-3xl font-bold text-gray-800 mb-10 flex items-center tracking-tight">
+                <h3 className="text-2xl md:text-3xl font-bold text-gray-800 mb-[18px] flex items-center tracking-tight">
                     <i className="fas fa-rocket text-accent mr-3"></i>
                     Professional Applications
                 </h3>
@@ -111,9 +111,9 @@ const Projects = () => {
             </section>
 
             {/* Small Projects Section */}
-            <section className="mb-24 relative">
+            <section className="mb-[32px] relative">
                 {/* 🚨 UPDATED HEADING: Clean, professional sans-serif title */}
-                <h3 className="text-2xl md:text-3xl font-bold text-gray-800 mb-10 flex items-center tracking-tight">
+                <h3 className="text-2xl md:text-3xl font-bold text-gray-800 mb-[18px] flex items-center tracking-tight">
                     <i className="fas fa-code text-accent mr-3"></i>
                     Coding Challenges & Snippets
                 </h3>

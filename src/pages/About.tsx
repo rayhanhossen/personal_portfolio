@@ -5,7 +5,7 @@ const About = () => {
     return (
         <div className="font-sans">
             {/* Header */}
-            <div className="mb-12 pt-8">
+            <div className="mb-12 pt-4">
                 <h2 className="text-3xl text-gray-800 font-semibold mb-2">
                     <span className="text-accent">/</span>about-me
                 </h2>
@@ -13,7 +13,7 @@ const About = () => {
             </div>
 
             {/* Main Bio & Image */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-12 mb-24 items-start">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-12 mb-9 items-start">
                 
                 {/* 1. Bio Text & Button */}
                 <div className="text-gray-700 leading-relaxed order-2 md:order-1 pt-4">
@@ -33,8 +33,8 @@ const About = () => {
                             w-max mt-8 transition-all duration-300 rounded-xl"
                         aria-label="Download Resume"
                     >
-                        <span>Download CV</span>
-                        <i className="fas fa-arrow-down text-sm transform group-hover:translate-y-0.5 transition-all duration-300 ml-1"></i>
+                        <span>Resume</span>
+                        <i className="fas fa-download text-sm transform group-hover:translate-y-0.5 transition-all duration-300 ml-1"></i>
                     </a>
                 </div>
 
@@ -58,14 +58,14 @@ const About = () => {
             </div>
 
             {/* Skills Section */}
-            <section className="mb-24 relative">
+            <section className="mb-9 relative">
                 {/* 🚨 UPDATED HEADING: Clean, professional sans-serif title */}
-                <h3 className="text-2xl md:text-3xl font-bold text-gray-800 mb-10 flex items-center tracking-tight">
+                <h3 className="text-2xl md:text-3xl font-bold text-gray-800 mb-4 flex items-center tracking-tight">
                     <i className="fas fa-cogs text-accent mr-3"></i>
                     Technical Skills
                 </h3>
 
-                <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-6">
+                <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
                     {skills.map((grp) => (
                         // 🚨 APPLIED GLASS CARD: Transforms skills group into a floating glass panel
                         <div
@@ -93,8 +93,7 @@ const About = () => {
             </section>
 
             {/* Fun Facts Section */}
-            <section className="mb-24 relative">
-                {/* 🚨 UPDATED HEADING: Clean, professional sans-serif title */}
+            {/* <section className="mb-24 relative">
                 <h3 className="text-2xl md:text-3xl font-bold text-gray-800 mb-10 flex items-center tracking-tight">
                     <i className="fas fa-lightbulb text-accent mr-3"></i>
                     Fun Facts
@@ -112,15 +111,13 @@ const About = () => {
                     ))}
                 </div>
 
-                {/* Decorative Elements (Removed complex dark-theme geometry) */}
                 <div className="hidden md:block absolute right-0 top-0">
                     <div className="relative w-32 h-32">
-                        {/* Simple, light decorative elements */}
                         <div className="absolute top-0 right-0 w-16 h-16 rounded-lg border border-gray-300"></div>
                         <div className="absolute bottom-0 left-0 w-16 h-16 rounded-full bg-accent/20"></div>
                     </div>
                 </div>
-            </section>
+            </section> */}
         </div>
     );
 };
