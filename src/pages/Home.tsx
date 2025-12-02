@@ -71,7 +71,7 @@ const Home = () => {
                         transition-all duration-300 rounded-full font-medium text-sm md:text-base
                         
                         // BASE STATE: Accent background, white text
-                        bg-accent text-white shadow-lg shadow-accent/40
+                        bg-accent text-white  shadow-accent/40
                         
                         // HOVER STATE: Subtle darkening/lift
                         hover:bg-accent/90 hover:-translate-y-0.5 hover:shadow-xl"
