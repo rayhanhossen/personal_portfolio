@@ -6,7 +6,7 @@ const About = () => {
         <div className="font-sans">
             {/* Header */}
             <div className="mb-12 pt-4">
-                <h2 className="text-3xl text-gray-800 font-semibold mb-2">
+                <h2 className="text-3xl text-gray-800 font-bold mb-2">
                     <span className="text-accent">/</span>about-me
                 </h2>
                 <p className="text-gray-600 text-lg">Who am I?</p>
@@ -60,7 +60,7 @@ const About = () => {
             {/* Skills Section */}
             <section className="mb-9 relative">
                 {/* 🚨 UPDATED HEADING: Clean, professional sans-serif title */}
-                <h3 className="text-2xl md:text-3xl font-bold text-gray-800 mb-4 flex items-center tracking-tight">
+                <h3 className="text-2xl md:text-2xl font-semibold text-gray-800 mb-4 flex items-center tracking-tight">
                     <i className="fas fa-cogs text-accent mr-3"></i>
                     Technical Skills
                 </h3>
