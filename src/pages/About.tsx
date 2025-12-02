@@ -1,4 +1,4 @@
-import { personalInfo, skills, funFacts } from '../data/content';
+import { personalInfo, skills } from '../data/content';
 import profileImg from '../assets/profile-avatar.png';
 
 const About = () => {
