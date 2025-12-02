@@ -30,7 +30,7 @@ const About = () => {
                         rel="noopener noreferrer"
                         className="group flex items-center gap-3 border border-gray-400 text-gray-700 font-medium 
                             px-6 py-3 hover:border-accent hover:text-accent hover:bg-accent/5 
-                            w-max mt-8 transition-all duration-300 rounded-xl"
+                            w-max mt-8 transition-all duration-300 rounded-full"
                         aria-label="Download Resume"
                     >
                         <span>Resume</span>
