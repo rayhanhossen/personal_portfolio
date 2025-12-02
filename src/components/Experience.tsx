@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 
-// --- Type Definitions (Kept Unchanged) ---
+// --- Type Definitions ---
 interface Experience {
     id: number;
     role: string;
@@ -44,18 +44,18 @@ const ExperiencePreview: React.FC<ExperiencePreviewProps> = ({ featuredExperienc
 
     return (
         <div id="experience-preview" className="font-sans">
-            {/* 🚨 UPDATED: Clean Heading */}
+            {/* 🚨 UPDATED: Clean Heading (Dark Mode) */}
             <div className="flex justify-between items-end mb-[18px]">
-                <h2 className="text-xl md:text-2xl font-semibold text-gray-800 flex items-baseline">
-                    <span className="text-accent mr-2">
+                <h2 className="text-xl md:text-2xl font-semibold text-text-main flex items-baseline">
+                    <span className="text-accent mr-2 drop-shadow-[0_0_5px_rgba(34,211,238,0.5)]">
                         <i className="fas fa-briefcase"></i>
                     </span>
                     <span className="tracking-tight">Work Experience</span>
                 </h2>
             </div>
 
-            {/* 🌬️ Timeline Body (Light Gray Line) */}
-            <div className="relative border-l border-gray-300 space-y-4 pb-2">
+            {/* 🌬️ Timeline Body (Dark Line) */}
+            <div className="relative border-l border-white/10 space-y-4 pb-2">
                 {featuredExperience.map((exp, index) => {
                     const isFirst = index === 0;
                     const isExpanded = !!expandedIds[exp.id];
@@ -67,48 +67,47 @@ const ExperiencePreview: React.FC<ExperiencePreviewProps> = ({ featuredExperienc
                     const initialContent = hasMoreContent ? descriptionPoints.slice(0, 2) : descriptionPoints;
                     const restOfContent = hasMoreContent ? descriptionPoints.slice(2) : [];
 
-                    // 🚨 UPDATED: Dot Styling (Clean, Accent-focused)
+                    // 🚨 UPDATED: Dot Styling (Dark Mode & Neon Glow)
                     let dotClasses = 'absolute -left-[9px] top-1/2 -translate-y-1/2 w-4 h-4 rounded-full transition-all duration-300 z-10 shadow-md';
                     if (isFirst) {
-                        // Highlight the latest experience with the accent color
-                        dotClasses += ' bg-accent border-2 border-white dot-blink-animation';
+                        // Highlight: Accent color with a dark border to 'cut' into the line
+                        dotClasses += ' bg-accent border-2 border-bg shadow-[0_0_10px_rgba(34,211,238,0.6)] dot-blink-animation';
                     } else {
-                        // Subtle gray dot for past experiences
-                        dotClasses += ' bg-gray-400 border border-white group-hover:bg-accent/80';
+                        // Past: Dark slate dot with subtle border
+                        dotClasses += ' bg-slate-700 border border-slate-800 group-hover:bg-accent/80 group-hover:shadow-[0_0_8px_rgba(34,211,238,0.4)]';
                     }
 
-                    // 🚨 UPDATED: Card Styling (The core Glass Card)
-                    // We apply 'glass-card' and add minimal lift/shadow on hover
-                    const cardClasses = 'p-6 transition-all duration-300 glass-card';
+                    // 🚨 UPDATED: Card Styling (Dark Glass Card)
+                    const cardClasses = 'p-6 transition-all duration-300 glass-card border border-white/5 hover:border-accent/30 hover:bg-white/5';
                     
                     return (
                         <div key={exp.id} className="timeline-item pl-8 relative group">
                             <div className={dotClasses}></div>
                             <div className={cardClasses}>
                                 <div className="flex flex-col md:flex-row justify-between mb-2">
-                                    {/* Role: Prominent dark text */}
-                                    <h3 className="text-gray-900 font-semibold text-xl">{exp.role}</h3>
-                                    {/* Period: Subtle gray text */}
-                                    <span className="text-gray-500 text-sm mt-1 md:mt-0">{exp.period}</span>
+                                    {/* Role: Prominent White Text */}
+                                    <h3 className="text-text-main font-semibold text-xl group-hover:text-accent transition-colors">{exp.role}</h3>
+                                    {/* Period: Muted Text */}
+                                    <span className="text-text-muted text-sm mt-1 md:mt-0 font-medium">{exp.period}</span>
                                 </div>
                                 
                                 <p className="text-accent font-medium text-sm mb-4">
                                     {exp.company}
-                                    <span className="text-gray-500 ml-3 text-xs">
+                                    <span className="text-text-muted ml-3 text-xs opacity-70">
                                         <i className="fas fa-map-marker-alt"></i> {exp.location}
                                     </span>
                                 </p>
 
-                                <div className="text-gray-700 text-sm">
+                                <div className="text-slate-300 text-sm">
                                     {/* --- 1. ALWAYS VISIBLE CONTENT --- */}
                                     {Array.isArray(exp.description) ? (
-                                        <ul className="list-disc list-inside text-gray-700 space-y-2 leading-relaxed mb-1 pl-4">
+                                        <ul className="list-disc list-inside text-slate-300 space-y-2 leading-relaxed mb-1 pl-4 marker:text-accent/50">
                                             {initialContent.map((point, idx) => (
                                                 <li key={idx}>{point}</li>
                                             ))}
                                         </ul>
                                     ) : (
-                                        <p className="text-gray-700 leading-relaxed">{exp.description}</p>
+                                        <p className="text-slate-300 leading-relaxed">{exp.description}</p>
                                     )}
 
                                     {/* --- 2. HIDING/MEASURING WRAPPER --- */}
@@ -124,28 +123,24 @@ const ExperiencePreview: React.FC<ExperiencePreviewProps> = ({ featuredExperienc
                                                     opacity: isExpanded ? 1 : 0.01,
                                                 }}
                                             >
-                                                <ul className="list-disc list-inside text-gray-700 space-y-2 leading-relaxed mb-1 pl-4">
+                                                <ul className="list-disc list-inside text-slate-300 space-y-2 leading-relaxed mb-1 pl-4 marker:text-accent/50">
                                                     {restOfContent.map((point, idx) => (
                                                         <li key={idx}>{point}</li>
                                                     ))}
                                                 </ul>
                                             </div>
 
-                                            {/* 🚨 UPDATED: Show/Hide Button (Minimalist Link) */}
+                                            {/* 🚨 UPDATED: Show/Hide Button */}
                                             <div className="flex justify-end pt-4">
                                                 <button
                                                     onClick={() => toggleExpansion(exp.id)}
-                                                    className="flex items-center gap-1 font-medium text-sm text-accent hover:underline transition-colors"
+                                                    className="flex items-center gap-1 font-medium text-sm text-accent hover:text-white transition-colors"
                                                 >
                                                     <span>{isExpanded ? `Show Less` : `Show More`}</span>
                                                     {isExpanded ? (
-                                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-4 h-4">
-                                                            <path strokeLinecap="round" strokeLinejoin="round" d="m4.5 15.75 7.5-7.5 7.5 7.5" />
-                                                        </svg>
+                                                        <i className="fas fa-chevron-up text-xs"></i>
                                                     ) : (
-                                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-4 h-4">
-                                                            <path strokeLinecap="round" strokeLinejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
-                                                        </svg>
+                                                        <i className="fas fa-chevron-down text-xs"></i>
                                                     )}
                                                 </button>
                                             </div>

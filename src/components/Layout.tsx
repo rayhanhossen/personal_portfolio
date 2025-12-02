@@ -1,21 +1,21 @@
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Outlet, useLocation } from 'react-router-dom';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
+import RippleBackground from '../components/RippleBackground';
+import CustomCursor from '../components/CustomCursor';
 import { personalInfo } from '../data/content';
 
-
-const Layout = () => {
+const Layout: React.FC = () => {
     const [showScroll, setShowScroll] = useState(false);
     const location = useLocation();
 
-
-    // Scroll to top on route change
+    // Scroll to top
     useEffect(() => {
         window.scrollTo(0, 0);
     }, [location.pathname]);
 
-    // Handle Scroll Button Visibility
+    // Handle Scroll Button
     useEffect(() => {
         const checkScroll = () => {
             if (window.scrollY > 800) setShowScroll(true);
@@ -25,57 +25,62 @@ const Layout = () => {
         return () => window.removeEventListener('scroll', checkScroll);
     }, []);
 
-    // Dynamic Title Animation
+    // Dynamic Title
     useEffect(() => {
         const pageTitle = location.pathname === '/' ? 'Home' : location.pathname.substring(1).replace('-', ' ');
         document.title = `${personalInfo.name} | ${pageTitle.charAt(0).toUpperCase() + pageTitle.slice(1)}`;
     }, [location]);
 
     return (
-        // Apply 'default-cursor' class for general elements if needed, 
-        // but 'body' handles cursor visibility via CSS.
-        <div className="bg-bg min-h-screen relative text-gray-800 font-sans">
+        // 1. REMOVED 'bg-bg' from here. It is now handled inside RippleBackground.tsx
+        // If we keep it here, it covers the fixed background component because of stacking contexts.
+        <div className="min-h-screen relative text-text-main font-sans cursor-none overflow-x-hidden selection:bg-accent selection:text-bg">
 
-            {/* Fixed Left Sidebar */}
+            {/* Background & Cursor */}
+            <RippleBackground />
+            <CustomCursor />
+
+            {/* Sidebar (Left) */}
             <div className="fixed left-4 top-0 h-full hidden md:flex flex-col items-center justify-start pt-0 gap-1 w-8 z-50">
-                <div className="h-48 w-[1px] bg-gray-400"></div>
+                <div className="h-48 w-[1px] bg-slate-700"></div>
 
                 <div className="flex flex-col items-center">
-                    <a href={`mailto:${personalInfo.email}`} target="_blank" className="relative group text-gray-500 hover:text-accent text-xl my-2 transition-colors duration-200">
+                    <a href={`mailto:${personalInfo.email}`} className="relative group text-text-muted hover:text-accent text-xl my-2 transition-all duration-300 hover:-translate-y-1">
                         <i className="fa-regular fa-envelope"></i>
-                        <span className="social-label">{personalInfo.email}</span>
+                        <span className="social-label bg-accent text-bg font-bold">{personalInfo.email}</span>
                     </a>
-                    <a href={personalInfo.whatsapp} target="_blank" className="relative group text-gray-500 hover:text-accent text-xl my-2 transition-colors duration-200">
+                    <a href={personalInfo.whatsapp} target="_blank" rel="noreferrer" className="relative group text-text-muted hover:text-accent text-xl my-2 transition-all duration-300 hover:-translate-y-1">
                         <i className="fa-brands fa-whatsapp"></i>
-                        <span className="social-label">+{personalInfo.whatsapp.substring(personalInfo.whatsapp.indexOf('8'))}</span>
+                        <span className="social-label bg-accent text-bg font-bold">WhatsApp</span>
                     </a>
-                    <a href={personalInfo.linkedin} target="_blank" className="relative group text-gray-500 hover:text-accent text-xl my-2 transition-colors duration-200">
+                    <a href={personalInfo.linkedin} target="_blank" rel="noreferrer" className="relative group text-text-muted hover:text-accent text-xl my-2 transition-all duration-300 hover:-translate-y-1">
                         <i className="fab fa-linkedin"></i>
-                        <span className="social-label">LinkedIn</span>
+                        <span className="social-label bg-accent text-bg font-bold">LinkedIn</span>
                     </a>
                 </div>
             </div>
 
-            <div className="max-w-5xl mx-auto px-[1rem] md:px-12">
+            {/* Main Content */}
+            <div className="max-w-5xl mx-auto px-[1rem] md:px-12 relative z-10">
                 <Navbar />
-                <main className="view-section">
+                <main className="view-section mb-8">
                     <Outlet />
                 </main>
                 <Footer />
             </div>
 
-            {/* Scroll To Top: Clean Circle Button */}
+            {/* Scroll To Top Button */}
             <button
                 onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-                className={`fixed bottom-8 right-8 z-[100] transition-all duration-300 transform ${showScroll ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4 pointer-events-none'
-                    }`}
+                className={`fixed bottom-8 right-8 z-[100] transition-all duration-500 transform ${
+                    showScroll ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4 pointer-events-none'
+                }`}
             >
                 <div className="flex items-center justify-center h-12 w-12 rounded-full 
-                    bg-accent/80 backdrop-blur-sm shadow-lg 
-                    hover:bg-accent hover:shadow-xl hover:-translate-y-1
-                    transition-all duration-300">
-
-                    <i className="fas fa-arrow-up text-white text-base"></i>
+                    bg-accent/10 backdrop-blur-md border border-accent/50 shadow-[0_0_15px_rgba(34,211,238,0.3)]
+                    hover:bg-accent hover:shadow-[0_0_25px_rgba(34,211,238,0.6)] hover:-translate-y-1
+                    transition-all duration-300 group">
+                    <i className="fas fa-arrow-up text-accent group-hover:text-bg text-base transition-colors"></i>
                 </div>
             </button>
         </div>
