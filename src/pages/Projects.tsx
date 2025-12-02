@@ -91,7 +91,7 @@ const Projects = () => {
 
             {/* Header */}
             <div className="mb-[32px]">
-                <h2 className="text-3xl text-gray-800 font-semibold mb-2">
+                <h2 className="text-3xl text-gray-800 font-bold mb-2">
                     <span className="text-accent">/</span>projects
                 </h2>
                 <p className="text-gray-600 text-lg">A selection of my best work.</p>
@@ -100,7 +100,7 @@ const Projects = () => {
             {/* Complete Apps Section */}
             <section className="mb-[32px] relative">
                 {/* 🚨 UPDATED HEADING: Clean, professional sans-serif title */}
-                <h3 className="text-2xl md:text-3xl font-bold text-gray-800 mb-[18px] flex items-center tracking-tight">
+                <h3 className="text-2xl md:text-2xl font-semibold text-gray-800 mb-[18px] flex items-center tracking-tight">
                     <i className="fas fa-rocket text-accent mr-3"></i>
                     Professional Applications
                 </h3>
@@ -113,7 +113,7 @@ const Projects = () => {
             {/* Small Projects Section */}
             <section className="mb-[32px] relative">
                 {/* 🚨 UPDATED HEADING: Clean, professional sans-serif title */}
-                <h3 className="text-2xl md:text-3xl font-bold text-gray-800 mb-[18px] flex items-center tracking-tight">
+                <h3 className="text-2xl md:text-2xl font-semibold text-gray-800 mb-[18px] flex items-center tracking-tight">
                     <i className="fas fa-code text-accent mr-3"></i>
                     Coding Challenges & Snippets
                 </h3>
