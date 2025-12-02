@@ -35,7 +35,7 @@ const QuoteDisplay = () => {
         return () => clearInterval(quoteInterval);
     }, []);
 
-    // 3. Typing Effect (Retained logic, updated cursor)
+    // 3. Typing Effect
     useEffect(() => {
         const fullText = `"${quotes[index].text}"`;
         if (isTyping) {
@@ -48,26 +48,26 @@ const QuoteDisplay = () => {
                 setIsTyping(false);
             }
         }
-    }, [displayedText, isTyping, index, quotes]);
+    }, [displayedText, isTyping, index]);
 
     const time = new Date().toLocaleTimeString('en-US', { hour12: true, hour: "2-digit", minute: "2-digit" });
 
     return (
         <div className="w-full font-sans text-base relative group cursor-default my-8">
 
-            {/* 🫧 GLASS CARD CONTAINER */}
-            <div className="glass-card shadow-xl overflow-hidden"> 
+            {/* 🫧 GLASS CARD CONTAINER (Dark Mode Adapted) */}
+            <div className="glass-card shadow-xl overflow-hidden border border-white/10"> 
                 
-                {/* Header (Minimalist) */}
-                <div className="flex items-center justify-between bg-gray-50/70 border-b border-gray-200 p-3">
+                {/* Header (Darkened) */}
+                <div className="flex items-center justify-between bg-white/5 border-b border-white/10 p-3">
                     <div className="flex gap-2">
-                        {/* Simple, neutral indicator lights */}
-                        <div className="w-3 h-3 rounded-full bg-red-400"></div>
-                        <div className="w-3 h-3 rounded-full bg-yellow-400"></div>
-                        <div className="w-3 h-3 rounded-full bg-green-400"></div>
+                        {/* Traffic Lights */}
+                        <div className="w-3 h-3 rounded-full bg-[#FF5F56]"></div>
+                        <div className="w-3 h-3 rounded-full bg-[#FFBD2E]"></div>
+                        <div className="w-3 h-3 rounded-full bg-[#27C93F]"></div>
                     </div>
                     {/* Clean Title */}
-                    <div className="text-gray-500 text-xs font-medium">
+                    <div className="text-text-muted text-xs font-medium tracking-wide">
                         Insight Generator
                     </div>
                 </div>
@@ -76,14 +76,14 @@ const QuoteDisplay = () => {
                 <div className="p-6 md:p-8 min-h-[220px] flex flex-col justify-between relative">
                     
                     <div className="relative z-10">
-                        {/* Quote Text: Clean, readable dark text */}
-                        <div className="text-xl sm:text-2xl md:text-3xl text-gray-800 leading-snug break-words font-light italic">
+                        {/* Quote Text: White for Dark Mode */}
+                        <div className="text-xl sm:text-2xl md:text-3xl text-text-main leading-snug break-words font-light italic">
                             {displayedText}
-                            {/* 🚨 UPDATED CURSOR: Subtle underscore with accent color */}
-                            {/* <span className={`animate-pulse inline-block w-2 h-0.5 bg-accent ml-1 align-middle ${isTyping ? 'opacity-100' : 'opacity-0'}`}></span> */}
+                            {/* Cursor */}
+                            <span className={`animate-pulse inline-block w-2 h-6 bg-accent ml-1 align-middle ${isTyping ? 'opacity-100' : 'opacity-0'}`}></span>
                         </div>
 
-                        {/* Author: Transitioned to clean sans-serif text */}
+                        {/* Author */}
                         <div
                             className={`mt-6 text-left text-accent font-medium italic transition-opacity duration-700 ease-in-out ${isTyping ? 'opacity-0' : 'opacity-100'
                                 }`}
@@ -92,16 +92,16 @@ const QuoteDisplay = () => {
                         </div>
                     </div>
 
-                    {/* Footer with Horizontal Progress Bar (Clean Look) */}
-                    <div className="mt-8 pt-4 border-t border-gray-200 flex justify-between items-center text-xs text-gray-500 font-sans">
+                    {/* Footer with Horizontal Progress Bar */}
+                    <div className="mt-8 pt-4 border-t border-white/10 flex justify-between items-center text-xs text-text-muted font-sans">
                         <div className="flex gap-4">
-                            <span>Quote refreshed: <span className="font-semibold text-gray-700">{time}</span></span>
+                            <span>Refreshed: <span className="font-semibold text-text-main">{time}</span></span>
                         </div>
                         
-                        {/* 📊 Progress Bar Container */}
-                        <div className="w-32 h-2 bg-gray-200 rounded-full overflow-hidden relative">
+                        {/* 📊 Progress Bar Container (Dark Track) */}
+                        <div className="w-32 h-1.5 bg-white/10 rounded-full overflow-hidden relative">
                             <div 
-                                className="h-full bg-accent transition-all duration-100 ease-linear rounded-full"
+                                className="h-full bg-accent transition-all duration-100 ease-linear rounded-full shadow-[0_0_10px_rgba(34,211,238,0.5)]"
                                 style={{ width: `${progress}%` }}
                                 title={`${Math.round(progress)}% progress`}
                             ></div>

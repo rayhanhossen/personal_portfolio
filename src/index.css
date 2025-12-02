@@ -6,57 +6,56 @@
 @tailwind utilities;
 
 /* --- GLOBAL STYLES --- */
-
 body {
-    /* Apply the light background and the new sans-serif font */
-    @apply bg-bg font-sans text-gray-800;
+    /* bg-bg and text-text-main are defined in tailwind.config.js */
+    @apply bg-bg text-text-main font-sans;
     min-height: 100vh;
+    overflow-x: hidden; /* Prevent horizontal scroll */
+    /* Optional: Hide default cursor if using the custom one */
+    /* cursor: none; */ 
 }
 
 /* --- CUSTOM UTILITIES & COMPONENTS --- */
+
+/* Updated Glass Card for Dark Mode */
 .glass-card {
-    @apply bg-glass-overlay/80 backdrop-blur-xl rounded-2xl shadow-lg transition-all duration-300;
-    border: 1px solid rgba(255, 255, 255, 0.3);
+    /* Darker, more transparent background for contrast against dark body */
+    @apply bg-glass-overlay/40 backdrop-blur-xl rounded-2xl shadow-xl transition-all duration-300;
+    /* Subtle border to define edges in the dark */
+    border: 1px solid rgba(255, 255, 255, 0.08);
 }
 
-/* Optional Hover Effect */
 /* .glass-card:hover {
-    @apply shadow-xl shadow-accent/30;
+    border-color: rgba(34, 211, 238, 0.3);
+    box-shadow: 0 4px 20px -2px rgba(34, 211, 238, 0.1);
 } */
 
-/* Accent for buttons and headings */
+/* Accent helper */
 .accent-text {
     @apply text-accent;
 }
 
-/* --- Light Dots Pattern Utility --- */
-.light-dots-pattern {
-    /* Subtle blue-gray color blending with the background */
-    background-image: radial-gradient(rgba(195, 220, 229, 0.6) 1px, transparent 1px);
-    background-size: 24px 24px;
-}
-
-/* --- SCROLLBAR REDESIGN (Light Mode) --- */
+/* --- SCROLLBAR REDESIGN (Dark Mode) --- */
 ::-webkit-scrollbar {
-    width: 6px;
+    width: 8px;
 }
 
 ::-webkit-scrollbar-track {
-    background: transparent;
+    background: #020617; /* Dark background match */
 }
 
 ::-webkit-scrollbar-thumb {
-    background: #C3DCE5;
-    /* Lighter color */
-    border-radius: 3px;
+    background: #1e293b; /* Dark slate handle */
+    border-radius: 4px;
+    border: 1px solid #0f172a;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-    background: #A3C3CD;
+    background: #22d3ee; /* Neon Cyan on hover */
 }
 
 
-/* --- HEADING LINE (Simplified) --- */
+/* --- HEADING LINE --- */
 .heading-line {
     display: flex;
     align-items: center;
@@ -67,69 +66,101 @@ body {
     content: '';
     display: block;
     height: 1px;
-    background-color: #3CB4C4;
-    /* Using the new accent color */
+    background-color: #22d3ee; /* Neon Cyan Accent */
     flex-grow: 1;
     max-width: 500px;
+    opacity: 0.5;
 }
 
+/* --- SOCIAL LABELS (Sidebar Popups) --- */
 .social-label {
     position: absolute;
     top: 50%;
     left: 100%;
-    transform: translateY(-50%); /* Initial state: hidden */
+    transform: translateY(-50%);
 
-    background: #3CB4C4; /* Using the new accent color */
-    color: white;
-    padding: 0.25rem 0.5rem;
+    /* Updated Colors */
+    background: #22d3ee; /* Neon Cyan */
+    color: #020617;      /* Dark Text for contrast */
+    font-weight: 600;
+    
+    padding: 0.25rem 0.75rem;
     border-radius: 0.25rem;
     font-size: 0.8rem;
     white-space: nowrap;
-    margin-left: 0.5rem;
+    margin-left: 0.8rem;
 
     opacity: 0;
     visibility: hidden;
-    transition: opacity 0.3s, visibility 0.3s, transform 0.3s;
+    transition: all 0.3s ease;
     z-index: 60;
+    
+    /* Neon Glow */
+    box-shadow: 0 0 10px rgba(34, 211, 238, 0.5);
 }
 
-/* Reveal the label when the parent <a> tag is hovered (using the 'group-hover' effect) */
+/* Pointer Triangle for the label */
+.social-label::before {
+    content: '';
+    position: absolute;
+    left: -4px;
+    top: 50%;
+    transform: translateY(-50%);
+    border-top: 4px solid transparent;
+    border-bottom: 4px solid transparent;
+    border-right: 4px solid #22d3ee;
+}
+
 .group:hover .social-label {
     opacity: 1;
     visibility: visible;
-    /* Optional: Slide right on hover */
     transform: translateY(-50%) translateX(5px);
 }
 
-.dot-blink-animation {
-    animation: simpleBlink 2s infinite alternate; /* 1.5s duration, fade out then back in */
-}
+/* --- ANIMATIONS --- */
 
-@keyframes simpleBlink {
-    0% {
-        opacity: 1;
-        transform: scale(1);
-    }
-    100% {
-        opacity: 0.7; /* Fade slightly */
-        transform: scale(1.05); /* Gentle pulse */
-    }
-}
-
-
-/* --- FADE IN ANIMATION (Kept) --- */
 .view-section {
-    animation: fadeIn 0.3s ease-in-out;
+    animation: fadeIn 0.4s ease-out;
 }
 
 @keyframes fadeIn {
     from {
         opacity: 0;
-        transform: translateY(10px);
+        transform: translateY(15px);
     }
-
     to {
         opacity: 1;
         transform: translateY(0);
     }
+}
+
+/* --- CUSTOM CURSOR --- */
+.cursor-dot,
+.cursor-outline {
+    position: fixed;
+    top: 0;
+    left: 0;
+    transform: translate(-50%, -50%);
+    border-radius: 50%;
+    z-index: 9999;
+    pointer-events: none;
+}
+
+.cursor-dot {
+    width: 8px;
+    height: 8px;
+    background-color: #22d3ee; /* Neon Cyan */
+    box-shadow: 0 0 8px rgba(34, 211, 238, 0.8); /* Glow */
+}
+
+.cursor-outline {
+    width: 40px;
+    height: 40px;
+    border: 1px solid rgba(34, 211, 238, 0.5);
+    transition: width 0.2s, height 0.2s, background-color 0.2s;
+}
+
+/* Expand cursor on clickable elements */
+body:hover .cursor-outline {
+   opacity: 1;
 }

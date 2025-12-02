@@ -14,6 +14,8 @@ export const personalInfo = {
     about: [
         "Hello, I'm Rayhan hossen!",
         "I'm a self-taught front-end developer based in Dhaka, Bangladesh. I can develop responsive websites from scratch and raise them into modern user-friendly web experiences.",
+        "Transforming my creativity and knowledge into websites has been my passion for over a year.",
+        "Transforming my creativity and knowledge into websites has been my passion for over a year.",
         "Transforming my creativity and knowledge into websites has been my passion for over a year."
     ],
     cvLink: "/files/my-cv.pdf",
@@ -38,7 +40,9 @@ export const experiences: Experience[] = [
         role: "Senior Frontend Developer",
         company: "TechCorp Inc.",
         location: "New York, NY",
-        period: "2023 - Present",
+        period: "Jan 2023 - Present",
+        startDate: "2023-01",
+        endDate: "Present",
         description: [
             "Leading a team of 5 developers in migrating legacy monolith to micro-frontend architecture.",
             "Implemented CI/CD pipelines reducing deployment time by 60%. Leading a team of 5 developers in migrating legacy monolith to micro-frontend architecture.Leading a team of 5 developers in migrating legacy monolith to micro-frontend architecture.",
@@ -51,7 +55,9 @@ export const experiences: Experience[] = [
         role: "Web Developer",
         company: "Creative Studio",
         location: "London, UK",
-        period: "2021 - 2023",
+        period: "Jan 2021 - Dec 2023",
+        startDate: "2021-01",
+        endDate: "2023-12",
         description: [
             "Developed and maintained 20+ responsive websites for diverse clients.",
             "Collaborated with designers to implement pixel-perfect UIs from Figma.",
@@ -63,7 +69,9 @@ export const experiences: Experience[] = [
         role: "Junior Developer",
         company: "StartUp Galaxy",
         location: "Remote",
-        period: "2020 - 2021",
+        period: "Jan 2020 - Dec 2021",
+        startDate: "2020-01",
+        endDate: "2021-12",
         description: [
             "Assisted in building the MVP of a fintech application using React.",
             "Fixed bugs and implemented new features based on user feedback."
@@ -81,16 +89,18 @@ export const projects: Project[] = [
         image: "https://placehold.co/400x300/222/FFF?text=ChertNodes",
         tech: ["HTML", "SCSS", "Python", "Flask"],
         category: "professional",
-        liveLink: "www.google.com"
+        liveLink: "https://www.google.com",
+        sourceLink: "https://www.stripe.com"
     },
     {
         id: 2,
-        title: "ProtectX",
+        title: "ProtectX For ED",
         description: "Discord anti-crash bot",
         image: "https://placehold.co/400x300/333/FFF?text=ProtectX",
         tech: ["React", "Express", "Discord.js", "Node.js"],
         category: "professional",
-        liveLink: "#"
+        liveLink: "#",
+        sourceLink: "#"
     },
     {
         id: 3,
@@ -99,7 +109,8 @@ export const projects: Project[] = [
         image: "https://placehold.co/400x300/333/FFF?text=Bot", // Empty for small project
         tech: ["Discord.js", "TS", "JS"],
         category: "small",
-        liveLink: "#"
+        liveLink: "#",
+        sourceLink: "https://www.google.com"
     }
 ];
 

@@ -4,7 +4,8 @@ export interface Project {
   description: string;
   image: string;
   tech: string[]; // e.g., "HTML SCSS Python"
-  liveLink?: string;
+  liveLink: string;
+  sourceLink: string;
   cached?: boolean; // For "complete-apps" vs "small-projects"
   category: 'professional' | 'small'; 
 }
@@ -20,6 +21,8 @@ export interface Experience {
   company: string;
   location: string;
   period: string;
+  startDate: string;
+  endDate: string;
   description: string | string[]; // Can be a paragraph or bullet points
 }
 

@@ -6,17 +6,27 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        // Define the new, clean color palette
-        'bg': '#E8F7FA', // The light, airy background
-        'glass-overlay': '#FFFFFF', // The base color for the translucent panels
-        'accent': '#3CB4C4', // The new, calm accent color
+        // --- MIDNIGHT ICE PALETTE ---
+        'bg': '#020617',         // Very dark slate (almost black)
+        'glass-overlay': '#1e293b', // Lighter slate for cards/navbar
+        'accent': '#22d3ee',     // Bright Neon Cyan (The "Ice")
+        
+        // Custom text colors for the dark theme
+        'text-main': '#f8fafc',  // Bright white-blue
+        'text-muted': '#94a3b8', // Muted blue-grey
       },
       fontFamily: {
-        // Implement the modern sans-serif font stack
-        sans: ["Inter", "ui-sans-serif", "system-ui", "-apple-system", "Segoe UI", "Roboto", "Helvetica Neue", "Arial"],
+        sans: ["Inter", "sans-serif"],
       },
-      lineHeight: {
-        '12': '1.2'
+      animation: {
+        'ripple': 'ripple 15s infinite linear',
+      },
+      keyframes: {
+        ripple: {
+          '0%': { transform: 'scale(0.8)' },
+          '50%': { transform: 'scale(1.2)' },
+          '100%': { transform: 'scale(0.8)' },
+        },
       },
     },
   },
