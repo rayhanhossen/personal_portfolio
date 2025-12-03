@@ -25,27 +25,3 @@ export interface Experience {
   endDate: string;
   description: string | string[]; // Can be a paragraph or bullet points
 }
-
-export interface Education {
-  id: number;
-  degree: string;
-  institution: string;
-  period: string;
-  details: string;
-}
-
-export interface Certificate {
-  id: number;
-  title: string;
-  issuer: string;
-  date: string;
-  link: string;
-  iconClass: string; // FontAwesome class
-  colorClass: string; // Tailwind text color class
-  borderColorClass: string; // Tailwind border color class
-}
-
-export interface FunFact {
-  id: number;
-  text: string; // Can contain HTML strings if sanitized, but plain text preferred
-}
