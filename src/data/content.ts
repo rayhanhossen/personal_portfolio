@@ -1,4 +1,4 @@
-import type { SkillGroup, Experience, Project, Education, Certificate, FunFact } from "../types";
+import type { SkillGroup, Experience, Project } from "../types";
 
 // personal info 
 export const personalInfo = {
@@ -12,24 +12,29 @@ export const personalInfo = {
     facebook: "https://www.facebook.com/maverickrayhan/",
     instagram: "https://www.instagram.com/maverickrayhan/",
     about: [
-        "Hello, I'm Rayhan hossen!",
-        "I'm a self-taught front-end developer based in Dhaka, Bangladesh. I can develop responsive websites from scratch and raise them into modern user-friendly web experiences.",
-        "Transforming my creativity and knowledge into websites has been my passion for over a year.",
-        "Transforming my creativity and knowledge into websites has been my passion for over a year.",
-        "Transforming my creativity and knowledge into websites has been my passion for over a year."
+        `Experienced Software Engineer with 5 years of success building and scaling backend systems
+        across fintech, telecommunications, and e-commerce sectors.
+        Proficient in Django, FastAPI, Celery, Redis, PostgreSQL, MSSQL, Docker, and AWS S3.
+        Demonstrated ability to architect RESTful APIs and deliver performant, production-ready solutions`,
+        
+        `Currently focused on AI-powered systems, leveraging LLMs, Retrieval-Augmented Generation (RAG),
+         and Model Content Processors (MCP) to develop data-driven backend platforms.`
     ],
-    cvLink: "/files/my-cv.pdf",
+    cvLink: "https://drive.google.com/file/d/1WoS8uMgPH64ywzrcrXLm4kCwA-VqTaaG/view?usp=sharing",
 };
 
 
 // skills 
 export const skills: SkillGroup[] = [
-    { category: "Languages", items: ["TypeScript", "Lua", "Python", "JavaScript", "C++"] },
-    { category: "Databases", items: ["SQLite", "PostgreSQL", "Mongo", "Redis"] },
-    { category: "Frameworks", items: ["React", "Vue", "Discord.js", "Flask", "Express.js", "Laravel"] },
-    { category: "Tools", items: ["VSCode", "Neovim", "Linux", "Figma", "Git"] },
-    { category: "Other", items: ["HTML", "CSS", "SCSS", "REST"] },
-    { category: "Testing", items: ["Jest", "Cypress"] }
+    { category: "Programming", items: ["Python,", "TypeScript", "JavaScript"] },
+    { category: "Frameworks", items: ["Django", "FastAPI", "NestJS"] },
+    { category: "Front-End", items: ["React", "HTML5", "CSS3"] },
+    { category: "Databases", items: ["PostgreSQL", "MSSQL"] },
+    { category: "Caching & Messaging", items: ["Redis", "Celery"] },
+    { category: "Cloud & DevOps", items: ["AWS Lambda", "AWS S3", "AWS EC2", "Docker", "CI/CD pipelines", "Git"] },
+    { category: "AI & Data Processing", items: ["LLM", "RAG", "MCP"]},
+    { category: "Automation & Testing", items: ["Selenium", "Pandas", "OpenCV", "PaddleOCR", "AutoIT"]},
+    { category: "Development Methodologies", items: ["Sprint Planning", "Code Reviews"]}
 ];
 
 
@@ -37,44 +42,88 @@ export const skills: SkillGroup[] = [
 export const experiences: Experience[] = [
     {
         id: 1,
-        role: "Senior Frontend Developer",
-        company: "TechCorp Inc.",
-        location: "New York, NY",
-        period: "Jan 2023 - Present",
-        startDate: "2023-01",
+        role: "BI System Engineer",
+        company: "BRAC IT Services Limited",
+        location: "Dhaka, Bangladesh",
+        period: "Jun 2025 - Present",
+        startDate: "2025-06",
         endDate: "Present",
         description: [
-            "Leading a team of 5 developers in migrating legacy monolith to micro-frontend architecture.",
-            "Implemented CI/CD pipelines reducing deployment time by 60%. Leading a team of 5 developers in migrating legacy monolith to micro-frontend architecture.Leading a team of 5 developers in migrating legacy monolith to micro-frontend architecture.",
-            "Mentoring junior developers and conducting code reviews.",
-            "Leading a team of 5 developers in migrating legacy monolith to micro-frontend architecture."
+            "Build interactive dashboards using Python and Django, enabling data-driven decisions and analytics across internal teams.",
+            "Apply LLMs, RAG, and Model Content Processors (MCP) to build intelligent backend systems for processing unstructured data."
         ]
     },
     {
         id: 2,
-        role: "Web Developer",
-        company: "Creative Studio",
-        location: "London, UK",
-        period: "Jan 2021 - Dec 2023",
-        startDate: "2021-01",
-        endDate: "2023-12",
+        role: "Software Engineer",
+        company: "BRAC IT Services Limited",
+        location: "Dhaka, Bangladesh",
+        period: "Feb 2024 - May 2025",
+        startDate: "2024-03",
+        endDate: "2025-05",
         description: [
-            "Developed and maintained 20+ responsive websites for diverse clients.",
-            "Collaborated with designers to implement pixel-perfect UIs from Figma.",
-            "Optimized website performance achieving 90+ Lighthouse scores."
+            "Developed an eKYC identity verification system using FastAPI, PaddleOCR, and Amazon Rekognition, reducing manual data entry by 60%.",
+            "Enhanced the OCR pipeline with Google Translate API to support Bangla-to-English text conversion.",
+            "Designed and deployed a containerized Python-Flask backend for scalable employee data processing, integrated with Apache Spark and Iceberg, and automated setup via Docker multi-stage builds.",
+            "Built RPA workflows automating CIB data extraction, reducing manual processing time by 70% using Selenium, Pandas, OpenCV, AutoIT, and PaddleOCR.",
+            "Contributed to backend infrastructure by configuring Red Hat Linux servers, enabling server-to-server communication, and deploying secure, scalable APIs with Nginx."
         ]
     },
     {
         id: 3,
-        role: "Junior Developer",
-        company: "StartUp Galaxy",
+        role: "Team Lead - Site Furnishing & Critical Deployment",
+        company: "Daniyal Technologies",
         location: "Remote",
-        period: "Jan 2020 - Dec 2021",
-        startDate: "2020-01",
-        endDate: "2021-12",
+        period: "Sep 2023 - Dec 2023",
+        startDate: "2023-09",
+        endDate: "2023-12",
         description: [
-            "Assisted in building the MVP of a fintech application using React.",
-            "Fixed bugs and implemented new features based on user feedback."
+            "Led cross-functional frontend and backend teams to deliver mission-critical e-commerce projects on time, maintaining high code quality and system performance.",
+            "Directed the design, development, and deployment of new features, contributing to a continuous cycle of product improvement and customer value delivery.",
+            "Facilitated daily stand-ups and sprint planning sessions, monitored team progress, and resolved technical and operational blockers.",
+            "Mentored junior developers on best practices and collaborated with stakeholders to align technical execution with evolving business requirements."
+        ]
+    },
+    {
+        id: 4,
+        role: "Software Engineer - II",
+        company: "Daniyal Technologies",
+        location: "Remote",
+        period: "Jul 2022 - Aug 2023",
+        startDate: "2022-07",
+        endDate: "2023-08",
+        description: [
+            "Developed scalable RESTful APIs for a multi-store e-commerce platform using NestJS and TypeScript, ensuring modular architecture and high performance.",
+            "Integrated NMI payment gateway to enable secure transactions, incorporating robust error handling and transaction lifecycle management.",
+            "Implemented delivery logistics with FedEx and UPS APIs to automate shipping rate calculation, real-time tracking, and label generation.",
+            "Collaborated with frontend and QA teams to support API integration and testing, following Git workflows, code reviews, and documentation standards."
+        ]
+    },
+    {
+        id: 5,
+        role: "Software Engineer",
+        company: "Divergent Technologies Ltd",
+        location: "Dhaka, Bangladesh",
+        period: "Dec 2020 - Jun 2022",
+        startDate: "2020-12",
+        endDate: "2022-06",
+        description: [
+            "Built and maintained an LDAP-based access management system using Python, Django, Celery, Redis, and PostgreSQL, automating provisioning for telecom enterprise users.",
+            "Developed backend micro-services using NestJS and TypeScript for fintech features like merchant onboarding, leveraging DynamoDB and Docker for scalability.",
+            "Automated enterprise workflows with Selenium, AutoIT, and Pandas, including SMS notifications, SAP vendor payments, and remote file processing.",
+            "Collaborated within Agile teams, performed code reviews, and ensured secure, maintainable backend delivery aligned with industry best practices."
+        ]
+    },
+    {
+        id: 6,
+        role: "Web Developer",
+        company: "Weabers",
+        location: "Dhaka, Bangladesh",
+        period: "Sep 2020 - Dec 2020",
+        startDate: "2020-09",
+        endDate: "2020-12",
+        description: [
+            "Developed responsive frontend components using HTML5, CSS3, and JavaScript to enhance UX for SME clients."
         ]
     }
 ];
@@ -84,70 +133,67 @@ export const experiences: Experience[] = [
 export const projects: Project[] = [
     {
         id: 1,
-        title: "ChertNodes",
-        description: "Minecraft servers hosting",
-        image: "https://placehold.co/400x300/222/FFF?text=ChertNodes",
-        tech: ["HTML", "SCSS", "Python", "Flask"],
+        title: "Smart Document Assistant (LLM + RAG + FAISS)",
+        description: `Built a PDF question-answering assistant using FastAPI, SentenceTransformers,
+        TinyLLaMA, and FAISS for vector-based semantic search. Processed unstructured documents with a
+        custom Model Content Processor (MCP), enabling intelligent content understanding and contextual query handling.`,
+        image: "https://placehold.co/400x300/222/FFF?text=Smart Document Assistant",
+        tech: ["LLM", "RAG", "Python", "FAISS"],
         category: "professional",
-        liveLink: "https://www.google.com",
-        sourceLink: "https://www.stripe.com"
+        liveLink: "#",
+        sourceLink: "#"
     },
     {
         id: 2,
-        title: "ProtectX For ED",
-        description: "Discord anti-crash bot",
-        image: "https://placehold.co/400x300/333/FFF?text=ProtectX",
-        tech: ["React", "Express", "Discord.js", "Node.js"],
+        title: "Brac Bank eKYC System",
+        description: `Developed an automated identity verification platform using FastAPI, PaddleOCR,
+        and Amazon Rekognition, reducing manual workload by 60%. Enabled Bangla-to-English OCR translation
+        via Google Translate API and designed scalable RESTful endpoints for cross-system integration. Managed
+        background processes using Celery and Docker, ensuring efficient and containerized asynchronous task execution.
+        `,
+        image: "https://placehold.co/400x300/333/FFF?text=Brac Bank eKYC System",
+        tech: ["FastAPI", "PaddleOCR", "Celery", "Docker"],
         category: "professional",
         liveLink: "#",
         sourceLink: "#"
     },
     {
         id: 3,
+        title: "Robi Axiata UAM (User Access Management)",
+        description: `Engineered an LDAP-based enterprise user management system for Robi Axiata using Django,
+        PostgreSQL, Redis, and Celery. Automated provisioning and de-provisioning across telecom services,
+        reducing onboarding time and administrative overhead. Ensured secure deployment using Docker and implemented 
+        role-based access workflows aligned with internal compliance standards.`,
+        image: "https://placehold.co/400x300/333/FFF?text=UAM", // Empty for small project
+        tech: ["DRF", "VueJS", "Docker", "Celery", "Redis"],
+        category: "professional",
+        liveLink: "#",
+        sourceLink: ""
+    },
+    {
+        id: 4,
+        title: "Bkash Merchant Portal",
+        description: `Contributed to a scalable fintech platform using NestJS, API Gateway, and DynamoDB,
+        enabling efficient merchant onboarding and transaction handling. Improved system observability and 
+        fault tolerance with centralized logging and event-driven error-handling patterns.`,
+        image: "https://placehold.co/400x300/333/FFF?text=Bkash Marchent Portal",
+        tech: ["TypeScript", "NestJs", "DynamoDB"],
+        category: "professional",
+        liveLink: "#",
+        sourceLink: "#"
+    },
+    {
+        id: 5,
         title: "Bot boilerplate",
         description: "Start creating scalable discord.js bot with typescript in seconds",
         image: "https://placehold.co/400x300/333/FFF?text=Bot", // Empty for small project
         tech: ["Discord.js", "TS", "JS"],
         category: "small",
         liveLink: "#",
-        sourceLink: "https://www.google.com"
+        sourceLink: "#"
     }
 ];
 
-
-// education
-export const education: Education[] = [
-    {
-        id: 1,
-        degree: "BSc Computer Science",
-        institution: "University of Technology",
-        period: "2016 - 2020",
-        details: "Focus on Algorithms, Data Structures. Thesis: Optimizing Neural Networks."
-    }
-];
-
-
-// certificates
-export const certificates: Certificate[] = [
-    {
-        id: 1,
-        title: "AWS Certified Cloud Practitioner",
-        issuer: "Amazon Web Services",
-        date: "Jan 2023",
-        link: "#",
-        iconClass: "fab fa-aws",
-        colorClass: "text-white",
-        borderColorClass: "hover:border-primary"
-    }
-];
-
-
-// fun facts 
-export const funFacts: FunFact[] = [
-    { id: 1, text: "I like winter more than summer" },
-    { id: 2, text: "I often bike with my friends" },
-    { id: 3, text: "I love to explore the nature" },
-];
 
 
 // quotes

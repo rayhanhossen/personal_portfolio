@@ -91,7 +91,7 @@ const ExperiencePreview: React.FC<ExperiencePreviewProps> = ({ featuredExperienc
 
                 {/* Total Exp Badge */}
                 <div className="glass-card border border-accent/20 bg-accent/5 px-3 py-1.5 md:px-4 md:py-2 rounded-lg flex items-center gap-2 md:gap-3 shadow-[0_0_10px_rgba(34,211,238,0.05)]">
-                    <div className="flex flex-col items-end leading-none">
+                    <div className="flex flex-col items-start leading-none">
                         <span className="text-[8px] md:text-[10px] uppercase tracking-widest text-text-muted font-bold mb-0.5 md:mb-1">
                             Total Exp
                         </span>
