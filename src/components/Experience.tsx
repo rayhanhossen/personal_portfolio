@@ -1,54 +1,38 @@
 import React, { useState, useRef, useEffect, useMemo } from 'react';
 
-// --- Type Definitions ---
 export interface Experience {
     id: number;
     role: string;
     company: string;
     location: string;
     period: string;
-    startDate: string; // Format: "YYYY-MM" (e.g., "2022-03")
-    endDate: string;   // Format: "YYYY-MM" or "Present"
+    startDate: string;
+    endDate: string;
     description: string[] | string;
+    skills?: string[];
 }
 
 interface ExperiencePreviewProps {
     featuredExperience: Experience[];
 }
 
-// --- Helper: Total Experience (Excluding current partial month) ---
+// --- Helper: Calculate Total Experience ---
 const calculateTotalExperience = (experiences: Experience[]) => {
     let totalMonths = 0;
-
     experiences.forEach(exp => {
-        // 1. Parse Start Date
         const start = new Date(`${exp.startDate}-01`);
-
-        // 2. Parse End Date
         let end;
         if (exp.endDate === 'Present') {
             const now = new Date();
-            // 🚨 FIX: Go back 1 month from today to get "previous month last date" logic
-            // effectively ignoring the current running month
             end = new Date(now.getFullYear(), now.getMonth() - 1, 1);
         } else {
             end = new Date(`${exp.endDate}-01`);
         }
-
-        // 3. Calculate difference
-        // Formula: (Year Diff * 12) + Month Diff
-        // We add +1 because experience is inclusive (Jan to Jan is 1 month of work)
         const months = (end.getFullYear() - start.getFullYear()) * 12 + (end.getMonth() - start.getMonth()) + 1;
-
-        // Only add if the result is positive (prevents issues if start date is in the future)
-        if (months > 0) {
-            totalMonths += months;
-        }
+        if (months > 0) totalMonths += months;
     });
-
     const years = Math.floor(totalMonths / 12);
     const remainingMonths = totalMonths % 12;
-
     return { years, months: remainingMonths };
 };
 
@@ -58,6 +42,20 @@ const ExperiencePreview: React.FC<ExperiencePreviewProps> = ({ featuredExperienc
     const contentRefs = useRef<Record<number, HTMLDivElement | null>>({});
 
     const totalExp = useMemo(() => calculateTotalExperience(featuredExperience), [featuredExperience]);
+
+    // --- Grouping Logic ---
+    const groupedExperience = useMemo(() => {
+        const groups: { company: string; location: string; roles: Experience[] }[] = [];
+        featuredExperience.forEach((exp) => {
+            const lastGroup = groups[groups.length - 1];
+            if (lastGroup && lastGroup.company === exp.company) {
+                lastGroup.roles.push(exp);
+            } else {
+                groups.push({ company: exp.company, location: exp.location, roles: [exp] });
+            }
+        });
+        return groups;
+    }, [featuredExperience]);
 
     const toggleExpansion = (id: number) => {
         setExpandedIds(prev => ({ ...prev, [id]: !prev[id] }));
@@ -77,120 +75,169 @@ const ExperiencePreview: React.FC<ExperiencePreviewProps> = ({ featuredExperienc
     }, [featuredExperience, contentHeights]);
 
     return (
-        <div id="experience-preview" className="font-sans">
+        <div id="experience-preview" className="font-sans relative animate-fadeIn">
 
             {/* --- HEADER --- */}
-            <div className="flex flex-row justify-between items-center mb-[24px] gap-4">
+            <div className="flex flex-row justify-between items-end mb-16 relative z-10">
+                <div className="relative">
+                    {/* Watermark */}
+                    <div className="absolute -top-10 -left-10 text-[100px] text-accent/5 opacity-20 pointer-events-none select-none z-0">
+                        <i className="fas fa-history"></i>
+                    </div>
 
-                <h2 className="text-xl md:text-2xl font-semibold text-text-main flex items-baseline">
-                    <span className="text-accent mr-2 drop-shadow-[0_0_5px_rgba(34,211,238,0.5)]">
-                        <i className="fas fa-briefcase"></i>
-                    </span>
-                    <span className="tracking-tight">Work Experience</span>
-                </h2>
-
-                {/* Total Exp Badge */}
-                <div className="glass-card border border-accent/20 bg-accent/5 px-3 py-1.5 md:px-4 md:py-2 rounded-lg flex items-center gap-2 md:gap-3 shadow-[0_0_10px_rgba(34,211,238,0.05)]">
-                    <div className="flex flex-col items-start leading-none">
-                        <span className="text-[8px] md:text-[10px] uppercase tracking-widest text-text-muted font-bold mb-0.5 md:mb-1">
-                            Total Exp
-                        </span>
+                    <h2 className="text-3xl md:text-4xl font-bold flex items-center gap-2 relative z-10">
+                        <span className="text-accent font-mono drop-shadow-[0_0_5px_rgba(34,211,238,0.5)]">/</span>
+                        <span className="text-transparent bg-clip-text bg-text-gradient">experience</span>
+                    </h2>
+                    <p className="text-text-muted text-lg font-light tracking-wide relative z-10 mt-2">
+                        My professional journey.
+                    </p>
+                </div>
+                
+                {/* Total Experience Badge */}
+                <div className="hidden sm:flex glass-card border border-accent/20 bg-accent/5 px-4 py-2 rounded-xl items-center gap-3 shadow-[0_0_15px_rgba(34,211,238,0.05)] backdrop-blur-md">
+                    <div className="flex flex-col items-end leading-none">
+                        <span className="text-[10px] uppercase tracking-widest text-accent font-bold mb-1 opacity-80">Total Years</span>
                         <div className="flex items-baseline gap-1">
-                            <span className="text-lg md:text-xl font-bold text-accent drop-shadow-[0_0_5px_rgba(34,211,238,0.4)]">
-                                {totalExp.years}
-                            </span>
-                            <span className="text-[10px] md:text-xs text-slate-400 mr-1 md:mr-2">Yrs</span>
-
+                            <span className="text-2xl font-bold text-white drop-shadow-[0_0_5px_rgba(34,211,238,0.4)]">{totalExp.years}</span>
+                            <span className="text-xs text-slate-400 mr-2">Yrs</span>
                             {totalExp.months > 0 && (
                                 <>
-                                    <span className="text-lg md:text-xl font-bold text-accent drop-shadow-[0_0_5px_rgba(34,211,238,0.4)]">
-                                        {totalExp.months}
-                                    </span>
-                                    <span className="text-[10px] md:text-xs text-slate-400">Mth</span>
+                                    <span className="text-2xl font-bold text-white drop-shadow-[0_0_5px_rgba(34,211,238,0.4)]">{totalExp.months}</span>
+                                    <span className="text-xs text-slate-400">Mos</span>
                                 </>
                             )}
                         </div>
                     </div>
-                    {/* Icon: Smaller on mobile */}
-                    <i className="fas fa-history text-xl md:text-2xl text-accent/20 ml-1"></i>
                 </div>
             </div>
 
-            {/* --- TIMELINE --- */}
-            <div className="relative border-l border-white/10 space-y-4 pb-2">
-                {featuredExperience.map((exp, index) => {
-                    const isFirst = index === 0;
-                    const isExpanded = !!expandedIds[exp.id];
-                    const fullHeight = contentHeights[exp.id] || 1000;
+            {/* --- LIST CONTAINER (No Outer Line) --- */}
+            <div className="flex flex-col gap-8"> 
+                
+                {groupedExperience.map((group, groupIndex) => (
+                    <div key={groupIndex} className="group/company">
+                        
+                        {/* 🚨 REMOVED: Outer Timeline Dot & Line */}
 
-                    const descriptionPoints = Array.isArray(exp.description) ? exp.description : [exp.description];
-                    const hasMoreContent = descriptionPoints.length > 2;
-                    const initialContent = hasMoreContent ? descriptionPoints.slice(0, 2) : descriptionPoints;
-                    const restOfContent = hasMoreContent ? descriptionPoints.slice(2) : [];
+                        {/* COMPANY CARD */}
+                        <div className="glass-card border border-white/5 bg-glass-overlay/50 p-6 md:p-8 rounded-2xl hover:border-accent/30 transition-all duration-300 shadow-lg">
+                            
+                            {/* Company Header */}
+                            <div className="flex flex-col sm:flex-row sm:items-center justify-between mb-8 border-b border-white/5 pb-4">
+                                <h3 className="text-2xl font-bold text-text-main flex items-center gap-3">
+                                    {group.company}
+                                </h3>
+                                <span className="text-xs text-text-muted flex items-center gap-1 mt-1 sm:mt-0 font-mono bg-white/5 px-2 py-1 rounded">
+                                    <i className="fas fa-map-marker-alt text-accent/70"></i> {group.location}
+                                </span>
+                            </div>
 
-                    let dotClasses = 'absolute -left-[9px] top-1/2 -translate-y-1/2 w-4 h-4 rounded-full transition-all duration-300 z-10 shadow-md';
+                            {/* ROLES LIST (Inner Timeline Kept for Logic) */}
+                            <div className="flex flex-col gap-10 relative">
+                                
+                                {/* Vertical line connecting roles if > 1 */}
+                                {group.roles.length > 1 && (
+                                    <div className="absolute left-[7px] top-3 bottom-6 w-[1px] bg-white/10"></div>
+                                )}
 
-                    if (isFirst) {
-                        // Highlight: Accent color + 'animate-pulse' for the breathing effect
-                        dotClasses += ' bg-accent border-2 border-bg shadow-[0_0_10px_rgba(34,211,238,0.6)] animate-pulse';
-                    } else {
-                        // Past: Dark slate dot
-                        dotClasses += ' bg-slate-700 border border-slate-800 group-hover:bg-accent/80 group-hover:shadow-[0_0_8px_rgba(34,211,238,0.4)]';
-                    }
+                                {group.roles.map((exp) => {
+                                    const isPresent = exp.endDate === 'Present';
+                                    const isExpanded = !!expandedIds[exp.id];
+                                    const fullHeight = contentHeights[exp.id] || 1000;
+                                    const descriptionPoints = Array.isArray(exp.description) ? exp.description : [exp.description];
+                                    const hasMoreContent = descriptionPoints.length > 2;
+                                    const initialContent = hasMoreContent ? descriptionPoints.slice(0, 2) : descriptionPoints;
+                                    const restOfContent = hasMoreContent ? descriptionPoints.slice(2) : [];
 
-                    return (
-                        <div key={exp.id} className="timeline-item pl-8 relative group">
-                            <div className={dotClasses}></div>
-                            <div className="p-6 transition-all duration-300 glass-card border border-white/5 hover:border-accent/30">
-                                <div className="flex flex-col md:flex-row justify-between mb-2">
-                                    <h3 className="text-text-main font-semibold text-xl transition-colors">{exp.role}</h3>
-                                    <span className="text-text-muted text-sm mt-1 md:mt-0 font-medium">{exp.period}</span>
-                                </div>
+                                    return (
+                                        <div key={exp.id} className="relative pl-8">
+                                            
+                                            {/* Role Dot */}
+                                            <div className={`absolute left-[3px] top-2.5 w-2 h-2 rounded-full border border-bg
+                                                ${isPresent ? 'bg-green-500 shadow-[0_0_8px_rgba(34,197,94,0.6)]' : 'bg-slate-500'}`}
+                                            ></div>
 
-                                <p className="text-accent font-medium text-sm mb-4">
-                                    {exp.company}
-                                    <span className="text-text-muted ml-3 text-xs opacity-70">
-                                        <i className="fas fa-map-marker-alt"></i> {exp.location}
-                                    </span>
-                                </p>
+                                            {/* Role Header */}
+                                            <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start mb-4 gap-2">
+                                                <h4 className="text-xl font-semibold text-white group-hover/company:text-accent transition-colors">
+                                                    {exp.role}
+                                                </h4>
+                                                
+                                                {/* Date & Blink Indicator */}
+                                                <div className="flex items-center gap-2 text-xs font-mono text-text-muted whitespace-nowrap bg-black/20 px-2 py-1 rounded border border-white/5">
+                                                    {isPresent && (
+                                                        <span className="relative flex h-2 w-2">
+                                                            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+                                                            <span className="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
+                                                        </span>
+                                                    )}
+                                                    <span className={isPresent ? "text-green-400 font-bold" : ""}>{exp.period}</span>
+                                                </div>
+                                            </div>
 
-                                <div className="text-slate-300 text-sm">
-                                    <ul className="list-disc list-inside text-slate-300 space-y-2 leading-relaxed mb-1 pl-4 marker:text-accent">
-                                        {initialContent.map((point, idx) => <li key={idx}>{point}</li>)}
-                                    </ul>
-
-                                    {hasMoreContent && (
-                                        <>
-                                            <div
-                                                ref={el => { contentRefs.current[exp.id] = el }}
-                                                className="content-inner-wrapper pt-2"
-                                                style={{
-                                                    maxHeight: isExpanded ? `${fullHeight}px` : '0px',
-                                                    transition: `max-height 500ms ease-in-out, opacity 500ms ease-in-out`,
-                                                    overflow: 'hidden',
-                                                    opacity: isExpanded ? 1 : 0.01,
-                                                }}
-                                            >
-                                                <ul className="list-disc list-inside text-slate-300 space-y-2 leading-relaxed mb-1 pl-4 marker:text-accent">
-                                                    {restOfContent.map((point, idx) => <li key={idx}>{point}</li>)}
+                                            {/* Description */}
+                                            <div className="text-slate-300 text-sm leading-relaxed font-light">
+                                                <ul className="space-y-3">
+                                                    {initialContent.map((point, idx) => (
+                                                        <li key={idx} className="flex gap-3">
+                                                            <span className="mt-1.5 w-1 h-1 rounded-full bg-accent/50 flex-shrink-0"></span>
+                                                            <span>{point}</span>
+                                                        </li>
+                                                    ))}
                                                 </ul>
+
+                                                {/* Expandable Content */}
+                                                {hasMoreContent && (
+                                                    <div
+                                                        ref={el => { contentRefs.current[exp.id] = el }}
+                                                        style={{
+                                                            maxHeight: isExpanded ? `${fullHeight}px` : '0px',
+                                                            transition: `max-height 500ms ease-in-out, opacity 500ms ease-in-out`,
+                                                            overflow: 'hidden',
+                                                            opacity: isExpanded ? 1 : 0.01,
+                                                        }}
+                                                    >
+                                                        <ul className="space-y-3 mt-3">
+                                                            {restOfContent.map((point, idx) => (
+                                                                <li key={idx} className="flex gap-3">
+                                                                    <span className="mt-1.5 w-1 h-1 rounded-full bg-accent/50 flex-shrink-0"></span>
+                                                                    <span>{point}</span>
+                                                                </li>
+                                                            ))}
+                                                        </ul>
+                                                    </div>
+                                                )}
+                                                
+                                                {/* Toggle Button */}
+                                                {hasMoreContent && (
+                                                    <button
+                                                        onClick={() => toggleExpansion(exp.id)}
+                                                        className="mt-4 text-[10px] font-bold uppercase tracking-widest text-accent/70 hover:text-accent flex items-center gap-2 transition-colors border-b border-transparent hover:border-accent/50 pb-0.5 w-max"
+                                                    >
+                                                        {isExpanded ? 'Collapse' : 'Read Full Details'}
+                                                        <i className={`fas ${isExpanded ? 'fa-chevron-up' : 'fa-chevron-down'}`}></i>
+                                                    </button>
+                                                )}
                                             </div>
-                                            <div className="flex justify-end pt-4">
-                                                <button
-                                                    onClick={() => toggleExpansion(exp.id)}
-                                                    className="flex items-center gap-1 font-medium text-sm text-accent hover:text-white transition-colors"
-                                                >
-                                                    <span>{isExpanded ? `Show Less` : `Show More`}</span>
-                                                    <i className={`fas ${isExpanded ? 'fa-chevron-up' : 'fa-chevron-down'} text-xs`}></i>
-                                                </button>
-                                            </div>
-                                        </>
-                                    )}
-                                </div>
+
+                                            {/* Skills Tags */}
+                                            {exp.skills && exp.skills.length > 0 && (
+                                                <div className="flex flex-wrap gap-2 mt-5 pt-4 border-t border-white/5">
+                                                    {exp.skills.map((skill, i) => (
+                                                        <span key={i} className="px-2 py-0.5 text-[10px] font-mono rounded bg-accent/5 text-accent/80 border border-accent/10">
+                                                            {skill}
+                                                        </span>
+                                                    ))}
+                                                </div>
+                                            )}
+                                        </div>
+                                    );
+                                })}
                             </div>
                         </div>
-                    );
-                })}
+                    </div>
+                ))}
             </div>
         </div>
     );
