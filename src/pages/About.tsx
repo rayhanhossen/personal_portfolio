@@ -6,7 +6,7 @@ const About = () => {
         <div className="font-sans animate-fadeIn">
             
             {/* --- HEADER (Updated with Watermark) --- */}
-            <div className="mb-12 relative z-10">
+            <div className="pt-32 mb-12 relative z-10">
                 {/* Watermark Icon */}
                 <div className="absolute -top-10 -left-10 text-[100px] text-accent/5 opacity-20 pointer-events-none select-none z-0">
                     <i className="fas fa-user-astronaut"></i>
@@ -15,7 +15,7 @@ const About = () => {
                 <h2 className="text-3xl md:text-4xl font-bold mb-3 flex items-center gap-2 relative z-10">
                     <span className="text-accent font-mono drop-shadow-[0_0_5px_rgba(34,211,238,0.5)]">/</span>
                     <span className="text-transparent bg-clip-text bg-text-gradient">
-                        about-me
+                        about_me
                     </span>
                 </h2>
                 <p className="text-text-muted text-lg font-light tracking-wide relative z-10">
@@ -66,10 +66,6 @@ const About = () => {
                             
                             {/* "Tech Overlay" at the bottom */}
                             <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/90 to-transparent p-6 pt-12">
-                                <div className="flex items-center gap-2 mb-1">
-                                    <span className="h-2 w-2 rounded-full bg-green-500 shadow-[0_0_5px_#22c55e]"></span>
-                                    <span className="text-xs font-mono text-green-400 tracking-widest">ONLINE</span>
-                                </div>
                                 <div className="text-white font-bold text-lg">{personalInfo.name}</div>
                                 <div className="text-accent text-xs font-mono">{personalInfo.title}</div>
                             </div>
@@ -79,11 +75,11 @@ const About = () => {
             </div>
 
             {/* --- SKILLS SECTION --- */}
-            <section className="mb-4 relative">
+            <section className="mb-12 relative">
                 <div className="flex items-center gap-3 mb-8">
                     <i className="fas fa-microchip text-accent text-xl"></i>
                     <h3 className="text-2xl font-semibold text-text-main tracking-tight">
-                        Technical Stack
+                        Technical Skills
                     </h3>
                 </div>
 
@@ -137,7 +133,7 @@ const About = () => {
                                     ${lgClasses[lgSlots]}`}
                             >
                                 <span className="text-text-muted/40 font-mono font-bold tracking-widest text-[10px] uppercase mb-2 animate-pulse">
-                                    AWAITING_DATA...
+                                    LOADING_SKILLS...
                                 </span>
                                 <div className="flex gap-1">
                                     <div className="w-1 h-1 bg-accent/20 rounded-full"></div>

@@ -2,15 +2,15 @@ import { useState } from 'react';
 import { projects } from '../data/content';
 
 export interface Project {
-  id: number;
-  title: string;
-  description: string;
-  image: string;
-  tech: string[];
-  liveLink: string;
-  sourceLink?: string; 
-  cached?: boolean;
-  category: 'professional' | 'small'; 
+    id: number;
+    title: string;
+    description: string;
+    image: string;
+    tech: string[];
+    liveLink: string;
+    sourceLink?: string;
+    cached?: boolean;
+    category: 'professional' | 'small';
 }
 
 const Projects = () => {
@@ -40,9 +40,9 @@ const Projects = () => {
         const isExpanded = !!expandedIds[project.id];
         const maxLength = 120;
         const shouldTruncate = project.description.length > maxLength;
-        
+
         const displayDescription = isExpanded || !shouldTruncate
-            ? project.description 
+            ? project.description
             : `${project.description.slice(0, maxLength)}...`;
 
         return (
@@ -67,11 +67,11 @@ const Projects = () => {
 
                 {/* 🚨 CONTENT BODY: Left Aligned (Standard) */}
                 <div className="p-5 flex flex-col flex-grow relative">
-                    
+
                     <h3 className="text-xl text-text-main font-bold mb-2 group-hover:text-accent transition-colors duration-300">
                         {project.title}
                     </h3>
-                    
+
                     <div className="mb-6 flex-grow">
                         <p className="text-slate-300 text-sm leading-relaxed font-light transition-all duration-300">
                             {displayDescription}
@@ -121,9 +121,9 @@ const Projects = () => {
 
     return (
         <div id="projects-view" className="view-section animate-fadeIn font-sans">
-            
+
             {/* --- HEADER --- */}
-            <div className="mb-12 relative z-10">
+            <div className="pt-32 mb-12 relative z-10">
                 <div className="absolute -top-10 -left-10 text-[100px] text-accent/5 opacity-20 pointer-events-none select-none z-0">
                     <i className="fas fa-laptop-code"></i>
                 </div>
@@ -138,7 +138,7 @@ const Projects = () => {
             </div>
 
             {/* 1. Professional Apps */}
-            <section className="mb-16 relative">
+            <section className="mb-12 relative">
                 <h3 className="text-xl md:text-2xl font-semibold text-text-main mb-8 flex items-center tracking-tight">
                     <i className="fas fa-rocket text-accent mr-3 drop-shadow-[0_0_5px_rgba(34,211,238,0.5)]"></i>
                     Professional Applications
@@ -149,10 +149,10 @@ const Projects = () => {
             </section>
 
             {/* 2. Coding Challenges */}
-            <section className="mb-8 relative">
+            <section className="mb-12 relative">
                 <h3 className="text-xl md:text-2xl font-semibold text-text-main mb-8 flex items-center tracking-tight">
                     <i className="fas fa-terminal text-accent mr-3 drop-shadow-[0_0_5px_rgba(34,211,238,0.5)]"></i>
-                    Coding Challenges & Snippets
+                    Tools & Snippets
                 </h3>
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                     {smallProjects.map(renderProjectCard)}

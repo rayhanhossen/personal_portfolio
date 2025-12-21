@@ -54,7 +54,7 @@ const QuoteDisplay = () => {
     const time = new Date().toLocaleTimeString('en-US', { hour12: false, hour: "2-digit", minute: "2-digit", second: "2-digit" });
 
     return (
-        <div className="w-full font-sans text-base relative group cursor-default my-8">
+        <div className="w-full font-sans text-base relative group cursor-default">
 
             {/* 🫧 GLASS CARD CONTAINER */}
             <div className="bg-glass-overlay backdrop-blur-md rounded-xl shadow-xl overflow-hidden border border-white/10 transition-all duration-300 hover:border-accent/30 hover:shadow-[0_0_20px_rgba(34,211,238,0.15)]"> 

@@ -11,25 +11,25 @@ const Home = () => {
 
             {/* --- HERO SECTION --- */}
             <section id="home" className="min-h-[80vh] flex flex-col justify-center pt-32 pb-12 relative">
-                
-                <div className="w-full max-w-5xl mx-auto px-4 md:px-6">
-                    
+
+                <div className="w-full max-w-5xl mx-auto">
+
                     {/* AVATAR + INTRO ROW */}
                     <div className="flex items-center gap-4 mb-6">
                         {/* Glowing Avatar */}
                         <div className="relative w-16 h-16 md:w-20 md:h-20 rounded-full p-[2px] bg-gradient-to-tr from-accent to-transparent">
-                            <img 
-                                src={profileImg} 
-                                alt="Rayhan" 
+                            <img
+                                src={profileImg}
+                                alt="Rayhan"
                                 className="w-full h-full rounded-full object-cover border-2 border-bg"
                             />
                         </div>
-                        
+
                         <div>
                             <h2 className="text-xl md:text-2xl font-medium text-text-muted mb-1">
                                 Hi, I'm <span className="text-text-main font-semibold">{personalInfo.name}</span>
                             </h2>
-                            
+
                             {/* 🚨 UPDATED: Green Pinging Status Indicator */}
                             <div className="flex items-center gap-2 mt-1">
                                 <span className="relative flex h-2 w-2">
@@ -55,8 +55,8 @@ const Home = () => {
 
                     {/* SUB-HEADLINE */}
                     <p className="text-lg md:text-xl text-slate-300 max-w-2xl mb-10 leading-relaxed font-light border-l-2 border-accent/30 pl-6">
-                        Specializing in scalable <span className="text-white font-medium">Full Stack Architecture</span> and <span className="text-white font-medium">LLM Integration</span>. 
-                        I turn complex data into clear, actionable digital experiences.
+                        Focused on writing <span className="text-white font-medium">clean, maintainable code</span> and designing <span className="text-white font-medium">resilient systems</span>.
+                        I deliver efficient software solutions that solve complex technical challenges <span className="text-white italic">at scale</span>.
                     </p>
 
                     {/* BUTTONS */}
@@ -80,15 +80,17 @@ const Home = () => {
                             rounded-lg font-medium text-base transition-all duration-300
                             bg-glass-overlay border border-white/10 text-text-muted hover:text-accent hover:border-accent"
                         >
-                            <span>View Resume</span>
+                            <span>Download Resume</span>
                             <i className="fas fa-download text-sm opacity-70 group-hover:opacity-100 transition-opacity"></i>
                         </a>
                     </div>
                 </div>
 
                 {/* TECH TICKER */}
-                <div className="mt-16 md:mt-24 pt-8 border-t border-white/5 w-full max-w-5xl mx-auto px-4 md:px-6 overflow-hidden">
-                    <p className="text-xs font-mono text-accent/50 mb-4 uppercase tracking-widest">Powering solutions with:</p>
+                <div className="mt-12 pt-8 border-t border-white/5 w-full overflow-hidden">
+                    <p className="text-sm font-mono text-slate-400 mb-5 uppercase tracking-widest font-semibold">
+                        Core Tech Stack:
+                    </p>
                     <div className="flex flex-wrap gap-x-8 gap-y-4 opacity-70 grayscale hover:grayscale-0 transition-all duration-500">
                         {heroStack.map((tech) => (
                             <span key={tech} className="text-xl md:text-2xl font-bold text-slate-500 hover:text-accent cursor-default transition-colors">
@@ -100,12 +102,12 @@ const Home = () => {
             </section>
 
             {/* --- OTHER SECTIONS --- */}
-            
-            <section className="mb-20 w-full max-w-5xl mx-auto px-4 md:px-6">
+
+            <section className="mb-12 w-full">
                 <QuoteDisplay />
             </section>
 
-            <section id="experience-preview" className="mb-20 w-full max-w-5xl mx-auto px-4 md:px-6">
+            <section id="experience-preview" className="mb-12">
                 <ExperiencePreview featuredExperience={experiences} />
             </section>
 

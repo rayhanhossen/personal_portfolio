@@ -78,7 +78,7 @@ const ExperiencePreview: React.FC<ExperiencePreviewProps> = ({ featuredExperienc
         <div id="experience-preview" className="font-sans relative animate-fadeIn">
 
             {/* --- HEADER --- */}
-            <div className="flex flex-row justify-between items-end mb-16 relative z-10">
+            <div className="flex flex-row justify-between items-end mb-12 relative z-10">
                 <div className="relative">
                     {/* Watermark */}
                     <div className="absolute -top-10 -left-10 text-[100px] text-accent/5 opacity-20 pointer-events-none select-none z-0">
@@ -87,24 +87,24 @@ const ExperiencePreview: React.FC<ExperiencePreviewProps> = ({ featuredExperienc
 
                     <h2 className="text-3xl md:text-4xl font-bold flex items-center gap-2 relative z-10">
                         <span className="text-accent font-mono drop-shadow-[0_0_5px_rgba(34,211,238,0.5)]">/</span>
-                        <span className="text-transparent bg-clip-text bg-text-gradient">experience</span>
+                        <span className="text-transparent bg-clip-text bg-text-gradient">work_experience</span>
                     </h2>
                     <p className="text-text-muted text-lg font-light tracking-wide relative z-10 mt-2">
                         My professional journey.
                     </p>
                 </div>
-                
+
                 {/* Total Experience Badge */}
                 <div className="hidden sm:flex glass-card border border-accent/20 bg-accent/5 px-4 py-2 rounded-xl items-center gap-3 shadow-[0_0_15px_rgba(34,211,238,0.05)] backdrop-blur-md">
-                    <div className="flex flex-col items-end leading-none">
-                        <span className="text-[10px] uppercase tracking-widest text-accent font-bold mb-1 opacity-80">Total Years</span>
+                    <div className="flex flex-col items-start leading-none">
+                        <span className="text-[10px] uppercase tracking-widest text-accent font-bold mb-1 opacity-80">Total_Exp</span>
                         <div className="flex items-baseline gap-1">
                             <span className="text-2xl font-bold text-white drop-shadow-[0_0_5px_rgba(34,211,238,0.4)]">{totalExp.years}</span>
                             <span className="text-xs text-slate-400 mr-2">Yrs</span>
                             {totalExp.months > 0 && (
                                 <>
                                     <span className="text-2xl font-bold text-white drop-shadow-[0_0_5px_rgba(34,211,238,0.4)]">{totalExp.months}</span>
-                                    <span className="text-xs text-slate-400">Mos</span>
+                                    <span className="text-xs text-slate-400">Mth</span>
                                 </>
                             )}
                         </div>
@@ -113,16 +113,16 @@ const ExperiencePreview: React.FC<ExperiencePreviewProps> = ({ featuredExperienc
             </div>
 
             {/* --- LIST CONTAINER (No Outer Line) --- */}
-            <div className="flex flex-col gap-8"> 
-                
+            <div className="flex flex-col gap-8">
+
                 {groupedExperience.map((group, groupIndex) => (
                     <div key={groupIndex} className="group/company">
-                        
+
                         {/* 🚨 REMOVED: Outer Timeline Dot & Line */}
 
                         {/* COMPANY CARD */}
                         <div className="glass-card border border-white/5 bg-glass-overlay/50 p-6 md:p-8 rounded-2xl hover:border-accent/30 transition-all duration-300 shadow-lg">
-                            
+
                             {/* Company Header */}
                             <div className="flex flex-col sm:flex-row sm:items-center justify-between mb-8 border-b border-white/5 pb-4">
                                 <h3 className="text-2xl font-bold text-text-main flex items-center gap-3">
@@ -135,7 +135,7 @@ const ExperiencePreview: React.FC<ExperiencePreviewProps> = ({ featuredExperienc
 
                             {/* ROLES LIST (Inner Timeline Kept for Logic) */}
                             <div className="flex flex-col gap-10 relative">
-                                
+
                                 {/* Vertical line connecting roles if > 1 */}
                                 {group.roles.length > 1 && (
                                     <div className="absolute left-[7px] top-3 bottom-6 w-[1px] bg-white/10"></div>
@@ -152,7 +152,7 @@ const ExperiencePreview: React.FC<ExperiencePreviewProps> = ({ featuredExperienc
 
                                     return (
                                         <div key={exp.id} className="relative pl-8">
-                                            
+
                                             {/* Role Dot */}
                                             <div className={`absolute left-[3px] top-2.5 w-2 h-2 rounded-full border border-bg
                                                 ${isPresent ? 'bg-green-500 shadow-[0_0_8px_rgba(34,197,94,0.6)]' : 'bg-slate-500'}`}
@@ -163,7 +163,7 @@ const ExperiencePreview: React.FC<ExperiencePreviewProps> = ({ featuredExperienc
                                                 <h4 className="text-xl font-semibold text-white group-hover/company:text-accent transition-colors">
                                                     {exp.role}
                                                 </h4>
-                                                
+
                                                 {/* Date & Blink Indicator */}
                                                 <div className="flex items-center gap-2 text-xs font-mono text-text-muted whitespace-nowrap bg-black/20 px-2 py-1 rounded border border-white/5">
                                                     {isPresent && (
@@ -208,7 +208,7 @@ const ExperiencePreview: React.FC<ExperiencePreviewProps> = ({ featuredExperienc
                                                         </ul>
                                                     </div>
                                                 )}
-                                                
+
                                                 {/* Toggle Button */}
                                                 {hasMoreContent && (
                                                     <button
