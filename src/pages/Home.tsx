@@ -6,15 +6,10 @@ import { Link } from 'react-router-dom';
 const Home = () => {
     return (
         <div id="home-view" className="view-section animate-fadeIn">
-
             {/* --- HERO SECTION --- */}
             <section id="home" className="min-h-screen flex flex-col justify-center pt-20 pb-12 relative">
-
                 <div className="w-full max-w-5xl mx-auto">
-
-                    {/* AVATAR + INTRO ROW */}
                     <div className="flex items-center gap-4 mb-6">
-                        {/* Glowing Avatar */}
                         <div className="relative w-16 h-16 md:w-20 md:h-20 rounded-full p-[2px] bg-gradient-to-tr from-accent to-transparent">
                             <img
                                 src={profileImg}
@@ -22,13 +17,10 @@ const Home = () => {
                                 className="w-full h-full rounded-full object-cover border-2 border-bg"
                             />
                         </div>
-
                         <div>
                             <h2 className="text-xl md:text-2xl font-medium text-text-muted mb-1">
-                                Hi, I'm <span className="text-text-main font-semibold">{personalInfo.name}</span>
+                                Hi, I'm <span className="text-text-main font-semibold">{personalInfo.name} Hossen</span>
                             </h2>
-
-                            {/* 🚨 UPDATED: Green Pinging Status Indicator */}
                             <div className="flex items-center gap-2 mt-1">
                                 <span className="relative flex h-2 w-2">
                                     <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
@@ -41,7 +33,6 @@ const Home = () => {
                         </div>
                     </div>
 
-                    {/* MASSIVE HEADLINE */}
                     <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold text-text-main mb-8 leading-[1.1] tracking-tight">
                         Engineering{' '}
                         <span className="text-transparent bg-clip-text bg-text-gradient inline-block pb-2">
@@ -51,33 +42,24 @@ const Home = () => {
                         that solve real problems.
                     </h1>
 
-                    {/* SUB-HEADLINE */}
                     <p className="text-lg md:text-xl text-slate-300 max-w-2xl mb-10 leading-relaxed font-light border-l-2 border-accent/30 pl-6">
                         Focused on writing <span className="text-white font-medium">clean, maintainable code</span> and designing <span className="text-white font-medium">resilient systems</span>.
                         I deliver efficient software solutions that solve complex technical challenges <span className="text-white italic">at scale</span>.
                     </p>
 
-                    {/* BUTTONS */}
                     <div className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto">
                         <Link
                             to="/contact"
-                            aria-label="Contact Rayhan via email or form"
-                            className="group relative px-8 py-4 flex items-center justify-center gap-3 
-                                    rounded-lg font-bold text-base transition-all duration-300
-                                    bg-accent text-bg shadow-neon hover:bg-white hover:text-bg hover:shadow-[0_0_30px_rgba(255,255,255,0.4)] hover:-translate-y-1"
+                            className="group relative px-8 py-4 flex items-center justify-center gap-3 rounded-lg font-bold text-base transition-all duration-300 bg-accent text-bg shadow-neon hover:bg-white hover:text-bg hover:shadow-[0_0_30px_rgba(255,255,255,0.4)] hover:-translate-y-1"
                         >
-                            {/* Changing the icon to a paper plane or envelope is a universal "Contact" signal */}
                             <span>Get In Touch</span>
                             <i className="fas fa-paper-plane text-sm transform group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform"></i>
                         </Link>
-
                         <a
                             href={personalInfo.cvLink}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="group px-8 py-4 flex items-center justify-center gap-3 
-                            rounded-lg font-medium text-base transition-all duration-300
-                            bg-glass-overlay border border-white/10 text-text-muted hover:text-accent hover:border-accent"
+                            className="group px-8 py-4 flex items-center justify-center gap-3 rounded-lg font-medium text-base transition-all duration-300 bg-glass-overlay border border-white/10 text-text-muted hover:text-accent hover:border-accent"
                         >
                             <span>Download Resume</span>
                             <i className="fas fa-download text-sm opacity-70 group-hover:opacity-100 transition-opacity"></i>
@@ -85,7 +67,6 @@ const Home = () => {
                     </div>
                 </div>
 
-                {/* TECH TICKER */}
                 <div className="mt-12 pt-12 border-t border-white/5 w-full overflow-hidden">
                     <p className="text-sm font-mono text-slate-400 mb-5 uppercase tracking-widest font-semibold">
                         Core Tech Stack:
@@ -100,11 +81,28 @@ const Home = () => {
                 </div>
             </section>
 
-            {/* --- OTHER SECTIONS --- */}
-            <section id="experience-preview" className="mb-12">
-                <ExperiencePreview featuredExperience={experiences} />
-            </section>
+            {/* --- EXPERIENCE PREVIEW SECTION --- */}
+            <section className="mb-24 px-4">
+                {/* The Experience Card */}
+                <ExperiencePreview featuredExperience={experiences} limit={1} />
 
+                {/* Minimalist Navigation Link - Positioned closer to the card */}
+                <div className="flex justify-end max-w-5xl mx-auto mt-4">
+                    <Link
+                        to="/about#experience"
+                        className="group flex items-center gap-2 px-2 py-1 
+                       text-text-muted hover:text-accent 
+                       transition-all duration-300 font-mono text-[11px] tracking-widest uppercase"
+                    >
+                        <span className="relative">
+                            View Full History
+                            {/* Minimalist underline animation */}
+                            <span className="absolute -bottom-1 left-0 w-0 h-[1px] bg-accent/50 transition-all duration-300 group-hover:w-full"></span>
+                        </span>
+                        <i className="fas fa-chevron-right text-[8px] transform group-hover:translate-x-1 transition-transform"></i>
+                    </Link>
+                </div>
+            </section>
         </div>
     );
 };
