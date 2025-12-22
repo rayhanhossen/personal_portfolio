@@ -23,7 +23,7 @@ const About = () => {
     return (
         <div className="font-sans animate-fadeIn">
             {/* --- HEADER --- */}
-            <div className="pt-32 mb-8 relative z-10">
+            <div className="pt-24 md:pt-32 mb-8 relative z-10">
                 <div className="absolute -top-10 -left-10 text-[100px] text-accent/5 opacity-20 pointer-events-none select-none z-0">
                     <i className="fas fa-user-astronaut"></i>
                 </div>
