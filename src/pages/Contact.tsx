@@ -12,6 +12,7 @@ const ContactPage: React.FC = () => {
     const [loadingRefine, setLoadingRefine] = useState(false);
     const [isRefined, setIsRefined] = useState(false);
     const [copyStatus, setCopyStatus] = useState<string | null>(null);
+    const [cooldown, setCooldown] = useState(false);
 
     // --- Action: Send Email ---
     const handleSend = (e: React.FormEvent) => {
@@ -44,8 +45,16 @@ const ContactPage: React.FC = () => {
 
     const handleRefine = useCallback(async (e: React.MouseEvent) => {
         e.preventDefault();
-        if (!message.trim() || loadingRefine) return;
+
+        // 2. Add 'cooldown' to the block condition
+        if (!message.trim() || loadingRefine || cooldown) return;
+
         setLoadingRefine(true);
+        setCooldown(true); // 3. Start cooldown immediately
+
+        // 4. Reset cooldown after 5 seconds (prevents spamming)
+        setTimeout(() => setCooldown(false), 5000);
+
         const GEMINI_API_KEY = import.meta.env.VITE_GEMINI_API_KEY;
         const prompt = `Refine this message for a developer's contact form. Fix grammar and improve clarity. Keep it professional but friendly and concise. Output ONLY the refined text: "${message}"`;
 
@@ -55,6 +64,15 @@ const ContactPage: React.FC = () => {
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ contents: [{ parts: [{ text: prompt }] }] })
             });
+
+            // 5. specific check for 429
+            if (response.status === 429) {
+                console.warn("Too many requests. Please wait a moment.");
+                // Optional: alert("Please wait a few seconds before refining again.");
+                setLoadingRefine(false);
+                return;
+            }
+
             const data = await response.json();
             const refinedText = data?.candidates?.[0]?.content?.parts?.[0]?.text;
             if (refinedText) {
@@ -62,9 +80,11 @@ const ContactPage: React.FC = () => {
                 setIsRefined(true);
                 setTimeout(() => setIsRefined(false), 2000);
             }
-        } catch (error) { console.error("AI Error:", error); }
+        } catch (error) {
+            console.error("AI Error:", error);
+        }
         setLoadingRefine(false);
-    }, [message, loadingRefine]);
+    }, [message, loadingRefine, cooldown]);
 
     return (
         <div className="font-sans animate-fadeIn">
