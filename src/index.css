@@ -10,48 +10,51 @@ body {
     /* bg-bg and text-text-main are defined in tailwind.config.js */
     @apply bg-bg text-text-main font-sans;
     min-height: 100vh;
-    overflow-x: hidden; /* Prevent horizontal scroll */
-    /* Optional: Hide default cursor if using the custom one */
-    /* cursor: none; */ 
+    overflow-x: hidden; 
+    
+    /* 🚨 ACTIVATED: Hide default cursor so CustomCursor is the only one visible */
+    cursor: none; 
 }
 
 /* --- CUSTOM UTILITIES & COMPONENTS --- */
 
-/* Updated Glass Card for Dark Mode */
+/* Updated Glass Card for "Midnight Ice" Theme */
 .glass-card {
-    /* Darker, more transparent background for contrast against dark body */
-    @apply bg-glass-overlay/40 backdrop-blur-xl rounded-2xl shadow-xl transition-all duration-300;
-    /* Subtle border to define edges in the dark */
-    border: 1px solid rgba(255, 255, 255, 0.08);
+    /* 1. Use 'bg-glass-overlay' (70% opacity) for better text readability over video */
+    /* 2. Added 'border-white/10' to match the sharp edges we discussed */
+    @apply bg-glass-overlay backdrop-blur-md rounded-2xl shadow-xl transition-all duration-300 border border-white/10;
 }
 
-/* .glass-card:hover {
-    border-color: rgba(34, 211, 238, 0.3);
-    box-shadow: 0 4px 20px -2px rgba(34, 211, 238, 0.1);
-} */
+/* 🚨 ACTIVATED: Cyberpunk Hover Effect */
+.glass-card:hover {
+    /* On hover, border turns Cyan and creates a Neon Glow */
+    @apply border-accent/50 shadow-neon;
+    transform: translateY(-2px); /* Subtle lift */
+}
 
 /* Accent helper */
 .accent-text {
     @apply text-accent;
 }
 
-/* --- SCROLLBAR REDESIGN (Dark Mode) --- */
+/* --- SCROLLBAR REDESIGN (Matches Theme) --- */
 ::-webkit-scrollbar {
     width: 8px;
 }
 
 ::-webkit-scrollbar-track {
-    background: #020617; /* Dark background match */
+    background: #020617; /* Matches 'bg' */
 }
 
 ::-webkit-scrollbar-thumb {
-    background: #1e293b; /* Dark slate handle */
+    background: #1e293b; /* Matches 'slate-800' */
     border-radius: 4px;
     border: 1px solid #0f172a;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-    background: #22d3ee; /* Neon Cyan on hover */
+    background: #22d3ee; /* Matches 'accent' */
+    box-shadow: 0 0 10px #22d3ee; /* Glowing Scrollbar Handle */
 }
 
 
@@ -66,7 +69,7 @@ body {
     content: '';
     display: block;
     height: 1px;
-    background-color: #22d3ee; /* Neon Cyan Accent */
+    background-color: #22d3ee; /* Neon Cyan */
     flex-grow: 1;
     max-width: 500px;
     opacity: 0.5;
@@ -79,9 +82,9 @@ body {
     left: 100%;
     transform: translateY(-50%);
 
-    /* Updated Colors */
-    background: #22d3ee; /* Neon Cyan */
-    color: #020617;      /* Dark Text for contrast */
+    /* Colors */
+    background: #22d3ee; 
+    color: #020617;      
     font-weight: 600;
     
     padding: 0.25rem 0.75rem;
@@ -120,13 +123,13 @@ body {
 /* --- ANIMATIONS --- */
 
 .view-section {
-    animation: fadeIn 0.4s ease-out;
+    animation: fadeIn 0.5s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 @keyframes fadeIn {
     from {
         opacity: 0;
-        transform: translateY(15px);
+        transform: translateY(20px);
     }
     to {
         opacity: 1;
@@ -149,15 +152,15 @@ body {
 .cursor-dot {
     width: 8px;
     height: 8px;
-    background-color: #22d3ee; /* Neon Cyan */
-    box-shadow: 0 0 8px rgba(34, 211, 238, 0.8); /* Glow */
+    background-color: #22d3ee; 
+    box-shadow: 0 0 10px rgba(34, 211, 238, 0.9); /* Stronger glow on the dot */
 }
 
 .cursor-outline {
     width: 40px;
     height: 40px;
     border: 1px solid rgba(34, 211, 238, 0.5);
-    transition: width 0.2s, height 0.2s, background-color 0.2s;
+    transition: width 0.15s ease-out, height 0.15s ease-out, background-color 0.15s;
 }
 
 /* Expand cursor on clickable elements */

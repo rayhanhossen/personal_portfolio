@@ -2,20 +2,28 @@ import React, { useEffect, useState } from 'react';
 import { Outlet, useLocation } from 'react-router-dom';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
-import RippleBackground from '../components/RippleBackground';
 import CustomCursor from '../components/CustomCursor';
 import { personalInfo } from '../data/content';
+import VideoBackground from './VideoBackground';
 
 const Layout: React.FC = () => {
     const [showScroll, setShowScroll] = useState(false);
     const location = useLocation();
 
-    // Scroll to top
+    // 1. Handle Browser Scroll Restoration
+    useEffect(() => {
+        if ('scrollRestoration' in history) {
+            history.scrollRestoration = 'manual';
+        }
+        window.scrollTo(0, 0);
+    }, []);
+
+    // 2. Handle Scroll on Route Change
     useEffect(() => {
         window.scrollTo(0, 0);
     }, [location.pathname]);
 
-    // Handle Scroll Button
+    // Handle Scroll Button Visibility
     useEffect(() => {
         const checkScroll = () => {
             if (window.scrollY > 800) setShowScroll(true);
@@ -35,44 +43,17 @@ const Layout: React.FC = () => {
         <div className="min-h-screen relative text-text-main font-sans cursor-none overflow-x-hidden selection:bg-accent selection:text-bg">
 
             {/* Background */}
-            <RippleBackground />
+            <VideoBackground />
             
-            {/* 🚨 FIX 2: Custom Cursor Z-Index
-               - Wrapped in a high z-index div so it sits above Navbar/Sidebar/Buttons.
-               - 'pointer-events-none' ensures the wrapper doesn't block clicks. 
-            */}
+            {/* Custom Cursor */}
             <div className="fixed inset-0 z-[9999] pointer-events-none overflow-hidden">
                 <CustomCursor />
             </div>
 
-            {/* 🚨 FIX 1: Sidebar (Left) 
-               - Changed 'md:flex' to 'xl:flex'.
-               - md (768px) includes tablets.
-               - xl (1280px) is strictly desktop/laptop.
-            */}
-            <div className="fixed left-4 top-0 h-full hidden xl:flex flex-col items-center justify-start pt-0 gap-1 w-8 z-50">
-                <div className="h-48 w-[1px] bg-slate-700"></div>
-
-                <div className="flex flex-col items-center">
-                    <a href={`mailto:${personalInfo.email}`} className="relative group text-text-muted hover:text-accent text-xl my-2 transition-all duration-300 hover:-translate-y-1">
-                        <i className="fa-regular fa-envelope"></i>
-                        <span className="social-label bg-accent text-bg font-bold">{personalInfo.email}</span>
-                    </a>
-                    <a href={personalInfo.whatsapp} target="_blank" rel="noreferrer" className="relative group text-text-muted hover:text-accent text-xl my-2 transition-all duration-300 hover:-translate-y-1">
-                        <i className="fa-brands fa-whatsapp"></i>
-                        <span className="social-label bg-accent text-bg font-bold">+{personalInfo.whatsapp.substring(personalInfo.whatsapp.indexOf('8'))}</span>
-                    </a>
-                    <a href={personalInfo.linkedin} target="_blank" rel="noreferrer" className="relative group text-text-muted hover:text-accent text-xl my-2 transition-all duration-300 hover:-translate-y-1">
-                        <i className="fab fa-linkedin"></i>
-                        <span className="social-label bg-accent text-bg font-bold">LinkedIn</span>
-                    </a>
-                </div>
-            </div>
-
             {/* Main Content */}
-            <div className="max-w-5xl mx-auto px-[1rem] md:px-12 relative z-10">
+            <div className="max-w-5xl mx-auto px-4 md:px-6 relative z-10">
                 <Navbar />
-                <main className="view-section mb-8">
+                <main className="view-section mb-20">
                     <Outlet />
                 </main>
                 <Footer />
@@ -85,11 +66,14 @@ const Layout: React.FC = () => {
                     showScroll ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4 pointer-events-none'
                 }`}
             >
-                <div className="flex items-center justify-center h-12 w-12 rounded-full 
-                    bg-accent/10 backdrop-blur-md border border-accent/50 shadow-[0_0_15px_rgba(34,211,238,0.3)]
-                    hover:bg-accent hover:shadow-[0_0_25px_rgba(34,211,238,0.6)] hover:-translate-y-1
+                {/* 🚨 UPDATED DESIGN: Rounded-xl (Square) + Animated Arrow */}
+                <div className="flex items-center justify-center h-12 w-12 rounded-xl 
+                    bg-glass-overlay backdrop-blur-md border border-white/10 shadow-lg
+                    hover:bg-accent hover:border-accent hover:shadow-neon hover:-translate-y-1
                     transition-all duration-300 group">
-                    <i className="fas fa-arrow-up text-accent group-hover:text-bg text-base transition-colors"></i>
+                    
+                    {/* Icon animates UP on hover now */}
+                    <i className="fas fa-arrow-up text-accent group-hover:text-bg text-base transition-transform duration-300 group-hover:-translate-y-0.5"></i>
                 </div>
             </button>
         </div>

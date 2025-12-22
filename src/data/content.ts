@@ -16,25 +16,25 @@ export const personalInfo = {
         across fintech, telecommunications, and e-commerce sectors.
         Proficient in Django, FastAPI, Celery, Redis, PostgreSQL, MSSQL, Docker, and AWS S3.
         Demonstrated ability to architect RESTful APIs and deliver performant, production-ready solutions`,
-        
+
         `Currently focused on AI-powered systems, leveraging LLMs, Retrieval-Augmented Generation (RAG),
          and Model Content Processors (MCP) to develop data-driven backend platforms.`
     ],
-    cvLink: "https://drive.google.com/file/d/1WoS8uMgPH64ywzrcrXLm4kCwA-VqTaaG/view?usp=sharing",
+    cvLink: "https://drive.google.com/uc?export=download&id=1WoS8uMgPH64ywzrcrXLm4kCwA-VqTaaG",
 };
 
 
 // skills 
 export const skills: SkillGroup[] = [
-    { category: "Programming", items: ["Python,", "TypeScript", "JavaScript"] },
+    { category: "Programming", items: ["Python", "TypeScript", "JavaScript"] },
     { category: "Frameworks", items: ["Django", "FastAPI", "NestJS"] },
     { category: "Front-End", items: ["React", "HTML5", "CSS3"] },
     { category: "Databases", items: ["PostgreSQL", "MSSQL"] },
     { category: "Caching & Messaging", items: ["Redis", "Celery"] },
     { category: "Cloud & DevOps", items: ["AWS Lambda", "AWS S3", "AWS EC2", "Docker", "CI/CD pipelines", "Git"] },
-    { category: "AI & Data Processing", items: ["LLM", "RAG", "MCP"]},
-    { category: "Automation & Testing", items: ["Selenium", "Pandas", "OpenCV", "PaddleOCR", "AutoIT"]},
-    { category: "Development Methodologies", items: ["Sprint Planning", "Code Reviews"]}
+    { category: "AI & Data Processing", items: ["LLM", "RAG", "MCP"] },
+    { category: "Automation & Testing", items: ["Selenium", "Pandas", "OpenCV", "PaddleOCR", "AutoIT"] },
+    { category: "Development Methodologies", items: ["Sprint Planning", "Code Reviews"] }
 ];
 
 
@@ -51,7 +51,8 @@ export const experiences: Experience[] = [
         description: [
             "Build interactive dashboards using Python and Django, enabling data-driven decisions and analytics across internal teams.",
             "Apply LLMs, RAG, and Model Content Processors (MCP) to build intelligent backend systems for processing unstructured data."
-        ]
+        ],
+        skills: ["Python", "Django", "LLM", "RAG", "MCP"]
     },
     {
         id: 2,
@@ -67,7 +68,8 @@ export const experiences: Experience[] = [
             "Designed and deployed a containerized Python-Flask backend for scalable employee data processing, integrated with Apache Spark and Iceberg, and automated setup via Docker multi-stage builds.",
             "Built RPA workflows automating CIB data extraction, reducing manual processing time by 70% using Selenium, Pandas, OpenCV, AutoIT, and PaddleOCR.",
             "Contributed to backend infrastructure by configuring Red Hat Linux servers, enabling server-to-server communication, and deploying secure, scalable APIs with Nginx."
-        ]
+        ],
+        skills: ["FastAPI", "PaddleOCR", "AWS Rekognition", "Docker", "Selenium", "Pandas", "Linux/Nginx"]
     },
     {
         id: 3,
@@ -82,7 +84,8 @@ export const experiences: Experience[] = [
             "Directed the design, development, and deployment of new features, contributing to a continuous cycle of product improvement and customer value delivery.",
             "Facilitated daily stand-ups and sprint planning sessions, monitored team progress, and resolved technical and operational blockers.",
             "Mentored junior developers on best practices and collaborated with stakeholders to align technical execution with evolving business requirements."
-        ]
+        ],
+        skills: ["Team Leadership", "Project Management", "Agile/Scrum", "Code Review", "Mentorship"]
     },
     {
         id: 4,
@@ -97,7 +100,8 @@ export const experiences: Experience[] = [
             "Integrated NMI payment gateway to enable secure transactions, incorporating robust error handling and transaction lifecycle management.",
             "Implemented delivery logistics with FedEx and UPS APIs to automate shipping rate calculation, real-time tracking, and label generation.",
             "Collaborated with frontend and QA teams to support API integration and testing, following Git workflows, code reviews, and documentation standards."
-        ]
+        ],
+        skills: ["NestJS", "TypeScript", "REST APIs", "Payment Gateway Integration", "FedEx/UPS APIs"]
     },
     {
         id: 5,
@@ -112,7 +116,8 @@ export const experiences: Experience[] = [
             "Developed backend micro-services using NestJS and TypeScript for fintech features like merchant onboarding, leveraging DynamoDB and Docker for scalability.",
             "Automated enterprise workflows with Selenium, AutoIT, and Pandas, including SMS notifications, SAP vendor payments, and remote file processing.",
             "Collaborated within Agile teams, performed code reviews, and ensured secure, maintainable backend delivery aligned with industry best practices."
-        ]
+        ],
+        skills: ["Python", "Django", "Celery/Redis", "PostgreSQL", "NestJS", "Docker", "Selenium"]
     },
     {
         id: 6,
@@ -124,7 +129,8 @@ export const experiences: Experience[] = [
         endDate: "2020-12",
         description: [
             "Developed responsive frontend components using HTML5, CSS3, and JavaScript to enhance UX for SME clients."
-        ]
+        ],
+        skills: ["HTML5", "CSS3", "JavaScript", "Responsive Design"]
     }
 ];
 
@@ -140,8 +146,8 @@ export const projects: Project[] = [
         image: "https://placehold.co/400x300/222/FFF?text=Smart Document Assistant",
         tech: ["LLM", "RAG", "Python", "FAISS"],
         category: "professional",
-        liveLink: "#",
-        sourceLink: "#"
+        liveLink: "https://www.google.com",
+        sourceLink: "https://www.google.com"
     },
     {
         id: 2,
@@ -199,12 +205,20 @@ export const projects: Project[] = [
 // quotes
 export const quotes = [
     { text: "First, solve the problem. Then, write the code.", author: "John Johnson" },
-    { text: "Simplicity is the ultimate sophistication.", author: "Leonardo da Vinci" },
-    { text: "Code is like humor. When you have to explain it, it’s bad.", author: "Cory House" },
     { text: "The best way to predict the future is to invent it.", author: "Alan Kay" },
     { text: "Make it work, make it right, make it fast.", author: "Kent Beck" },
     { text: "Technology is best when it brings people together.", author: "Matt Mullenweg" },
-    { text: "Talk is cheap. Show me the code.", author: "Linus Torvalds" },
-    { text: "Experience is the name everyone gives to their mistakes.", author: "Oscar Wilde" },
-    { text: "It’s not a bug – it’s an undocumented feature.", author: "Anonymous" }
+];
+
+
+export const heroStack = [
+    "Python",
+    "Django",
+    "FastAPI",
+    "React",
+    "AWS",
+    "Docker",
+    "PostgreSQL",
+    "RAG",
+    "MCP"
 ];

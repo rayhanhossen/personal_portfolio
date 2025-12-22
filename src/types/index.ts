@@ -16,12 +16,13 @@ export interface SkillGroup {
 }
 
 export interface Experience {
-  id: number;
-  role: string;
-  company: string;
-  location: string;
-  period: string;
-  startDate: string;
-  endDate: string;
-  description: string | string[]; // Can be a paragraph or bullet points
+    id: number;
+    role: string;
+    company: string;
+    location: string;
+    period: string;
+    startDate: string;
+    endDate: string;
+    description: string[] | string;
+    skills?: string[]; // <--- Add this line
 }

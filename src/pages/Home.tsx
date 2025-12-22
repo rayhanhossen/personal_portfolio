@@ -1,126 +1,108 @@
-import { HashLink } from 'react-router-hash-link';
-import { personalInfo, experiences } from '../data/content';
+import { personalInfo, experiences, heroStack } from '../data/content';
 import profileImg from '../assets/profile-avatar.png';
-import QuoteDisplay from '../components/QuoteDisplay';
 import ExperiencePreview from '../components/Experience';
-import Contact from '../components/Contact';
-
+import { Link } from 'react-router-dom';
 
 const Home = () => {
-
     return (
-        <div id="home-view" className="view-section">
-
-            {/* HERO SECTION */}
-            <section id="home" className="grid grid-cols-1 md:grid-cols-12 gap-y-4 md:gap-y-12 md:gap-x-0 md:items-stretch mb-8">
-                {/* 1. TEXT AND BUTTONS CARD (8 Columns) */}
-                <div className="order-2 md:order-1 p-5 pb-[24px] md:col-span-8 glass-card shadow-xl md:mr-[16px] border border-white/5">
-                    {/* 1. STATUS BUBBLE */}
-                    <div className="mb-4 inline-flex items-center p-2 rounded-lg border border-accent/20 bg-accent/5 text-sm w-max">
-                        <div className="flex items-center gap-2 text-text-muted">
-                            <span className="relative flex h-3 w-3">
-                                {/* Ping/Dot */}
-                                <span
-                                    className="animate-ping absolute inline-flex h-full w-full rounded-full bg-accent opacity-75"
-                                    style={{ animationDuration: '2s' }}
-                                ></span>
-                                <span className="relative inline-flex rounded-full h-3 w-3 bg-accent shadow-[0_0_10px_#22d3ee]"></span>
-                            </span>
-
-                            {/* Status Text */}
-                            <span className='tracking-normal font-medium text-text-main'>
-                                Open to <span className="text-accent font-bold drop-shadow-[0_0_5px_rgba(34,211,238,0.5)]">work</span>
-                            </span>
+        <div id="home-view" className="view-section animate-fadeIn">
+            {/* --- HERO SECTION --- */}
+            <section id="home" className="min-h-screen flex flex-col justify-center pt-20 pb-12 mt-[27px] relative">
+                <div className="w-full max-w-5xl mx-auto">
+                    <div className="flex items-center gap-4 mb-6">
+                        <div className="relative w-16 h-16 md:w-20 md:h-20 rounded-full p-[2px] bg-gradient-to-tr from-accent to-transparent">
+                            <img
+                                src={profileImg}
+                                alt="Rayhan"
+                                className="w-full h-full rounded-full object-cover border-2 border-bg"
+                            />
+                        </div>
+                        <div>
+                            <h2 className="text-xl md:text-2xl font-medium text-text-muted mb-1">
+                                Hi, I'm <span className="text-text-main font-semibold">{personalInfo.name} Hossen</span>
+                            </h2>
+                            <div className="flex items-center gap-2 mt-1">
+                                <span className="relative flex h-2 w-2">
+                                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+                                    <span className="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
+                                </span>
+                                <span className="text-xs font-mono font-bold tracking-widest text-green-400">
+                                    OPEN_TO_WORK
+                                </span>
+                            </div>
                         </div>
                     </div>
 
-                    {/* 2. HEADER */}
-                    <h3 className="font-sans text-2xl md:text-5xl font-medium text-text-main mb-6 tracking-tight md:leading-tight">
-                        Engineering AI-driven products that solve real problems — beautifully and efficiently
-                        <span className="animate-pulse text-accent">.</span>
-                    </h3>
+                    <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold text-text-main mb-8 leading-[1.1] tracking-tight">
+                        Engineering{' '}
+                        <span className="text-transparent bg-clip-text bg-text-gradient inline-block pb-2">
+                            Intelligent Systems
+                        </span>
+                        <br className="hidden md:block" />
+                        that solve real problems.
+                    </h1>
 
-                    {/* Description */}
-                    <p className="font-sans text-text-muted mb-8 max-w-lg text-base leading-relaxed">
-                        I love turning complex ideas into clear, intelligent digital experiences.
+                    <p className="text-lg md:text-xl text-slate-300 max-w-2xl mb-10 leading-relaxed font-light border-l-2 border-accent/30 pl-6">
+                        Focused on writing <span className="text-white font-medium">clean, maintainable code</span> and designing <span className="text-white font-medium">resilient systems</span>.
+                        I deliver efficient software solutions that solve complex technical challenges <span className="text-white italic">at scale</span>.
                     </p>
 
-                    <div className="flex flex-col sm:flex-row gap-4 mt-8 w-full md:w-auto">
-
-                        {/* Contact Me Button */}
-                        <HashLink
-                            to="#contacts"
-                            smooth
-                            className="flex-1 sm:flex-none group relative
-                        px-6 py-3 flex items-center justify-center gap-2 
-                        transition-all duration-300 rounded-full font-bold text-sm md:text-base
-                        
-                        // BASE STATE: Accent background, Dark text (Better contrast on Cyan)
-                        bg-accent text-bg shadow-[0_0_15px_rgba(34,211,238,0.3)]
-                        
-                        // HOVER STATE: Lift and Glow
-                        hover:bg-accent hover:-translate-y-0.5 hover:shadow-[0_0_25px_rgba(34,211,238,0.6)]"
+                    <div className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto">
+                        <Link
+                            to="/contact"
+                            className="group relative px-8 py-4 flex items-center justify-center gap-3 rounded-lg font-bold text-base transition-all duration-300 bg-accent text-bg shadow-neon hover:bg-white hover:text-bg hover:shadow-[0_0_30px_rgba(255,255,255,0.4)] hover:-translate-y-1"
                         >
-                            <span>Get in touch</span>
-                            <span className="font-bold transition-transform duration-300 group-hover:translate-x-1">
-                                {`>`}
-                            </span>
-                        </HashLink>
-
-                        {/* 📄 Resume Download Button */}
+                            <span>Get In Touch</span>
+                            <i className="fas fa-paper-plane text-sm transform group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform"></i>
+                        </Link>
                         <a
                             href={personalInfo.cvLink}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="flex-1 sm:flex-none group relative
-                        px-6 py-3 flex items-center justify-center gap-2 
-                        transition-all duration-300 rounded-full font-medium text-sm md:text-base
-                        
-                        // BASE STATE: Outline style (Dark Mode)
-                        border border-white/20 text-text-muted border-accent hover:text-accent 
-                        hover:bg-accent/5 hover:shadow-[0_0_15px_rgba(34,211,238,0.2)]"
+                            className="group px-8 py-4 flex items-center justify-center gap-3 rounded-lg font-medium text-base transition-all duration-300 bg-glass-overlay border border-white/10 text-text-muted hover:text-accent hover:border-accent"
                         >
-                            <span>Resume</span>
-                            <i className="fas fa-download text-sm ml-1 transition-colors"></i>
+                            <span>Download Resume</span>
+                            <i className="fas fa-download text-sm opacity-70 group-hover:opacity-100 transition-opacity"></i>
                         </a>
                     </div>
                 </div>
 
-                {/* 2. PROFILE IMAGE CARD (4 Columns) */}
-                <div className="order-1 md:order-2 md:col-span-4 glass-card shadow-xl h-full min-h-[350px] relative border border-white/5 overflow-hidden">
-                    {/* UPDATED: 
-                       - Removed 'flex' and 'justify-end' 
-                       - Added 'w-full h-full object-cover' to image
-                       - This forces the image to cover the ENTIRE card area like a background
-                    */}
-                    <img
-                        src={profileImg}
-                        alt="profile"
-                        className="w-full h-full object-cover absolute inset-0"
-                        // 'object-center' ensures the face stays visible if cropped
-                        style={{ objectPosition: 'center' }}
-                    />
-
-                    {/* Subtle background shapes (These are now hidden behind the opaque image, but kept for structure) */}
-                    <div className="absolute top-0 left-0 w-1/3 h-1/3 rounded-full bg-accent/10 blur-xl -translate-x-1/2 -translate-y-1/2 z-0"></div>
-                    <div className="absolute bottom-0 right-0 w-2/5 h-2/5 rounded-full bg-blue-600/10 blur-xl translate-x-1/3 translate-y-1/3 z-0"></div>
+                <div className="mt-12 pt-12 border-t border-white/5 w-full overflow-hidden">
+                    <p className="text-sm font-mono text-slate-400 mb-5 uppercase tracking-widest font-semibold">
+                        Core Tech Stack:
+                    </p>
+                    <div className="flex flex-wrap gap-x-8 gap-y-4 opacity-70 grayscale hover:grayscale-0 transition-all duration-500">
+                        {heroStack.map((tech) => (
+                            <span key={tech} className="text-xl md:text-2xl font-bold text-slate-400 hover:text-accent cursor-default transition-colors">
+                                {tech}
+                            </span>
+                        ))}
+                    </div>
                 </div>
             </section>
 
-            {/* QUOTE SECTION */}
-            <section className="mb-8 w-full">
-                <QuoteDisplay />
+            {/* --- EXPERIENCE PREVIEW SECTION --- */}
+            <section className="mb-24">
+                {/* The Experience Card */}
+                <ExperiencePreview featuredExperience={experiences} limit={1} />
+
+                {/* Minimalist Navigation Link - Positioned closer to the card */}
+                <div className="flex justify-end max-w-5xl mx-auto mt-4">
+                    <Link
+                        to="/about#experience"
+                        className="group flex items-center gap-2 px-2 py-1 
+                       text-text-muted hover:text-accent 
+                       transition-all duration-300 font-mono text-[11px] tracking-widest uppercase"
+                    >
+                        <span className="relative">
+                            View Full History
+                            {/* Minimalist underline animation */}
+                            <span className="absolute -bottom-1 left-0 w-0 h-[1px] bg-accent/50 transition-all duration-300 group-hover:w-full"></span>
+                        </span>
+                        <i className="fas fa-chevron-right text-[8px] transform group-hover:translate-x-1 transition-transform"></i>
+                    </Link>
+                </div>
             </section>
-
-
-            {/* EXPERIENCE PREVIEW */}
-            <section id="experience-preview" className="mb-8">
-                <ExperiencePreview featuredExperience={experiences} />
-            </section>
-
-
-            {/* CONTACTS SECTION */}
-            <Contact />
         </div>
     );
 };
