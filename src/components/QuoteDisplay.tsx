@@ -11,7 +11,7 @@ const QuoteDisplay = () => {
     useEffect(() => {
         setProgress(0);
         const startTime = Date.now();
-        const duration = 60000;
+        const duration = 15000;
 
         const progressInterval = setInterval(() => {
             const elapsed = Date.now() - startTime;
@@ -30,7 +30,7 @@ const QuoteDisplay = () => {
             setIndex((prev) => (prev + 1) % quotes.length);
             setDisplayedText("");
             setIsTyping(true);
-        }, 60000);
+        }, 15000);
 
         return () => clearInterval(quoteInterval);
     }, []);
