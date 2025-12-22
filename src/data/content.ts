@@ -20,13 +20,13 @@ export const personalInfo = {
         `Currently focused on AI-powered systems, leveraging LLMs, Retrieval-Augmented Generation (RAG),
          and Model Content Processors (MCP) to develop data-driven backend platforms.`
     ],
-    cvLink: "https://drive.google.com/file/d/1WoS8uMgPH64ywzrcrXLm4kCwA-VqTaaG/view?usp=sharing",
+    cvLink: "https://drive.google.com/uc?export=download&id=1WoS8uMgPH64ywzrcrXLm4kCwA-VqTaaG",
 };
 
 
 // skills 
 export const skills: SkillGroup[] = [
-    { category: "Programming", items: ["Python,", "TypeScript", "JavaScript"] },
+    { category: "Programming", items: ["Python", "TypeScript", "JavaScript"] },
     { category: "Frameworks", items: ["Django", "FastAPI", "NestJS"] },
     { category: "Front-End", items: ["React", "HTML5", "CSS3"] },
     { category: "Databases", items: ["PostgreSQL", "MSSQL"] },
@@ -205,14 +205,9 @@ export const projects: Project[] = [
 // quotes
 export const quotes = [
     { text: "First, solve the problem. Then, write the code.", author: "John Johnson" },
-    { text: "Simplicity is the ultimate sophistication.", author: "Leonardo da Vinci" },
-    { text: "Code is like humor. When you have to explain it, it’s bad.", author: "Cory House" },
     { text: "The best way to predict the future is to invent it.", author: "Alan Kay" },
     { text: "Make it work, make it right, make it fast.", author: "Kent Beck" },
     { text: "Technology is best when it brings people together.", author: "Matt Mullenweg" },
-    { text: "Talk is cheap. Show me the code.", author: "Linus Torvalds" },
-    { text: "Experience is the name everyone gives to their mistakes.", author: "Oscar Wilde" },
-    { text: "It’s not a bug – it’s an undocumented feature.", author: "Anonymous" }
 ];
 
 
@@ -223,6 +218,7 @@ export const heroStack = [
     "React",
     "AWS",
     "Docker",
-    "LLM",
-    "PostgreSQL"
+    "PostgreSQL",
+    "RAG",
+    "MCP"
 ];

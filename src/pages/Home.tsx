@@ -1,16 +1,14 @@
-import { HashLink } from 'react-router-hash-link';
 import { personalInfo, experiences, heroStack } from '../data/content';
 import profileImg from '../assets/profile-avatar.png';
-import QuoteDisplay from '../components/QuoteDisplay';
-import Contact from '../components/Contact';
-import ExperiencePreview from '../components/Experience'; // Ensure this path is correct based on your file structure
+import ExperiencePreview from '../components/Experience';
+import { Link } from 'react-router-dom';
 
 const Home = () => {
     return (
         <div id="home-view" className="view-section animate-fadeIn">
 
             {/* --- HERO SECTION --- */}
-            <section id="home" className="min-h-[80vh] flex flex-col justify-center pt-32 pb-12 relative">
+            <section id="home" className="min-h-screen flex flex-col justify-center pt-20 pb-12 relative">
 
                 <div className="w-full max-w-5xl mx-auto">
 
@@ -61,16 +59,17 @@ const Home = () => {
 
                     {/* BUTTONS */}
                     <div className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto">
-                        <HashLink
-                            to="#contacts"
-                            smooth
+                        <Link
+                            to="/contact"
+                            aria-label="Contact Rayhan via email or form"
                             className="group relative px-8 py-4 flex items-center justify-center gap-3 
-                            rounded-lg font-bold text-base transition-all duration-300
-                            bg-accent text-bg shadow-neon hover:bg-white hover:text-bg hover:shadow-[0_0_30px_rgba(255,255,255,0.4)] hover:-translate-y-1"
+                                    rounded-lg font-bold text-base transition-all duration-300
+                                    bg-accent text-bg shadow-neon hover:bg-white hover:text-bg hover:shadow-[0_0_30px_rgba(255,255,255,0.4)] hover:-translate-y-1"
                         >
-                            <span>Let's Talk</span>
-                            <i className="fas fa-arrow-right transform group-hover:translate-x-1 transition-transform"></i>
-                        </HashLink>
+                            {/* Changing the icon to a paper plane or envelope is a universal "Contact" signal */}
+                            <span>Get In Touch</span>
+                            <i className="fas fa-paper-plane text-sm transform group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform"></i>
+                        </Link>
 
                         <a
                             href={personalInfo.cvLink}
@@ -87,13 +86,13 @@ const Home = () => {
                 </div>
 
                 {/* TECH TICKER */}
-                <div className="mt-12 pt-8 border-t border-white/5 w-full overflow-hidden">
+                <div className="mt-12 pt-12 border-t border-white/5 w-full overflow-hidden">
                     <p className="text-sm font-mono text-slate-400 mb-5 uppercase tracking-widest font-semibold">
                         Core Tech Stack:
                     </p>
                     <div className="flex flex-wrap gap-x-8 gap-y-4 opacity-70 grayscale hover:grayscale-0 transition-all duration-500">
                         {heroStack.map((tech) => (
-                            <span key={tech} className="text-xl md:text-2xl font-bold text-slate-500 hover:text-accent cursor-default transition-colors">
+                            <span key={tech} className="text-xl md:text-2xl font-bold text-slate-400 hover:text-accent cursor-default transition-colors">
                                 {tech}
                             </span>
                         ))}
@@ -102,17 +101,8 @@ const Home = () => {
             </section>
 
             {/* --- OTHER SECTIONS --- */}
-
-            <section className="mb-12 w-full">
-                <QuoteDisplay />
-            </section>
-
             <section id="experience-preview" className="mb-12">
                 <ExperiencePreview featuredExperience={experiences} />
-            </section>
-
-            <section>
-                <Contact />
             </section>
 
         </div>

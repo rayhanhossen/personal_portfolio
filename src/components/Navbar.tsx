@@ -58,7 +58,6 @@ const Navbar = () => {
                         {/* Logo Text */}
                         <span className="font-bold text-lg md:text-xl tracking-tight text-text-main group-hover:text-white transition-colors">
                             {personalInfo.name.toUpperCase()}
-                            <span className="text-accent">.</span>
                         </span>
                     </Link>
 

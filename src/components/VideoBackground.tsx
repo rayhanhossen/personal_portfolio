@@ -1,11 +1,22 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 
 const VideoBackground: React.FC = () => {
+    const videoRef = useRef<HTMLVideoElement>(null);
+
+    useEffect(() => {
+        if (videoRef.current) {
+            // 0.5 is half speed. Adjust this number to find your perfect "vibe"
+            videoRef.current.playbackRate = 0.25;
+        }
+    }, []);
+    
     return (
         <div className="fixed inset-0 z-[-1] w-full h-full overflow-hidden bg-bg">
             
             {/* 1. The Video (Crystal Clear) */}
             <video
+                poster='/background_thumbnail.png'
+                ref={videoRef}
                 autoPlay
                 loop
                 muted

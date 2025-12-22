@@ -113,7 +113,7 @@ const ExperiencePreview: React.FC<ExperiencePreviewProps> = ({ featuredExperienc
             </div>
 
             {/* --- LIST CONTAINER (No Outer Line) --- */}
-            <div className="flex flex-col gap-8">
+            <div className="flex flex-col gap-5">
 
                 {groupedExperience.map((group, groupIndex) => (
                     <div key={groupIndex} className="group/company">
@@ -124,7 +124,7 @@ const ExperiencePreview: React.FC<ExperiencePreviewProps> = ({ featuredExperienc
                         <div className="glass-card border border-white/5 bg-glass-overlay/50 p-6 md:p-8 rounded-2xl hover:border-accent/30 transition-all duration-300 shadow-lg">
 
                             {/* Company Header */}
-                            <div className="flex flex-col sm:flex-row sm:items-center justify-between mb-8 border-b border-white/5 pb-4">
+                            <div className="flex flex-col sm:flex-row sm:items-center justify-between mb-5 border-b border-white/5 pb-4">
                                 <h3 className="text-2xl font-bold text-text-main flex items-center gap-3">
                                     {group.company}
                                 </h3>
@@ -225,7 +225,7 @@ const ExperiencePreview: React.FC<ExperiencePreviewProps> = ({ featuredExperienc
                                             {exp.skills && exp.skills.length > 0 && (
                                                 <div className="flex flex-wrap gap-2 mt-5 pt-4 border-t border-white/5">
                                                     {exp.skills.map((skill, i) => (
-                                                        <span key={i} className="px-2 py-0.5 text-[10px] font-mono rounded bg-accent/5 text-accent/80 border border-accent/10">
+                                                        <span key={i} className="px-2 py-0.5 text-[10px] font-mono rounded bg-slate-800/50 text-slate-300 border border-slate-700/50">
                                                             {skill}
                                                         </span>
                                                     ))}

@@ -1,10 +1,11 @@
 import { personalInfo, skills } from '../data/content';
 import profileImg from '../assets/profile-avatar.png';
+import QuoteDisplay from '../components/QuoteDisplay';
 
 const About = () => {
     return (
         <div className="font-sans animate-fadeIn">
-            
+
             {/* --- HEADER (Updated with Watermark) --- */}
             <div className="pt-32 mb-12 relative z-10">
                 {/* Watermark Icon */}
@@ -52,10 +53,10 @@ const About = () => {
                 {/* 2. Profile Image "ID Card" (5 Columns) */}
                 <div className="md:col-span-5 flex justify-center md:justify-end order-1 md:order-2">
                     <div className="relative w-full max-w-sm group">
-                        
+
                         {/* The Glowing Frame */}
                         <div className="absolute -inset-0.5 bg-gradient-to-tr from-accent to-transparent rounded-2xl opacity-50 blur-sm group-hover:opacity-100 transition duration-500"></div>
-                        
+
                         {/* The Image Container */}
                         <div className="relative rounded-2xl bg-black border border-white/10 overflow-hidden">
                             <img
@@ -63,7 +64,7 @@ const About = () => {
                                 alt={personalInfo.name}
                                 className="w-full h-auto object-cover opacity-90 group-hover:opacity-100 group-hover:scale-105 transition-all duration-700"
                             />
-                            
+
                             {/* "Tech Overlay" at the bottom */}
                             <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/90 to-transparent p-6 pt-12">
                                 <div className="text-white font-bold text-lg">{personalInfo.name}</div>
@@ -74,9 +75,20 @@ const About = () => {
                 </div>
             </div>
 
+            {/* --- NEW: SYSTEM PHILOSOPHY (The Quote) --- */}
+            <div className="mb-12 max-w-5xl mx-auto">
+                <div className="flex items-center gap-3 mb-6">
+                    <i className="fas fa-brain text-accent text-xl"></i>
+                    <h3 className="text-2xl font-semibold text-text-main tracking-tight">
+                        Dev Mindset
+                    </h3>
+                </div>
+                <QuoteDisplay />
+            </div>
+
             {/* --- SKILLS SECTION --- */}
             <section className="mb-12 relative">
-                <div className="flex items-center gap-3 mb-8">
+                <div className="flex items-center gap-3 mb-6">
                     <i className="fas fa-microchip text-accent text-xl"></i>
                     <h3 className="text-2xl font-semibold text-text-main tracking-tight">
                         Technical Skills
@@ -99,7 +111,7 @@ const About = () => {
                                 </span>
                                 <i className="fas fa-code text-white/10 text-xs"></i>
                             </div>
-                            
+
                             {/* List */}
                             <div className="p-4 text-slate-300 text-sm flex flex-col gap-2.5 overflow-y-auto aesthetic-scrollbar">
                                 {grp.items.map((skill) => (
@@ -132,14 +144,14 @@ const About = () => {
                                     ${smClasses[smSlots]} 
                                     ${lgClasses[lgSlots]}`}
                             >
-                                <span className="text-text-muted/40 font-mono font-bold tracking-widest text-[10px] uppercase mb-2 animate-pulse">
-                                    LOADING_SKILLS...
+                                <span className="text-text-muted font-mono font-bold tracking-widest text-[10px] uppercase mb-2 animate-pulse">
+                                    CONTINUOUS_LEARNING...
                                 </span>
-                                <div className="flex gap-1">
+                                {/* <div className="flex gap-1">
                                     <div className="w-1 h-1 bg-accent/20 rounded-full"></div>
                                     <div className="w-1 h-1 bg-accent/20 rounded-full"></div>
                                     <div className="w-1 h-1 bg-accent/20 rounded-full"></div>
-                                </div>
+                                </div> */}
                             </div>
                         );
                     })()}

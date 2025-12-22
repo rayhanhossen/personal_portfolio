@@ -2,7 +2,7 @@ import React, { useState, useRef, useCallback } from 'react';
 import emailjs from '@emailjs/browser';
 import { personalInfo } from '../data/content';
 
-const Contact: React.FC = () => {
+const ContactPage: React.FC = () => {
     const form = useRef<HTMLFormElement>(null);
     const textareaRef = useRef<HTMLTextAreaElement>(null);
 
@@ -66,10 +66,10 @@ const Contact: React.FC = () => {
     }, [message]);
 
     return (
-        <section id="contacts" className="w-full max-w-5xl mx-auto px-4 md:px-6 mb-20 relative">
-
-            {/* 1. Header Section */}
-            <div className="mb-12 relative z-10">
+        <div className="font-sans animate-fadeIn">
+            
+            {/* --- HEADER (Matched to About Page) --- */}
+            <div className="pt-32 mb-12 relative z-10">
                 {/* Watermark Icon */}
                 <div className="absolute -top-10 -left-10 text-[100px] text-accent/5 opacity-20 pointer-events-none select-none z-0">
                     <i className="fas fa-paper-plane"></i>
@@ -77,32 +77,30 @@ const Contact: React.FC = () => {
 
                 <h2 className="text-3xl md:text-4xl font-bold mb-3 flex items-center gap-2 relative z-10">
                     <span className="text-accent font-mono drop-shadow-[0_0_5px_rgba(34,211,238,0.5)]">/</span>
-                    <span className="text-transparent bg-clip-text bg-text-gradient">contact</span>
+                    <span className="text-transparent bg-clip-text bg-text-gradient">
+                        contact_me
+                    </span>
                 </h2>
-
-                {/* 🚨 UPDATED: Stronger, Recruiter-Friendly Text */}
                 <p className="text-text-muted text-lg font-light tracking-wide max-w-xl relative z-10">
                     I am actively seeking full-time opportunities. If you have a role to discuss, or just want to connect, my inbox is always open.
                 </p>
             </div>
 
-            {/* 2. The Grid Layout */}
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start">
+            {/* --- MAIN CONTENT GRID --- */}
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 mb-16 items-start">
 
-                {/* ⬅️ LEFT COLUMN: Info Panels (Occupies 5 cols) */}
-                <div className="lg:col-span-5 flex flex-col gap-6">
-
+                {/* LEFT COLUMN: Info Panels (Matched to About's 5-column side) */}
+                <div className="lg:col-span-5 flex flex-col gap-6 order-2 lg:order-1">
+                    
                     {/* Status Card */}
                     <div className="glass-card p-6 border border-white/10 rounded-xl relative overflow-hidden group">
                         <div className="absolute top-0 right-0 w-32 h-32 bg-accent/5 rounded-full blur-2xl -translate-y-1/2 translate-x-1/2"></div>
-
                         <h3 className="text-text-main font-bold text-lg mb-4">Current Status</h3>
                         <div className="flex items-center gap-3">
                             <span className="relative flex h-3 w-3">
                                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
                                 <span className="relative inline-flex rounded-full h-3 w-3 bg-green-500"></span>
                             </span>
-                            {/* 🚨 UPDATED STATUS TEXT */}
                             <span className="text-green-400 font-mono text-sm tracking-wider font-bold">OPEN TO WORK</span>
                         </div>
                         <p className="text-text-muted text-sm mt-3 leading-relaxed">
@@ -156,34 +154,30 @@ const Contact: React.FC = () => {
                     </div>
                 </div>
 
-                {/* ➡️ RIGHT COLUMN: The Form (Occupies 7 cols) */}
-                <div className="lg:col-span-7">
+                {/* RIGHT COLUMN: The Form (Matched to About's 7-column side) */}
+                <div className="lg:col-span-7 order-1 lg:order-2">
                     <div className="glass-card bg-glass-overlay/50 backdrop-blur-xl p-6 md:p-8 rounded-2xl border border-white/10 shadow-2xl">
                         <form ref={form} onSubmit={handleSend} className="flex flex-col gap-6">
-
-                            {/* Input Grid */}
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                                 <div className="flex flex-col gap-2">
                                     <label className="text-xs font-mono text-accent uppercase tracking-widest">Name</label>
                                     <input
                                         required type="text" name="name" placeholder="John Doe"
-                                        className="w-full bg-black/40 border border-white/10 rounded-lg px-4 py-3 text-sm text-white placeholder-white/20 focus:outline-none focus:border-accent/50 focus:shadow-[0_0_15px_rgba(34,211,238,0.1)] transition-all"
+                                        className="w-full bg-black/40 border border-white/10 rounded-lg px-4 py-3 text-sm text-white focus:outline-none focus:border-accent/50 transition-all"
                                     />
                                 </div>
                                 <div className="flex flex-col gap-2">
                                     <label className="text-xs font-mono text-accent uppercase tracking-widest">Email</label>
                                     <input
                                         required type="email" name="from_email" placeholder="john@company.com"
-                                        className="w-full bg-black/40 border border-white/10 rounded-lg px-4 py-3 text-sm text-white placeholder-white/20 focus:outline-none focus:border-accent/50 focus:shadow-[0_0_15px_rgba(34,211,238,0.1)] transition-all"
+                                        className="w-full bg-black/40 border border-white/10 rounded-lg px-4 py-3 text-sm text-white focus:outline-none focus:border-accent/50 transition-all"
                                     />
                                 </div>
                             </div>
 
-                            {/* Message Area */}
                             <div className="flex flex-col gap-2 relative">
                                 <div className="flex justify-between items-end">
                                     <label className="text-xs font-mono text-accent uppercase tracking-widest">Message</label>
-                                    {/* AI Refine Button */}
                                     <button
                                         type="button"
                                         onClick={handleRefine}
@@ -194,29 +188,27 @@ const Contact: React.FC = () => {
                                         {loadingRefine ? 'Optimizing...' : 'AI Refine'}
                                     </button>
                                 </div>
-                                {/* 🚨 UPDATED PLACEHOLDER */}
                                 <textarea
-                                    required name="message" rows={5}
+                                    required name="message" rows={6}
                                     ref={textareaRef}
                                     value={message}
                                     onChange={(e) => setMessage(e.target.value)}
-                                    placeholder="Hi, I'd like to discuss a potential role at our company..."
-                                    className="w-full bg-black/40 border border-white/10 rounded-lg px-4 py-3 text-sm text-white placeholder-white/20 focus:outline-none focus:border-accent/50 focus:shadow-[0_0_15px_rgba(34,211,238,0.1)] transition-all resize-none"
+                                    placeholder="Hi, I'd like to discuss a potential role..."
+                                    className="w-full bg-black/40 border border-white/10 rounded-lg px-4 py-3 text-sm text-white focus:outline-none focus:border-accent/50 transition-all resize-none"
                                 />
                             </div>
 
-                            {/* Action Bar */}
                             <div className="flex items-center justify-end pt-2">
                                 <button
                                     type="submit"
                                     disabled={!message.trim() || status === 'sending' || status === 'success'}
                                     className={`
-                                        relative overflow-hidden group flex items-center gap-3 px-8 py-3 rounded-lg font-bold text-sm tracking-wide transition-all duration-300
+                                        relative group flex items-center gap-3 px-10 py-4 rounded-lg font-bold text-sm tracking-wide transition-all duration-300
                                         ${status === 'success'
-                                            ? 'bg-green-500 text-white shadow-[0_0_20px_rgba(34,197,94,0.4)]'
+                                            ? 'bg-green-500 text-white'
                                             : 'bg-accent text-bg shadow-neon hover:shadow-[0_0_30px_rgba(34,211,238,0.6)] hover:-translate-y-1'
                                         }
-                                        disabled:opacity-50 disabled:cursor-not-allowed disabled:shadow-none
+                                        disabled:opacity-50 disabled:cursor-not-allowed
                                     `}
                                 >
                                     {status === 'sending' ? (
@@ -232,8 +224,8 @@ const Contact: React.FC = () => {
                     </div>
                 </div>
             </div>
-        </section>
+        </div>
     );
 };
 
-export default Contact;
+export default ContactPage;
