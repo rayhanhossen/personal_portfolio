@@ -111,24 +111,22 @@ const ContactPage: React.FC = () => {
 
                         <div>
                             <div className="flex items-center justify-between mb-8">
-                                <div className="flex items-center gap-2">
-                                    <div className="p-2 rounded-lg bg-accent/5 border border-accent/20 text-accent">
-                                        <i className="fas fa-globe-americas text-xs"></i>
-                                    </div>
-                                    <h3 className="text-text-main font-semibold text-sm uppercase tracking-widest font-mono">Mobility_Status</h3>
+                                <div className="flex items-center gap-3">
+                                    {/* CHANGED: Removed wrapper div, increased icon size directly */}
+                                    <i className="fas fa-globe-americas text-accent text-xl"></i>
+
+                                    {/* Kept text styles, flex-row handles the alignment */}
+                                    <h3 className="text-text-main font-semibold text-md uppercase tracking-widest font-mono mt-1">
+                                        Mobility Status
+                                    </h3>
                                 </div>
-                                {/* <div className="flex items-center gap-2 px-3 py-1 rounded-full bg-green-500/10 border border-green-500/20">
-                                    <span className="relative flex h-2 w-2">
-                                        <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
-                                        <span className="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
-                                    </span>
-                                    <span className="text-green-400 font-mono text-[10px] font-bold">AVAILABLE</span>
-                                </div> */}
+
+                                {/* ... The 'AVAILABLE' badge code continues here ... */}
                             </div>
 
                             <div className="space-y-6">
-                                <h4 className="text-text-main text-2xl font-bold leading-tight">
-                                    Seeking Global <span className="text-accent">&</span> Local Opportunities
+                                <h4 className="text-text-main text-1xl font-bold leading-tight">
+                                    Seeking Global & Local Opportunities
                                 </h4>
                                 <div className="text-text-muted text-[15px] leading-relaxed font-light">
                                     <p>
@@ -154,15 +152,18 @@ const ContactPage: React.FC = () => {
                             <div className="flex flex-col gap-1">
                                 <span className="text-[10px] font-mono text-text-muted uppercase tracking-widest">Current Location</span>
                                 <div className="flex items-center gap-2">
-                                    <span className="text-xs font-bold text-white">Dhaka, Bangladesh</span>
+                                    {/* Dynamic Location */}
+                                    <span className="text-xs font-bold text-white">{personalInfo.location}</span>
+                                    {/* Dynamic Timezone */}
                                     <span className="text-[10px] font-mono text-accent bg-accent/5 px-1.5 py-0.5 rounded border border-accent/10">
-                                        GMT+6
+                                        {personalInfo.timezone}
                                     </span>
                                 </div>
                             </div>
                             <div className="flex flex-col gap-1 items-end">
                                 <span className="text-[10px] font-mono text-text-muted uppercase tracking-widest">Notice Period</span>
-                                <span className="text-xs font-bold text-accent">2 Month</span>
+                                {/* Dynamic Notice Period */}
+                                <span className="text-xs font-bold text-accent">{personalInfo.noticePeriod}</span>
                             </div>
                         </div>
                     </div>

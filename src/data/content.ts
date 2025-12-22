@@ -6,6 +6,9 @@ export const personalInfo = {
     title: "Software Engineer",
     email: "to.rayhanhossen@gmail.com",
     phone: "+8801621145012",
+    location: "Dhaka, Bangladesh",
+    timezone: "GMT+6",
+    noticePeriod: "2 Months",
     whatsapp: "https://wa.me/8801621145012",
     linkedin: "https://www.linkedin.com/in/rayhanhossen/",
     github: "https://github.com/rayhanhossen",
@@ -204,13 +207,45 @@ export const projects: Project[] = [
 
 // quotes
 export const quotes = [
-    { text: "First, solve the problem. Then, write the code.", author: "John Johnson" },
-    { text: "The best way to predict the future is to invent it.", author: "Alan Kay" },
-    { text: "Make it work, make it right, make it fast.", author: "Kent Beck" },
-    { text: "Technology is best when it brings people together.", author: "Matt Mullenweg" },
+    { 
+        text: "First, solve the problem. Then, write the code.", 
+        author: "John Johnson" 
+    },
+    { 
+        text: "Any fool can write code that a computer can understand. Good programmers write code that humans can understand.", 
+        author: "Martin Fowler" 
+    },
+    { 
+        text: "Make it work, make it right, make it fast.", 
+        author: "Kent Beck" 
+    },
+    { 
+        text: "Simplicity is the soul of efficiency.", 
+        author: "Austin Freeman" 
+    },
+    { 
+        text: "Optimism is an occupational hazard of programming: feedback is the treatment.", 
+        author: "Kent Beck" 
+    },
+    { 
+        text: "The only way to go fast, is to go well.", 
+        author: "Robert C. Martin" 
+    },
+    { 
+        text: "Programs must be written for people to read, and only incidentally for machines to execute.", 
+        author: "Harold Abelson" 
+    },
+    { 
+        text: "Debugging is twice as hard as writing the code in the first place. Therefore, if you write the code as cleverly as possible, you are, by definition, not smart enough to debug it.", 
+        author: "Brian Kernighan" 
+    },
+    { 
+        text: "The best way to predict the future is to invent it.", 
+        author: "Alan Kay" 
+    },
 ];
 
-
+// core tech stack 
 export const heroStack = [
     "Python",
     "Django",
