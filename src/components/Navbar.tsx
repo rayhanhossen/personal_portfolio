@@ -31,7 +31,7 @@ const Navbar = () => {
             {/* 'fixed' ensures it stays pinned. 'top-0' or 'top-4' for floating look. */}
             <header 
                 className={`fixed top-0 left-0 right-0 z-[100] transition-all duration-300 flex justify-center px-4 md:px-6
-                ${scrolled ? 'py-3' : 'py-5 md:py-6'}`}
+                ${scrolled ? 'py-3' : 'py-3 md:py-3'}`}
             >
                 <div 
                     className={`

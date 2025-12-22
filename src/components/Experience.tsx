@@ -90,8 +90,8 @@ const ExperiencePreview: React.FC<ExperiencePreviewProps> = ({ featuredExperienc
                     </p>
                 </div>
 
-                <div className="flex items-center gap-4 bg-white/5 border border-white/10 px-6 py-4 rounded-2xl self-start md:self-center">
-                    <div className="h-10 w-10 rounded-full bg-accent/10 flex items-center justify-center">
+                <div className="flex items-center gap-4 bg-white/5 border border-white/10 px-6 py-4 rounded-2xl w-full md:w-auto md:self-center">
+                    <div className="h-10 w-10 rounded-full bg-accent/10 flex items-center justify-center shrink-0">
                         <i className="fas fa-briefcase text-accent text-sm"></i>
                     </div>
                     <div>
@@ -112,16 +112,20 @@ const ExperiencePreview: React.FC<ExperiencePreviewProps> = ({ featuredExperienc
                 </div>
             </div>
 
-            <div className="flex flex-col gap-6">
+            <div className="flex flex-col gap-4">
                 {groupedExperience.map((group, groupIndex) => (
                     <div key={groupIndex} className="group/company">
-                        <div className="glass-card border border-white/5 bg-glass-overlay/50 p-6 md:p-8 rounded-2xl hover:border-accent/30 transition-all duration-300 shadow-lg">
+                        {/* CHANGED: Removed shadow-lg, added shadow-none and hover:shadow-md */}
+                        <div className="glass-card border border-white/5 bg-glass-overlay/50 p-6 md:p-8 rounded-2xl hover:border-accent/30 transition-all duration-300 shadow-none hover:shadow-md">
+
+                            {/* 1. COMPANY HEADER SECTION */}
                             <div className="flex flex-col sm:flex-row sm:items-center justify-between mb-5 border-b border-white/5 pb-4">
                                 <h3 className="text-xl font-bold text-text-main flex items-center gap-3">
                                     <span className="w-2 h-2 rounded-full bg-accent shadow-[0_0_8px_rgba(34,211,238,0.4)]"></span>
                                     {group.company}
                                 </h3>
-                                <span className="text-[11px] text-text-muted flex items-center gap-2 mt-2 sm:mt-0 font-mono tracking-wider bg-white/5 px-3 py-1 rounded-full border border-white/5">
+
+                                <span className="w-fit self-start mt-2 sm:mt-0 text-[10px] sm:text-[11px] text-text-muted flex items-center gap-2 font-mono tracking-wider bg-white/5 px-2 py-1 sm:px-3 rounded-full border border-white/5">
                                     <i className="fas fa-map-marker-alt text-accent/70"></i> {group.location}
                                 </span>
                             </div>
@@ -140,17 +144,20 @@ const ExperiencePreview: React.FC<ExperiencePreviewProps> = ({ featuredExperienc
                                     const initialContent = hasMoreContent ? descriptionPoints.slice(0, 2) : descriptionPoints;
                                     const restOfContent = hasMoreContent ? descriptionPoints.slice(2) : [];
 
+
                                     return (
                                         <div key={exp.id} className="relative pl-8">
                                             <div className={`absolute left-[3px] top-2.5 w-2 h-2 rounded-full border border-bg z-10
-                                                ${isPresent ? 'bg-green-500 shadow-[0_0_8px_rgba(34,197,94,0.6)]' : 'bg-slate-500'}`}
+                                    ${isPresent ? 'bg-green-500 shadow-[0_0_8px_rgba(34,197,94,0.6)]' : 'bg-slate-500'}`}
                                             ></div>
 
-                                            <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start mb-4 gap-3">
+                                            {/* 2. ROLE & PERIOD SECTION */}
+                                            <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start mb-4 gap-2 sm:gap-3">
                                                 <h4 className="text-lg font-semibold text-white group-hover/company:text-accent transition-colors">
                                                     {exp.role}
                                                 </h4>
-                                                <div className="flex items-center gap-2 text-[11px] font-mono text-text-muted bg-black/40 px-3 py-1 rounded-full border border-white/5 whitespace-nowrap">
+
+                                                <div className="w-fit self-start flex items-center gap-2 text-[10px] sm:text-[11px] font-mono text-text-main bg-transparent px-2 py-1 sm:px-3 rounded-full border border-white/5 whitespace-nowrap">
                                                     {isPresent && (
                                                         <span className="relative flex h-2 w-2">
                                                             <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
@@ -161,6 +168,7 @@ const ExperiencePreview: React.FC<ExperiencePreviewProps> = ({ featuredExperienc
                                                 </div>
                                             </div>
 
+                                            {/* Description Logic */}
                                             <div className="text-slate-300 text-sm leading-relaxed font-light">
                                                 <ul className="space-y-3">
                                                     {initialContent.map((point, idx) => (
@@ -220,6 +228,13 @@ const ExperiencePreview: React.FC<ExperiencePreviewProps> = ({ featuredExperienc
                     </div>
                 ))}
             </div>
+            {/* ADDED: Style block to define the minimalistic dark shadow */}
+            <style>{`
+                /* Minimalist subtle hover shadow for dark glass-cards */
+                .hover\:shadow-md:hover {
+                    box-shadow: 0 10px 30px -15px rgba(0, 0, 0, 0.5);
+                }
+            `}</style>
         </div>
     );
 };

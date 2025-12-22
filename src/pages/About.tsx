@@ -23,7 +23,7 @@ const About = () => {
     return (
         <div className="font-sans animate-fadeIn">
             {/* --- HEADER --- */}
-            <div className="pt-32 mb-12 relative z-10">
+            <div className="pt-32 mb-8 relative z-10">
                 <div className="absolute -top-10 -left-10 text-[100px] text-accent/5 opacity-20 pointer-events-none select-none z-0">
                     <i className="fas fa-user-astronaut"></i>
                 </div>
@@ -46,7 +46,7 @@ const About = () => {
                         href={personalInfo.cvLink}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="group inline-flex items-center gap-3 px-8 py-3 mt-4 rounded-lg bg-accent text-bg font-bold shadow-neon hover:bg-white hover:text-bg transition-all duration-300"
+                        className="group flex w-full md:w-auto md:inline-flex justify-center items-center gap-3 px-8 py-3 mt-4 rounded-lg bg-accent text-bg font-bold shadow-neon hover:bg-white hover:text-bg transition-all duration-300"
                     >
                         <span>Download Resume</span>
                         <i className="fas fa-download text-sm group-hover:translate-y-1 transition-transform"></i>
@@ -69,9 +69,8 @@ const About = () => {
 
 
             {/* --- SKILLS SECTION --- */}
-            <section className="mb-12 relative pt-12">
-                {/* Minimalist Top Border Gradient */}
-                <div className="absolute top-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-white/10 to-transparent"></div>
+            {/* Added 'border-t' and 'border-white/10' here for the top border */}
+            <section className="mb-12 pt-12 border-t border-white/10 relative">
 
                 <div className="flex items-center gap-3 mb-8">
                     <i className="fas fa-microchip text-accent text-xl"></i>
@@ -118,11 +117,6 @@ const About = () => {
                                 <span className="text-text-muted font-mono font-bold tracking-widest text-[10px] uppercase mb-2 animate-pulse">
                                     CONTINUOUS_LEARNING...
                                 </span>
-                                {/* <div className="flex gap-1">
-                                    <div className="w-1 h-1 bg-accent/20 rounded-full"></div>
-                                    <div className="w-1 h-1 bg-accent/20 rounded-full"></div>
-                                    <div className="w-1 h-1 bg-accent/20 rounded-full"></div>
-                                </div> */}
                             </div>
                         );
                     })()}

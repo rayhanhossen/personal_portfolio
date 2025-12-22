@@ -38,34 +38,44 @@ const Projects = () => {
     // Helper: Project Card
     const renderProjectCard = (project: Project) => {
         const isExpanded = !!expandedIds[project.id];
+        // Calculate length to decide if button is needed
         const maxLength = 120;
         const shouldTruncate = project.description.length > maxLength;
-
-        const displayDescription = isExpanded || !shouldTruncate
-            ? project.description
-            : `${project.description.slice(0, maxLength)}...`;
 
         return (
             <div
                 key={project.id}
                 className="group flex flex-col glass-card bg-glass-overlay backdrop-blur-md border border-white/10 rounded-xl overflow-hidden 
                            transition-all duration-300 
-                           hover:-translate-y-2 hover:border-accent/40 hover:shadow-[0_0_15px_rgba(34,211,238,0.15)]"
+                           shadow-none hover:shadow-md hover:-translate-y-2 hover:border-accent/40"
             >
                 {renderProjectThumbnail(project)}
 
-                {/* 🚨 TECH STACK: Centered (justify-center) */}
-                <div className="border-b border-white/5 p-3 bg-white/5 flex-none">
-                    <div className="flex flex-wrap justify-center gap-2">
-                        {project.tech.map((tech, i) => (
-                            <span key={i} className="text-[10px] font-mono font-medium px-1.5 py-0.5 rounded text-accent/80 bg-accent/5 border border-accent/10">
-                                {tech}
-                            </span>
-                        ))}
-                    </div>
+                {/* 🚨 TECH STACK: Dynamic Alignment */}
+                {/* 🚨 TECH STACK: Dynamic Alignment based on Text Size & Reduced Gap */}
+                <div className="border-b border-white/5 p-2 flex-none">
+                    {(() => {
+                        // Calculate total text length to decide alignment
+                        const totalCharCount = project.tech.join('').length;
+                        // Threshold: If text is longer than 30 chars, align left (start), else center
+                        const alignmentClass = totalCharCount > 30 ? 'justify-start' : 'justify-center';
+
+                        return (
+                            <div className={`flex flex-wrap gap-1.5 ${alignmentClass}`}>
+                                {project.tech.map((tech, i) => (
+                                    <span
+                                        key={i}
+                                        className="text-[10px] font-mono font-bold tracking-wide px-2 py-1 rounded-md text-accent border border-accent/20 bg-transparent shadow-[0_0_10px_rgba(34,211,238,0.05)]"
+                                    >
+                                        {tech}
+                                    </span>
+                                ))}
+                            </div>
+                        );
+                    })()}
                 </div>
 
-                {/* 🚨 CONTENT BODY: Left Aligned (Standard) */}
+                {/* CONTENT BODY */}
                 <div className="p-5 flex flex-col flex-grow relative">
 
                     <h3 className="text-xl text-text-main font-bold mb-2 group-hover:text-accent transition-colors duration-300">
@@ -73,22 +83,34 @@ const Projects = () => {
                     </h3>
 
                     <div className="mb-6 flex-grow">
-                        <p className="text-slate-300 text-sm leading-relaxed font-light transition-all duration-300">
-                            {displayDescription}
-                        </p>
+                        {/* Smooth Height Animation */}
+                        <div
+                            className={`relative overflow-hidden transition-all duration-500 ease-in-out ${isExpanded ? 'max-h-[500px]' : 'max-h-[4.5rem]'
+                                }`}
+                        >
+                            <p className="text-slate-300 text-sm leading-relaxed font-light">
+                                {project.description}
+                            </p>
+
+                            {/* Fade Mask */}
+                            {/* {!isExpanded && shouldTruncate && (
+                                <div className="absolute bottom-0 left-0 right-0 h-6 bg-gradient-to-t from-[#0a0a0a]/90 to-transparent"></div>
+                            )} */}
+                        </div>
 
                         {shouldTruncate && (
+                            /* UPDATED BUTTON STYLE TO MATCH EXPERIENCE SECTION */
                             <button
                                 onClick={() => toggleExpand(project.id)}
-                                className="mt-2 text-xs font-bold uppercase tracking-wider text-accent/70 hover:text-accent flex items-center gap-1 transition-colors focus:outline-none"
+                                className="mt-4 text-[10px] font-bold uppercase tracking-widest text-accent/70 hover:text-accent flex items-center gap-2 transition-colors border-b border-transparent hover:border-accent/50 pb-0.5 w-max focus:outline-none"
                             >
-                                <span>{isExpanded ? 'Show Less' : 'Show More'}</span>
-                                <i className={`fas ${isExpanded ? 'fa-chevron-up' : 'fa-chevron-down'} text-[10px]`}></i>
+                                <span>{isExpanded ? 'Collapse' : 'Read Full Details'}</span>
+                                <i className={`fas ${isExpanded ? 'fa-chevron-up' : 'fa-chevron-down'} text-[8px]`}></i>
                             </button>
                         )}
                     </div>
 
-                    {/* Links - Standard Alignment */}
+                    {/* Links */}
                     <div className="flex items-center gap-4 mt-auto border-t border-white/5 pt-4">
                         {project.liveLink && project.liveLink !== "#" && (
                             <a
@@ -123,7 +145,7 @@ const Projects = () => {
         <div id="projects-view" className="view-section animate-fadeIn font-sans">
 
             {/* --- HEADER --- */}
-            <div className="pt-32 mb-12 relative z-10">
+            <div className="pt-32 mb-8 relative z-10">
                 <div className="absolute -top-10 -left-10 text-[100px] text-accent/5 opacity-20 pointer-events-none select-none z-0">
                     <i className="fas fa-laptop-code"></i>
                 </div>
@@ -158,6 +180,13 @@ const Projects = () => {
                     {smallProjects.map(renderProjectCard)}
                 </div>
             </section>
+
+            <style>{`
+                /* Minimalist subtle hover shadow for dark glass-cards */
+                .hover\:shadow-md:hover {
+                    box-shadow: 0 10px 30px -15px rgba(0, 0, 0, 0.5);
+                }
+            `}</style>
         </div>
     );
 };
