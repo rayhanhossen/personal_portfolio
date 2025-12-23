@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { useLocation } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { experiences, personalInfo, skills } from '../data/content';
 import profileImg from '../assets/profile-avatar.png';
 import QuoteDisplay from '../components/QuoteDisplay';
@@ -42,15 +42,39 @@ const About = () => {
                             {paragraph}
                         </p>
                     ))}
-                    <a
-                        href={personalInfo.cvLink}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="group flex w-full md:w-auto md:inline-flex justify-center items-center gap-3 px-8 py-3 mt-4 rounded-lg bg-accent text-bg font-bold shadow-neon hover:bg-white hover:text-bg transition-all duration-300"
-                    >
-                        <span>Download Resume</span>
-                        <i className="fas fa-download text-sm group-hover:translate-y-1 transition-transform"></i>
-                    </a>
+
+                    {/* ACTION BUTTONS: Updated to match Home Page Mobile Layout */}
+                    <div className="flex flex-row gap-3 mt-8 w-full sm:w-auto">
+
+                        {/* 1. Primary: Get In Touch */}
+                        <Link
+                            to="/contact"
+                            className="group relative flex-1 sm:flex-none px-4 sm:px-8 py-3.5 flex items-center justify-center gap-2 sm:gap-3 
+               rounded-full bg-accent text-bg font-bold text-xs sm:text-sm tracking-wide
+               shadow-[0_0_20px_-5px_rgba(34,211,238,0.4)]
+               hover:shadow-[0_0_25px_-5px_rgba(34,211,238,0.6)]
+               hover:scale-[1.02] active:scale-[0.98]
+               transition-all duration-300 ease-out whitespace-nowrap"
+                        >
+                            <span>Get In Touch</span>
+                            <i className="fas fa-paper-plane text-xs transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform duration-300"></i>
+                        </Link>
+
+                        {/* 2. Secondary: Resume */}
+                        <a
+                            href={personalInfo.cvLink}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="group flex-1 sm:flex-none px-4 sm:px-8 py-3.5 flex items-center justify-center gap-2 sm:gap-3 
+               rounded-full bg-transparent border border-text-muted/30 
+               text-text-muted font-medium text-xs sm:text-sm tracking-wide
+               hover:text-text-main hover:border-text-main/50 hover:bg-text-muted/5
+               transition-all duration-300 ease-out whitespace-nowrap"
+                        >
+                            <span>Resume</span>
+                            <i className="fas fa-download text-xs opacity-70 group-hover:opacity-100 group-hover:translate-y-0.5 transition-all duration-300"></i>
+                        </a>
+                    </div>
                 </div>
                 <div className="md:col-span-5 flex justify-center md:justify-end order-1 md:order-2">
                     <div className="relative w-full max-w-sm group">
