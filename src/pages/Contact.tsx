@@ -1,4 +1,4 @@
-import React, { useState, useRef, useCallback } from 'react';
+import React, { useState, useRef } from 'react';
 import emailjs from '@emailjs/browser';
 import { personalInfo } from '../data/content';
 
@@ -9,10 +9,10 @@ const ContactPage: React.FC = () => {
     // State
     const [message, setMessage] = useState('');
     const [status, setStatus] = useState<'idle' | 'sending' | 'success' | 'error'>('idle');
-    const [loadingRefine, setLoadingRefine] = useState(false);
-    const [isRefined, setIsRefined] = useState(false);
+    // const [loadingRefine, setLoadingRefine] = useState(false);
+    const [isRefined] = useState(false);
     const [copyStatus, setCopyStatus] = useState<string | null>(null);
-    const [cooldown, setCooldown] = useState(false);
+    // const [cooldown, setCooldown] = useState(false);
 
     // --- Action: Send Email ---
     const handleSend = (e: React.FormEvent) => {
