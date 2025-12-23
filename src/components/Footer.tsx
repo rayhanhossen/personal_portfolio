@@ -6,9 +6,8 @@ const Footer: React.FC = () => {
     const currentYear = new Date().getFullYear();
 
     return (
-        // 🚨 UPDATED: Added 'rounded-2xl', 'mb-8', and changed 'border-t' to 'border'
         <footer className="relative mt-20 mb-3 rounded-2xl border border-white/10 bg-black/20 backdrop-blur-md overflow-hidden">
-
+            
             {/* Decorative Top Highlight */}
             <div className="absolute top-0 left-1/2 -translate-x-1/2 w-1/3 h-[1px] bg-gradient-to-r from-transparent via-accent/50 to-transparent"></div>
 
@@ -69,7 +68,6 @@ const Footer: React.FC = () => {
                         <span className="mx-2 flex items-center justify-center">
                             <i className="fas fa-heart text-accent animate-pulse scale-90"></i>
                         </span>
-                        {/* <span className="text-text-muted">by Rayhan</span> */}
                         <span className="text-accent/50 font-bold ml-2">]</span>
                     </div>
                 </div>
@@ -78,7 +76,8 @@ const Footer: React.FC = () => {
     );
 };
 
-// Helper Component for Social Icons
+// --- Helper Components ---
+
 interface SocialLinkProps {
     href: string;
     icon: string;
@@ -90,12 +89,23 @@ const SocialLink: React.FC<SocialLinkProps> = ({ href, icon, label }) => (
         href={href}
         target="_blank"
         rel="noreferrer"
-        className="w-10 h-10 flex items-center justify-center rounded-lg bg-white/5 border border-white/10 text-text-muted 
-                   hover:bg-accent hover:text-bg hover:border-accent hover:shadow-neon hover:-translate-y-1 
-                   transition-all duration-300 group"
+        className="group relative flex items-center justify-center w-10 h-10 rounded-xl bg-white/5 border border-white/10 hover:bg-accent/10 hover:border-accent/20 transition-all duration-300 hover:-translate-y-1"
         aria-label={label}
     >
-        <i className={`${icon} text-lg group-hover:scale-110 transition-transform`}></i>
+        {/* Icon */}
+        <i className={`${icon} text-lg text-gray-400 group-hover:text-accent transition-colors duration-300`}></i>
+
+        {/* Tooltip Container */}
+        <div className="absolute -top-10 left-1/2 -translate-x-1/2 px-2 py-1 bg-slate-900/90 backdrop-blur-md border border-white/10 rounded-md opacity-0 invisible group-hover:opacity-100 group-hover:visible translate-y-2 group-hover:translate-y-0 transition-all duration-300 ease-out whitespace-nowrap z-50 shadow-xl">
+            
+            {/* Tooltip Text */}
+            <span className="text-[10px] font-mono tracking-wider text-accent uppercase">
+                {label}
+            </span>
+            
+            {/* Tiny Arrow */}
+            <div className="absolute -bottom-1 left-1/2 -translate-x-1/2 w-2 h-2 bg-slate-900/90 border-r border-b border-white/10 rotate-45 transform"></div>
+        </div>
     </a>
 );
 
