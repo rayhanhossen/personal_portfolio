@@ -5,11 +5,13 @@ import Layout from './components/Layout';
 import About from './pages/About';
 import ContactPage from './pages/Contact';
 import { Analytics } from "@vercel/analytics/react";
+import { SpeedInsights } from "@vercel/speed-insights/react"
 
 function App() {
     return (
         <BrowserRouter>
-            <Analytics/>
+            <Analytics />
+            <SpeedInsights />
             <Routes>
                 <Route path="/" element={<Layout />}>
                     <Route index element={<Home />} />
