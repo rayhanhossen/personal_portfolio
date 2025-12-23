@@ -55,13 +55,15 @@ const CustomCursor: React.FC = () => {
             const isClickable = target.tagName === 'A' || target.tagName === 'BUTTON' || target.closest('a') || target.closest('button') || target.classList.contains('cursor-pointer');
             
             // Check for Text (Paragraphs, Headers, Inputs)
-            const isText = target.tagName === 'P' || target.tagName === 'SPAN' || target.tagName === 'H1' || target.tagName === 'H2' || target.tagName === 'H3' || target.tagName === 'INPUT' || target.tagName === 'TEXTAREA';
+            // const isText = target.tagName === 'P' || target.tagName === 'SPAN' || target.tagName === 'H1' || target.tagName === 'H2' || target.tagName === 'H3' || target.tagName === 'INPUT' || target.tagName === 'TEXTAREA';
 
             if (isClickable) {
                 setCursorState('pointer');
-            } else if (isText) {
-                setCursorState('text');
-            } else {
+            } 
+            //else if (isText) {
+            //     setCursorState('text');
+            // } 
+            else {
                 setCursorState('default');
             }
         };
