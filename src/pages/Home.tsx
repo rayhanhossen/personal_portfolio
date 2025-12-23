@@ -47,22 +47,37 @@ const Home = () => {
                         I deliver efficient software solutions that solve complex technical challenges <span className="text-white italic">at scale</span>.
                     </p>
 
-                    <div className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto">
+                    <div className="flex flex-row gap-3 w-full sm:w-auto justify-center sm:justify-start">
+
+                        {/* 1. Primary Button (Get In Touch) */}
                         <Link
                             to="/contact"
-                            className="group relative px-8 py-4 flex items-center justify-center gap-3 rounded-lg font-bold text-base transition-all duration-300 bg-accent text-bg shadow-neon hover:bg-white hover:text-bg hover:shadow-[0_0_30px_rgba(255,255,255,0.4)] hover:-translate-y-1"
+                            className="group relative flex-1 sm:flex-none px-4 sm:px-8 py-3.5 flex items-center justify-center gap-2 sm:gap-3 
+                   rounded-full bg-accent text-bg font-bold text-xs sm:text-sm tracking-wide
+                   shadow-[0_0_20px_-5px_rgba(34,211,238,0.4)]
+                   hover:shadow-[0_0_25px_-5px_rgba(34,211,238,0.6)]
+                   hover:scale-[1.02] active:scale-[0.98]
+                   transition-all duration-300 ease-out whitespace-nowrap"
                         >
                             <span>Get In Touch</span>
-                            <i className="fas fa-paper-plane text-sm transform group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform"></i>
+                            <i className="fas fa-paper-plane text-xs transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform duration-300"></i>
                         </Link>
+
+                        {/* 2. Secondary Button (Resume) */}
                         <a
                             href={personalInfo.cvLink}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="group px-8 py-4 flex items-center justify-center gap-3 rounded-lg font-medium text-base transition-all duration-300 bg-glass-overlay border border-white/10 text-text-muted hover:text-accent hover:border-accent"
+                            className="group flex-1 sm:flex-none px-4 sm:px-8 py-3.5 flex items-center justify-center gap-2 sm:gap-3 
+                            rounded-full 
+                            /* PERMANENT STYLES (Previously Hover) */
+                            bg-text-muted/10 border border-text-main/50 text-text-main 
+                            /* NEW HOVER (Subtle interaction only) */
+                            hover:bg-text-muted/20 hover:scale-[1.02] active:scale-[0.98]
+                            transition-all duration-300 ease-out whitespace-nowrap"
                         >
-                            <span>Download Resume</span>
-                            <i className="fas fa-download text-sm opacity-70 group-hover:opacity-100 transition-opacity"></i>
+                            <span>Resume</span>
+                            <i className="fas fa-download text-xs opacity-100 group-hover:translate-y-0.5 transition-all duration-300"></i>
                         </a>
                     </div>
                 </div>
@@ -86,20 +101,20 @@ const Home = () => {
                 {/* The Experience Card */}
                 <ExperiencePreview featuredExperience={experiences} limit={1} />
 
-                {/* Minimalist Navigation Link - Positioned closer to the card */}
-                <div className="flex justify-end max-w-5xl mx-auto mt-4">
+                {/* Center Navigation Button */}
+                <div className="mt-4 flex justify-center w-full">
                     <Link
                         to="/about#experience"
-                        className="group flex items-center gap-2 px-2 py-1 
-                       text-text-muted hover:text-accent 
-                       transition-all duration-300 font-mono text-[11px] tracking-widest uppercase"
+                        className="group relative inline-flex items-center gap-3 px-8 py-3 
+                       rounded-full border border-text-muted/20 bg-transparent
+                       text-xs font-mono tracking-[0.2em] uppercase text-text-muted
+                       hover:text-accent hover:border-accent/40 hover:bg-accent/5
+                       transition-all duration-500 ease-out"
                     >
-                        <span className="relative">
-                            View Full History
-                            {/* Minimalist underline animation */}
-                            <span className="absolute -bottom-1 left-0 w-0 h-[1px] bg-accent/50 transition-all duration-300 group-hover:w-full"></span>
-                        </span>
-                        <i className="fas fa-chevron-right text-[8px] transform group-hover:translate-x-1 transition-transform"></i>
+                        <span className="relative z-10 font-semibold">View All</span>
+
+                        {/* Icon container with right-slide animation */}
+                        <i className="fas fa-arrow-right text-[10px] transform group-hover:translate-x-1 transition-transform duration-300"></i>
                     </Link>
                 </div>
             </section>

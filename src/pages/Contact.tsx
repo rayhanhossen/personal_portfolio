@@ -1,4 +1,4 @@
-import React, { useState, useRef, useCallback } from 'react';
+import React, { useState, useRef } from 'react';
 import emailjs from '@emailjs/browser';
 import { personalInfo } from '../data/content';
 
@@ -9,10 +9,10 @@ const ContactPage: React.FC = () => {
     // State
     const [message, setMessage] = useState('');
     const [status, setStatus] = useState<'idle' | 'sending' | 'success' | 'error'>('idle');
-    const [loadingRefine, setLoadingRefine] = useState(false);
-    const [isRefined, setIsRefined] = useState(false);
+    // const [loadingRefine, setLoadingRefine] = useState(false);
+    const [isRefined] = useState(false);
     const [copyStatus, setCopyStatus] = useState<string | null>(null);
-    const [cooldown, setCooldown] = useState(false);
+    // const [cooldown, setCooldown] = useState(false);
 
     // --- Action: Send Email ---
     const handleSend = (e: React.FormEvent) => {
@@ -43,48 +43,48 @@ const ContactPage: React.FC = () => {
         });
     };
 
-    const handleRefine = useCallback(async (e: React.MouseEvent) => {
-        e.preventDefault();
+    // const handleRefine = useCallback(async (e: React.MouseEvent) => {
+    //     e.preventDefault();
 
-        // 2. Add 'cooldown' to the block condition
-        if (!message.trim() || loadingRefine || cooldown) return;
+    //     // 2. Add 'cooldown' to the block condition
+    //     if (!message.trim() || loadingRefine || cooldown) return;
 
-        setLoadingRefine(true);
-        setCooldown(true); // 3. Start cooldown immediately
+    //     setLoadingRefine(true);
+    //     setCooldown(true); // 3. Start cooldown immediately
 
-        // 4. Reset cooldown after 5 seconds (prevents spamming)
-        setTimeout(() => setCooldown(false), 5000);
+    //     // 4. Reset cooldown after 5 seconds (prevents spamming)
+    //     setTimeout(() => setCooldown(false), 5000);
 
-        const GEMINI_API_KEY = import.meta.env.VITE_GEMINI_API_KEY;
-        const prompt = `Refine this message for a developer's contact form. Fix grammar and improve clarity. Keep it professional but friendly and concise. Output ONLY the refined text: "${message}"`;
+    //     const GEMINI_API_KEY = import.meta.env.VITE_GEMINI_API_KEY;
+    //     const prompt = `Refine this message for a developer's contact form. Fix grammar and improve clarity. Keep it professional but friendly and concise. Output ONLY the refined text: "${message}"`;
 
-        try {
-            const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${GEMINI_API_KEY}`, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ contents: [{ parts: [{ text: prompt }] }] })
-            });
+    //     try {
+    //         const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${GEMINI_API_KEY}`, {
+    //             method: 'POST',
+    //             headers: { 'Content-Type': 'application/json' },
+    //             body: JSON.stringify({ contents: [{ parts: [{ text: prompt }] }] })
+    //         });
 
-            // 5. specific check for 429
-            if (response.status === 429) {
-                console.warn("Too many requests. Please wait a moment.");
-                // Optional: alert("Please wait a few seconds before refining again.");
-                setLoadingRefine(false);
-                return;
-            }
+    //         // 5. specific check for 429
+    //         if (response.status === 429) {
+    //             console.warn("Too many requests. Please wait a moment.");
+    //             // Optional: alert("Please wait a few seconds before refining again.");
+    //             setLoadingRefine(false);
+    //             return;
+    //         }
 
-            const data = await response.json();
-            const refinedText = data?.candidates?.[0]?.content?.parts?.[0]?.text;
-            if (refinedText) {
-                setMessage(refinedText.trim());
-                setIsRefined(true);
-                setTimeout(() => setIsRefined(false), 2000);
-            }
-        } catch (error) {
-            console.error("AI Error:", error);
-        }
-        setLoadingRefine(false);
-    }, [message, loadingRefine, cooldown]);
+    //         const data = await response.json();
+    //         const refinedText = data?.candidates?.[0]?.content?.parts?.[0]?.text;
+    //         if (refinedText) {
+    //             setMessage(refinedText.trim());
+    //             setIsRefined(true);
+    //             setTimeout(() => setIsRefined(false), 2000);
+    //         }
+    //     } catch (error) {
+    //         console.error("AI Error:", error);
+    //     }
+    //     setLoadingRefine(false);
+    // }, [message, loadingRefine, cooldown]);
 
     return (
         <div className="font-sans animate-fadeIn">
@@ -215,7 +215,7 @@ const ContactPage: React.FC = () => {
                             <div className="flex-1 flex flex-col gap-2 min-h-[250px]">
                                 <div className="flex justify-between items-center px-1">
                                     <label className="text-[10px] font-mono text-accent uppercase tracking-widest">Message</label>
-                                    <button
+                                    {/* <button
                                         type="button"
                                         onClick={handleRefine}
                                         disabled={loadingRefine || !message.trim()}
@@ -231,7 +231,7 @@ const ContactPage: React.FC = () => {
                                     >
                                         <i className={`fas ${loadingRefine ? 'fa-circle-notch fa-spin' : 'fa-wand-magic-sparkles'} text-[9px]`}></i>
                                         <span>{loadingRefine ? 'Refining' : 'Refine'}</span>
-                                    </button>
+                                    </button> */}
                                 </div>
                                 <textarea required name="message" value={message} onChange={(e) => setMessage(e.target.value)}
                                     placeholder="Hey Rayhan, I saw your portfolio and wanted to chat about..."

@@ -38,7 +38,6 @@ const Projects = () => {
     // Helper: Project Card
     const renderProjectCard = (project: Project) => {
         const isExpanded = !!expandedIds[project.id];
-        // Calculate length to decide if button is needed
         const maxLength = 120;
         const shouldTruncate = project.description.length > maxLength;
 
@@ -51,13 +50,9 @@ const Projects = () => {
             >
                 {renderProjectThumbnail(project)}
 
-                {/* 🚨 TECH STACK: Dynamic Alignment */}
-                {/* 🚨 TECH STACK: Dynamic Alignment based on Text Size & Reduced Gap */}
                 <div className="border-b border-white/5 p-2 flex-none">
                     {(() => {
-                        // Calculate total text length to decide alignment
                         const totalCharCount = project.tech.join('').length;
-                        // Threshold: If text is longer than 30 chars, align left (start), else center
                         const alignmentClass = totalCharCount > 30 ? 'justify-start' : 'justify-center';
 
                         return (
@@ -75,15 +70,12 @@ const Projects = () => {
                     })()}
                 </div>
 
-                {/* CONTENT BODY */}
                 <div className="p-5 flex flex-col flex-grow relative">
-
                     <h3 className="text-xl text-text-main font-bold mb-2 group-hover:text-accent transition-colors duration-300">
                         {project.title}
                     </h3>
 
                     <div className="mb-6 flex-grow">
-                        {/* Smooth Height Animation */}
                         <div
                             className={`relative overflow-hidden transition-all duration-500 ease-in-out ${isExpanded ? 'max-h-[500px]' : 'max-h-[4.5rem]'
                                 }`}
@@ -91,15 +83,9 @@ const Projects = () => {
                             <p className="text-slate-300 text-sm leading-relaxed font-light">
                                 {project.description}
                             </p>
-
-                            {/* Fade Mask */}
-                            {/* {!isExpanded && shouldTruncate && (
-                                <div className="absolute bottom-0 left-0 right-0 h-6 bg-gradient-to-t from-[#0a0a0a]/90 to-transparent"></div>
-                            )} */}
                         </div>
 
                         {shouldTruncate && (
-                            /* UPDATED BUTTON STYLE TO MATCH EXPERIENCE SECTION */
                             <button
                                 onClick={() => toggleExpand(project.id)}
                                 className="mt-4 text-[10px] font-bold uppercase tracking-widest text-accent/70 hover:text-accent flex items-center gap-2 transition-colors border-b border-transparent hover:border-accent/50 pb-0.5 w-max focus:outline-none"
@@ -110,7 +96,6 @@ const Projects = () => {
                         )}
                     </div>
 
-                    {/* Links */}
                     <div className="flex items-center gap-4 mt-auto border-t border-white/5 pt-4">
                         {project.liveLink && project.liveLink !== "#" && (
                             <a
@@ -135,6 +120,56 @@ const Projects = () => {
                                 <span>Source</span>
                             </a>
                         )}
+                    </div>
+                </div>
+            </div>
+        );
+    };
+
+    /**
+     * Logic for the Dynamic Filler Card
+     * Grid Layout: 1 col (mobile), 2 cols (md), 3 cols (lg)
+     */
+    const renderFillerCard = (listLength: number) => {
+        // MD (Tablet - 2 cols): Needs filler if length is odd (1 remainder)
+        const mdNeedsFiller = listLength % 2 !== 0;
+        
+        // LG (Desktop - 3 cols): 
+        // If remainder 1: Needs filler spanning 2 cols
+        // If remainder 2: Needs filler spanning 1 col
+        // If remainder 0: No filler
+        const lgRemainder = listLength % 3;
+        const lgNeedsFiller = lgRemainder !== 0;
+
+        // If neither needs filler, return null
+        if (!mdNeedsFiller && !lgNeedsFiller) return null;
+
+        return (
+            <div
+                className={`
+                    rounded-xl border border-dashed border-white/10 bg-white/5 
+                    flex flex-col items-center justify-center text-center p-8 min-h-[400px]
+                    /* Default Hidden (Mobile) */
+                    hidden
+                    /* Tablet Logic */
+                    ${mdNeedsFiller ? 'md:flex md:col-span-1' : 'md:hidden'}
+                    /* Desktop Logic */
+                    ${lgNeedsFiller ? 'lg:flex' : 'lg:hidden'}
+                    ${lgRemainder === 1 ? 'lg:col-span-2' : ''}
+                    ${lgRemainder === 2 ? 'lg:col-span-1' : ''}
+                `}
+            >
+                <div className="flex flex-col items-center gap-4 opacity-50">
+                    <div className="w-16 h-16 rounded-full bg-white/5 flex items-center justify-center animate-pulse">
+                         <i className="fas fa-hammer text-2xl text-accent/50"></i>
+                    </div>
+                    <div>
+                        <span className="text-text-muted font-mono font-bold tracking-widest text-xs uppercase block mb-1 animate-pulse">
+                            WORK_IN_PROGRESS
+                        </span>
+                        <span className="text-[10px] text-slate-200 font-light tracking-wide">
+                            More projects coming soon...
+                        </span>
                     </div>
                 </div>
             </div>
@@ -167,6 +202,8 @@ const Projects = () => {
                 </h3>
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                     {completeProjects.map(renderProjectCard)}
+                    {/* DYNAMIC FILLER */}
+                    {renderFillerCard(completeProjects.length)}
                 </div>
             </section>
 
@@ -178,6 +215,8 @@ const Projects = () => {
                 </h3>
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                     {smallProjects.map(renderProjectCard)}
+                    {/* DYNAMIC FILLER */}
+                    {renderFillerCard(smallProjects.length)}
                 </div>
             </section>
 
