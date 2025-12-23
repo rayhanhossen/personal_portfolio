@@ -66,13 +66,15 @@ const About = () => {
                             target="_blank"
                             rel="noopener noreferrer"
                             className="group flex-1 sm:flex-none px-4 sm:px-8 py-3.5 flex items-center justify-center gap-2 sm:gap-3 
-               rounded-full bg-transparent border border-text-muted/30 
-               text-text-muted font-medium text-xs sm:text-sm tracking-wide
-               hover:text-text-main hover:border-text-main/50 hover:bg-text-muted/5
-               transition-all duration-300 ease-out whitespace-nowrap"
+                            rounded-full 
+                            /* PERMANENT STYLES (Previously Hover) */
+                            bg-text-muted/10 border border-text-main/50 text-text-main 
+                            /* NEW HOVER (Subtle interaction only) */
+                            hover:bg-text-muted/20 hover:scale-[1.02] active:scale-[0.98]
+                            transition-all duration-300 ease-out whitespace-nowrap"
                         >
                             <span>Resume</span>
-                            <i className="fas fa-download text-xs opacity-70 group-hover:opacity-100 group-hover:translate-y-0.5 transition-all duration-300"></i>
+                            <i className="fas fa-download text-xs opacity-100 group-hover:translate-y-0.5 transition-all duration-300"></i>
                         </a>
                     </div>
                 </div>
