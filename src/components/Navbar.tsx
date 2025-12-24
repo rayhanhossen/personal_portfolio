@@ -43,7 +43,7 @@ const Navbar = () => {
                         className="flex items-center gap-3 group select-none"
                         onClick={() => setIsOpen(false)}
                     >
-                        <div className="relative flex items-center justify-center w-11 h-11 rounded-xl bg-white/5 border border-white/10 overflow-hidden transition-all duration-300 group-hover:border-accent/50 group-hover:shadow-[0_0_15px_rgba(34,211,238,0.3)]">
+                        <div className="relative flex items-center justify-center w-10 h-10 rounded-xl bg-white/5 border border-white/10 overflow-hidden transition-all duration-300 group-hover:border-accent/50 group-hover:shadow-[0_0_15px_rgba(34,211,238,0.3)]">
                             <div className="absolute inset-0 bg-accent/10 opacity-0 group-hover:opacity-100 transition-opacity"></div>
                             <i className="fas fa-terminal text-accent text-base relative z-10"></i>
                         </div>
