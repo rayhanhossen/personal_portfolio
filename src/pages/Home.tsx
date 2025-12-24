@@ -7,7 +7,7 @@ const Home = () => {
     return (
         <div id="home-view" className="view-section animate-fadeIn">
             {/* --- HERO SECTION --- */}
-            <section id="home" className="min-h-screen flex flex-col justify-center pt-20 pb-12 mt-[27px] relative">
+            <section id="home" className="min-h-[100dvh] flex flex-col justify-center py-20 md:pt-28 md:pb-20 relative">
                 <div className="w-full max-w-5xl mx-auto">
                     <div className="flex items-center gap-4 mb-6">
                         <div className="relative w-16 h-16 md:w-20 md:h-20 rounded-full p-[2px] bg-gradient-to-tr from-accent to-transparent">
@@ -97,7 +97,7 @@ const Home = () => {
             </section>
 
             {/* --- EXPERIENCE PREVIEW SECTION --- */}
-            <section className="mb-24">
+            <section className="mb-12">
                 {/* The Experience Card */}
                 <ExperiencePreview featuredExperience={experiences} limit={1} />
 
