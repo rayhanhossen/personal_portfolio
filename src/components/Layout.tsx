@@ -51,7 +51,7 @@ const Layout: React.FC = () => {
             </div>
 
             {/* Main Content */}
-            <div className="max-w-5xl mx-auto px-4 md:px-6 relative z-10">
+            <div className="max-w-5xl mx-auto px-4 md:px-0 relative z-10">
                 <Navbar />
                 <main className="view-section mb-20">
                     <Outlet />
