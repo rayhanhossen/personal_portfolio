@@ -23,7 +23,7 @@ const About = () => {
     return (
         <div className="font-sans animate-fadeIn">
             {/* --- HEADER --- */}
-            <div className="pt-24 md:pt-32 mb-8 relative z-10">
+            {/* <div className="pt-24 md:pt-32 mb-8 relative z-10">
                 <div className="absolute -top-10 -left-10 text-[100px] text-accent/5 opacity-20 pointer-events-none select-none z-0">
                     <i className="fas fa-user-astronaut"></i>
                 </div>
@@ -32,10 +32,10 @@ const About = () => {
                     <span className="text-transparent bg-clip-text bg-text-gradient">about_me</span>
                 </h2>
                 <p className="text-text-muted text-lg font-light tracking-wide relative z-10">Who am I?</p>
-            </div>
+            </div> */}
 
             {/* --- BIO & IMAGE --- */}
-            <div className="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-12 mb-16 items-start">
+            <div className="pt-32 relative z-10 grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-12 mb-16 items-start">
                 <div className="md:col-span-7 leading-relaxed order-2 md:order-1">
                     {personalInfo.about.map((paragraph, index) => (
                         <p key={index} className="mb-6 text-base md:text-lg text-slate-300 font-light">
@@ -49,12 +49,12 @@ const About = () => {
                         {/* 1. Primary: Get In Touch */}
                         <Link
                             to="/contact"
-                            className="group relative flex-1 sm:flex-none px-4 sm:px-8 py-3.5 flex items-center justify-center gap-2 sm:gap-3 
-               rounded-full bg-accent text-bg font-bold text-xs sm:text-sm tracking-wide
-               shadow-[0_0_20px_-5px_rgba(34,211,238,0.4)]
-               hover:shadow-[0_0_25px_-5px_rgba(34,211,238,0.6)]
-               hover:scale-[1.02] active:scale-[0.98]
-               transition-all duration-300 ease-out whitespace-nowrap"
+                            className="group relative flex-1 sm:flex-none px-6 py-2.5 flex items-center justify-center gap-2 
+                            rounded-full bg-accent text-bg font-bold text-sm tracking-wide
+                            shadow-[0_0_20px_-5px_rgba(34,211,238,0.4)]
+                            hover:shadow-[0_0_25px_-5px_rgba(34,211,238,0.6)]
+                            hover:scale-[1.02] active:scale-[0.98]
+                            transition-all duration-300 ease-out whitespace-nowrap"
                         >
                             <span>Get In Touch</span>
                             <i className="fas fa-paper-plane text-xs transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform duration-300"></i>
@@ -65,11 +65,11 @@ const About = () => {
                             href={personalInfo.cvLink}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="group flex-1 sm:flex-none px-4 sm:px-8 py-3.5 flex items-center justify-center gap-2 sm:gap-3 
+                            className="group flex-1 sm:flex-none px-6 py-2.5 flex items-center justify-center gap-2 
                             rounded-full 
-                            /* PERMANENT STYLES (Previously Hover) */
-                            bg-text-muted/10 border border-text-main/50 text-text-main 
-                            /* NEW HOVER (Subtle interaction only) */
+                            /* PERMANENT STYLES */
+                            bg-text-muted/10 border border-text-main/50 text-text-main font-medium text-sm
+                            /* HOVER INTERACTION */
                             hover:bg-text-muted/20 hover:scale-[1.02] active:scale-[0.98]
                             transition-all duration-300 ease-out whitespace-nowrap"
                         >

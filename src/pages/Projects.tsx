@@ -133,7 +133,7 @@ const Projects = () => {
     const renderFillerCard = (listLength: number) => {
         // MD (Tablet - 2 cols): Needs filler if length is odd (1 remainder)
         const mdNeedsFiller = listLength % 2 !== 0;
-        
+
         // LG (Desktop - 3 cols): 
         // If remainder 1: Needs filler spanning 2 cols
         // If remainder 2: Needs filler spanning 1 col
@@ -148,12 +148,15 @@ const Projects = () => {
             <div
                 className={`
                     rounded-xl border border-dashed border-white/10 bg-white/5 
-                    flex flex-col items-center justify-center text-center p-8 min-h-[400px]
-                    /* Default Hidden (Mobile) */
+                    flex-col items-center justify-center text-center p-8 min-h-[400px]
+                    
+                    /* Base State: Hidden (Mobile) */
                     hidden
-                    /* Tablet Logic */
+
+                    /* Tablet Logic: Applies display:flex if needed */
                     ${mdNeedsFiller ? 'md:flex md:col-span-1' : 'md:hidden'}
-                    /* Desktop Logic */
+
+                    /* Desktop Logic: Applies display:flex if needed */
                     ${lgNeedsFiller ? 'lg:flex' : 'lg:hidden'}
                     ${lgRemainder === 1 ? 'lg:col-span-2' : ''}
                     ${lgRemainder === 2 ? 'lg:col-span-1' : ''}
@@ -161,7 +164,7 @@ const Projects = () => {
             >
                 <div className="flex flex-col items-center gap-4 opacity-50">
                     <div className="w-16 h-16 rounded-full bg-white/5 flex items-center justify-center animate-pulse">
-                         <i className="fas fa-hammer text-2xl text-accent/50"></i>
+                        <i className="fas fa-hammer text-2xl text-accent/50"></i>
                     </div>
                     <div>
                         <span className="text-text-muted font-mono font-bold tracking-widest text-xs uppercase block mb-1 animate-pulse">
@@ -177,10 +180,10 @@ const Projects = () => {
     };
 
     return (
-        <div id="projects-view" className="view-section animate-fadeIn font-sans">
+        <div id="projects-view" className="pt-32 relative z-10 view-section animate-fadeIn font-sans">
 
             {/* --- HEADER --- */}
-            <div className="pt-24 md:pt-32 mb-8 relative z-10">
+            {/* <div className="pt-24 md:pt-32 mb-8 relative z-10">
                 <div className="absolute -top-10 -left-10 text-[100px] text-accent/5 opacity-20 pointer-events-none select-none z-0">
                     <i className="fas fa-laptop-code"></i>
                 </div>
@@ -192,7 +195,7 @@ const Projects = () => {
                 <p className="text-text-muted text-lg font-light tracking-wide relative z-10">
                     A selection of my best work.
                 </p>
-            </div>
+            </div> */}
 
             {/* 1. Professional Apps */}
             <section className="mb-12 relative">
