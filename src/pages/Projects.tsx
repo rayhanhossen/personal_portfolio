@@ -199,7 +199,7 @@ const Projects = () => {
 
             {/* 1. Professional Apps */}
             <section className="mb-12 relative">
-                <h3 className="text-xl md:text-2xl font-semibold text-text-main mb-8 flex items-center tracking-tight">
+                <h3 className="text-2xl font-semibold text-text-main mb-8 flex items-center tracking-tight">
                     <i className="fas fa-rocket text-accent mr-3 drop-shadow-[0_0_5px_rgba(34,211,238,0.5)]"></i>
                     Professional Applications
                 </h3>
@@ -212,7 +212,7 @@ const Projects = () => {
 
             {/* 2. Coding Challenges */}
             <section className="mb-12 relative">
-                <h3 className="text-xl md:text-2xl font-semibold text-text-main mb-8 flex items-center tracking-tight">
+                <h3 className="text-2xl font-semibold text-text-main mb-8 flex items-center tracking-tight">
                     <i className="fas fa-terminal text-accent mr-3 drop-shadow-[0_0_5px_rgba(34,211,238,0.5)]"></i>
                     Tools & Snippets
                 </h3>
