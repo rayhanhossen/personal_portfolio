@@ -28,15 +28,15 @@ const Navbar = () => {
     return (
         <>
             {/* --- HEADER WRAPPER --- */}
-            <header 
+            <header
                 className={`fixed top-0 left-0 right-0 z-[100] transition-all duration-300 border-b
-                ${scrolled 
-                    ? 'bg-[#020617]/80 backdrop-blur-xl border-white/5 py-4 shadow-lg' 
-                    : 'bg-transparent border-transparent py-6' 
-                }`} 
+                ${scrolled
+                        ? 'bg-[#020617]/80 backdrop-blur-xl border-white/5 py-4 shadow-lg'
+                        : 'bg-transparent border-transparent py-6'
+                    }`}
             >
                 <div className="max-w-5xl mx-auto px-4 md:px-0 flex justify-between items-center">
-                    
+
                     {/* --- LOGO --- */}
                     <Link
                         to="/"
@@ -47,7 +47,7 @@ const Navbar = () => {
                             <div className="absolute inset-0 bg-accent/10 opacity-0 group-hover:opacity-100 transition-opacity"></div>
                             <i className="fas fa-terminal text-accent text-base relative z-10"></i>
                         </div>
-                        
+
                         <div className="flex flex-col">
                             <span className="font-bold text-xl uppercase md:text-2xl tracking-tight text-white leading-none group-hover:text-accent transition-colors">
                                 {personalInfo.name}
@@ -63,8 +63,8 @@ const Navbar = () => {
                                 to={link.path}
                                 className={({ isActive }) =>
                                     `relative text-base font-medium tracking-wide transition-all duration-300 py-1
-                                    ${isActive 
-                                        ? 'text-accent' 
+                                    ${isActive
+                                        ? 'text-accent'
                                         : 'text-text-muted hover:text-white'
                                     }`
                                 }
@@ -73,7 +73,7 @@ const Navbar = () => {
                                     <>
                                         {link.name}
                                         <span className={`absolute -bottom-1.5 left-1/2 -translate-x-1/2 w-1 h-1 rounded-full bg-accent transition-all duration-300 
-                                            ${isActive ? 'opacity-100 scale-100' : 'opacity-0 scale-0'}`} 
+                                            ${isActive ? 'opacity-100 scale-100' : 'opacity-0 scale-0'}`}
                                         />
                                     </>
                                 )}
@@ -81,12 +81,12 @@ const Navbar = () => {
                         ))}
 
                         {/* --- CONTACT BUTTON (Desktop) --- */}
-                        <NavLink 
-                            to="/contact" 
+                        <NavLink
+                            to="/contact"
                             className={({ isActive }) => `
                                 group ml-4 px-6 py-2.5 rounded-full border text-sm font-bold tracking-wider transition-all duration-300 flex items-center gap-2 overflow-hidden
-                                ${isActive 
-                                    ? 'bg-accent text-bg border-accent shadow-[0_0_20px_rgba(34,211,238,0.3)]' 
+                                ${isActive
+                                    ? 'bg-accent text-bg border-accent shadow-[0_0_20px_rgba(34,211,238,0.3)]'
                                     : 'bg-white/5 border-white/10 text-white hover:bg-white/10 hover:border-accent/50'
                                 }
                             `}
@@ -96,7 +96,7 @@ const Navbar = () => {
                             <div className="relative w-2 h-3 flex items-center justify-center">
                                 {/* Chevron (>): Visible by default, slides out right on hover */}
                                 <i className="fas fa-chevron-right text-[10px] absolute transition-all duration-300 transform group-hover:translate-x-full group-hover:opacity-0"></i>
-                                
+
                                 {/* Arrow (->): Hidden left by default, slides in to center on hover */}
                                 <i className="fas fa-arrow-right text-[10px] absolute transition-all duration-300 transform -translate-x-full opacity-0 group-hover:translate-x-0 group-hover:opacity-100"></i>
                             </div>
@@ -104,8 +104,8 @@ const Navbar = () => {
                     </nav>
 
                     {/* --- MOBILE TOGGLE --- */}
-                    <button 
-                        className="md:hidden relative w-12 h-12 flex items-center justify-center rounded-lg text-white hover:bg-white/5 transition-colors" 
+                    <button
+                        className="md:hidden relative w-12 h-12 flex items-center justify-center rounded-lg text-white hover:bg-white/5 transition-colors"
                         onClick={() => setIsOpen(!isOpen)}
                         aria-label="Toggle Menu"
                     >
@@ -115,7 +115,7 @@ const Navbar = () => {
             </header>
 
             {/* --- MOBILE MENU OVERLAY --- */}
-            <div 
+            <div
                 className={`fixed inset-0 z-[90] bg-[#020617]/95 backdrop-blur-xl transition-all duration-300 md:hidden flex flex-col
                 ${isOpen ? 'opacity-100 visible' : 'opacity-0 invisible pointer-events-none'}`}
             >
@@ -136,15 +136,17 @@ const Navbar = () => {
                                 {link.name}
                             </NavLink>
                         ))}
-                        
+
                         {/* --- CONTACT BUTTON (Mobile) --- */}
                         <NavLink
                             to="/contact"
                             onClick={() => setIsOpen(false)}
                             className={({ isActive }) => `
-                                group mt-6 px-10 py-4 rounded-full border text-lg font-medium transition-all flex items-center justify-center gap-3
-                                ${isActive 
-                                    ? 'bg-accent text-bg border-accent shadow-neon' 
+                                    group mt-6 px-10 py-3
+                                    rounded-full border text-base /* <-- Reduced text size for better proportion */
+                                    font-medium transition-all flex items-center justify-center gap-3
+                                    ${isActive
+                                    ? 'bg-accent text-bg border-accent shadow-neon'
                                     : 'bg-white/5 border-white/10 text-white hover:bg-white/10 hover:border-white/20'
                                 }
                             `}
