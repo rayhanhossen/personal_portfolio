@@ -1,62 +1,34 @@
 import React, { useEffect, useRef, useState } from 'react';
+import { useLocation } from 'react-router-dom'; // Import this
 
-// Common style props for consistency
+// --- 1. SVG ICONS (Kept exactly the same) ---
 const SVG_PROPS = {
-    width: "100%",
-    height: "100%",
-    fill: "white",      // Inner Color
-    stroke: "white",    // Outline Color
-    strokeWidth: "0.9", // Outline Thickness
-    strokeLinejoin: "round" as "round",
-    strokeLinecap: "round" as "round"
+    width: "100%", height: "100%", fill: "white", stroke: "white", 
+    strokeWidth: "0.9", strokeLinejoin: "round" as "round", strokeLinecap: "round" as "round"
 };
 
 const SVG_PROPS_NOT_ALLOWED = {
-    width: "100%",
-    height: "100%",
-    fill: "red",      // Inner Color
-    stroke: "white",    // Outline Color
-    strokeWidth: "0.9", // Outline Thickness
-    strokeLinejoin: "round" as "round",
-    strokeLinecap: "round" as "round"
+    ...SVG_PROPS, fill: "red"
 };
 
 const IconDefault = () => (
-    // YOUR NEW SVG (ViewBox 0 0 24 24)
     <svg viewBox="0 0 30 30" xmlns="http://www.w3.org/2000/svg" style={{ overflow: 'visible' }}>
         <g>
-             {/* The Bounding Box (Transparent) */}
             <path fill="none" d="M0 0h24v24H0z"/>
-            {/* The Arrow Path */}
-            <path 
-                d="M13.91 12.36L17 20.854l-2.818 1.026-3.092-8.494-4.172 3.156 1.49-14.909 10.726 10.463z"
-                fill="black"
-                stroke="white"
-                strokeWidth="0.9"
-                strokeLinejoin="round"
-                strokeLinecap="round"
-            />
+            <path d="M13.91 12.36L17 20.854l-2.818 1.026-3.092-8.494-4.172 3.156 1.49-14.909 10.726 10.463z" fill="black" stroke="white" strokeWidth="0.9" strokeLinejoin="round" strokeLinecap="round"/>
         </g>
     </svg>
 );
 
 const IconPointer = () => (
-    // Adjusted viewBox to crop the empty space from the original 36x36
     <svg viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg" style={{ overflow: 'visible' }}>
-         <path 
-            d="M30.4,17.6c-1.8-1.9-4.2-3.2-6.7-3.7c-1.1-0.3-2.2-0.5-3.3-0.6c2.8-3.3,2.3-8.3-1-11.1s-8.3-2.3-11.1,1s-2.3,8.3,1,11.1c0.6,0.5,1.2,0.9,1.8,1.1v2.2l-1.6-1.5c-1.4-1.4-3.7-1.4-5.2,0c-1.4,1.4-1.5,3.6-0.1,5l4.6,5.4c0.2,1.4,0.7,2.7,1.4,3.9c0.5,0.9,1.2,1.8,1.9,2.5v1.9c0,0.6,0.4,1,1,1h13.6c0.5,0,1-0.5,1-1v-2.6c1.9-2.3,2.9-5.2,2.9-8.1v-5.8C30.7,17.9,30.6,17.7,30.4,17.6z M8.4,8.2c0-3.3,2.7-5.9,6-5.8c3.3,0,5.9,2.7,5.8,6c0,1.8-0.8,3.4-2.2,4.5V7.9c-0.1-1.8-1.6-3.2-3.4-3.2c-1.8-0.1-3.4,1.4-3.4,3.2v5.2C9.5,12.1,8.5,10.2,8.4,8.2L8.4,8.2z M28.7,24c0.1,2.6-0.8,5.1-2.5,7.1c-0.2,0.2-0.4,0.4-0.4,0.7v2.1H14.2v-1.4c0-0.3-0.2-0.6-0.4-0.8c-0.7-0.6-1.3-1.3-1.8-2.2c-0.6-1-1-2.2-1.2-3.4c0-0.2-0.1-0.4-0.2-0.6l-4.8-5.7c-0.3-0.3-0.5-0.7-0.5-1.2c0-0.4,0.2-0.9,0.5-1.2c0.7-0.6,1.7-0.6,2.4,0l2.9,2.9v3l1.9-1V7.9c0.1-0.7,0.7-1.3,1.5-1.2c0.7,0,1.4,0.5,1.4,1.2v11.5l2,0.4v-4.6c0.1-0.1,0.2-0.1,0.3-0.2c0.7,0,1.4,0.1,2.1,0.2v5.1l1.6,0.3v-5.2l1.2,0.3c0.5,0.1,1,0.3,1.5,0.5v5l1.6,0.3v-4.6c0.9,0.4,1.7,1,2.4,1.7L28.7,24z" 
-            {...SVG_PROPS}
-            //transform="scale(0.9) translate(1,1)" // Slight adjust to fit stroke inside box
-        />
+         <path d="M30.4,17.6c-1.8-1.9-4.2-3.2-6.7-3.7c-1.1-0.3-2.2-0.5-3.3-0.6c2.8-3.3,2.3-8.3-1-11.1s-8.3-2.3-11.1,1s-2.3,8.3,1,11.1c0.6,0.5,1.2,0.9,1.8,1.1v2.2l-1.6-1.5c-1.4-1.4-3.7-1.4-5.2,0c-1.4,1.4-1.5,3.6-0.1,5l4.6,5.4c0.2,1.4,0.7,2.7,1.4,3.9c0.5,0.9,1.2,1.8,1.9,2.5v1.9c0,0.6,0.4,1,1,1h13.6c0.5,0,1-0.5,1-1v-2.6c1.9-2.3,2.9-5.2,2.9-8.1v-5.8C30.7,17.9,30.6,17.7,30.4,17.6z M8.4,8.2c0-3.3,2.7-5.9,6-5.8c3.3,0,5.9,2.7,5.8,6c0,1.8-0.8,3.4-2.2,4.5V7.9c-0.1-1.8-1.6-3.2-3.4-3.2c-1.8-0.1-3.4,1.4-3.4,3.2v5.2C9.5,12.1,8.5,10.2,8.4,8.2L8.4,8.2z M28.7,24c0.1,2.6-0.8,5.1-2.5,7.1c-0.2,0.2-0.4,0.4-0.4,0.7v2.1H14.2v-1.4c0-0.3-0.2-0.6-0.4-0.8c-0.7-0.6-1.3-1.3-1.8-2.2c-0.6-1-1-2.2-1.2-3.4c0-0.2-0.1-0.4-0.2-0.6l-4.8-5.7c-0.3-0.3-0.5-0.7-0.5-1.2c0-0.4,0.2-0.9,0.5-1.2c0.7-0.6,1.7-0.6,2.4,0l2.9,2.9v3l1.9-1V7.9c0.1-0.7,0.7-1.3,1.5-1.2c0.7,0,1.4,0.5,1.4,1.2v11.5l2,0.4v-4.6c0.1-0.1,0.2-0.1,0.3-0.2c0.7,0,1.4,0.1,2.1,0.2v5.1l1.6,0.3v-5.2l1.2,0.3c0.5,0.1,1,0.3,1.5,0.5v5l1.6,0.3v-4.6c0.9,0.4,1.7,1,2.4,1.7L28.7,24z" {...SVG_PROPS} />
     </svg>
 );
 
 const IconText = () => (
     <svg viewBox="0 0 30 30" xmlns="http://www.w3.org/2000/svg" style={{ overflow: 'visible' }}>
-        <path 
-            d="M13,19A1,1 0 0,0 14,20H16V22H13.5C12.95,22 12,21.55 12,21C12,21.55 11.05,22 10.5,22H8V20H10A1,1 0 0,0 11,19V5A1,1 0 0,0 10,4H8V2H10.5C11.05,2 12,2.45 12,3C12,2.45 12.95,2 13.5,2H16V4H14A1,1 0 0,0 13,5V19Z" 
-            {...SVG_PROPS}
-        />
+        <path d="M13,19A1,1 0 0,0 14,20H16V22H13.5C12.95,22 12,21.55 12,21C12,21.55 11.05,22 10.5,22H8V20H10A1,1 0 0,0 11,19V5A1,1 0 0,0 10,4H8V2H10.5C11.05,2 12,2.45 12,3C12,2.45 12.95,2 13.5,2H16V4H14A1,1 0 0,0 13,5V19Z" {...SVG_PROPS} />
     </svg>
 );
 
@@ -78,6 +50,31 @@ const CustomCursor: React.FC = () => {
     const cursorRef = useRef<HTMLDivElement>(null);
     const [cursorType, setCursorType] = useState<CursorType>('default');
     const [isClicking, setIsClicking] = useState(false);
+    
+    // NEW: Detect route changes
+    const location = useLocation();
+    
+    // NEW: Store mouse coordinates so we can re-check elements without moving mouse
+    const mousePos = useRef({ x: 0, y: 0 });
+
+    // Helper: Logic to determine cursor type from an HTML Element
+    const getCursorTypeForElement = (target: Element | null): CursorType => {
+        if (!target) return 'default';
+        
+        const computedStyle = window.getComputedStyle(target);
+
+        if (target.hasAttribute('disabled') || target.closest('[disabled]') || computedStyle.cursor === 'not-allowed') {
+            return 'disabled';
+        } 
+        if (target.tagName === 'INPUT' || target.tagName === 'TEXTAREA' || computedStyle.cursor === 'text' || (target as HTMLElement).isContentEditable) {
+            return 'text';
+        } 
+        if (target.tagName === 'A' || target.tagName === 'BUTTON' || target.closest('a') || target.closest('button') || computedStyle.cursor === 'pointer') {
+            return 'pointer';
+        } 
+        
+        return 'default';
+    };
 
     useEffect(() => {
         // --- 1. Hide System Cursor ---
@@ -93,53 +90,60 @@ const CustomCursor: React.FC = () => {
 
         // --- 2. Move Logic ---
         const onMouseMove = (e: MouseEvent) => {
+            // Update ref coordinates
+            mousePos.current = { x: e.clientX, y: e.clientY };
+
+            // Move the visual cursor
             if (cursorRef.current) {
                 cursorRef.current.style.transform = `translate3d(${e.clientX}px, ${e.clientY}px, 0)`;
             }
-        };
-
-        // --- 3. Hover Detection Logic ---
-        const onMouseOver = (e: MouseEvent) => {
-            const target = e.target as HTMLElement;
-            const computedStyle = window.getComputedStyle(target).cursor;
-
-            if (target.hasAttribute('disabled') || target.closest('[disabled]') || computedStyle === 'not-allowed') {
-                setCursorType('disabled');
-            } else if (target.tagName === 'INPUT' || target.tagName === 'TEXTAREA' || computedStyle === 'text' || target.isContentEditable) {
-                setCursorType('text');
-            } else if (target.tagName === 'A' || target.tagName === 'BUTTON' || target.closest('a') || target.closest('button') || computedStyle === 'pointer') {
-                setCursorType('pointer');
-            } else {
-                setCursorType('default');
-            }
+            
+            // Traditional hover check (performance optimized)
+            const type = getCursorTypeForElement(e.target as Element);
+            setCursorType(type);
         };
 
         const onMouseDown = () => setIsClicking(true);
         const onMouseUp = () => setIsClicking(false);
 
         window.addEventListener('mousemove', onMouseMove);
-        window.addEventListener('mouseover', onMouseOver);
         window.addEventListener('mousedown', onMouseDown);
         window.addEventListener('mouseup', onMouseUp);
 
         return () => {
             window.removeEventListener('mousemove', onMouseMove);
-            window.removeEventListener('mouseover', onMouseOver);
             window.removeEventListener('mousedown', onMouseDown);
             window.removeEventListener('mouseup', onMouseUp);
             document.head.removeChild(style);
         };
     }, []);
 
+    // --- 3. RE-CHECK ON NAVIGATION (The Fix) ---
+    useEffect(() => {
+        // When location changes, the element under the mouse changes, 
+        // but no 'mousemove' event fires. We must manually check.
+        
+        const checkElementUnderMouse = () => {
+            const { x, y } = mousePos.current;
+            // Get the element at the current coordinates
+            const el = document.elementFromPoint(x, y);
+            const type = getCursorTypeForElement(el);
+            setCursorType(type);
+        };
+
+        // Small timeout ensures the new page has rendered before we check
+        const timeoutId = setTimeout(checkElementUnderMouse, 50);
+
+        return () => clearTimeout(timeoutId);
+    }, [location]); // Re-run whenever route changes
+
     return (
         <div 
             ref={cursorRef}
             className="custom-cursor fixed top-0 left-0 pointer-events-none z-[9999] will-change-transform flex items-center justify-center drop-shadow-md"
             style={{ 
-                // UNIFIED SIZE: 32px
                 width: '32px', 
                 height: '32px', 
-                // Center exactly on mouse tip
                 marginTop: '-12px', 
                 marginLeft: '-12px' 
             }}
