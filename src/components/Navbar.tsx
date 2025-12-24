@@ -25,6 +25,13 @@ const Navbar = () => {
         { name: 'About', path: '/about' },
     ];
 
+    const navLinksMobile = [
+        { name: 'Home', path: '/' },
+        { name: 'Projects', path: '/projects' },
+        { name: 'About', path: '/about' },
+        { name: 'Contact', path: '/contact' },
+    ];
+
     return (
         <>
             {/* --- HEADER WRAPPER --- */}
@@ -56,50 +63,76 @@ const Navbar = () => {
                     </Link>
 
                     {/* --- DESKTOP NAV --- */}
-                    <nav className="hidden md:flex items-center gap-8">
+                    {/* --- THE "QUANTUM" NAV BAR --- */}
+                    <nav className="hidden md:flex items-center gap-10">
+                        {/* Navigation Links (with your requested Mini Line) */}
                         {navLinks.map((link) => (
                             <NavLink
                                 key={link.name}
                                 to={link.path}
                                 className={({ isActive }) =>
-                                    `relative text-base font-medium tracking-wide transition-all duration-300 py-1
-                                    ${isActive
-                                        ? 'text-accent'
-                                        : 'text-text-muted hover:text-white'
-                                    }`
+                                    `relative text-base uppercase tracking-widest font-medium transition-all duration-300 pt-2 pb-[2px]
+                                    ${isActive ? 'text-white' : 'text-text-muted hover:text-white/80'}`
                                 }
                             >
                                 {({ isActive }) => (
                                     <>
                                         {link.name}
-                                        <span className={`absolute -bottom-1.5 left-1/2 -translate-x-1/2 w-1 h-1 rounded-full bg-accent transition-all duration-300 
-                                            ${isActive ? 'opacity-100 scale-100' : 'opacity-0 scale-0'}`}
+                                        {/* The Mini Line */}
+                                        <span className={`absolute -bottom-1 left-1/2 -translate-x-1/2 
+                                        h-[2.5px] w-5 rounded-full bg-accent shadow-[0_0_10px_var(--accent-color)]
+                                        transition-all duration-300 ease-out
+                                        ${isActive ? 'opacity-100 scale-x-100' : 'opacity-0 scale-x-0'}`}
                                         />
                                     </>
                                 )}
                             </NavLink>
                         ))}
 
-                        {/* --- CONTACT BUTTON (Desktop) --- */}
+                        {/* --- AGGRESSIVE CONTACT BUTTON --- */}
                         <NavLink
                             to="/contact"
                             className={({ isActive }) => `
-                                group ml-4 px-6 py-2.5 rounded-full border text-sm font-bold tracking-wider transition-all duration-300 flex items-center gap-2 overflow-hidden
-                                ${isActive
-                                    ? 'bg-accent text-bg border-accent shadow-[0_0_20px_rgba(34,211,238,0.3)]'
-                                    : 'bg-white/5 border-white/10 text-white hover:bg-white/10 hover:border-accent/50'
-                                }
+                                group relative ml-6 px-6 py-2 bg-white/5 rounded-full overflow-hidden transition-all duration-500
+                                border border-white/50 flex items-center gap-1
+                                hover:border-accent hover:shadow-[0_0_40px_-5px_rgba(34,211,238,0.6)]
+                                ${isActive ? 'bg-accent border-accent' : 'bg-transparent'}
                             `}
                         >
-                            <span>Contact</span>
-                            {/* Animated Icon Container */}
-                            <div className="relative w-2 h-3 flex items-center justify-center">
-                                {/* Chevron (>): Visible by default, slides out right on hover */}
-                                <i className="fas fa-chevron-right text-[10px] absolute transition-all duration-300 transform group-hover:translate-x-full group-hover:opacity-0"></i>
+                            {/* This is the magic part: we use a function inside the NavLink */}
+                            {({ isActive }) => (
+                                <>
+                                    {/* 1. Background Fill (Aggressive Slide) */}
+                                    <div className={`absolute inset-0 bg-accent transition-transform duration-500 ease-out -z-10
+                                        ${isActive ? 'translate-y-0' : 'translate-y-[102%] group-hover:translate-y-0'}
+                                    `}
+                                    />
 
-                                {/* Arrow (->): Hidden left by default, slides in to center on hover */}
-                                <i className="fas fa-arrow-right text-[10px] absolute transition-all duration-300 transform -translate-x-full opacity-0 group-hover:translate-x-0 group-hover:opacity-100"></i>
-                            </div>
+                                    {/* 2. Content */}
+                                    <span className={`relative text-base font-medium tracking-widest transition-colors duration-300
+                                        ${isActive ? 'text-black' : 'text-white group-hover:text-black'}
+                                    `}>
+                                        Contact
+                                    </span>
+
+                                    {/* 3. Aggressive Icon */}
+                                    <div className="relative w-4 h-4 overflow-hidden">
+                                        <div className={`flex flex-col transition-transform duration-500 ease-in-out
+                                            ${isActive ? '-translate-y-1/2' : 'group-hover:-translate-y-1/2'}
+                                        `}>
+                                            {/* Top Icon (Visible when not active/hovered) */}
+                                            <i className={`fas fa-chevron-right text-[12px] h-4 flex items-center justify-center
+                                                ${isActive ? 'text-black' : 'text-white group-hover:text-black'}
+                                            `}></i>
+                                            {/* Bottom Icon (Slides up on Hover/Active) */}
+                                            <i className="fas fa-paper-plane text-[10px] h-4 flex items-center justify-center text-black"></i>
+                                        </div>
+                                    </div>
+
+                                    {/* 4. The "Flash" Sheen Effect */}
+                                    <div className="absolute top-0 -left-[100%] w-full h-full bg-gradient-to-r from-transparent via-white/50 to-transparent skew-x-[30deg] group-hover:animate-[shine_0.8s_ease-in-out]" />
+                                </>
+                            )}
                         </NavLink>
                     </nav>
 
@@ -116,58 +149,51 @@ const Navbar = () => {
 
             {/* --- MOBILE MENU OVERLAY --- */}
             <div
-                className={`fixed inset-0 z-[90] bg-[#020617]/95 backdrop-blur-xl transition-all duration-300 md:hidden flex flex-col
-                ${isOpen ? 'opacity-100 visible' : 'opacity-0 invisible pointer-events-none'}`}
-            >
-                <div className="absolute inset-0" onClick={() => setIsOpen(false)} />
+                className={`fixed inset-0 z-[90] bg-slate-950/98 backdrop-blur-2xl transition-all duration-500 ease-in-out md:hidden flex flex-col
+                    ${isOpen ? 'opacity-100 visible' : 'opacity-0 invisible pointer-events-none'}`}
+                >
+                {/* Animated background element for extra depth */}
+                <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[30%] bg-accent/10 blur-[120px] rounded-full animate-pulse" />
 
-                <div className="relative z-10 flex flex-col justify-center items-center h-full px-6 gap-8">
-                    <nav className="flex flex-col gap-6 w-full max-w-xs text-center">
-                        {navLinks.map((link) => (
+                <div className="relative z-10 flex flex-col justify-center items-center h-full px-8">
+                    <nav className="flex flex-col gap-4 w-full max-w-sm">
+                        {navLinksMobile.map((link, index) => (
                             <NavLink
                                 key={link.name}
                                 to={link.path}
                                 onClick={() => setIsOpen(false)}
+                                // Delay each link slightly for a staggered "reveal" effect
+                                style={{ transitionDelay: isOpen ? `${index * 50}ms` : '0ms' }}
                                 className={({ isActive }) =>
-                                    `text-2xl font-bold tracking-tight transition-colors duration-300 flex items-center justify-center gap-3
-                                    ${isActive ? 'text-accent' : 'text-white/40 hover:text-white'}`
+                                    `text-2xl font-black uppercase tracking-tighter transition-all duration-500 flex items-center justify-between group
+                                    ${isOpen ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}
+                                    ${isActive ? 'text-accent' : 'text-white/20 hover:text-white'}`
                                 }
                             >
-                                {link.name}
+                                {({ isActive }) => (
+                                    <>
+                                        <span>{link.name}</span>
+                                        {/* A mini line that grows on active/hover */}
+                                        <div className={`h-[2px] bg-accent transition-all duration-500 
+                                        ${isActive ? 'w-12' : 'w-0 group-hover:w-8'}`}
+                                        />
+                                    </>
+                                )}
                             </NavLink>
                         ))}
-
-                        {/* --- CONTACT BUTTON (Mobile) --- */}
-                        <NavLink
-                            to="/contact"
-                            onClick={() => setIsOpen(false)}
-                            className={({ isActive }) => `
-                                    group mt-6 px-10 py-3
-                                    rounded-full border text-base /* <-- Reduced text size for better proportion */
-                                    font-medium transition-all flex items-center justify-center gap-3
-                                    ${isActive
-                                    ? 'bg-accent text-bg border-accent shadow-neon'
-                                    : 'bg-white/5 border-white/10 text-white hover:bg-white/10 hover:border-white/20'
-                                }
-                            `}
-                        >
-                            <span>Contact</span>
-                            <div className="relative w-3 h-4 flex items-center justify-center">
-                                <i className="fas fa-chevron-right text-sm absolute transition-all duration-300 transform group-hover:translate-x-full group-hover:opacity-0"></i>
-                                <i className="fas fa-arrow-right text-sm absolute transition-all duration-300 transform -translate-x-full opacity-0 group-hover:translate-x-0 group-hover:opacity-100"></i>
-                            </div>
-                        </NavLink>
                     </nav>
 
-                    <div className="mt-8 pt-8 border-t border-white/10 w-full max-w-xs flex justify-center gap-10">
-                        <a href={personalInfo.github} target="_blank" rel="noreferrer" className="text-white/40 hover:text-accent transition-colors">
-                            <i className="fab fa-github text-3xl"></i>
+                    {/* --- SOCIALS --- */}
+                    <div className={`mt-16 pt-8 border-t border-white/5 w-full max-w-sm flex justify-around transition-all duration-700 delay-300
+                        ${isOpen ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
+                        <a href={personalInfo.github} className="p-4 rounded-full bg-white/5 text-white hover:text-accent hover:bg-white/10 transition-all">
+                            <i className="fab fa-github text-2xl"></i>
                         </a>
-                        <a href={personalInfo.linkedin} target="_blank" rel="noreferrer" className="text-white/40 hover:text-accent transition-colors">
-                            <i className="fab fa-linkedin text-3xl"></i>
+                        <a href={personalInfo.linkedin} className="p-4 rounded-full bg-white/5 text-white hover:text-accent hover:bg-white/10 transition-all">
+                            <i className="fab fa-linkedin text-2xl"></i>
                         </a>
-                        <a href={`mailto:${personalInfo.email}`} className="text-white/40 hover:text-accent transition-colors">
-                            <i className="fas fa-envelope text-3xl"></i>
+                        <a href={`mailto:${personalInfo.email}`} className="p-4 rounded-full bg-white/5 text-white hover:text-accent hover:bg-white/10 transition-all">
+                            <i className="fas fa-envelope text-2xl"></i>
                         </a>
                     </div>
                 </div>
