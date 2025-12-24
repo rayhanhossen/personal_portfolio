@@ -89,18 +89,18 @@ const ContactPage: React.FC = () => {
     return (
         <div className="font-sans animate-fadeIn">
             {/* --- HEADER --- */}
-            <div className="pt-24 md:pt-32 mb-8 relative z-10">
+            {/* <div className="pt-28 mb-8 relative z-10">
                 <div className="absolute -top-10 -left-10 text-[100px] text-accent/5 opacity-20 pointer-events-none select-none z-0">
                     <i className="fas fa-paper-plane"></i>
                 </div>
-                <h2 className="text-3xl md:text-4xl font-bold mb-3 flex items-center gap-2 relative z-10">
+                <h2 className="text-3xl font-bold mb-3 flex items-center gap-2 relative z-10">
                     <span className="text-accent font-mono">/</span>
-                    <span className="text-transparent bg-clip-text bg-text-gradient">contact_me</span>
+                    <span className="text-transparent bg-clip-text bg-text-gradient">Contact Me</span>
                 </h2>
-            </div>
+            </div> */}
 
             {/* --- MAIN CONTENT GRID --- */}
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch mb-20 text-text-main">
+            <div className="pt-28 relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch mb-20 text-text-main">
 
                 {/* LEFT COLUMN: Status & Info */}
                 <div className="lg:col-span-5 flex flex-col gap-6">

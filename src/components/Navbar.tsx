@@ -6,14 +6,14 @@ const Navbar = () => {
     const [isOpen, setIsOpen] = useState(false);
     const [scrolled, setScrolled] = useState(false);
 
-    // 1. Handle Scroll Effect
+    // Handle Scroll Effect
     useEffect(() => {
         const handleScroll = () => setScrolled(window.scrollY > 20);
         window.addEventListener('scroll', handleScroll);
         return () => window.removeEventListener('scroll', handleScroll);
     }, []);
 
-    // 2. Lock Body Scroll when Mobile Menu is open
+    // Lock Body Scroll when Mobile Menu is open
     useEffect(() => {
         if (isOpen) document.body.style.overflow = 'hidden';
         else document.body.style.overflow = 'unset';
@@ -27,109 +27,146 @@ const Navbar = () => {
 
     return (
         <>
-            {/* --- MAIN NAVBAR CONTAINER --- */}
-            {/* Reduced outer vertical padding (py-2) */}
+            {/* --- HEADER WRAPPER --- */}
             <header 
-                className={`fixed top-0 left-0 right-0 z-[100] transition-all duration-300 flex justify-center px-4 md:px-6
-                ${scrolled ? 'py-2' : 'py-3'}`} 
+                className={`fixed top-0 left-0 right-0 z-[100] transition-all duration-300 border-b
+                ${scrolled 
+                    ? 'bg-[#020617]/80 backdrop-blur-xl border-white/5 py-4 shadow-lg' 
+                    : 'bg-transparent border-transparent py-6' 
+                }`} 
             >
-                <div 
-                    className={`
-                        w-full max-w-5xl flex justify-between items-center 
-                        px-3 py-1.5 md:px-4 md:py-2  /* <-- REDUCED PADDING HERE */
-                        bg-glass-overlay/80 backdrop-blur-xl 
-                        border border-white/10 rounded-xl /* Reduced rounding slightly for compact look */
-                        transition-all duration-300
-                        ${scrolled ? 'shadow-[0_4px_30px_rgba(0,0,0,0.5)] border-white/5' : 'shadow-xl'}
-                    `}
-                >
+                <div className="max-w-5xl mx-auto px-4 md:px-0 flex justify-between items-center">
+                    
                     {/* --- LOGO --- */}
                     <Link
                         to="/"
-                        className="flex items-center gap-2 group select-none"
+                        className="flex items-center gap-3 group select-none"
                         onClick={() => setIsOpen(false)}
                     >
-                        {/* Logo Icon: Reduced to w-8 h-8 */}
-                        <div className="relative flex items-center justify-center w-8 h-8 rounded-lg bg-white/5 border border-white/10 overflow-hidden transition-all duration-300 group-hover:border-accent/50 group-hover:shadow-[0_0_15px_rgba(34,211,238,0.3)]">
+                        <div className="relative flex items-center justify-center w-11 h-11 rounded-xl bg-white/5 border border-white/10 overflow-hidden transition-all duration-300 group-hover:border-accent/50 group-hover:shadow-[0_0_15px_rgba(34,211,238,0.3)]">
                             <div className="absolute inset-0 bg-accent/10 opacity-0 group-hover:opacity-100 transition-opacity"></div>
-                            <i className="fas fa-terminal text-accent text-xs relative z-10"></i>
+                            <i className="fas fa-terminal text-accent text-base relative z-10"></i>
                         </div>
                         
-                        {/* Logo Text: Reduced size */}
-                        <span className="font-bold text-base md:text-lg tracking-tight text-text-main group-hover:text-white transition-colors">
-                            {personalInfo.name.toUpperCase()}
-                        </span>
+                        <div className="flex flex-col">
+                            <span className="font-bold text-xl uppercase md:text-2xl tracking-tight text-white leading-none group-hover:text-accent transition-colors">
+                                {personalInfo.name}
+                            </span>
+                        </div>
                     </Link>
 
-                    {/* --- DESKTOP NAVIGATION (Pill Style) --- */}
-                    <nav className="hidden md:flex items-center gap-1 bg-black/20 p-1 rounded-lg border border-white/5">
+                    {/* --- DESKTOP NAV --- */}
+                    <nav className="hidden md:flex items-center gap-8">
                         {navLinks.map((link) => (
                             <NavLink
                                 key={link.name}
                                 to={link.path}
                                 className={({ isActive }) =>
-                                    `relative px-4 py-1.5 rounded-md text-xs md:text-sm font-medium transition-all duration-300
+                                    `relative text-base font-medium tracking-wide transition-all duration-300 py-1
                                     ${isActive 
-                                        ? 'text-accent bg-white/10 shadow-[inset_0_0_10px_rgba(34,211,238,0.1)] border border-white/5' 
-                                        : 'text-text-muted hover:text-white hover:bg-white/5 border border-transparent'
+                                        ? 'text-accent' 
+                                        : 'text-text-muted hover:text-white'
                                     }`
                                 }
                             >
-                                {link.name}
+                                {({ isActive }) => (
+                                    <>
+                                        {link.name}
+                                        <span className={`absolute -bottom-1.5 left-1/2 -translate-x-1/2 w-1 h-1 rounded-full bg-accent transition-all duration-300 
+                                            ${isActive ? 'opacity-100 scale-100' : 'opacity-0 scale-0'}`} 
+                                        />
+                                    </>
+                                )}
                             </NavLink>
                         ))}
+
+                        {/* --- CONTACT BUTTON (Desktop) --- */}
+                        <NavLink 
+                            to="/contact" 
+                            className={({ isActive }) => `
+                                group ml-4 px-6 py-2.5 rounded-full border text-sm font-bold tracking-wider transition-all duration-300 flex items-center gap-2 overflow-hidden
+                                ${isActive 
+                                    ? 'bg-accent text-bg border-accent shadow-[0_0_20px_rgba(34,211,238,0.3)]' 
+                                    : 'bg-white/5 border-white/10 text-white hover:bg-white/10 hover:border-accent/50'
+                                }
+                            `}
+                        >
+                            <span>Contact</span>
+                            {/* Animated Icon Container */}
+                            <div className="relative w-2 h-3 flex items-center justify-center">
+                                {/* Chevron (>): Visible by default, slides out right on hover */}
+                                <i className="fas fa-chevron-right text-[10px] absolute transition-all duration-300 transform group-hover:translate-x-full group-hover:opacity-0"></i>
+                                
+                                {/* Arrow (->): Hidden left by default, slides in to center on hover */}
+                                <i className="fas fa-arrow-right text-[10px] absolute transition-all duration-300 transform -translate-x-full opacity-0 group-hover:translate-x-0 group-hover:opacity-100"></i>
+                            </div>
+                        </NavLink>
                     </nav>
 
-                    {/* --- MOBILE TOGGLE BUTTON --- */}
-                    {/* Adjusted size to match new height */}
+                    {/* --- MOBILE TOGGLE --- */}
                     <button 
-                        className="md:hidden relative w-8 h-8 flex items-center justify-center rounded-lg text-text-muted hover:text-accent hover:bg-white/5 transition-colors border border-transparent hover:border-white/10" 
+                        className="md:hidden relative w-12 h-12 flex items-center justify-center rounded-lg text-white hover:bg-white/5 transition-colors" 
                         onClick={() => setIsOpen(!isOpen)}
                         aria-label="Toggle Menu"
                     >
-                        <i className={`fas ${isOpen ? 'fa-times' : 'fa-bars'} text-base transition-transform duration-300 ${isOpen ? 'rotate-90' : 'rotate-0'}`}></i>
+                        <i className={`fas ${isOpen ? 'fa-times' : 'fa-bars-staggered'} text-xl transition-all duration-300 ${isOpen ? 'rotate-90' : ''}`}></i>
                     </button>
                 </div>
             </header>
 
             {/* --- MOBILE MENU OVERLAY --- */}
             <div 
-                className={`fixed inset-0 z-[90] bg-bg/60 backdrop-blur-xl transition-opacity duration-300 md:hidden
+                className={`fixed inset-0 z-[90] bg-[#020617]/95 backdrop-blur-xl transition-all duration-300 md:hidden flex flex-col
                 ${isOpen ? 'opacity-100 visible' : 'opacity-0 invisible pointer-events-none'}`}
-                onClick={() => setIsOpen(false)}
             >
-                <div 
-                    className={`absolute top-0 left-0 w-full bg-[#020617] border-b border-white/10 shadow-2xl transition-transform duration-300 ease-out
-                    ${isOpen ? 'translate-y-0' : '-translate-y-full'}`}
-                    onClick={(e) => e.stopPropagation()}
-                >
-                    <div className="pt-20 pb-8 px-6 flex flex-col gap-3"> {/* Adjusted top padding since header is smaller */}
+                <div className="absolute inset-0" onClick={() => setIsOpen(false)} />
+
+                <div className="relative z-10 flex flex-col justify-center items-center h-full px-6 gap-8">
+                    <nav className="flex flex-col gap-6 w-full max-w-xs text-center">
                         {navLinks.map((link) => (
                             <NavLink
                                 key={link.name}
                                 to={link.path}
                                 onClick={() => setIsOpen(false)}
                                 className={({ isActive }) =>
-                                    `group flex items-center justify-between p-3.5 rounded-xl border transition-all duration-300
-                                    ${isActive
-                                        ? 'bg-accent/10 border-accent/30 text-accent shadow-[0_0_15px_rgba(34,211,238,0.1)]' 
-                                        : 'bg-white/5 border-white/5 text-text-muted hover:bg-white/10 hover:border-white/10 hover:text-white'
-                                    }`
+                                    `text-2xl font-bold tracking-tight transition-colors duration-300 flex items-center justify-center gap-3
+                                    ${isActive ? 'text-accent' : 'text-white/40 hover:text-white'}`
                                 }
                             >
-                                <span className="text-base font-medium tracking-wide flex items-center gap-3">
-                                    <i className={`fas fa-${link.name === 'Home' ? 'home' : link.name === 'Projects' ? 'code-branch' : link.name === 'Contact' ? 'envelope' : 'user'} w-5 text-center opacity-70`}></i>
-                                    {link.name}
-                                </span>
-                                <i className="fas fa-chevron-right text-xs opacity-50 group-hover:translate-x-1 transition-transform"></i>
+                                {link.name}
                             </NavLink>
                         ))}
                         
-                        <div className="mt-4 pt-6 border-t border-white/5 flex justify-center gap-6">
-                            <a href={personalInfo.github} target="_blank" className="text-text-muted hover:text-accent transition-colors"><i className="fab fa-github text-lg"></i></a>
-                            <a href={personalInfo.linkedin} target="_blank" className="text-text-muted hover:text-accent transition-colors"><i className="fab fa-linkedin text-lg"></i></a>
-                            <a href={`mailto:${personalInfo.email}`} className="text-text-muted hover:text-accent transition-colors"><i className="fas fa-envelope text-lg"></i></a>
-                        </div>
+                        {/* --- CONTACT BUTTON (Mobile) --- */}
+                        <NavLink
+                            to="/contact"
+                            onClick={() => setIsOpen(false)}
+                            className={({ isActive }) => `
+                                group mt-6 px-10 py-4 rounded-full border text-lg font-medium transition-all flex items-center justify-center gap-3
+                                ${isActive 
+                                    ? 'bg-accent text-bg border-accent shadow-neon' 
+                                    : 'bg-white/5 border-white/10 text-white hover:bg-white/10 hover:border-white/20'
+                                }
+                            `}
+                        >
+                            <span>Contact</span>
+                            <div className="relative w-3 h-4 flex items-center justify-center">
+                                <i className="fas fa-chevron-right text-sm absolute transition-all duration-300 transform group-hover:translate-x-full group-hover:opacity-0"></i>
+                                <i className="fas fa-arrow-right text-sm absolute transition-all duration-300 transform -translate-x-full opacity-0 group-hover:translate-x-0 group-hover:opacity-100"></i>
+                            </div>
+                        </NavLink>
+                    </nav>
+
+                    <div className="mt-8 pt-8 border-t border-white/10 w-full max-w-xs flex justify-center gap-10">
+                        <a href={personalInfo.github} target="_blank" rel="noreferrer" className="text-white/40 hover:text-accent transition-colors">
+                            <i className="fab fa-github text-3xl"></i>
+                        </a>
+                        <a href={personalInfo.linkedin} target="_blank" rel="noreferrer" className="text-white/40 hover:text-accent transition-colors">
+                            <i className="fab fa-linkedin text-3xl"></i>
+                        </a>
+                        <a href={`mailto:${personalInfo.email}`} className="text-white/40 hover:text-accent transition-colors">
+                            <i className="fas fa-envelope text-3xl"></i>
+                        </a>
                     </div>
                 </div>
             </div>
