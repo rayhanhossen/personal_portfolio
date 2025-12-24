@@ -109,7 +109,7 @@ const Navbar = () => {
                                     />
 
                                     {/* 2. Content */}
-                                    <span className={`relative text-base font-medium tracking-widest transition-colors duration-300
+                                    <span className={`relative text-base font-semibold tracking-widest transition-colors duration-300
                                         ${isActive ? 'text-black' : 'text-white group-hover:text-black'}
                                     `}>
                                         Contact
