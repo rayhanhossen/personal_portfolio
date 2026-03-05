@@ -9,7 +9,6 @@ const QuoteDisplay = () => {
 
     // 1. Handle Progress Bar (1 Minute)
     useEffect(() => {
-        setProgress(0);
         const startTime = Date.now();
         const duration = 15000;
 
@@ -44,11 +43,13 @@ const QuoteDisplay = () => {
                     setDisplayedText(fullText.slice(0, displayedText.length + 1));
                 }, 50);
                 return () => clearTimeout(timeout);
-            } else {
-                setIsTyping(false);
             }
         }
     }, [displayedText, isTyping, index]);
+
+    // Derived state to stop typing cursor
+    const fullText = `"${quotes[index].text}"`;
+    const isCurrentlyTyping = isTyping && displayedText.length < fullText.length;
 
     // Format Time for "System Timestamp"
     const time = new Date().toLocaleTimeString('en-US', { hour12: false, hour: "2-digit", minute: "2-digit", second: "2-digit" });
@@ -57,11 +58,11 @@ const QuoteDisplay = () => {
         <div className="w-full font-sans text-base relative group cursor-default">
 
             {/* 🫧 GLASS CARD CONTAINER */}
-            <div className="bg-glass-overlay backdrop-blur-md rounded-xl shadow-xl overflow-hidden border border-white/10 transition-all duration-300 hover:border-accent/30 hover:shadow-[0_0_20px_rgba(34,211,238,0.15)]"> 
-                
+            <div className="bg-glass-overlay backdrop-blur-md rounded-xl shadow-xl overflow-hidden border border-white/10 transition-all duration-300 hover:border-accent/30 hover:shadow-[0_0_20px_rgba(34,211,238,0.15)]">
+
                 {/* 1. HEADER: Replaced Traffic Lights with "System Log" Header */}
                 <div className="flex items-center justify-between bg-white/5 border-b border-white/5 p-3 px-6">
-                    
+
                     {/* Left: ID Tag */}
                     <div className="flex items-center gap-3">
                         <i className="fas fa-terminal text-accent/50 text-xs"></i>
@@ -82,7 +83,7 @@ const QuoteDisplay = () => {
 
                 {/* 2. BODY */}
                 <div className="p-6 md:p-10 min-h-[200px] flex flex-col justify-center relative">
-                    
+
                     {/* Decorative Background Grid (Optional) */}
                     <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:40px_40px] pointer-events-none"></div>
 
@@ -90,12 +91,12 @@ const QuoteDisplay = () => {
                         {/* Quote Text */}
                         <h3 className="text-xl md:text-2xl text-text-main leading-relaxed font-light italic tracking-wide">
                             {displayedText}
-                            <span className={`animate-pulse inline-block w-0.5 h-6 bg-accent shadow-[0_0_10px_#22d3ee] ml-1 align-middle ${isTyping ? 'opacity-100' : 'opacity-0'}`}></span>
+                            <span className={`animate-pulse inline-block w-0.5 h-6 bg-accent shadow-[0_0_10px_#22d3ee] ml-1 align-middle ${isCurrentlyTyping ? 'opacity-100' : 'opacity-0'}`}></span>
                         </h3>
 
                         {/* Author */}
                         <div
-                            className={`mt-6 flex items-center justify-center gap-2 transition-all duration-700 ease-in-out ${isTyping ? 'opacity-0 translate-y-2' : 'opacity-100 translate-y-0'}`}
+                            className={`mt-6 flex items-center justify-center gap-2 transition-all duration-700 ease-in-out ${isCurrentlyTyping ? 'opacity-0 translate-y-2' : 'opacity-100 translate-y-0'}`}
                         >
                             <span className="h-[1px] w-8 bg-accent/30"></span>
                             <span className="text-accent font-mono text-xs uppercase tracking-widest">
@@ -114,7 +115,7 @@ const QuoteDisplay = () => {
 
                     {/* Minimal Progress Bar */}
                     <div className="w-24 md:w-32 h-0.5 bg-white/10 rounded-full overflow-hidden">
-                        <div 
+                        <div
                             className="h-full bg-accent shadow-[0_0_10px_#22d3ee] transition-all duration-100 ease-linear"
                             style={{ width: `${progress}%` }}
                         ></div>

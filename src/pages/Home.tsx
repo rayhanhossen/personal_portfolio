@@ -52,12 +52,7 @@ const Home = () => {
                         {/* 1. Primary Button (Get In Touch) */}
                         <Link
                             to="/contact"
-                            className="group relative flex-1 sm:flex-none px-6 py-2.5 flex items-center justify-center gap-2 
-                            rounded-full bg-accent text-bg font-bold text-sm tracking-wide
-                            shadow-[0_0_20px_-5px_rgba(34,211,238,0.4)]
-                            hover:shadow-[0_0_25px_-5px_rgba(34,211,238,0.6)]
-                            hover:scale-[1.02] active:scale-[0.98]
-                            transition-all duration-300 ease-out whitespace-nowrap"
+                            className="btn-primary w-full sm:w-auto"
                         >
                             <span>Get In Touch</span>
                             <i className="fas fa-paper-plane text-xs transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform duration-300"></i>
@@ -68,13 +63,7 @@ const Home = () => {
                             href={personalInfo.cvLink}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="group flex-1 sm:flex-none px-6 py-2.5 flex items-center justify-center gap-2 
-                            rounded-full 
-                            /* PERMANENT STYLES */
-                            bg-text-muted/10 border border-text-main/50 text-text-main font-medium text-sm
-                            /* HOVER INTERACTION */
-                            hover:bg-text-muted/20 hover:scale-[1.02] active:scale-[0.98]
-                            transition-all duration-300 ease-out whitespace-nowrap"
+                            className="btn-secondary w-full sm:w-auto"
                         >
                             <span>Resume</span>
                             <i className="fas fa-download text-xs opacity-100 group-hover:translate-y-0.5 transition-all duration-300"></i>

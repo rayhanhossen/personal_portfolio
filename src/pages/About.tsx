@@ -37,41 +37,44 @@ const About = () => {
             {/* --- BIO & IMAGE --- */}
             <div className="pt-32 relative z-10 grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-12 mb-16 items-start">
                 <div className="md:col-span-7 leading-relaxed order-2 md:order-1">
-                    {personalInfo.about.map((paragraph, index) => (
-                        <p key={index} className="mb-6 text-base md:text-lg text-slate-300 font-light">
-                            {paragraph}
-                        </p>
-                    ))}
 
-                    {/* ACTION BUTTONS: Updated to match Home Page Mobile Layout */}
+                    {/* Role + Status Tags */}
+                    <div className="flex flex-wrap items-center gap-2 mb-6">
+                        <span className="flex items-center gap-1.5 text-xs font-mono font-semibold px-3 py-1.5 rounded-full border border-accent/30 bg-accent/5 text-accent">
+                            <span className="w-1.5 h-1.5 rounded-full bg-green-400 animate-pulse inline-block"></span>
+                            Open to Work
+                        </span>
+                        <span className="text-xs font-mono px-3 py-1.5 rounded-full border border-white/10 bg-white/5 text-slate-400">
+                            <i className="fas fa-map-marker-alt text-accent/60 mr-1.5"></i>Dhaka, Bangladesh (GMT+6)
+                        </span>
+                        <span className="text-xs font-mono px-3 py-1.5 rounded-full border border-white/10 bg-white/5 text-slate-400">
+                            <i className="fas fa-plane text-accent/60 mr-1.5"></i>Open to Relocation
+                        </span>
+                    </div>
+
+                    {/* Bio Text */}
+                    <p className="mb-4 text-base md:text-lg text-slate-300 font-light leading-relaxed">
+                        Experienced Software Engineer building and scaling backend systems across fintech, telecommunications, and e-commerce — proficient in <strong className="text-white font-semibold">Django, FastAPI, PostgreSQL, Docker</strong> and AWS.
+                    </p>
+                    <p className="mb-6 text-base text-slate-400 font-light leading-relaxed">
+                        Currently focused on AI-powered systems, leveraging <strong className="text-accent font-medium">LLMs, RAG, and Model Content Processors (MCP)</strong> to build intelligent, data-driven backend platforms.
+                    </p>
+
+                    {/* ACTION BUTTONS */}
                     <div className="flex flex-row gap-3 mt-8 w-full sm:w-auto">
-
-                        {/* 1. Primary: Get In Touch */}
                         <Link
                             to="/contact"
-                            className="group relative flex-1 sm:flex-none px-6 py-2.5 flex items-center justify-center gap-2 
-                            rounded-full bg-accent text-bg font-bold text-sm tracking-wide
-                            shadow-[0_0_20px_-5px_rgba(34,211,238,0.4)]
-                            hover:shadow-[0_0_25px_-5px_rgba(34,211,238,0.6)]
-                            hover:scale-[1.02] active:scale-[0.98]
-                            transition-all duration-300 ease-out whitespace-nowrap"
+                            className="btn-primary w-full sm:w-auto"
                         >
                             <span>Get In Touch</span>
                             <i className="fas fa-paper-plane text-xs transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform duration-300"></i>
                         </Link>
 
-                        {/* 2. Secondary: Resume */}
                         <a
                             href={personalInfo.cvLink}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="group flex-1 sm:flex-none px-6 py-2.5 flex items-center justify-center gap-2 
-                            rounded-full 
-                            /* PERMANENT STYLES */
-                            bg-text-muted/10 border border-text-main/50 text-text-main font-medium text-sm
-                            /* HOVER INTERACTION */
-                            hover:bg-text-muted/20 hover:scale-[1.02] active:scale-[0.98]
-                            transition-all duration-300 ease-out whitespace-nowrap"
+                            className="btn-secondary w-full sm:w-auto"
                         >
                             <span>Resume</span>
                             <i className="fas fa-download text-xs opacity-100 group-hover:translate-y-0.5 transition-all duration-300"></i>

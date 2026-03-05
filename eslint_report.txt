@@ -1,0 +1,72 @@
+
+> personal_portfolio@0.0.0 lint
+> eslint .
+
+
+/Users/rayhanhossen/Coding Zone/personal_portfolio/src/components/CustomCursor.tsx
+  7:52  error  Expected a `const` instead of a literal type assertion  @typescript-eslint/prefer-as-const
+  7:87  error  Expected a `const` instead of a literal type assertion  @typescript-eslint/prefer-as-const
+
+/Users/rayhanhossen/Coding Zone/personal_portfolio/src/components/Experience.tsx
+   74:13  error  Error: Calling setState synchronously within an effect can trigger cascading renders
+
+Effects are intended to synchronize state between React and external systems such as manually updating the DOM, state management libraries, or other platform APIs. In general, the body of an effect should do one or both of the following:
+* Update external systems with the latest state from React.
+* Subscribe for updates from some external system, calling setState in a callback function when external state changes.
+
+Calling setState synchronously within an effect body causes cascading renders that can hurt performance, and is not recommended. (https://react.dev/learn/you-might-not-need-an-effect).
+
+/Users/rayhanhossen/Coding Zone/personal_portfolio/src/components/Experience.tsx:74:13
+  72 |         });
+  73 |         if (Object.keys(newHeights).length > 0) {
+> 74 |             setContentHeights(prev => ({ ...prev, ...newHeights }));
+     |             ^^^^^^^^^^^^^^^^^ Avoid calling setState() directly within an effect
+  75 |         }
+  76 |     }, [featuredExperience, contentHeights]);
+  77 |  react-hooks/set-state-in-effect
+  234:23  error  Unnecessary escape character: \:                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        no-useless-escape
+
+/Users/rayhanhossen/Coding Zone/personal_portfolio/src/components/QuoteDisplay.tsx
+  12:9   error  Error: Calling setState synchronously within an effect can trigger cascading renders
+
+Effects are intended to synchronize state between React and external systems such as manually updating the DOM, state management libraries, or other platform APIs. In general, the body of an effect should do one or both of the following:
+* Update external systems with the latest state from React.
+* Subscribe for updates from some external system, calling setState in a callback function when external state changes.
+
+Calling setState synchronously within an effect body causes cascading renders that can hurt performance, and is not recommended. (https://react.dev/learn/you-might-not-need-an-effect).
+
+/Users/rayhanhossen/Coding Zone/personal_portfolio/src/components/QuoteDisplay.tsx:12:9
+  10 |     // 1. Handle Progress Bar (1 Minute)
+  11 |     useEffect(() => {
+> 12 |         setProgress(0);
+     |         ^^^^^^^^^^^ Avoid calling setState() directly within an effect
+  13 |         const startTime = Date.now();
+  14 |         const duration = 15000;
+  15 |                             react-hooks/set-state-in-effect
+  48:17  error  Error: Calling setState synchronously within an effect can trigger cascading renders
+
+Effects are intended to synchronize state between React and external systems such as manually updating the DOM, state management libraries, or other platform APIs. In general, the body of an effect should do one or both of the following:
+* Update external systems with the latest state from React.
+* Subscribe for updates from some external system, calling setState in a callback function when external state changes.
+
+Calling setState synchronously within an effect body causes cascading renders that can hurt performance, and is not recommended. (https://react.dev/learn/you-might-not-need-an-effect).
+
+/Users/rayhanhossen/Coding Zone/personal_portfolio/src/components/QuoteDisplay.tsx:48:17
+  46 |                 return () => clearTimeout(timeout);
+  47 |             } else {
+> 48 |                 setIsTyping(false);
+     |                 ^^^^^^^^^^^ Avoid calling setState() directly within an effect
+  49 |             }
+  50 |         }
+  51 |     }, [displayedText, isTyping, index]);  react-hooks/set-state-in-effect
+
+/Users/rayhanhossen/Coding Zone/personal_portfolio/src/pages/Contact.tsx
+  290:23  error  Unnecessary escape character: \:  no-useless-escape
+  293:23  error  Unnecessary escape character: \:  no-useless-escape
+
+/Users/rayhanhossen/Coding Zone/personal_portfolio/src/pages/Projects.tsx
+  228:23  error  Unnecessary escape character: \:  no-useless-escape
+
+✖ 9 problems (9 errors, 0 warnings)
+  2 errors and 0 warnings potentially fixable with the `--fix` option.
+

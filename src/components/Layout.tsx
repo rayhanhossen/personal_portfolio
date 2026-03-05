@@ -4,7 +4,7 @@ import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import CustomCursor from '../components/CustomCursor';
 import { personalInfo } from '../data/content';
-import VideoBackground from './VideoBackground';
+import AnimatedBackground from './AnimatedBackground';
 
 const Layout: React.FC = () => {
     const [showScroll, setShowScroll] = useState(false);
@@ -43,8 +43,8 @@ const Layout: React.FC = () => {
         <div className="min-h-screen relative text-text-main font-sans cursor-none overflow-x-hidden selection:bg-accent selection:text-bg">
 
             {/* Background */}
-            <VideoBackground />
-            
+            <AnimatedBackground />
+
             {/* Custom Cursor */}
             <div className="fixed inset-0 z-[9999] pointer-events-none overflow-hidden">
                 <CustomCursor />
@@ -62,16 +62,15 @@ const Layout: React.FC = () => {
             {/* Scroll To Top Button */}
             <button
                 onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-                className={`fixed bottom-8 right-8 z-[100] transition-all duration-500 transform ${
-                    showScroll ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4 pointer-events-none'
-                }`}
+                className={`fixed bottom-8 right-8 z-[100] transition-all duration-500 transform ${showScroll ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4 pointer-events-none'
+                    }`}
             >
                 {/* 🚨 UPDATED DESIGN: Rounded-xl (Square) + Animated Arrow */}
                 <div className="flex items-center justify-center h-12 w-12 rounded-xl 
                     bg-glass-overlay backdrop-blur-md border border-white/10 shadow-lg
                     hover:bg-accent hover:border-accent hover:shadow-neon hover:-translate-y-1
                     transition-all duration-300 group">
-                    
+
                     {/* Icon animates UP on hover now */}
                     <i className="fas fa-arrow-up text-accent group-hover:text-bg text-base transition-transform duration-300 group-hover:-translate-y-0.5"></i>
                 </div>

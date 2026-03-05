@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { projects } from '../data/content';
 
 export interface Project {
@@ -15,9 +15,31 @@ export interface Project {
 
 const Projects = () => {
     const [expandedIds, setExpandedIds] = useState<Record<number, boolean>>({});
+    const [contentHeights, setContentHeights] = useState<Record<number, number>>({});
+    const contentRefs = useRef<Record<number, HTMLParagraphElement | null>>({});
 
     const completeProjects = projects.filter(p => p.category === 'professional');
     const smallProjects = projects.filter(p => p.category === 'small');
+
+    useEffect(() => {
+        const newHeights: Record<number, number> = {};
+        let hasChanges = false;
+
+        projects.forEach(project => {
+            const ref = contentRefs.current[project.id];
+            if (ref) {
+                const height = ref.scrollHeight;
+                if (contentHeights[project.id] !== height) {
+                    newHeights[project.id] = height;
+                    hasChanges = true;
+                }
+            }
+        });
+
+        if (hasChanges) {
+            setContentHeights(prev => ({ ...prev, ...newHeights }));
+        }
+    }, [contentHeights]);
 
     const toggleExpand = (id: number) => {
         setExpandedIds(prev => ({ ...prev, [id]: !prev[id] }));
@@ -44,9 +66,9 @@ const Projects = () => {
         return (
             <div
                 key={project.id}
-                className="group flex flex-col glass-card bg-glass-overlay backdrop-blur-md border border-white/10 rounded-xl overflow-hidden 
-                           transition-all duration-300 
-                           shadow-none hover:shadow-md hover:-translate-y-2 hover:border-accent/40"
+                className="group flex flex-col glass-card bg-glass-overlay backdrop-blur-md border border-white/[0.12] rounded-xl overflow-hidden 
+                       transition-all duration-300 
+                       shadow-none hover:shadow-md hover:-translate-y-2 hover:border-accent/40"
             >
                 {renderProjectThumbnail(project)}
 
@@ -77,10 +99,16 @@ const Projects = () => {
 
                     <div className="mb-6 flex-grow">
                         <div
-                            className={`relative overflow-hidden transition-all duration-500 ease-in-out ${isExpanded ? 'max-h-[500px]' : 'max-h-[4.5rem]'
-                                }`}
+                            style={{
+                                maxHeight: isExpanded ? `${contentHeights[project.id] || 500}px` : '4.5rem',
+                                transition: 'max-height 500ms ease-in-out',
+                                overflow: 'hidden'
+                            }}
                         >
-                            <p className="text-slate-300 text-sm leading-relaxed font-light">
+                            <p
+                                ref={el => { contentRefs.current[project.id] = el; }}
+                                className="text-slate-300 text-sm leading-relaxed font-light"
+                            >
                                 {project.description}
                             </p>
                         </div>
@@ -88,7 +116,7 @@ const Projects = () => {
                         {shouldTruncate && (
                             <button
                                 onClick={() => toggleExpand(project.id)}
-                                className="mt-4 text-[10px] font-bold uppercase tracking-widest text-accent/70 hover:text-accent flex items-center gap-2 transition-colors border-b border-transparent hover:border-accent/50 pb-0.5 w-max focus:outline-none"
+                                className="mt-4 text-[10px] font-bold uppercase tracking-widest text-slate-400/80 hover:text-accent flex items-center gap-2 transition-colors border-b border-transparent hover:border-accent/50 pb-0.5 w-max focus:outline-none"
                             >
                                 <span>{isExpanded ? 'Collapse' : 'Read Full Details'}</span>
                                 <i className={`fas ${isExpanded ? 'fa-chevron-up' : 'fa-chevron-down'} text-[8px]`}></i>
@@ -225,7 +253,7 @@ const Projects = () => {
 
             <style>{`
                 /* Minimalist subtle hover shadow for dark glass-cards */
-                .hover\:shadow-md:hover {
+                .hover\\:shadow-md:hover {
                     box-shadow: 0 10px 30px -15px rgba(0, 0, 0, 0.5);
                 }
             `}</style>

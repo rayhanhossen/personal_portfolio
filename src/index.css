@@ -10,26 +10,25 @@ body {
     /* bg-bg and text-text-main are defined in tailwind.config.js */
     @apply bg-bg text-text-main font-sans;
     min-height: 100vh;
-    overflow-x: hidden; 
-    
+    overflow-x: hidden;
+
     /* 🚨 ACTIVATED: Hide default cursor so CustomCursor is the only one visible */
-    cursor: none; 
+    cursor: none;
 }
 
 /* --- CUSTOM UTILITIES & COMPONENTS --- */
 
 /* Updated Glass Card for "Midnight Ice" Theme */
 .glass-card {
-    /* 1. Use 'bg-glass-overlay' (70% opacity) for better text readability over video */
-    /* 2. Added 'border-white/10' to match the sharp edges we discussed */
     @apply bg-glass-overlay backdrop-blur-md rounded-2xl shadow-xl transition-all duration-300 border border-white/10;
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.05);
 }
 
 /* 🚨 ACTIVATED: Cyberpunk Hover Effect */
 .glass-card:hover {
-    /* On hover, border turns Cyan and creates a Neon Glow */
-    @apply border-accent/50 shadow-neon;
-    transform: translateY(-2px); /* Subtle lift */
+    @apply border-accent/50;
+    transform: translateY(-2px);
+    box-shadow: 0 0 5px theme('colors.accent'), 0 0 20px theme('colors.accent'), 0 16px 40px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.08);
 }
 
 /* Accent helper */
@@ -43,18 +42,22 @@ body {
 }
 
 ::-webkit-scrollbar-track {
-    background: #020617; /* Matches 'bg' */
+    background: #020617;
+    /* Matches 'bg' */
 }
 
 ::-webkit-scrollbar-thumb {
-    background: #1e293b; /* Matches 'slate-800' */
+    background: #1e293b;
+    /* Matches 'slate-800' */
     border-radius: 4px;
     border: 1px solid #0f172a;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-    background: #22d3ee; /* Matches 'accent' */
-    box-shadow: 0 0 10px #22d3ee; /* Glowing Scrollbar Handle */
+    background: #22d3ee;
+    /* Matches 'accent' */
+    box-shadow: 0 0 10px #22d3ee;
+    /* Glowing Scrollbar Handle */
 }
 
 
@@ -69,7 +72,8 @@ body {
     content: '';
     display: block;
     height: 1px;
-    background-color: #22d3ee; /* Neon Cyan */
+    background-color: #22d3ee;
+    /* Neon Cyan */
     flex-grow: 1;
     max-width: 500px;
     opacity: 0.5;
@@ -83,10 +87,10 @@ body {
     transform: translateY(-50%);
 
     /* Colors */
-    background: #22d3ee; 
-    color: #020617;      
+    background: #22d3ee;
+    color: #020617;
     font-weight: 600;
-    
+
     padding: 0.25rem 0.75rem;
     border-radius: 0.25rem;
     font-size: 0.8rem;
@@ -97,7 +101,7 @@ body {
     visibility: hidden;
     transition: all 0.3s ease;
     z-index: 60;
-    
+
     /* Neon Glow */
     box-shadow: 0 0 10px rgba(34, 211, 238, 0.5);
 }
@@ -131,6 +135,7 @@ body {
         opacity: 0;
         transform: translateY(20px);
     }
+
     to {
         opacity: 1;
         transform: translateY(0);
@@ -152,8 +157,9 @@ body {
 .cursor-dot {
     width: 8px;
     height: 8px;
-    background-color: #22d3ee; 
-    box-shadow: 0 0 10px rgba(34, 211, 238, 0.9); /* Stronger glow on the dot */
+    background-color: #22d3ee;
+    box-shadow: 0 0 10px rgba(34, 211, 238, 0.9);
+    /* Stronger glow on the dot */
 }
 
 .cursor-outline {
@@ -165,5 +171,69 @@ body {
 
 /* Expand cursor on clickable elements */
 body:hover .cursor-outline {
-   opacity: 1;
+    opacity: 1;
+}
+
+/* --- PREMIUM BUTTON STYLES --- */
+
+/* Primary Button (Solid Accent with Glow) */
+.btn-primary {
+    @apply relative overflow-hidden inline-flex items-center justify-center gap-2 px-6 py-3 rounded-full font-bold text-sm tracking-wide transition-all duration-300;
+    background: linear-gradient(135deg, theme('colors.accent') 0%, #0ea5e9 100%);
+    color: theme('colors.bg');
+    box-shadow: 0 4px 15px rgba(34, 211, 238, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.4);
+    border: 1px solid transparent;
+}
+
+.btn-primary::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+    transition: all 0.5s ease;
+}
+
+.btn-primary:not(:disabled):hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(34, 211, 238, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.5);
+    border-color: rgba(255, 255, 255, 0.5);
+}
+
+.btn-primary:not(:disabled):hover::before {
+    left: 100%;
+}
+
+.btn-primary:not(:disabled):active {
+    transform: translateY(1px);
+    box-shadow: 0 2px 10px rgba(34, 211, 238, 0.3);
+}
+
+.btn-primary:disabled {
+    @apply opacity-50 cursor-not-allowed bg-white/5 border-white/10 text-slate-400;
+    background: theme('colors.slate.800');
+    box-shadow: none;
+}
+
+/* Secondary Button (Glass Outline) */
+.btn-secondary {
+    @apply relative inline-flex items-center justify-center gap-2 px-6 py-3 rounded-full font-medium text-sm transition-all duration-300;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    color: theme('colors.text-main');
+    backdrop-filter: blur(8px);
+}
+
+.btn-secondary:hover {
+    background: rgba(255, 255, 255, 0.08);
+    border-color: theme('colors.accent');
+    color: theme('colors.white');
+    box-shadow: 0 0 15px rgba(34, 211, 238, 0.15);
+    transform: translateY(-2px);
+}
+
+.btn-secondary:active {
+    transform: translateY(1px);
 }

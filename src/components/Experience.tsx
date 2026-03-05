@@ -64,13 +64,21 @@ const ExperiencePreview: React.FC<ExperiencePreviewProps> = ({ featuredExperienc
 
     useEffect(() => {
         const newHeights: Record<number, number> = {};
+        let hasChanges = false;
+
         featuredExperience.forEach(exp => {
             const ref = contentRefs.current[exp.id];
-            if (ref && !contentHeights[exp.id]) {
-                newHeights[exp.id] = ref.scrollHeight;
+            if (ref) {
+                const height = ref.scrollHeight;
+                if (contentHeights[exp.id] !== height) {
+                    newHeights[exp.id] = height;
+                    hasChanges = true;
+                }
             }
         });
-        if (Object.keys(newHeights).length > 0) {
+
+        if (hasChanges) {
+            // eslint-disable-next-line react-hooks/set-state-in-effect
             setContentHeights(prev => ({ ...prev, ...newHeights }));
         }
     }, [featuredExperience, contentHeights]);
@@ -174,7 +182,7 @@ const ExperiencePreview: React.FC<ExperiencePreviewProps> = ({ featuredExperienc
                                                     {initialContent.map((point, idx) => (
                                                         <li key={idx} className="flex gap-3">
                                                             <span className="mt-1.5 w-1 h-1 rounded-full bg-accent/50 flex-shrink-0"></span>
-                                                            <span>{point}</span>
+                                                            <span dangerouslySetInnerHTML={{ __html: point }}></span>
                                                         </li>
                                                     ))}
                                                 </ul>
@@ -193,7 +201,7 @@ const ExperiencePreview: React.FC<ExperiencePreviewProps> = ({ featuredExperienc
                                                             {restOfContent.map((point, idx) => (
                                                                 <li key={idx} className="flex gap-3">
                                                                     <span className="mt-1.5 w-1 h-1 rounded-full bg-accent/50 flex-shrink-0"></span>
-                                                                    <span>{point}</span>
+                                                                    <span dangerouslySetInnerHTML={{ __html: point }}></span>
                                                                 </li>
                                                             ))}
                                                         </ul>
@@ -231,7 +239,7 @@ const ExperiencePreview: React.FC<ExperiencePreviewProps> = ({ featuredExperienc
             {/* ADDED: Style block to define the minimalistic dark shadow */}
             <style>{`
                 /* Minimalist subtle hover shadow for dark glass-cards */
-                .hover\:shadow-md:hover {
+                .hover\\:shadow-md:hover {
                     box-shadow: 0 10px 30px -15px rgba(0, 0, 0, 0.5);
                 }
             `}</style>

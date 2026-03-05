@@ -52,8 +52,8 @@ export const experiences: Experience[] = [
         startDate: "2025-06",
         endDate: "Present",
         description: [
-            "Build interactive dashboards using Python and Django, enabling data-driven decisions and analytics across internal teams.",
-            "Apply LLMs, RAG, and Model Content Processors (MCP) to build intelligent backend systems for processing unstructured data."
+            "Build interactive dashboards using <strong>Python</strong> and <strong>Django</strong>, enabling data-driven decisions and analytics across internal teams.",
+            "Apply <strong>LLMs</strong>, <strong>RAG</strong>, and <strong>Model Content Processors (MCP)</strong> to build intelligent backend systems for processing unstructured data."
         ],
         skills: ["Python", "Django", "LLM", "RAG", "MCP"]
     },
@@ -66,11 +66,11 @@ export const experiences: Experience[] = [
         startDate: "2024-03",
         endDate: "2025-05",
         description: [
-            "Developed an eKYC identity verification system using FastAPI, PaddleOCR, and Amazon Rekognition, reducing manual data entry by 60%.",
-            "Enhanced the OCR pipeline with Google Translate API to support Bangla-to-English text conversion.",
-            "Designed and deployed a containerized Python-Flask backend for scalable employee data processing, integrated with Apache Spark and Iceberg, and automated setup via Docker multi-stage builds.",
-            "Built RPA workflows automating CIB data extraction, reducing manual processing time by 70% using Selenium, Pandas, OpenCV, AutoIT, and PaddleOCR.",
-            "Contributed to backend infrastructure by configuring Red Hat Linux servers, enabling server-to-server communication, and deploying secure, scalable APIs with Nginx."
+            "Developed an eKYC identity verification system using <strong>FastAPI</strong>, <strong>PaddleOCR</strong>, and <strong>Amazon Rekognition</strong>.",
+            "Enhanced the OCR pipeline with <strong>Google Translate API</strong> to support Bangla-to-English text conversion.",
+            "Designed and deployed a containerized <strong>Python-Flask</strong> backend for scalable employee data processing, integrated with <strong>Apache Spark</strong> and <strong>Iceberg</strong>, and automated setup via <strong>Docker</strong> multi-stage builds.",
+            "Built RPA workflows automating CIB data extraction using <strong>Selenium</strong>, <strong>Pandas</strong>, <strong>OpenCV</strong>, <strong>AutoIT</strong>, and <strong>PaddleOCR</strong>.",
+            "Contributed to backend infrastructure by configuring <strong>Red Hat Linux</strong> servers, enabling server-to-server communication, and deploying secure, scalable APIs with <strong>Nginx</strong>."
         ],
         skills: ["FastAPI", "PaddleOCR", "AWS Rekognition", "Docker", "Selenium", "Pandas", "Linux/Nginx"]
     },
@@ -83,10 +83,10 @@ export const experiences: Experience[] = [
         startDate: "2023-09",
         endDate: "2023-12",
         description: [
-            "Led cross-functional frontend and backend teams to deliver mission-critical e-commerce projects on time, maintaining high code quality and system performance.",
-            "Directed the design, development, and deployment of new features, contributing to a continuous cycle of product improvement and customer value delivery.",
-            "Facilitated daily stand-ups and sprint planning sessions, monitored team progress, and resolved technical and operational blockers.",
-            "Mentored junior developers on best practices and collaborated with stakeholders to align technical execution with evolving business requirements."
+            "Led <strong>cross-functional frontend and backend teams</strong> to deliver mission-critical e-commerce projects on time, maintaining high code quality and system performance.",
+            "Directed the design, development, and deployment of new features, contributing to a <strong>continuous cycle of product improvement</strong> and customer value delivery.",
+            "Facilitated daily stand-ups and sprint planning sessions, monitored team progress, and resolved <strong>technical and operational blockers</strong>.",
+            "<strong>Mentored junior developers</strong> on best practices and collaborated with stakeholders to align technical execution with evolving business requirements."
         ],
         skills: ["Team Leadership", "Project Management", "Agile/Scrum", "Code Review", "Mentorship"]
     },
@@ -99,10 +99,10 @@ export const experiences: Experience[] = [
         startDate: "2022-07",
         endDate: "2023-08",
         description: [
-            "Developed scalable RESTful APIs for a multi-store e-commerce platform using NestJS and TypeScript, ensuring modular architecture and high performance.",
-            "Integrated NMI payment gateway to enable secure transactions, incorporating robust error handling and transaction lifecycle management.",
-            "Implemented delivery logistics with FedEx and UPS APIs to automate shipping rate calculation, real-time tracking, and label generation.",
-            "Collaborated with frontend and QA teams to support API integration and testing, following Git workflows, code reviews, and documentation standards."
+            "Developed scalable <strong>RESTful APIs</strong> for a multi-store e-commerce platform using <strong>NestJS</strong> and <strong>TypeScript</strong>, ensuring modular architecture and high performance.",
+            "Integrated <strong>NMI payment gateway</strong> to enable secure transactions, incorporating robust error handling and transaction lifecycle management.",
+            "Implemented delivery logistics with <strong>FedEx and UPS APIs</strong> to automate shipping rate calculation, real-time tracking, and label generation.",
+            "Collaborated with frontend and QA teams to support API integration and testing, following <strong>Git workflows</strong>, code reviews, and documentation standards."
         ],
         skills: ["NestJS", "TypeScript", "REST APIs", "Payment Gateway Integration", "FedEx/UPS APIs"]
     },
@@ -115,10 +115,10 @@ export const experiences: Experience[] = [
         startDate: "2020-12",
         endDate: "2022-06",
         description: [
-            "Built and maintained an LDAP-based access management system using Python, Django, Celery, Redis, and PostgreSQL, automating provisioning for telecom enterprise users.",
-            "Developed backend micro-services using NestJS and TypeScript for fintech features like merchant onboarding, leveraging DynamoDB and Docker for scalability.",
-            "Automated enterprise workflows with Selenium, AutoIT, and Pandas, including SMS notifications, SAP vendor payments, and remote file processing.",
-            "Collaborated within Agile teams, performed code reviews, and ensured secure, maintainable backend delivery aligned with industry best practices."
+            "Built and maintained an LDAP-based access management system using <strong>Python</strong>, <strong>Django</strong>, <strong>Celery</strong>, <strong>Redis</strong>, and <strong>PostgreSQL</strong>, automating provisioning for telecom enterprise users.",
+            "Developed backend micro-services using <strong>NestJS</strong> and <strong>TypeScript</strong> for fintech features like merchant onboarding, leveraging <strong>DynamoDB</strong> and <strong>Docker</strong> for scalability.",
+            "Automated enterprise workflows with <strong>Selenium</strong>, <strong>AutoIT</strong>, and <strong>Pandas</strong>, including SMS notifications, SAP vendor payments, and remote file processing.",
+            "Collaborated within Agile teams, performed code reviews, and ensured secure, maintainable backend delivery aligned with <strong>industry best practices</strong>."
         ],
         skills: ["Python", "Django", "Celery/Redis", "PostgreSQL", "NestJS", "Docker", "Selenium"]
     },
@@ -131,7 +131,7 @@ export const experiences: Experience[] = [
         startDate: "2020-09",
         endDate: "2020-12",
         description: [
-            "Developed responsive frontend components using HTML5, CSS3, and JavaScript to enhance UX for SME clients."
+            "Developed responsive frontend components using <strong>HTML5</strong>, <strong>CSS3</strong>, and <strong>JavaScript</strong> to enhance UX for SME clients."
         ],
         skills: ["HTML5", "CSS3", "JavaScript", "Responsive Design"]
     }
@@ -143,10 +143,10 @@ export const projects: Project[] = [
     {
         id: 1,
         title: "Smart Document Assistant (LLM + RAG + FAISS)",
-        description: `Built a PDF question-answering assistant using FastAPI, SentenceTransformers,
-        TinyLLaMA, and FAISS for vector-based semantic search. Processed unstructured documents with a
-        custom Model Content Processor (MCP), enabling intelligent content understanding and contextual query handling.`,
-        image: "https://placehold.co/400x300/222/FFF?text=Smart Document Assistant",
+        description: `AI-powered PDF question-answering assistant using FastAPI, SentenceTransformers,
+        TinyLLaMA, and FAISS for vector-based semantic search — enabling intelligent content understanding
+        and zero-shot contextual query handling across unstructured documents via a custom MCP pipeline.`,
+        image: "/project_smart_doc.png",
         tech: ["LLM", "RAG", "Python", "FAISS"],
         category: "professional",
         liveLink: "https://www.google.com",
@@ -155,12 +155,10 @@ export const projects: Project[] = [
     {
         id: 2,
         title: "Brac Bank eKYC System",
-        description: `Developed an automated identity verification platform using FastAPI, PaddleOCR,
-        and Amazon Rekognition, reducing manual workload by 60%. Enabled Bangla-to-English OCR translation
-        via Google Translate API and designed scalable RESTful endpoints for cross-system integration. Managed
-        background processes using Celery and Docker, ensuring efficient and containerized asynchronous task execution.
-        `,
-        image: "https://placehold.co/400x300/333/FFF?text=Brac Bank eKYC System",
+        description: `Built an automated identity verification platform using FastAPI,
+        PaddleOCR, and Amazon Rekognition. Added Bangla-to-English OCR translation and scalable REST endpoints.
+        Managed async background jobs with Celery and Docker for containerized execution.`,
+        image: "/project_ekyc.png",
         tech: ["FastAPI", "PaddleOCR", "Celery", "Docker"],
         category: "professional",
         liveLink: "#",
@@ -170,10 +168,9 @@ export const projects: Project[] = [
         id: 3,
         title: "Robi Axiata UAM (User Access Management)",
         description: `Engineered an LDAP-based enterprise user management system for Robi Axiata using Django,
-        PostgreSQL, Redis, and Celery. Automated provisioning and de-provisioning across telecom services,
-        reducing onboarding time and administrative overhead. Ensured secure deployment using Docker and implemented 
-        role-based access workflows aligned with internal compliance standards.`,
-        image: "https://placehold.co/400x300/333/FFF?text=UAM", // Empty for small project
+        PostgreSQL, Redis, and Celery — automating provisioning across telecom services and eliminating
+        manual onboarding overhead. Secured via Docker deployment with role-based access workflows.`,
+        image: "/project_uam.png",
         tech: ["DRF", "VueJS", "Docker", "Celery", "Redis"],
         category: "professional",
         liveLink: "#",
@@ -182,10 +179,10 @@ export const projects: Project[] = [
     {
         id: 4,
         title: "Bkash Merchant Portal",
-        description: `Contributed to a scalable fintech platform using NestJS, API Gateway, and DynamoDB,
-        enabling efficient merchant onboarding and transaction handling. Improved system observability and 
-        fault tolerance with centralized logging and event-driven error-handling patterns.`,
-        image: "https://placehold.co/400x300/333/FFF?text=Bkash Marchent Portal",
+        description: `Scalable fintech platform using NestJS, API Gateway, and DynamoDB enabling efficient
+        merchant onboarding and real-time transaction handling for 1,400+ active merchants. Improved
+        observability with centralized logging and event-driven error-handling patterns.`,
+        image: "/project_bkash.png",
         tech: ["TypeScript", "NestJs", "DynamoDB"],
         category: "professional",
         liveLink: "#",
@@ -207,41 +204,41 @@ export const projects: Project[] = [
 
 // quotes
 export const quotes = [
-    { 
-        text: "First, solve the problem. Then, write the code.", 
-        author: "John Johnson" 
+    {
+        text: "First, solve the problem. Then, write the code.",
+        author: "John Johnson"
     },
-    { 
-        text: "Any fool can write code that a computer can understand. Good programmers write code that humans can understand.", 
-        author: "Martin Fowler" 
+    {
+        text: "Any fool can write code that a computer can understand. Good programmers write code that humans can understand.",
+        author: "Martin Fowler"
     },
-    { 
-        text: "Make it work, make it right, make it fast.", 
-        author: "Kent Beck" 
+    {
+        text: "Make it work, make it right, make it fast.",
+        author: "Kent Beck"
     },
-    { 
-        text: "Simplicity is the soul of efficiency.", 
-        author: "Austin Freeman" 
+    {
+        text: "Simplicity is the soul of efficiency.",
+        author: "Austin Freeman"
     },
-    { 
-        text: "Optimism is an occupational hazard of programming: feedback is the treatment.", 
-        author: "Kent Beck" 
+    {
+        text: "Optimism is an occupational hazard of programming: feedback is the treatment.",
+        author: "Kent Beck"
     },
-    { 
-        text: "The only way to go fast, is to go well.", 
-        author: "Robert C. Martin" 
+    {
+        text: "The only way to go fast, is to go well.",
+        author: "Robert C. Martin"
     },
-    { 
-        text: "Programs must be written for people to read, and only incidentally for machines to execute.", 
-        author: "Harold Abelson" 
+    {
+        text: "Programs must be written for people to read, and only incidentally for machines to execute.",
+        author: "Harold Abelson"
     },
-    { 
-        text: "Debugging is twice as hard as writing the code in the first place. Therefore, if you write the code as cleverly as possible, you are, by definition, not smart enough to debug it.", 
-        author: "Brian Kernighan" 
+    {
+        text: "Debugging is twice as hard as writing the code in the first place. Therefore, if you write the code as cleverly as possible, you are, by definition, not smart enough to debug it.",
+        author: "Brian Kernighan"
     },
-    { 
-        text: "The best way to predict the future is to invent it.", 
-        author: "Alan Kay" 
+    {
+        text: "The best way to predict the future is to invent it.",
+        author: "Alan Kay"
     },
 ];
 

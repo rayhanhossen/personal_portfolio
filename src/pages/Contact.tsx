@@ -242,11 +242,7 @@ const ContactPage: React.FC = () => {
                             <button
                                 type="submit"
                                 disabled={!message.trim() || status === 'sending'}
-                                className={`w-full py-5 rounded-xl font-bold text-sm tracking-widest uppercase transition-all duration-500 flex items-center justify-center gap-3 
-                                    ${status === 'success'
-                                        ? 'bg-green-500 text-white shadow-none'
-                                        : 'bg-accent text-bg disabled:bg-white/5 disabled:text-text-muted disabled:border-white/10 disabled:shadow-none hover:shadow-sm shadow-none border border-transparent'
-                                    }`}
+                                className={`w-full py-4 mt-2 ${status === 'success' ? 'bg-green-500 text-white rounded-full font-bold tracking-wide transition-all' : 'btn-primary'}`}
                             >
                                 {status === 'sending' ? (
                                     <>
@@ -287,10 +283,10 @@ const ContactPage: React.FC = () => {
                     border-color: rgba(34, 211, 238, 0.4);
                 }
                 /* Minimalist subtle hover shadow for dark glass-cards */
-                .hover\:shadow-md:hover {
+                .hover\\:shadow-md:hover {
                     box-shadow: 0 10px 30px -15px rgba(0, 0, 0, 0.5);
                 }
-                .hover\:shadow-sm:hover {
+                .hover\\:shadow-sm:hover {
                     box-shadow: 0 5px 15px -10px rgba(255, 255, 255, 0.05);
                 }
             `}</style>
