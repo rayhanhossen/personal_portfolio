@@ -18,19 +18,12 @@ interface ExperiencePreviewProps {
 }
 
 const calculateTotalExperience = (experiences: Experience[]) => {
-    let totalMonths = 0;
-    experiences.forEach(exp => {
-        const start = new Date(`${exp.startDate}-01`);
-        let end;
-        if (exp.endDate === 'Present') {
-            const now = new Date();
-            end = new Date(now.getFullYear(), now.getMonth() - 1, 1);
-        } else {
-            end = new Date(`${exp.endDate}-01`);
-        }
-        const months = (end.getFullYear() - start.getFullYear()) * 12 + (end.getMonth() - start.getMonth()) + 1;
-        if (months > 0) totalMonths += months;
-    });
+    // Find the earliest start date across all roles
+    const startDates = experiences.map(exp => new Date(`${exp.startDate}-01`));
+    const earliest = new Date(Math.min(...startDates.map(d => d.getTime())));
+    const now = new Date();
+
+    const totalMonths = (now.getFullYear() - earliest.getFullYear()) * 12 + (now.getMonth() - earliest.getMonth());
     const years = Math.floor(totalMonths / 12);
     const remainingMonths = totalMonths % 12;
     return { years, months: remainingMonths };

@@ -59,7 +59,7 @@ export const experiences: Experience[] = [
         company: "BRAC IT Services Limited",
         location: "Dhaka, Bangladesh",
         period: "Feb 2024 - May 2025",
-        startDate: "2024-03",
+        startDate: "2024-02",
         endDate: "2025-05",
         description: [
             "Developed an eKYC identity verification system using <strong>FastAPI</strong>, <strong>PaddleOCR</strong>, and <strong>Amazon Rekognition</strong>.",
