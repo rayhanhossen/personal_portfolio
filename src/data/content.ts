@@ -228,10 +228,6 @@ export const quotes = [
         text: "I treat every codebase like I'll have to debug it at 3 AM. Clean code isn't a luxury — it's a survival strategy.",
         author: "My Principle"
     },
-    {
-        text: "Debugging is twice as hard as writing the code in the first place. Therefore, if you write the code as cleverly as possible, you are, by definition, not smart enough to debug it.",
-        author: "Brian Kernighan"
-    },
 ];
 
 import {
