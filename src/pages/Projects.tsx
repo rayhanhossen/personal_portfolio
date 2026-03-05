@@ -1,31 +1,60 @@
 import { useState, useRef, useEffect } from 'react';
-import { projects } from '../data/content';
+import { projects as staticProjects } from '../data/content';
+import { usePortfolioData } from '../hooks/usePortfolioData';
+import Skeleton from '../components/Skeleton';
+import type { Project } from '../types';
 
-export interface Project {
-    id: number;
-    title: string;
-    description: string;
-    image: string;
-    tech: string[];
-    liveLink: string;
-    sourceLink?: string;
-    cached?: boolean;
-    category: 'professional' | 'small';
-}
+const ProjectCardSkeleton = () => (
+    <div className="flex flex-col glass-card bg-glass-overlay backdrop-blur-md border border-white/[0.12] rounded-xl overflow-hidden shadow-none">
+        <Skeleton variant="rect" className="h-48" />
+        <div className="border-b border-white/5 p-2 flex gap-1.5 justify-center">
+            <Skeleton className="h-5 w-12 rounded-full" />
+            <Skeleton className="h-5 w-12 rounded-full" />
+            <Skeleton className="h-5 w-12 rounded-full" />
+        </div>
+        <div className="p-5 flex flex-col gap-3">
+            <Skeleton className="h-7 w-3/4" />
+            <Skeleton className="h-16 w-full" />
+            <div className="flex justify-between items-center mt-4">
+                <Skeleton className="h-4 w-20" />
+                <Skeleton className="h-4 w-20" />
+            </div>
+        </div>
+    </div>
+);
+
+const ProjectsSkeleton = () => (
+    <div id="projects-view" className="pt-32 relative z-10 view-section animate-fadeIn font-sans">
+        <section className="mb-12 relative">
+            <Skeleton className="h-8 w-64 mb-8" />
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                {[1, 2, 3].map(i => <ProjectCardSkeleton key={i} />)}
+            </div>
+        </section>
+    </div>
+);
 
 const Projects = () => {
+    const { data, loading } = usePortfolioData();
     const [expandedIds, setExpandedIds] = useState<Record<number, boolean>>({});
     const [contentHeights, setContentHeights] = useState<Record<number, number>>({});
     const contentRefs = useRef<Record<number, HTMLParagraphElement | null>>({});
 
-    const completeProjects = projects.filter(p => p.category === 'professional');
-    const smallProjects = projects.filter(p => p.category === 'small');
+    // Map database image_url to image property expected by UI
+    const dynamicProjects = data?.projects?.map((p: any) => ({
+        ...p,
+        image: p.image_url || p.image,
+        tech: Array.isArray(p.tech_stack) ? p.tech_stack : p.tech
+    })) || staticProjects;
+
+    const completeProjects = dynamicProjects.filter((p: any) => p.category === 'professional');
+    const smallProjects = dynamicProjects.filter((p: any) => p.category === 'small');
 
     useEffect(() => {
         const newHeights: Record<number, number> = {};
         let hasChanges = false;
 
-        projects.forEach(project => {
+        dynamicProjects.forEach((project: any) => {
             const ref = contentRefs.current[project.id];
             if (ref) {
                 const height = ref.scrollHeight;
@@ -39,11 +68,15 @@ const Projects = () => {
         if (hasChanges) {
             setContentHeights(prev => ({ ...prev, ...newHeights }));
         }
-    }, [contentHeights]);
+    }, [contentHeights, dynamicProjects]);
 
     const toggleExpand = (id: number) => {
         setExpandedIds(prev => ({ ...prev, [id]: !prev[id] }));
     };
+
+    if (loading) {
+        return <ProjectsSkeleton />;
+    }
 
     // Helper: Project Thumbnail
     const renderProjectThumbnail = (project: Project) => (
@@ -79,7 +112,7 @@ const Projects = () => {
 
                         return (
                             <div className={`flex flex-wrap gap-1.5 ${alignmentClass}`}>
-                                {project.tech.map((tech, i) => (
+                                {project.tech.map((tech: string, i: number) => (
                                     <span
                                         key={i}
                                         className="text-[10px] font-mono font-medium tracking-wide px-2.5 py-1 rounded-full text-slate-300 bg-white/5 border border-white/10"
@@ -206,7 +239,7 @@ const Projects = () => {
                 </p>
 
                 <div className="mt-auto relative z-10 flex flex-wrap gap-2 pt-4 border-t border-white/5">
-                    {project.tech.map((tech, i) => (
+                    {project.tech.map((tech: string, i: number) => (
                         <span
                             key={i}
                             className="text-[10px] font-mono font-medium tracking-wide px-2.5 py-1 rounded-full text-slate-300 bg-white/5 border border-white/10"
@@ -274,9 +307,6 @@ const Projects = () => {
 
     return (
         <div id="projects-view" className="pt-32 relative z-10 view-section animate-fadeIn font-sans">
-
-
-
             {/* 1. Professional Apps */}
             <section className="mb-12 relative">
                 <h3 className="text-2xl font-semibold text-text-main mb-8 flex items-center tracking-tight">
@@ -302,9 +332,6 @@ const Projects = () => {
                     {renderFillerCard(smallProjects.length)}
                 </div>
             </section>
-
-
-
         </div>
     );
 };

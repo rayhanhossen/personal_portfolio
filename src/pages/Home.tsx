@@ -1,9 +1,44 @@
-import { personalInfo, experiences, heroStack } from '../data/content';
+import { personalInfo as staticPersonalInfo, experiences as staticExperiences, heroStack } from '../data/content';
 import profileImg from '../assets/profile-avatar.png';
 import ExperiencePreview from '../components/Experience';
 import { Link } from 'react-router-dom';
+import { usePortfolioData } from '../hooks/usePortfolioData';
+import Skeleton from '../components/Skeleton';
+
+const HomeSkeleton = () => (
+    <div className="view-section animate-fadeIn">
+        <section className="min-h-[100dvh] flex flex-col justify-center py-28 md:pt-28 md:pb-20 relative">
+            <div className="w-full max-w-5xl mx-auto">
+                <div className="flex items-center gap-4 mb-6">
+                    <Skeleton variant="circle" className="w-16 h-16 md:w-20 md:h-20" />
+                    <div className="flex flex-col gap-2">
+                        <Skeleton className="h-6 w-48" />
+                        <Skeleton className="h-4 w-32" />
+                    </div>
+                </div>
+                <Skeleton className="h-16 md:h-24 w-3/4 mb-4" />
+                <Skeleton className="h-16 md:h-24 w-1/2 mb-8" />
+                <Skeleton className="h-20 w-2/3 mb-10" />
+                <div className="flex gap-3">
+                    <Skeleton className="h-12 w-32 rounded-lg" />
+                    <Skeleton className="h-12 w-32 rounded-lg" />
+                </div>
+            </div>
+        </section>
+    </div>
+);
 
 const Home = () => {
+    const { data, loading } = usePortfolioData();
+
+    // Use dynamic data if available, otherwise fallback to static data
+    const info = data?.personalInfo || staticPersonalInfo;
+    const expList = data?.experiences || staticExperiences;
+
+    if (loading) {
+        return <HomeSkeleton />;
+    }
+
     return (
         <div id="home-view" className="view-section animate-fadeIn">
             {/* --- HERO SECTION --- */}
@@ -19,7 +54,7 @@ const Home = () => {
                         </div>
                         <div>
                             <h2 className="text-xl md:text-2xl font-medium text-text-muted mb-1">
-                                Hi, I'm <span className="text-text-main font-semibold">{personalInfo.name} Hossen</span>
+                                Hi, I'm <span className="text-text-main font-semibold">{info.name} Hossen</span>
                             </h2>
                             <div className="flex items-center gap-2 mt-1">
                                 <span className="relative flex h-2 w-2">
@@ -60,7 +95,7 @@ const Home = () => {
 
                         {/* 2. Secondary Button (Resume) */}
                         <a
-                            href={personalInfo.cvLink}
+                            href={info.cvLink}
                             target="_blank"
                             rel="noopener noreferrer"
                             className="btn-secondary w-full sm:w-auto"
@@ -98,7 +133,7 @@ const Home = () => {
             {/* --- EXPERIENCE PREVIEW SECTION --- */}
             <section className="mb-12">
                 {/* The Experience Card */}
-                <ExperiencePreview featuredExperience={experiences} limit={1} />
+                <ExperiencePreview featuredExperience={expList} limit={1} />
 
                 {/* Center Navigation Button */}
                 <div className="mt-4 flex justify-center w-full">
