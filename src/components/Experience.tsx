@@ -133,8 +133,8 @@ const ExperiencePreview: React.FC<ExperiencePreviewProps> = ({ featuredExperienc
                                     {group.company}
                                 </h3>
 
-                                <span className="w-fit self-start mt-2 sm:mt-0 text-[10px] sm:text-[11px] text-text-muted flex items-center gap-2 font-mono tracking-wider bg-white/5 px-2 py-1 sm:px-3 rounded-full border border-white/5">
-                                    <i className="fas fa-map-marker-alt text-accent/70"></i> {group.location}
+                                <span className="w-fit self-start mt-2 sm:mt-0 text-xs text-slate-300 flex items-center gap-2 font-mono tracking-wider bg-white/5 px-3 py-1.5 rounded-full border border-white/10">
+                                    <i className="fas fa-map-marker-alt text-accent"></i> {group.location}
                                 </span>
                             </div>
 
@@ -165,7 +165,7 @@ const ExperiencePreview: React.FC<ExperiencePreviewProps> = ({ featuredExperienc
                                                     {exp.role}
                                                 </h4>
 
-                                                <div className="w-fit self-start flex items-center gap-2 text-[10px] sm:text-[11px] font-mono text-text-main bg-transparent px-2 py-1 sm:px-3 rounded-full border border-white/5 whitespace-nowrap">
+                                                <div className="w-fit self-start flex items-center gap-2 text-xs font-mono text-slate-300 bg-white/5 px-3 py-1.5 rounded-full border border-white/10 whitespace-nowrap">
                                                     {isPresent && (
                                                         <span className="relative flex h-2 w-2">
                                                             <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
@@ -222,7 +222,10 @@ const ExperiencePreview: React.FC<ExperiencePreviewProps> = ({ featuredExperienc
                                             {exp.skills && exp.skills.length > 0 && (
                                                 <div className="flex flex-wrap gap-2 mt-5 pt-4 border-t border-white/5">
                                                     {exp.skills.map((skill, i) => (
-                                                        <span key={i} className="px-2 py-0.5 text-[10px] font-mono rounded bg-slate-800/30 text-slate-400 border border-slate-700/30">
+                                                        <span key={i} className="text-xs font-medium px-3 py-1.5 rounded-full 
+                                                                       bg-white/5 border border-white/10 text-slate-300
+                                                                       hover:bg-accent/10 hover:border-accent/30 hover:text-accent
+                                                                       transition-all duration-300 cursor-default">
                                                             {skill}
                                                         </span>
                                                     ))}
@@ -236,13 +239,8 @@ const ExperiencePreview: React.FC<ExperiencePreviewProps> = ({ featuredExperienc
                     </div>
                 ))}
             </div>
-            {/* ADDED: Style block to define the minimalistic dark shadow */}
-            <style>{`
-                /* Minimalist subtle hover shadow for dark glass-cards */
-                .hover\\:shadow-md:hover {
-                    box-shadow: 0 10px 30px -15px rgba(0, 0, 0, 0.5);
-                }
-            `}</style>
+
+
         </div>
     );
 };

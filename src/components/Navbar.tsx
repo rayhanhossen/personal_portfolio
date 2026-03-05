@@ -89,51 +89,13 @@ const Navbar = () => {
                             </NavLink>
                         ))}
 
-                        {/* --- AGGRESSIVE CONTACT BUTTON --- */}
-                        <NavLink
+                        <Link
                             to="/contact"
-                            className={({ isActive }) => `
-                                group relative ml-6 px-6 py-2 bg-white/5 rounded-full overflow-hidden transition-all duration-500
-                                border border-white/50 flex items-center gap-1
-                                hover:border-accent hover:shadow-[0_0_40px_-5px_rgba(34,211,238,0.6)]
-                                ${isActive ? 'bg-accent border-accent' : 'bg-transparent'}
-                            `}
+                            className="btn-primary ml-6 hidden md:inline-flex"
                         >
-                            {/* This is the magic part: we use a function inside the NavLink */}
-                            {({ isActive }) => (
-                                <>
-                                    {/* 1. Background Fill (Aggressive Slide) */}
-                                    <div className={`absolute inset-0 bg-accent transition-transform duration-500 ease-out -z-10
-                                        ${isActive ? 'translate-y-0' : 'translate-y-[102%] group-hover:translate-y-0'}
-                                    `}
-                                    />
-
-                                    {/* 2. Content */}
-                                    <span className={`relative text-base font-semibold tracking-widest transition-colors duration-300
-                                        ${isActive ? 'text-black' : 'text-white group-hover:text-black'}
-                                    `}>
-                                        Contact
-                                    </span>
-
-                                    {/* 3. Aggressive Icon */}
-                                    <div className="relative w-4 h-4 overflow-hidden">
-                                        <div className={`flex flex-col transition-transform duration-500 ease-in-out
-                                            ${isActive ? '-translate-y-1/2' : 'group-hover:-translate-y-1/2'}
-                                        `}>
-                                            {/* Top Icon (Visible when not active/hovered) */}
-                                            <i className={`fas fa-chevron-right text-[12px] h-4 flex items-center justify-center
-                                                ${isActive ? 'text-black' : 'text-white group-hover:text-black'}
-                                            `}></i>
-                                            {/* Bottom Icon (Slides up on Hover/Active) */}
-                                            <i className="fas fa-paper-plane text-[10px] h-4 flex items-center justify-center text-black"></i>
-                                        </div>
-                                    </div>
-
-                                    {/* 4. The "Flash" Sheen Effect */}
-                                    <div className="absolute top-0 -left-[100%] w-full h-full bg-gradient-to-r from-transparent via-white/50 to-transparent skew-x-[30deg] group-hover:animate-[shine_0.8s_ease-in-out]" />
-                                </>
-                            )}
-                        </NavLink>
+                            <span>Contact</span>
+                            <i className="fas fa-paper-plane text-xs transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform duration-300"></i>
+                        </Link>
                     </nav>
 
                     {/* --- MOBILE TOGGLE --- */}
@@ -149,9 +111,9 @@ const Navbar = () => {
 
             {/* --- MOBILE MENU OVERLAY --- */}
             <div
-                className={`fixed inset-0 z-[90] bg-slate-950/98 backdrop-blur-2xl transition-all duration-500 ease-in-out md:hidden flex flex-col
+                className={`fixed inset-0 z-[90] bg-glass-overlay/90 backdrop-blur-2xl transition-all duration-500 ease-in-out md:hidden flex flex-col
                     ${isOpen ? 'opacity-100 visible' : 'opacity-0 invisible pointer-events-none'}`}
-                >
+            >
                 {/* Animated background element for extra depth */}
                 <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[30%] bg-accent/10 blur-[120px] rounded-full animate-pulse" />
 
@@ -184,16 +146,16 @@ const Navbar = () => {
                     </nav>
 
                     {/* --- SOCIALS --- */}
-                    <div className={`mt-16 pt-8 border-t border-white/5 w-full max-w-sm flex justify-around transition-all duration-700 delay-300
+                    <div className={`mt-16 pt-8 border-t border-white/10 w-full max-w-sm flex justify-around transition-all duration-700 delay-300
                         ${isOpen ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
-                        <a href={personalInfo.github} className="p-4 rounded-full bg-white/5 text-white hover:text-accent hover:bg-white/10 transition-all">
-                            <i className="fab fa-github text-2xl"></i>
+                        <a href={personalInfo.github} className="p-4 rounded-full glass-card hover:bg-white/10 text-white hover:text-accent transition-all group">
+                            <i className="fab fa-github text-2xl group-hover:scale-110 transition-transform"></i>
                         </a>
-                        <a href={personalInfo.linkedin} className="p-4 rounded-full bg-white/5 text-white hover:text-accent hover:bg-white/10 transition-all">
-                            <i className="fab fa-linkedin text-2xl"></i>
+                        <a href={personalInfo.linkedin} className="p-4 rounded-full glass-card hover:bg-white/10 text-white hover:text-accent transition-all group">
+                            <i className="fab fa-linkedin text-2xl group-hover:scale-110 transition-transform"></i>
                         </a>
-                        <a href={`mailto:${personalInfo.email}`} className="p-4 rounded-full bg-white/5 text-white hover:text-accent hover:bg-white/10 transition-all">
-                            <i className="fas fa-envelope text-2xl"></i>
+                        <a href={`mailto:${personalInfo.email}`} className="p-4 rounded-full glass-card hover:bg-white/10 text-white hover:text-accent transition-all group">
+                            <i className="fas fa-envelope text-2xl group-hover:scale-110 transition-transform"></i>
                         </a>
                     </div>
                 </div>

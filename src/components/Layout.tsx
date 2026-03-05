@@ -64,15 +64,10 @@ const Layout: React.FC = () => {
                 onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
                 className={`fixed bottom-8 right-8 z-[100] transition-all duration-500 transform ${showScroll ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4 pointer-events-none'
                     }`}
+                aria-label="Scroll to top"
             >
-                {/* 🚨 UPDATED DESIGN: Rounded-xl (Square) + Animated Arrow */}
-                <div className="flex items-center justify-center h-12 w-12 rounded-xl 
-                    bg-glass-overlay backdrop-blur-md border border-white/10 shadow-lg
-                    hover:bg-accent hover:border-accent hover:shadow-neon hover:-translate-y-1
-                    transition-all duration-300 group">
-
-                    {/* Icon animates UP on hover now */}
-                    <i className="fas fa-arrow-up text-accent group-hover:text-bg text-base transition-transform duration-300 group-hover:-translate-y-0.5"></i>
+                <div className="btn-secondary !p-0 !w-12 !h-12 !rounded-full flex items-center justify-center group">
+                    <i className="fas fa-arrow-up text-base transition-transform duration-300 group-hover:-translate-y-1"></i>
                 </div>
             </button>
         </div>

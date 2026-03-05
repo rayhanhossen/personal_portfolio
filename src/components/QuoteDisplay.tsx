@@ -99,9 +99,16 @@ const QuoteDisplay = () => {
                             className={`mt-6 flex items-center justify-center gap-2 transition-all duration-700 ease-in-out ${isCurrentlyTyping ? 'opacity-0 translate-y-2' : 'opacity-100 translate-y-0'}`}
                         >
                             <span className="h-[1px] w-8 bg-accent/30"></span>
-                            <span className="text-accent font-mono text-xs uppercase tracking-widest">
-                                {quotes[index].author}
-                            </span>
+                            {quotes[index].author === "My Principle" ? (
+                                <span className="text-accent font-mono text-xs uppercase tracking-widest flex items-center gap-2">
+                                    <i className="fas fa-bolt text-[8px]"></i>
+                                    Personal Principle
+                                </span>
+                            ) : (
+                                <span className="text-accent font-mono text-xs uppercase tracking-widest">
+                                    {quotes[index].author}
+                                </span>
+                            )}
                             <span className="h-[1px] w-8 bg-accent/30"></span>
                         </div>
                     </div>

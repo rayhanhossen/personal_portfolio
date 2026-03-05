@@ -9,10 +9,7 @@ const ContactPage: React.FC = () => {
     // State
     const [message, setMessage] = useState('');
     const [status, setStatus] = useState<'idle' | 'sending' | 'success' | 'error'>('idle');
-    // const [loadingRefine, setLoadingRefine] = useState(false);
-    const [isRefined] = useState(false);
     const [copyStatus, setCopyStatus] = useState<string | null>(null);
-    // const [cooldown, setCooldown] = useState(false);
 
     // --- Action: Send Email ---
     const handleSend = (e: React.FormEvent) => {
@@ -43,61 +40,9 @@ const ContactPage: React.FC = () => {
         });
     };
 
-    // const handleRefine = useCallback(async (e: React.MouseEvent) => {
-    //     e.preventDefault();
-
-    //     // 2. Add 'cooldown' to the block condition
-    //     if (!message.trim() || loadingRefine || cooldown) return;
-
-    //     setLoadingRefine(true);
-    //     setCooldown(true); // 3. Start cooldown immediately
-
-    //     // 4. Reset cooldown after 5 seconds (prevents spamming)
-    //     setTimeout(() => setCooldown(false), 5000);
-
-    //     const GEMINI_API_KEY = import.meta.env.VITE_GEMINI_API_KEY;
-    //     const prompt = `Refine this message for a developer's contact form. Fix grammar and improve clarity. Keep it professional but friendly and concise. Output ONLY the refined text: "${message}"`;
-
-    //     try {
-    //         const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${GEMINI_API_KEY}`, {
-    //             method: 'POST',
-    //             headers: { 'Content-Type': 'application/json' },
-    //             body: JSON.stringify({ contents: [{ parts: [{ text: prompt }] }] })
-    //         });
-
-    //         // 5. specific check for 429
-    //         if (response.status === 429) {
-    //             console.warn("Too many requests. Please wait a moment.");
-    //             // Optional: alert("Please wait a few seconds before refining again.");
-    //             setLoadingRefine(false);
-    //             return;
-    //         }
-
-    //         const data = await response.json();
-    //         const refinedText = data?.candidates?.[0]?.content?.parts?.[0]?.text;
-    //         if (refinedText) {
-    //             setMessage(refinedText.trim());
-    //             setIsRefined(true);
-    //             setTimeout(() => setIsRefined(false), 2000);
-    //         }
-    //     } catch (error) {
-    //         console.error("AI Error:", error);
-    //     }
-    //     setLoadingRefine(false);
-    // }, [message, loadingRefine, cooldown]);
 
     return (
         <div className="font-sans animate-fadeIn">
-            {/* --- HEADER --- */}
-            {/* <div className="pt-28 mb-8 relative z-10">
-                <div className="absolute -top-10 -left-10 text-[100px] text-accent/5 opacity-20 pointer-events-none select-none z-0">
-                    <i className="fas fa-paper-plane"></i>
-                </div>
-                <h2 className="text-3xl font-bold mb-3 flex items-center gap-2 relative z-10">
-                    <span className="text-accent font-mono">/</span>
-                    <span className="text-transparent bg-clip-text bg-text-gradient">Contact Me</span>
-                </h2>
-            </div> */}
 
             {/* --- MAIN CONTENT GRID --- */}
             <div className="pt-28 relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch mb-20 text-text-main">
@@ -112,10 +57,7 @@ const ContactPage: React.FC = () => {
                         <div>
                             <div className="flex items-center justify-between mb-8">
                                 <div className="flex items-center gap-3">
-                                    {/* CHANGED: Removed wrapper div, increased icon size directly */}
                                     <i className="fas fa-globe-americas text-accent text-xl"></i>
-
-                                    {/* Kept text styles, flex-row handles the alignment */}
                                     <h3 className="text-text-main font-semibold text-md uppercase tracking-widest font-mono mt-1">
                                         Mobility Status
                                     </h3>
@@ -125,7 +67,7 @@ const ContactPage: React.FC = () => {
                             </div>
 
                             <div className="space-y-6">
-                                <h4 className="text-text-main text-1xl font-bold leading-tight">
+                                <h4 className="text-text-main text-xl font-bold leading-tight">
                                     Seeking Global & Local Opportunities
                                 </h4>
                                 <div className="text-text-muted text-[15px] leading-relaxed font-light">
@@ -215,27 +157,11 @@ const ContactPage: React.FC = () => {
                             <div className="flex-1 flex flex-col gap-2 min-h-[250px]">
                                 <div className="flex justify-between items-center px-1">
                                     <label className="text-[10px] font-mono text-accent uppercase tracking-widest">Message</label>
-                                    {/* <button
-                                        type="button"
-                                        onClick={handleRefine}
-                                        disabled={loadingRefine || !message.trim()}
-                                        className={`
-                                            text-[10px] font-mono tracking-[0.2em] uppercase flex items-center gap-2 transition-all duration-500 transform
-                                            ${loadingRefine
-                                                ? 'text-accent animate-pulse scale-100 opacity-100'
-                                                : message.trim()
-                                                    ? 'text-text-muted/60 hover:text-accent scale-100 opacity-100 cursor-pointer'
-                                                    : 'scale-95 opacity-0 pointer-events-none'
-                                            }
-                                        `}
-                                    >
-                                        <i className={`fas ${loadingRefine ? 'fa-circle-notch fa-spin' : 'fa-wand-magic-sparkles'} text-[9px]`}></i>
-                                        <span>{loadingRefine ? 'Refining' : 'Refine'}</span>
-                                    </button> */}
+                                    {/* Refine button removed — feature disabled */}
                                 </div>
                                 <textarea required name="message" value={message} onChange={(e) => setMessage(e.target.value)}
                                     placeholder="Hey Rayhan, I saw your portfolio and wanted to chat about..."
-                                    className={`contact-input flex-1 resize-none py-4 transition-all duration-500 ${isRefined ? 'border-accent/60 bg-accent/5 shadow-[0_0_20px_rgba(34,211,238,0.1)]' : ''}`}
+                                    className="contact-input flex-1 resize-none py-4 transition-all duration-500"
                                 />
                             </div>
 
@@ -266,31 +192,8 @@ const ContactPage: React.FC = () => {
                 </div>
             </div>
 
-            <style>{`
-                .contact-input {
-                    width: 100%;
-                    background: rgba(255, 255, 255, 0.03);
-                    border: 1px solid rgba(255, 255, 255, 0.08);
-                    border-radius: 12px;
-                    padding: 1rem;
-                    font-size: 0.875rem;
-                    color: white;
-                    transition: all 0.3s ease;
-                }
-                .contact-input:focus {
-                    outline: none;
-                    background: rgba(255, 255, 255, 0.05);
-                    border-color: rgba(34, 211, 238, 0.4);
-                }
-                /* Minimalist subtle hover shadow for dark glass-cards */
-                .hover\\:shadow-md:hover {
-                    box-shadow: 0 10px 30px -15px rgba(0, 0, 0, 0.5);
-                }
-                .hover\\:shadow-sm:hover {
-                    box-shadow: 0 5px 15px -10px rgba(255, 255, 255, 0.05);
-                }
-            `}</style>
-        </div>
+
+        </div >
     );
 };
 

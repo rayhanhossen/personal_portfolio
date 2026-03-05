@@ -22,17 +22,7 @@ const About = () => {
 
     return (
         <div className="font-sans animate-fadeIn">
-            {/* --- HEADER --- */}
-            {/* <div className="pt-24 md:pt-32 mb-8 relative z-10">
-                <div className="absolute -top-10 -left-10 text-[100px] text-accent/5 opacity-20 pointer-events-none select-none z-0">
-                    <i className="fas fa-user-astronaut"></i>
-                </div>
-                <h2 className="text-3xl md:text-4xl font-bold mb-3 flex items-center gap-2 relative z-10">
-                    <span className="text-accent font-mono">/</span>
-                    <span className="text-transparent bg-clip-text bg-text-gradient">about_me</span>
-                </h2>
-                <p className="text-text-muted text-lg font-light tracking-wide relative z-10">Who am I?</p>
-            </div> */}
+
 
             {/* --- BIO & IMAGE --- */}
             <div className="pt-32 relative z-10 grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-12 mb-16 items-start">
@@ -45,20 +35,18 @@ const About = () => {
                             Open to Work
                         </span>
                         <span className="text-xs font-mono px-3 py-1.5 rounded-full border border-white/10 bg-white/5 text-slate-400">
-                            <i className="fas fa-map-marker-alt text-accent/60 mr-1.5"></i>Dhaka, Bangladesh (GMT+6)
-                        </span>
-                        <span className="text-xs font-mono px-3 py-1.5 rounded-full border border-white/10 bg-white/5 text-slate-400">
-                            <i className="fas fa-plane text-accent/60 mr-1.5"></i>Open to Relocation
+                            <i className="fas fa-map-marker-alt text-accent/60 mr-1.5"></i>{personalInfo.location} ({personalInfo.timezone})
                         </span>
                     </div>
 
-                    {/* Bio Text */}
-                    <p className="mb-4 text-base md:text-lg text-slate-300 font-light leading-relaxed">
-                        Experienced Software Engineer building and scaling backend systems across fintech, telecommunications, and e-commerce — proficient in <strong className="text-white font-semibold">Django, FastAPI, PostgreSQL, Docker</strong> and AWS.
-                    </p>
-                    <p className="mb-6 text-base text-slate-400 font-light leading-relaxed">
-                        Currently focused on AI-powered systems, leveraging <strong className="text-accent font-medium">LLMs, RAG, and Model Content Processors (MCP)</strong> to build intelligent, data-driven backend platforms.
-                    </p>
+                    {/* Bio Text — Dynamic from content.ts */}
+                    {personalInfo.about.map((paragraph, i) => (
+                        <p
+                            key={i}
+                            className={`${i === 0 ? 'mb-4 text-base md:text-lg text-slate-300' : 'mb-6 text-base text-slate-400'} font-light leading-relaxed`}
+                            dangerouslySetInnerHTML={{ __html: paragraph }}
+                        />
+                    ))}
 
                     {/* ACTION BUTTONS */}
                     <div className="flex flex-row gap-3 mt-8 w-full sm:w-auto">
@@ -98,57 +86,59 @@ const About = () => {
 
 
             {/* --- SKILLS SECTION --- */}
-            {/* Added 'border-t' and 'border-white/10' here for the top border */}
-            <section className="mb-12 pt-12 border-t border-white/10 relative">
+            <section className="mb-12 pt-12 border-t border-white/5 relative">
 
-                <div className="flex items-center gap-3 mb-8">
-                    <i className="fas fa-microchip text-accent text-xl"></i>
+                <div className="flex items-center gap-3 mb-10">
+                    <i className="fas fa-microchip text-accent text-xl drop-shadow-[0_0_5px_rgba(34,211,238,0.5)]"></i>
                     <h3 className="text-2xl font-semibold text-text-main tracking-tight">Technical Skills</h3>
                 </div>
 
-                <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
-                    {/* ... your existing skills.map and Dynamic Filler Card ... */}
-                    {skills.map((grp) => (
-                        <div key={grp.category} className="h-56 flex flex-col bg-glass-overlay backdrop-blur-md rounded-xl border border-white/10 transition-all hover:border-accent/40 group">
-                            <div className="border-b border-white/10 p-4 bg-white/5 rounded-t-xl flex justify-between items-center">
-                                <span className="font-mono font-bold text-accent text-xs uppercase">{grp.category}</span>
-                            </div>
-                            <div className="p-4 text-slate-300 text-sm flex flex-col gap-2.5 overflow-y-auto aesthetic-scrollbar">
-                                {grp.items.map((skill) => (
-                                    <span key={skill} className="hover:text-white transition-colors flex items-center gap-2">
-                                        <i className="fas fa-angle-right text-accent/50 text-xs"></i> {skill}
-                                    </span>
-                                ))}
-                            </div>
-                        </div>
-                    ))}
-
-                    {/* Dynamic Filler Card */}
-                    {(() => {
-                        const len = skills.length;
-                        const mobileSlots = (2 - (len % 2)) % 2;
-                        const smSlots = (3 - (len % 3)) % 3;
-                        const lgSlots = (4 - (len % 4)) % 4;
-
-                        if (mobileSlots === 0 && smSlots === 0 && lgSlots === 0) return null;
-
-                        const mobileClasses: Record<number, string> = { 0: "hidden", 1: "col-span-1 flex" };
-                        const smClasses: Record<number, string> = { 0: "sm:hidden", 1: "sm:col-span-1 sm:flex", 2: "sm:col-span-2 sm:flex" };
-                        const lgClasses: Record<number, string> = { 0: "lg:hidden", 1: "lg:col-span-1 lg:flex", 2: "lg:col-span-2 lg:flex", 3: "lg:col-span-3 lg:flex" };
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+                    {skills.map((grp) => {
+                        // Category-specific icons
+                        const categoryIcons: Record<string, string> = {
+                            'Programming': 'fa-code',
+                            'Frameworks': 'fa-layer-group',
+                            'Front-End': 'fa-palette',
+                            'Databases': 'fa-database',
+                            'Caching & Messaging': 'fa-bolt',
+                            'Cloud & DevOps': 'fa-cloud',
+                            'AI & Data Processing': 'fa-brain',
+                            'Automation & Testing': 'fa-robot',
+                            'Development Methodologies': 'fa-diagram-project',
+                        };
+                        const icon = categoryIcons[grp.category] || 'fa-cube';
 
                         return (
-                            <div
-                                className={`h-56 rounded-xl border border-dashed border-white/10 bg-white/5 flex-col items-center justify-center text-center 
-                                    ${mobileClasses[mobileSlots]} 
-                                    ${smClasses[smSlots]} 
-                                    ${lgClasses[lgSlots]}`}
-                            >
-                                <span className="text-text-muted font-mono font-bold tracking-widest text-[10px] uppercase mb-2 animate-pulse">
-                                    CONTINUOUS_LEARNING...
-                                </span>
+                            <div key={grp.category} className="glass-card !rounded-xl p-5 flex flex-col group relative overflow-hidden">
+                                {/* Subtle glow on hover */}
+                                <div className="absolute top-0 right-0 w-24 h-24 bg-accent/5 rounded-full blur-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+
+                                {/* Category Header */}
+                                <div className="flex items-center gap-3 mb-4 relative z-10">
+                                    <div className="w-9 h-9 rounded-lg bg-accent/10 border border-accent/20 flex items-center justify-center group-hover:bg-accent/20 group-hover:border-accent/40 transition-all duration-300">
+                                        <i className={`fas ${icon} text-accent text-sm`}></i>
+                                    </div>
+                                    <span className="font-mono font-bold text-white text-xs uppercase tracking-widest">{grp.category}</span>
+                                </div>
+
+                                {/* Skill Pills */}
+                                <div className="flex flex-wrap gap-2 relative z-10">
+                                    {grp.items.map((skill) => (
+                                        <span
+                                            key={skill}
+                                            className="text-xs font-medium px-3 py-1.5 rounded-full 
+                                                       bg-white/5 border border-white/10 text-slate-300
+                                                       hover:bg-accent/10 hover:border-accent/30 hover:text-accent
+                                                       transition-all duration-300 cursor-default"
+                                        >
+                                            {skill}
+                                        </span>
+                                    ))}
+                                </div>
                             </div>
                         );
-                    })()}
+                    })}
                 </div>
             </section>
 

@@ -75,9 +75,9 @@ const CustomCursor: React.FC = () => {
         const style = document.createElement('style');
         style.innerText = `
             body, html, * { cursor: none !important; }
-            @media (pointer: coarse) {
+            @media (hover: none) and (pointer: coarse) {
                 body, html, * { cursor: auto !important; }
-                .custom-cursor { display: none !important; }
+                .custom-cursor { display: none !important; opacity: 0 !important; visibility: hidden !important; }
             }
         `;
         document.head.appendChild(style);

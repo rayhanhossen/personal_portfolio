@@ -76,12 +76,21 @@ const Home = () => {
                     <p className="text-sm font-mono text-slate-400 mb-5 uppercase tracking-widest font-semibold">
                         Core Tech Stack:
                     </p>
-                    <div className="flex flex-wrap gap-x-8 gap-y-4 opacity-70 grayscale hover:grayscale-0 transition-all duration-500">
-                        {heroStack.map((tech) => (
-                            <span key={tech} className="text-xl md:text-2xl font-bold text-slate-400 hover:text-accent cursor-default transition-colors">
-                                {tech}
-                            </span>
-                        ))}
+                    <div className="flex flex-wrap gap-x-8 gap-y-6 md:gap-x-12 mt-6">
+                        {heroStack.map((tech) => {
+                            const Icon = tech.icon;
+                            return (
+                                <div
+                                    key={tech.name}
+                                    className={`flex flex-col items-center gap-2 group cursor-default transition-all duration-300`}
+                                >
+                                    <Icon className={`text-3xl md:text-4xl text-slate-500 transition-colors duration-300 group-hover:scale-110 ${tech.color}`} />
+                                    <span className="text-xs font-mono font-medium text-slate-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                                        {tech.name}
+                                    </span>
+                                </div>
+                            );
+                        })}
                     </div>
                 </div>
             </section>
@@ -95,29 +104,10 @@ const Home = () => {
                 <div className="mt-4 flex justify-center w-full">
                     <Link
                         to="/about#experience"
-                        className="group relative inline-flex items-center gap-2 px-6 py-2.5 
-                        rounded-full 
-                        /* INITIAL STATE: White Text & Border */
-                        bg-transparent border border-white/30 text-white
-                        /* HOVER STATE: Fill Accent */
-                        hover:bg-accent hover:text-bg hover:border-accent
-                        /* Font & Layout */
-                        font-bold text-xs tracking-wider uppercase
-                        /* Shadows & Transforms */
-                        shadow-none hover:shadow-[0_0_25px_-5px_rgba(34,211,238,0.6)]
-                        hover:scale-[1.02] active:scale-[0.98]
-                        transition-all duration-300 ease-out"
+                        className="btn-secondary group"
                     >
-                        <span className="relative z-10">View All</span>
-
-                        {/* Animated Icon Container */}
-                        <div className="relative w-3 h-3 flex items-center justify-center">
-                            {/* Chevron (>): Slides out to right on hover */}
-                            <i className="fas fa-chevron-right text-[10px] absolute transition-all duration-300 transform group-hover:translate-x-full group-hover:opacity-0"></i>
-
-                            {/* Arrow (->): Slides in from left on hover */}
-                            <i className="fas fa-arrow-right text-[10px] absolute transition-all duration-300 transform -translate-x-full opacity-0 group-hover:translate-x-0 group-hover:opacity-100"></i>
-                        </div>
+                        <span>View All</span>
+                        <i className="fas fa-arrow-right text-xs transform group-hover:translate-x-1 transition-transform duration-300"></i>
                     </Link>
                 </div>
             </section>

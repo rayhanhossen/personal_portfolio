@@ -12,8 +12,10 @@ body {
     min-height: 100vh;
     overflow-x: hidden;
 
-    /* 🚨 ACTIVATED: Hide default cursor so CustomCursor is the only one visible */
-    cursor: none;
+    /* 🚨 ACTIVATED: Hide default cursor only if the device has a mouse/pointer. Touch devices keep default behavior. */
+    @media (hover: hover) and (pointer: fine) {
+        cursor: none;
+    }
 }
 
 /* --- CUSTOM UTILITIES & COMPONENTS --- */
@@ -31,10 +33,7 @@ body {
     box-shadow: 0 0 5px theme('colors.accent'), 0 0 20px theme('colors.accent'), 0 16px 40px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.08);
 }
 
-/* Accent helper */
-.accent-text {
-    @apply text-accent;
-}
+
 
 /* --- SCROLLBAR REDESIGN (Matches Theme) --- */
 ::-webkit-scrollbar {
@@ -61,69 +60,6 @@ body {
 }
 
 
-/* --- HEADING LINE --- */
-.heading-line {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-}
-
-.heading-line::after {
-    content: '';
-    display: block;
-    height: 1px;
-    background-color: #22d3ee;
-    /* Neon Cyan */
-    flex-grow: 1;
-    max-width: 500px;
-    opacity: 0.5;
-}
-
-/* --- SOCIAL LABELS (Sidebar Popups) --- */
-.social-label {
-    position: absolute;
-    top: 50%;
-    left: 100%;
-    transform: translateY(-50%);
-
-    /* Colors */
-    background: #22d3ee;
-    color: #020617;
-    font-weight: 600;
-
-    padding: 0.25rem 0.75rem;
-    border-radius: 0.25rem;
-    font-size: 0.8rem;
-    white-space: nowrap;
-    margin-left: 0.8rem;
-
-    opacity: 0;
-    visibility: hidden;
-    transition: all 0.3s ease;
-    z-index: 60;
-
-    /* Neon Glow */
-    box-shadow: 0 0 10px rgba(34, 211, 238, 0.5);
-}
-
-/* Pointer Triangle for the label */
-.social-label::before {
-    content: '';
-    position: absolute;
-    left: -4px;
-    top: 50%;
-    transform: translateY(-50%);
-    border-top: 4px solid transparent;
-    border-bottom: 4px solid transparent;
-    border-right: 4px solid #22d3ee;
-}
-
-.group:hover .social-label {
-    opacity: 1;
-    visibility: visible;
-    transform: translateY(-50%) translateX(5px);
-}
-
 /* --- ANIMATIONS --- */
 
 .view-section {
@@ -142,37 +78,7 @@ body {
     }
 }
 
-/* --- CUSTOM CURSOR --- */
-.cursor-dot,
-.cursor-outline {
-    position: fixed;
-    top: 0;
-    left: 0;
-    transform: translate(-50%, -50%);
-    border-radius: 50%;
-    z-index: 9999;
-    pointer-events: none;
-}
 
-.cursor-dot {
-    width: 8px;
-    height: 8px;
-    background-color: #22d3ee;
-    box-shadow: 0 0 10px rgba(34, 211, 238, 0.9);
-    /* Stronger glow on the dot */
-}
-
-.cursor-outline {
-    width: 40px;
-    height: 40px;
-    border: 1px solid rgba(34, 211, 238, 0.5);
-    transition: width 0.15s ease-out, height 0.15s ease-out, background-color 0.15s;
-}
-
-/* Expand cursor on clickable elements */
-body:hover .cursor-outline {
-    opacity: 1;
-}
 
 /* --- PREMIUM BUTTON STYLES --- */
 
@@ -236,4 +142,31 @@ body:hover .cursor-outline {
 
 .btn-secondary:active {
     transform: translateY(1px);
+}
+
+/* --- CONTACT FORM INPUTS --- */
+.contact-input {
+    width: 100%;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 12px;
+    padding: 1rem;
+    font-size: 0.875rem;
+    color: white;
+    transition: all 0.3s ease;
+}
+
+.contact-input:focus {
+    outline: none;
+    background: rgba(255, 255, 255, 0.05);
+    border-color: rgba(34, 211, 238, 0.4);
+}
+
+/* --- SUBTLE HOVER SHADOWS --- */
+.hover\:shadow-md:hover {
+    box-shadow: 0 10px 30px -15px rgba(0, 0, 0, 0.5);
+}
+
+.hover\:shadow-sm:hover {
+    box-shadow: 0 5px 15px -10px rgba(255, 255, 255, 0.05);
 }

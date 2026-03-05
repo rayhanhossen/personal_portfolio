@@ -82,7 +82,7 @@ const Projects = () => {
                                 {project.tech.map((tech, i) => (
                                     <span
                                         key={i}
-                                        className="text-[10px] font-mono font-bold tracking-wide px-2 py-1 rounded-md text-accent border border-accent/20 bg-transparent shadow-[0_0_10px_rgba(34,211,238,0.05)]"
+                                        className="text-[10px] font-mono font-medium tracking-wide px-2.5 py-1 rounded-full text-slate-300 bg-white/5 border border-white/10"
                                     >
                                         {tech}
                                     </span>
@@ -154,6 +154,71 @@ const Projects = () => {
         );
     };
 
+    // Helper: Tool Card (No Image, GitHub-style)
+    const renderToolCard = (project: Project) => {
+        return (
+            <div
+                key={project.id}
+                className="group flex flex-col glass-card bg-glass-overlay backdrop-blur-md border border-white/[0.12] rounded-xl overflow-hidden 
+                       transition-all duration-300 p-6 relative
+                       shadow-none hover:shadow-[0_4px_20px_-5px_rgba(34,211,238,0.2)] hover:-translate-y-1 hover:border-accent/40"
+            >
+                {/* Background Glow Effect on Hover */}
+                <div className="absolute top-0 right-0 w-32 h-32 bg-accent/5 rounded-full blur-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+
+                <div className="flex justify-between items-start mb-4 relative z-10">
+                    <div className="w-10 h-10 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center text-accent/80 group-hover:text-accent group-hover:border-accent/30 transition-colors">
+                        <i className={`fas ${project.title.toLowerCase().includes('bot') ? 'fa-robot' : 'fa-code'} text-lg`}></i>
+                    </div>
+
+                    <div className="flex gap-3">
+                        {project.sourceLink && project.sourceLink !== "#" && (
+                            <a
+                                href={project.sourceLink}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="text-slate-400 hover:text-white transition-colors flex items-center justify-center"
+                                aria-label="Source Code"
+                            >
+                                <i className="fab fa-github text-lg transition-transform hover:scale-110"></i>
+                            </a>
+                        )}
+                        {project.liveLink && project.liveLink !== "#" && (
+                            <a
+                                href={project.liveLink}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="text-slate-400 hover:text-accent transition-colors flex items-center justify-center"
+                                aria-label="Live Demo"
+                            >
+                                <i className="fas fa-external-link-alt text-lg transition-transform hover:scale-110"></i>
+                            </a>
+                        )}
+                    </div>
+                </div>
+
+                <h3 className="text-xl text-text-main font-bold mb-3 group-hover:text-accent transition-colors duration-300 relative z-10">
+                    {project.title}
+                </h3>
+
+                <p className="text-slate-400 text-sm leading-relaxed font-light flex-grow mb-6 relative z-10">
+                    {project.description}
+                </p>
+
+                <div className="mt-auto relative z-10 flex flex-wrap gap-2 pt-4 border-t border-white/5">
+                    {project.tech.map((tech, i) => (
+                        <span
+                            key={i}
+                            className="text-[10px] font-mono font-medium tracking-wide px-2.5 py-1 rounded-full text-slate-300 bg-white/5 border border-white/10"
+                        >
+                            {tech}
+                        </span>
+                    ))}
+                </div>
+            </div>
+        );
+    };
+
     /**
      * Logic for the Dynamic Filler Card
      * Grid Layout: 1 col (mobile), 2 cols (md), 3 cols (lg)
@@ -210,20 +275,7 @@ const Projects = () => {
     return (
         <div id="projects-view" className="pt-32 relative z-10 view-section animate-fadeIn font-sans">
 
-            {/* --- HEADER --- */}
-            {/* <div className="pt-24 md:pt-32 mb-8 relative z-10">
-                <div className="absolute -top-10 -left-10 text-[100px] text-accent/5 opacity-20 pointer-events-none select-none z-0">
-                    <i className="fas fa-laptop-code"></i>
-                </div>
 
-                <h2 className="text-3xl md:text-4xl font-bold mb-3 flex items-center gap-2 relative z-10">
-                    <span className="text-accent font-mono drop-shadow-[0_0_5px_rgba(34,211,238,0.5)]">/</span>
-                    <span className="text-transparent bg-clip-text bg-text-gradient">projects</span>
-                </h2>
-                <p className="text-text-muted text-lg font-light tracking-wide relative z-10">
-                    A selection of my best work.
-                </p>
-            </div> */}
 
             {/* 1. Professional Apps */}
             <section className="mb-12 relative">
@@ -245,18 +297,14 @@ const Projects = () => {
                     Tools & Snippets
                 </h3>
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                    {smallProjects.map(renderProjectCard)}
+                    {smallProjects.map(renderToolCard)}
                     {/* DYNAMIC FILLER */}
                     {renderFillerCard(smallProjects.length)}
                 </div>
             </section>
 
-            <style>{`
-                /* Minimalist subtle hover shadow for dark glass-cards */
-                .hover\\:shadow-md:hover {
-                    box-shadow: 0 10px 30px -15px rgba(0, 0, 0, 0.5);
-                }
-            `}</style>
+
+
         </div>
     );
 };

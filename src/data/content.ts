@@ -15,13 +15,9 @@ export const personalInfo = {
     facebook: "https://www.facebook.com/maverickrayhan/",
     instagram: "https://www.instagram.com/maverickrayhan/",
     about: [
-        `Experienced Software Engineer with 5 years of success building and scaling backend systems
-        across fintech, telecommunications, and e-commerce sectors.
-        Proficient in Django, FastAPI, Celery, Redis, PostgreSQL, MSSQL, Docker, and AWS S3.
-        Demonstrated ability to architect RESTful APIs and deliver performant, production-ready solutions`,
+        `Experienced Software Engineer building and scaling backend systems across fintech, telecommunications, and e-commerce — proficient in <strong class="text-white font-semibold">Django, FastAPI, PostgreSQL, Docker</strong> and AWS.`,
 
-        `Currently focused on AI-powered systems, leveraging LLMs, Retrieval-Augmented Generation (RAG),
-         and Model Content Processors (MCP) to develop data-driven backend platforms.`
+        `Currently focused on AI-powered systems, leveraging <strong class="text-cyan-400 font-medium">LLMs, RAG, and Model Content Processors (MCP)</strong> to build intelligent, data-driven backend platforms.`
     ],
     cvLink: "https://drive.google.com/uc?export=download&id=1WoS8uMgPH64ywzrcrXLm4kCwA-VqTaaG",
 };
@@ -202,55 +198,65 @@ export const projects: Project[] = [
 
 
 
-// quotes
+// quotes — Personal engineering principles + select industry wisdom
 export const quotes = [
     {
-        text: "First, solve the problem. Then, write the code.",
-        author: "John Johnson"
+        text: "Ship fast, but never at the cost of code quality. Speed without structure is just technical debt in disguise.",
+        author: "My Principle"
     },
     {
         text: "Any fool can write code that a computer can understand. Good programmers write code that humans can understand.",
         author: "Martin Fowler"
     },
     {
+        text: "I don't just build features — I build systems that scale. Every line of code should serve the architecture, not fight it.",
+        author: "My Principle"
+    },
+    {
         text: "Make it work, make it right, make it fast.",
         author: "Kent Beck"
     },
     {
-        text: "Simplicity is the soul of efficiency.",
-        author: "Austin Freeman"
-    },
-    {
-        text: "Optimism is an occupational hazard of programming: feedback is the treatment.",
-        author: "Kent Beck"
+        text: "The best backend is the one nobody notices — it just works, silently, reliably, at scale.",
+        author: "My Principle"
     },
     {
         text: "The only way to go fast, is to go well.",
         author: "Robert C. Martin"
     },
     {
-        text: "Programs must be written for people to read, and only incidentally for machines to execute.",
-        author: "Harold Abelson"
+        text: "I treat every codebase like I'll have to debug it at 3 AM. Clean code isn't a luxury — it's a survival strategy.",
+        author: "My Principle"
     },
     {
         text: "Debugging is twice as hard as writing the code in the first place. Therefore, if you write the code as cleverly as possible, you are, by definition, not smart enough to debug it.",
         author: "Brian Kernighan"
     },
-    {
-        text: "The best way to predict the future is to invent it.",
-        author: "Alan Kay"
-    },
 ];
+
+import {
+    FaPython,
+    FaReact,
+    FaAws,
+    FaDocker
+} from 'react-icons/fa';
+import {
+    SiDjango,
+    SiFastapi,
+    SiPostgresql
+} from 'react-icons/si';
+import { BsCpu } from 'react-icons/bs'; // For RAG/MCP
+import { VscServerProcess } from 'react-icons/vsc'; // For MCP
 
 // core tech stack 
 export const heroStack = [
-    "Python",
-    "Django",
-    "FastAPI",
-    "React",
-    "AWS",
-    "Docker",
-    "PostgreSQL",
-    "RAG",
-    "MCP"
+    { name: "Python", icon: FaPython, color: "hover:text-[#3776AB]" },
+    { name: "Django", icon: SiDjango, color: "hover:text-[#092E20]" },
+    { name: "FastAPI", icon: SiFastapi, color: "hover:text-[#009688]" },
+    { name: "React", icon: FaReact, color: "hover:text-[#61DAFB]" },
+    { name: "AWS", icon: FaAws, color: "hover:text-[#FF9900]" },
+    { name: "Docker", icon: FaDocker, color: "hover:text-[#2496ED]" },
+    { name: "PostgreSQL", icon: SiPostgresql, color: "hover:text-[#4169E1]" },
+    { name: "RAG", icon: BsCpu, color: "hover:text-[#22D3EE]" },
+    { name: "MCP", icon: VscServerProcess, color: "hover:text-[#22D3EE]" }
 ];
