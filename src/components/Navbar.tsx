@@ -63,26 +63,24 @@ const Navbar = () => {
                     </Link>
 
                     {/* --- DESKTOP NAV --- */}
-                    {/* --- THE "QUANTUM" NAV BAR --- */}
-                    <nav className="hidden md:flex items-center gap-10">
-                        {/* Navigation Links (with your requested Mini Line) */}
+                    <nav className="hidden md:flex items-center gap-8">
                         {navLinks.map((link) => (
                             <NavLink
                                 key={link.name}
                                 to={link.path}
                                 className={({ isActive }) =>
-                                    `relative text-base uppercase tracking-widest font-medium transition-all duration-300 pt-2 pb-[2px]
-                                    ${isActive ? 'text-white' : 'text-text-muted hover:text-white/80'}`
+                                    `relative text-sm uppercase tracking-[0.2em] font-medium transition-all duration-300 py-2
+                                    ${isActive ? 'text-white' : 'text-slate-400 hover:text-white'}`
                                 }
                             >
                                 {({ isActive }) => (
                                     <>
                                         {link.name}
-                                        {/* The Mini Line */}
-                                        <span className={`absolute -bottom-1 left-1/2 -translate-x-1/2 
-                                        h-[2.5px] w-5 rounded-full bg-accent shadow-[0_0_10px_var(--accent-color)]
+                                        {/* Animated underline — visible on active, grows on hover */}
+                                        <span className={`absolute -bottom-0.5 left-0 right-0 mx-auto
+                                        h-[2px] rounded-full bg-accent
                                         transition-all duration-300 ease-out
-                                        ${isActive ? 'opacity-100 scale-x-100' : 'opacity-0 scale-x-0'}`}
+                                        ${isActive ? 'w-full opacity-100' : 'w-0 opacity-0 group-hover:w-full group-hover:opacity-100'}`}
                                         />
                                     </>
                                 )}
@@ -91,10 +89,10 @@ const Navbar = () => {
 
                         <Link
                             to="/contact"
-                            className="btn-primary ml-6 hidden md:inline-flex"
+                            className="btn-primary ml-4 hidden md:inline-flex"
                         >
                             <span>Contact</span>
-                            <i className="fas fa-paper-plane text-xs transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform duration-300"></i>
+                            <i className="fas fa-paper-plane text-xs"></i>
                         </Link>
                     </nav>
 

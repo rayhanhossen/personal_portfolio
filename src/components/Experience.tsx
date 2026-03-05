@@ -211,9 +211,9 @@ const ExperiencePreview: React.FC<ExperiencePreviewProps> = ({ featuredExperienc
                                                 {hasMoreContent && (
                                                     <button
                                                         onClick={() => toggleExpansion(exp.id)}
-                                                        className="mt-4 text-[10px] font-bold uppercase tracking-widest text-accent/70 hover:text-accent flex items-center gap-2 transition-colors border-b border-transparent hover:border-accent/50 pb-0.5 w-max"
+                                                        className="mt-4 text-[10px] font-bold uppercase tracking-widest text-slate-400/80 hover:text-accent flex items-center gap-2 transition-colors border-b border-transparent hover:border-accent/50 pb-0.5 w-max focus:outline-none"
                                                     >
-                                                        {isExpanded ? 'Collapse' : 'Read Full Details'}
+                                                        <span>{isExpanded ? 'Collapse' : 'Read Full Details'}</span>
                                                         <i className={`fas ${isExpanded ? 'fa-chevron-up' : 'fa-chevron-down'} text-[8px]`}></i>
                                                     </button>
                                                 )}

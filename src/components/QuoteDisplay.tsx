@@ -82,16 +82,16 @@ const QuoteDisplay = () => {
                 </div>
 
                 {/* 2. BODY */}
-                <div className="p-6 md:p-10 min-h-[200px] flex flex-col justify-center relative">
+                <div className="p-6 md:p-10 min-h-[250px] flex flex-col justify-center relative">
 
-                    {/* Decorative Background Grid (Optional) */}
+                    {/* Decorative Background Grid */}
                     <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:40px_40px] pointer-events-none"></div>
 
                     <div className="relative z-10 text-center">
                         {/* Quote Text */}
-                        <h3 className="text-xl md:text-2xl text-text-main leading-relaxed font-light italic tracking-wide">
+                        <h3 className="text-lg md:text-xl text-text-main leading-relaxed font-light italic tracking-wide">
                             {displayedText}
-                            <span className={`animate-pulse inline-block w-0.5 h-6 bg-accent shadow-[0_0_10px_#22d3ee] ml-1 align-middle ${isCurrentlyTyping ? 'opacity-100' : 'opacity-0'}`}></span>
+                            <span className={`animate-pulse inline-block w-0.5 h-5 bg-accent shadow-[0_0_10px_#22d3ee] ml-1 align-middle ${isCurrentlyTyping ? 'opacity-100' : 'opacity-0'}`}></span>
                         </h3>
 
                         {/* Author */}

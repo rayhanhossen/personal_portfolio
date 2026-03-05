@@ -110,9 +110,10 @@ const About = () => {
                         const icon = categoryIcons[grp.category] || 'fa-cube';
 
                         return (
-                            <div key={grp.category} className="glass-card !rounded-xl p-5 flex flex-col group relative overflow-hidden">
-                                {/* Subtle glow on hover */}
-                                <div className="absolute top-0 right-0 w-24 h-24 bg-accent/5 rounded-full blur-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                            <div key={grp.category} className="bg-glass-overlay backdrop-blur-md rounded-xl p-5 flex flex-col group relative overflow-hidden
+                                           border border-white/10 transition-all duration-300
+                                           shadow-[0_4px_24px_rgba(0,0,0,0.4)]
+                                           hover:shadow-[0_8px_32px_rgba(0,0,0,0.5)] hover:-translate-y-1 hover:border-accent/30">
 
                                 {/* Category Header */}
                                 <div className="flex items-center gap-3 mb-4 relative z-10">

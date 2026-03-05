@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import { Outlet, useLocation } from 'react-router-dom';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
-import CustomCursor from '../components/CustomCursor';
 import { personalInfo } from '../data/content';
 import AnimatedBackground from './AnimatedBackground';
 
@@ -40,15 +39,10 @@ const Layout: React.FC = () => {
     }, [location]);
 
     return (
-        <div className="min-h-screen relative text-text-main font-sans cursor-none overflow-x-hidden selection:bg-accent selection:text-bg">
+        <div className="min-h-screen relative text-text-main font-sans overflow-x-hidden selection:bg-accent selection:text-bg">
 
             {/* Background */}
             <AnimatedBackground />
-
-            {/* Custom Cursor */}
-            <div className="fixed inset-0 z-[9999] pointer-events-none overflow-hidden">
-                <CustomCursor />
-            </div>
 
             {/* Main Content */}
             <div className="max-w-5xl mx-auto px-4 md:px-0 relative z-10">

@@ -243,20 +243,18 @@ import {
 import {
     SiDjango,
     SiFastapi,
-    SiPostgresql
+    SiPostgresql,
+    SiRedis
 } from 'react-icons/si';
-import { BsCpu } from 'react-icons/bs'; // For RAG/MCP
-import { VscServerProcess } from 'react-icons/vsc'; // For MCP
 
 // core tech stack 
 export const heroStack = [
-    { name: "Python", icon: FaPython, color: "hover:text-[#3776AB]" },
-    { name: "Django", icon: SiDjango, color: "hover:text-[#092E20]" },
-    { name: "FastAPI", icon: SiFastapi, color: "hover:text-[#009688]" },
-    { name: "React", icon: FaReact, color: "hover:text-[#61DAFB]" },
-    { name: "AWS", icon: FaAws, color: "hover:text-[#FF9900]" },
-    { name: "Docker", icon: FaDocker, color: "hover:text-[#2496ED]" },
-    { name: "PostgreSQL", icon: SiPostgresql, color: "hover:text-[#4169E1]" },
-    { name: "RAG", icon: BsCpu, color: "hover:text-[#22D3EE]" },
-    { name: "MCP", icon: VscServerProcess, color: "hover:text-[#22D3EE]" }
+    { name: "Python", icon: FaPython, color: "text-[#3776AB]" },
+    { name: "Django", icon: SiDjango, color: "text-[#092E20]" },
+    { name: "FastAPI", icon: SiFastapi, color: "text-[#009688]" },
+    { name: "React", icon: FaReact, color: "text-[#61DAFB]" },
+    { name: "AWS", icon: FaAws, color: "text-[#FF9900]" },
+    { name: "Docker", icon: FaDocker, color: "text-[#2496ED]" },
+    { name: "PostgreSQL", icon: SiPostgresql, color: "text-[#4169E1]" },
+    { name: "Redis", icon: SiRedis, color: "text-[#DC382D]" },
 ];

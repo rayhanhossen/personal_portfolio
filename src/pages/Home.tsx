@@ -82,10 +82,10 @@ const Home = () => {
                             return (
                                 <div
                                     key={tech.name}
-                                    className={`flex flex-col items-center gap-2 group cursor-default transition-all duration-300`}
+                                    className="flex flex-col items-center gap-2 cursor-default"
                                 >
-                                    <Icon className={`text-3xl md:text-4xl text-slate-500 transition-colors duration-300 group-hover:scale-110 ${tech.color}`} />
-                                    <span className="text-xs font-mono font-medium text-slate-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                                    <Icon className={`text-3xl md:text-4xl ${tech.color}`} />
+                                    <span className="text-xs font-mono font-medium text-slate-400">
                                         {tech.name}
                                     </span>
                                 </div>

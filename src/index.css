@@ -11,11 +11,6 @@ body {
     @apply bg-bg text-text-main font-sans;
     min-height: 100vh;
     overflow-x: hidden;
-
-    /* 🚨 ACTIVATED: Hide default cursor only if the device has a mouse/pointer. Touch devices keep default behavior. */
-    @media (hover: hover) and (pointer: fine) {
-        cursor: none;
-    }
 }
 
 /* --- CUSTOM UTILITIES & COMPONENTS --- */
