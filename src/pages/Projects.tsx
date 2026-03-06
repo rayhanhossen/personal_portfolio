@@ -1,5 +1,6 @@
 import { useState, useRef, useEffect } from 'react';
 import { projects } from '../data/content';
+import { Helmet } from 'react-helmet-async';
 
 export interface Project {
     id: number;
@@ -274,6 +275,10 @@ const Projects = () => {
 
     return (
         <div id="projects-view" className="pt-32 relative z-10 view-section animate-fadeIn font-sans">
+            <Helmet>
+                <meta name="description" content="Explore Rayhan Hossen's portfolio of professional projects, including AI-powered systems, fintech solutions, and enterprise software." />
+                <meta name="keywords" content="Rayhan Hossen Projects, Software Engineering Portfolio, AI Systems, Django Projects, FastAPI Apps" />
+            </Helmet>
 
 
 

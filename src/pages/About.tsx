@@ -4,6 +4,7 @@ import { experiences, personalInfo, skills } from '../data/content';
 import profileImg from '../assets/profile-avatar.png';
 import QuoteDisplay from '../components/QuoteDisplay';
 import ExperiencePreview from '../components/Experience';
+import { Helmet } from 'react-helmet-async';
 
 const About = () => {
     const { hash } = useLocation();
@@ -22,6 +23,10 @@ const About = () => {
 
     return (
         <div className="font-sans animate-fadeIn">
+            <Helmet>
+                <meta name="description" content="Learn more about Rayhan Hossen's journey as a software engineer, his technical skills, and his professional philosophy." />
+                <meta name="keywords" content="About Rayhan Hossen, Software Engineer Bio, Technical Skills, Python Expert, Django Developer" />
+            </Helmet>
 
 
             {/* --- BIO & IMAGE --- */}
