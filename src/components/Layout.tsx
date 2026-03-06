@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Outlet, useLocation } from 'react-router-dom';
+import { Helmet } from 'react-helmet-async';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import { personalInfo } from '../data/content';
@@ -32,14 +33,15 @@ const Layout: React.FC = () => {
         return () => window.removeEventListener('scroll', checkScroll);
     }, []);
 
-    // Dynamic Title
-    useEffect(() => {
-        const pageTitle = location.pathname === '/' ? 'Home' : location.pathname.substring(1).replace('-', ' ');
-        document.title = `${personalInfo.name} | ${pageTitle.charAt(0).toUpperCase() + pageTitle.slice(1)}`;
-    }, [location]);
+    const pageTitle = location.pathname === '/' ? 'Home' : location.pathname.substring(1).replace('-', ' ');
+    const formattedTitle = `${personalInfo.name} | ${pageTitle.charAt(0).toUpperCase() + pageTitle.slice(1)}`;
 
     return (
         <div className="min-h-screen relative text-text-main font-sans overflow-x-hidden selection:bg-accent selection:text-bg">
+            <Helmet>
+                <title>{formattedTitle}</title>
+                <link rel="canonical" href={`https://rayhanhossen.pro${location.pathname}`} />
+            </Helmet>
 
             {/* Background */}
             <AnimatedBackground />

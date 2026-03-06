@@ -2,10 +2,15 @@ import { personalInfo, experiences, heroStack } from '../data/content';
 import profileImg from '../assets/profile-avatar.png';
 import ExperiencePreview from '../components/Experience';
 import { Link } from 'react-router-dom';
+import { Helmet } from 'react-helmet-async';
 
 const Home = () => {
     return (
         <div id="home-view" className="view-section animate-fadeIn">
+            <Helmet>
+                <meta name="description" content="Portfolio of Rayhan Hossen, a Senior Software Engineer specializing in Python, Django, and AI-powered systems. Based in Dhaka, Bangladesh." />
+                <meta name="keywords" content="Rayhan Hossen, Software Engineer, Python Developer, Django Expert, AI Engineer, Dhaka, Bangladesh" />
+            </Helmet>
             {/* --- HERO SECTION --- */}
             <section id="home" className="min-h-[100dvh] flex flex-col justify-center py-28 md:pt-28 md:pb-20 relative">
                 <div className="w-full max-w-5xl mx-auto">

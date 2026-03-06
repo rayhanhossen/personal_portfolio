@@ -1,6 +1,7 @@
 import React, { useState, useRef } from 'react';
 import emailjs from '@emailjs/browser';
 import { personalInfo } from '../data/content';
+import { Helmet } from 'react-helmet-async';
 
 const ContactPage: React.FC = () => {
     const form = useRef<HTMLFormElement>(null);
@@ -43,6 +44,10 @@ const ContactPage: React.FC = () => {
 
     return (
         <div className="font-sans animate-fadeIn">
+            <Helmet>
+                <meta name="description" content="Get in touch with Rayhan Hossen for software engineering opportunities, collaborations, or technical inquiries." />
+                <meta name="keywords" content="Contact Rayhan Hossen, Software Engineer Hire, Remote Developer, Python Freelancer" />
+            </Helmet>
 
             {/* --- MAIN CONTENT GRID --- */}
             <div className="pt-28 relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch mb-20 text-text-main">

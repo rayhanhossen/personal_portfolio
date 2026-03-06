@@ -1,0 +1,16 @@
+{
+    "name": "Rayhan Hossen | Software Engineer",
+    "short_name": "Rayhan Hossen",
+    "description": "Portfolio of Rayhan Hossen, a Senior Software Engineer specializing in Python and AI.",
+    "start_url": "/",
+    "display": "standalone",
+    "background_color": "#020617",
+    "theme_color": "#020617",
+    "icons": [
+        {
+            "src": "/favicon.svg",
+            "sizes": "any",
+            "type": "image/svg+xml"
+        }
+    ]
+}
